@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/01/07 19:13:41 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/01/07 19:25:41 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-
-# include "../libft/include/libft.h"
-
-#endif
+int	main(int argc, char **argv)
+{
+	printf("argc: %d. argv[0]: %s\n", argc, argv[0]);
+}
