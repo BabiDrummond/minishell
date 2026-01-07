@@ -6,6 +6,8 @@ INCLUDE = -Iinclude/
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
+READLINE = -lreadline
+
 SRCS_DIR = src/
 SRCS = main.c
 OBJS_DIR = objs/
@@ -14,7 +16,7 @@ OBJS = $(SRCS:%.c=$(OBJS_DIR)%.o)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	@$(CC) $(OBJS) $(LIBFT) -o $(NAME)
+	@$(CC) $(OBJS) $(LIBFT) -o $(NAME) $(READLINE)
 	@echo -n "\033[0;32mGenerated minishell\n"
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
