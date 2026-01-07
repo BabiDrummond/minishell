@@ -1,0 +1,9 @@
+.gitmodules
+*.out
+.vscode
+minishell
+obj*
+TODO
+main
+*linux
+fail*
