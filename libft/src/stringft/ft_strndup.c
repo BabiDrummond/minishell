@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mathft.h                                           :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/21 01:05:52 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/30 18:21:32 by bcosta-b         ###   ########.fr       */
+/*   Created: 2026/01/21 19:38:49 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/01/30 12:43:47 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATHFT_H
-# define MATHFT_H
-# include <stddef.h>
-# include "charft.h"
+#include "stringft.h"
 
-unsigned long long	ft_abs(long long number);
-int					ft_atoi(const char *nptr);
-size_t				next_prime(size_t n);
-int					ft_is_prime(size_t n);
-int					ilog2_ceil(unsigned int n);
-int					ilog2(unsigned int n);
+char	*ft_strndup(const char *s, size_t n)
+{
+	size_t	len;
+	char	*new_str;
 
-#endif
+	len = 0;
+	while (s[len] && len < n)
+		len++;
+	new_str = (char *)ft_malloc(len + 1);
+	ft_memcpy(new_str, s, len);
+	new_str[len] = '\0';
+	return (new_str);
+}

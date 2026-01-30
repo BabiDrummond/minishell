@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 12:41:04 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/09 20:38:05 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/01/30 12:44:02 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ static char	*word_dup(char *start, char *end)
 	char	*word;
 
 	len = end - start;
-	word = malloc(len + 1);
-	if (!word)
-		return (NULL);
+	word = ft_malloc(len + 1);
 	ft_memcpy(word, start, len);
 	word[len] = '\0';
 	return (word);
@@ -56,9 +54,7 @@ char	**ft_split(char *s)
 
 	words = count_words(s);
 	i = 0;
-	result = malloc(sizeof(char *) * (words + 1));
-	if (!result)
-		return (NULL);
+	result = ft_malloc(sizeof(char *) * (words + 1));
 	while (*s)
 	{
 		while (*s && ft_isspace(*s))

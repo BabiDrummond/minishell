@@ -3,21 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/01/07 19:42:29 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/01/29 18:32:52 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/01/30 19:09:43 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "lexer.h"
+#include <readline/readline.h>
+#include <readline/history.h>
+
+static void	handle_exit(char *prompt)
+{
+	if (strncmp(prompt, "exit", 5) == 0)
+	{
+		gc_free_all();
+		free(prompt);
+		exit(0);
+	}
+}
 
 int	main(void)
 {
-	char	*line;
+	t_string	**operators;
+	t_list		*tokens;
+	char		*prompt;
 
-	line = readline("minishell> ");
-	printf("Comando digitado: %s\n", line);
-	free(line);
+	operators = initialize_operators();
+	prompt = NULL;
+	tokens = NULL;
+	while (1)
+	{
+		prompt = readline("prompt> ");
+		tokens = tokenize(prompt, operators);
+		handle_exit(prompt);
+		print_tokens(tokens);
+		free(prompt);
+	}
+	gc_free_all();
 	return (0);
 }

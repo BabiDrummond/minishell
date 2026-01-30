@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mathft.h                                           :+:      :+:    :+:   */
+/*   gc_node_free.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/21 01:05:52 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/30 18:21:32 by bcosta-b         ###   ########.fr       */
+/*   Created: 2026/01/30 18:24:35 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/01/30 18:28:25 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATHFT_H
-# define MATHFT_H
-# include <stddef.h>
-# include "charft.h"
+#include "gcft.h"
 
-unsigned long long	ft_abs(long long number);
-int					ft_atoi(const char *nptr);
-size_t				next_prime(size_t n);
-int					ft_is_prime(size_t n);
-int					ilog2_ceil(unsigned int n);
-int					ilog2(unsigned int n);
-
-#endif
+void	gc_node_free(t_gc_node *gc_node)
+{
+	if (gc_node->destructor)
+		gc_node->destructor(gc_node->link.content);
+	free(gc_node);
+}

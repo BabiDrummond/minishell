@@ -7,6 +7,13 @@ SRCS_DIR = src/
 SRCS = charft/ft_isdigit.c	\
 	charft/ft_isspace.c		\
 	charft/ft_putchar.c		\
+	gcft/create_gc_node.c	\
+	gcft/gc_add_or_exit.c	\
+	gcft/gc_free_all.c		\
+	gcft/get_collector.c	\
+	gcft/gc_add.c			\
+	gcft/gc_exit.c			\
+	gcft/gc_node_free.c		\
 	hsft/hash_int_knuth.c	\
 	hsft/hs_add.c			\
 	hsft/hs_foreach.c		\
@@ -42,6 +49,7 @@ SRCS = charft/ft_isdigit.c	\
 	mathft/ilog2.c			\
 	mathft/next_prime.c		\
 	memft/ft_calloc.c		\
+	memft/ft_malloc.c		\
 	memft/ft_memcpy.c		\
 	memft/ft_memset.c		\
 	stringft/free_split.c	\
@@ -55,7 +63,10 @@ SRCS = charft/ft_isdigit.c	\
 	stringft/str_free.c		\
 	stringft/str_new_char.c	\
 	stringft/str_new_values.c\
-	stringft/str_new.c
+	stringft/ft_strndup.c\
+	stringft/ft_strncmp.c\
+	stringft/str_new.c \
+	listft/lst_new.c
 OBJS_DIR = objs/
 OBJS = $(SRCS:%.c=$(OBJS_DIR)%.o)
 

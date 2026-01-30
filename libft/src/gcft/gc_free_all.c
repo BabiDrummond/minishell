@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mathft.h                                           :+:      :+:    :+:   */
+/*   gc_free_all.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/21 01:05:52 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/30 18:21:32 by bcosta-b         ###   ########.fr       */
+/*   Created: 2026/01/30 18:29:54 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/01/30 18:31:09 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATHFT_H
-# define MATHFT_H
-# include <stddef.h>
-# include "charft.h"
+#include "gcft.h"
 
-unsigned long long	ft_abs(long long number);
-int					ft_atoi(const char *nptr);
-size_t				next_prime(size_t n);
-int					ft_is_prime(size_t n);
-int					ilog2_ceil(unsigned int n);
-int					ilog2(unsigned int n);
+void	gc_free_all(void)
+{
+	t_list		*gc;
+	t_gc_node	*node;
+	t_gc_node	*prev;
 
-#endif
+	gc = get_collector();
+	node = (t_gc_node *)gc->last;
+	while (node)
+	{
+		prev = (t_gc_node *)node->link.prev;
+		gc_node_free(node);
+		node = prev;
+	}
+	gc->first = NULL;
+	gc->last = NULL;
+	gc->count = 0;
+}

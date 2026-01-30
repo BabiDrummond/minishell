@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mathft.h                                           :+:      :+:    :+:   */
+/*   print_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/21 01:05:52 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/30 18:21:32 by bcosta-b         ###   ########.fr       */
+/*   Created: 2026/01/21 20:38:30 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/01/29 20:56:31 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATHFT_H
-# define MATHFT_H
-# include <stddef.h>
-# include "charft.h"
+#include "lexer_private.h"
 
-unsigned long long	ft_abs(long long number);
-int					ft_atoi(const char *nptr);
-size_t				next_prime(size_t n);
-int					ft_is_prime(size_t n);
-int					ilog2_ceil(unsigned int n);
-int					ilog2(unsigned int n);
+void	print_tokens(t_list *tokens)
+{
+	t_token	*token;
 
-#endif
+	token = (t_token *)tokens->first;
+	while (token)
+	{
+		print_token(token);
+		token = (t_token *)token->link.next;
+	}
+}

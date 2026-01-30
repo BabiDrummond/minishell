@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stringft.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 00:01:18 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/09 20:37:56 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/01/29 20:41:26 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ void		str_free(void *str);
 void		free_split(char **split);
 char		**ft_split(char *s);
 int			ft_is_number(char *str);
+char		*ft_strndup(const char *s, size_t n);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   listft.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 00:01:18 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/09 20:31:48 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/01/29 18:06:14 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ int		lst_is_first(t_node *node);
 int		lst_is_invalid(const t_node *node);
 int		lst_is_last(t_node *node);
 void	lst_dup(t_list *src, t_list *dest, void *(*dup)(void *));
+t_list	*lst_new(void);
 
 #endif

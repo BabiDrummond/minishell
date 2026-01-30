@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mathft.h                                           :+:      :+:    :+:   */
+/*   create_token_result.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/21 01:05:52 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/30 18:21:32 by bcosta-b         ###   ########.fr       */
+/*   Created: 2026/01/29 16:20:06 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/01/30 18:35:03 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATHFT_H
-# define MATHFT_H
-# include <stddef.h>
-# include "charft.h"
+#include "lexer_private.h"
 
-unsigned long long	ft_abs(long long number);
-int					ft_atoi(const char *nptr);
-size_t				next_prime(size_t n);
-int					ft_is_prime(size_t n);
-int					ilog2_ceil(unsigned int n);
-int					ilog2(unsigned int n);
+void	**create_token_result(void *str, void *token_value)
+{
+	void	**result;
 
-#endif
+	result = (void **)ft_malloc(sizeof(void *) * 2);
+	result[0] = str;
+	result[1] = token_value;
+	return (result);
+}

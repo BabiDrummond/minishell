@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mathft.h                                           :+:      :+:    :+:   */
+/*   create_word.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/21 01:05:52 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/30 18:21:32 by bcosta-b         ###   ########.fr       */
+/*   Created: 2026/01/21 19:45:02 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/01/30 12:43:29 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATHFT_H
-# define MATHFT_H
-# include <stddef.h>
-# include "charft.h"
+#include "lexer_private.h"
 
-unsigned long long	ft_abs(long long number);
-int					ft_atoi(const char *nptr);
-size_t				next_prime(size_t n);
-int					ft_is_prime(size_t n);
-int					ilog2_ceil(unsigned int n);
-int					ilog2(unsigned int n);
+t_word	*create_word(const char *value, int length, int expandable)
+{
+	t_word	*new_word;
 
-#endif
+	new_word = (t_word *) ft_malloc(sizeof(t_word));
+	new_word->link.list = NULL;
+	new_word->link.next = NULL;
+	new_word->link.prev = NULL;
+	new_word->link.content = ft_strndup(value, length);
+	new_word->link.list = NULL;
+	new_word->expandable = expandable;
+	return (new_word);
+}
