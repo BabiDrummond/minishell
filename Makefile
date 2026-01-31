@@ -1,7 +1,9 @@
 NAME = minishell
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-INCLUDE = -Iinclude/ -Isrc/lexer/ \
+INCLUDE = -Iinclude/ \
+	-Isrc/lexer/ \
+	-Isrc/parser/ \
 	-Ilibft/include -Ilibft \
 	-Ilibft/include/charft \
 	-Ilibft/include/gcft \
@@ -21,7 +23,7 @@ READLINE = -lreadline
 
 
 SRCS_DIR = src
-SRCS = main.c
+SRCS = main.c parser/parser.c parser/print_ast.c
 OBJS_DIR = objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 

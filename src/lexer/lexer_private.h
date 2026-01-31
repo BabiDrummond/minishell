@@ -6,7 +6,7 @@
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:40:23 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/30 18:48:35 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/01/30 20:18:41 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,6 @@ enum e_char_type
 	IS_DOUBLE_QUOTE,
 	IS_OPERATOR,
 	IS_WHITESPACE
-};
-
-struct s_word
-{
-	t_node			link;
-	int				expandable;
-};
-
-struct s_token
-{
-	t_node	link;
-	int		is_operator;
 };
 
 void		**create_token_result(void *str, void *token_value);

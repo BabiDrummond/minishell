@@ -4,7 +4,8 @@ CFLAGS = -Wall -Wextra -Werror
 INCLUDE = -I./include/
 
 SRCS_DIR = src/
-SRCS = charft/ft_isdigit.c	\
+SRCS = astft/ast_new.c		\
+	charft/ft_isdigit.c		\
 	charft/ft_isspace.c		\
 	charft/ft_putchar.c		\
 	gcft/create_gc_node.c	\
@@ -58,6 +59,7 @@ SRCS = charft/ft_isdigit.c	\
 	stringft/ft_split.c		\
 	stringft/ft_strchr.c	\
 	stringft/ft_strlen.c	\
+	stringft/ft_strcmp.c	\
 	stringft/put_str.c		\
 	stringft/str_dup.c		\
 	stringft/str_free.c		\

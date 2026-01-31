@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   astft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/21 19:40:23 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/30 20:19:03 by bcosta-b         ###   ########.fr       */
+/*   Created: 2026/01/30 15:14:43 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/01/30 20:24:36 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+#ifndef ASTFT_H
+# define ASTFT_H
 
-# include "listft.h"
-# include "stringft.h"
-# include "gcft.h"
+# include "memft.h"
 
-typedef enum e_char_type	t_char_type;
-
-typedef struct s_word
+typedef struct s_ast
 {
-	t_node			link;
-	int				expandable;
-}	t_word;
+	struct s_ast	*left;
+	struct s_ast	*right;
+	void			*value;
+}	t_ast;
 
-typedef struct s_token
-{
-	t_node	link;
-	int		is_operator;
-}	t_token;
+t_ast	*ast_new(void *value);
 
-t_string	**initialize_operators(void);
-t_list		*tokenize(char *prompt, t_string **operators);
-void		print_tokens(t_list *tokens);
 #endif
