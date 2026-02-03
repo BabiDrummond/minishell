@@ -6,12 +6,14 @@
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:24:36 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/30 20:20:54 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/02/04 15:36:10 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "stringft.h"
+#include "gcft.h"
+#include <stdio.h>
 
 static void	set_right(t_list *right, t_token *current_token, t_list *tokens)
 {
@@ -62,7 +64,7 @@ t_ast	*parse(t_list *tokens, t_string **operators)
 	t_string	**operator;
 	t_token		*current_token;
 
-	if (tokens == NULL)
+	if (has_syntax_error(tokens))
 		return (NULL);
 	operator = operators;
 	while (*operator)

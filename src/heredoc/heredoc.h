@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_token.c                                     :+:      :+:    :+:   */
+/*   heredoc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/21 19:43:59 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/02/02 19:49:36 by bcosta-b         ###   ########.fr       */
+/*   Created: 2026/01/30 15:14:43 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/02/04 17:49:56 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer_private.h"
+#ifndef HEREDOC_H
+# define HEREDOC_H
 
-t_token	*create_token(void *content, int is_operator)
-{
-	t_token	*new_token;
+# include "lexer.h"
+# include "parser.h"
+# include <readline/readline.h>
+# include <signal.h>
+# include <sys/wait.h>
+# include <unistd.h>
 
-	new_token = (t_token *) ft_malloc(sizeof(t_token));
-	new_token->link.list = NULL;
-	new_token->link.next = NULL;
-	new_token->link.prev = NULL;
-	new_token->link.content = content;
-	new_token->is_operator = is_operator;
-	new_token->stdin_fd = -1;
-	return (new_token);
-}
+int	collect_heredocs(t_ast *tokens);
+int	should_collect_heredoc(t_token *token);
+
+#endif

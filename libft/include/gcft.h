@@ -6,7 +6,7 @@
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:40:23 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/30 19:22:01 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/02/04 15:12:29 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define GCFT_H
 
 # include "listft.h"
+
+typedef enum e_gc_scope
+{
+	GC_SCOPE_GLOBAL,
+	GC_SCOPE_FUNCTION,
+	GC_SCOPE_COUNT
+}	t_gc_scope;
 
 typedef struct s_gc_node
 {
@@ -28,5 +35,6 @@ void		gc_add(void *ptr, void (*destructor)(void *));
 void		gc_free_all(void);
 void		gc_exit(void);
 void		gc_add_or_exit(void *ptr, void (*destructor)(void *));
-
+void		gc_set_current_scope(t_gc_scope new_scope);
+t_gc_scope	*gc_get_current_scope(void);
 #endif

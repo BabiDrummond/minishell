@@ -6,7 +6,7 @@
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 18:29:54 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/30 18:31:09 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/02/03 14:49:06 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void	gc_free_all(void)
 	gc->first = NULL;
 	gc->last = NULL;
 	gc->count = 0;
+	gc_set_current_scope(GC_SCOPE_GLOBAL);
 }

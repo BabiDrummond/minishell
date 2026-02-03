@@ -6,7 +6,7 @@
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 18:07:03 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/30 20:23:39 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/02/02 19:56:06 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ static void	print_ast_operator(t_ast *node, int depth)
 	print_ast_indent(depth + 1);
 	printf("\"type\": \"OPERATOR\",\n");
 	print_ast_indent(depth + 1);
-	printf("\"symbol\": \"%s\",\n",
+	printf("\"symbol\": %s,\n",
 		((t_string *)((t_token *)node->value)->link.content)->value);
+	print_ast_indent(depth + 1);
+	printf("\"stdin_fd\": %d,\n", ((t_token *)node->value)->stdin_fd);
 	print_ast_indent(depth + 1);
 	printf("\"left\": ");
 	print_ast(node->left, depth + 1);

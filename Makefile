@@ -2,6 +2,7 @@ NAME = minishell
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 INCLUDE = -Iinclude/ \
+	-Isrc/heredoc/ \
 	-Isrc/lexer/ \
 	-Isrc/parser/ \
 	-Ilibft/include -Ilibft \
@@ -23,7 +24,12 @@ READLINE = -lreadline
 
 
 SRCS_DIR = src
-SRCS = main.c parser/parser.c parser/print_ast.c
+SRCS = main.c \
+	parser/parser.c \
+	parser/print_ast.c \
+	parser/has_syntax_error.c \
+	heredoc/collect_heredocs.c \
+	heredoc/should_collect_heredoc.c
 OBJS_DIR = objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 

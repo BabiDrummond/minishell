@@ -6,7 +6,7 @@
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:40:23 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/30 20:19:03 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/02/04 15:18:42 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_token
 {
 	t_node	link;
 	int		is_operator;
+	int		stdin_fd;
 }	t_token;
 
 t_string	**initialize_operators(void);
