@@ -6,7 +6,7 @@
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:40:23 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/30 20:18:41 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/02/04 20:32:23 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ enum e_char_type
 
 void		**create_token_result(void *str, void *token_value);
 t_char_type	get_char_type(const char *str, t_string **operators);
-t_word		*create_word(const char *value, int length, int expandable);
+t_word		*create_word(const char *value, int length, t_quote_state quote_state);
 t_token		*create_token(void *content, int is_operator);
 void		syntax_error(void);
 void		**get_next_token(char *str, t_string **operators);
