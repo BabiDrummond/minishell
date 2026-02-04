@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 00:01:18 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/09 20:37:56 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/04 01:36:17 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char		*ft_strchr(const char *s, int c);
 size_t		put_string(t_string *str);
 void		str_free(void *str);
 void		free_split(char **split);
-char		**ft_split(char *s);
+char		**ft_split(const char *s, char c);
 int			ft_is_number(char *str);
 
 #endif

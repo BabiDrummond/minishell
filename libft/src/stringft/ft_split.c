@@ -6,71 +6,65 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 12:41:04 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/09 20:38:05 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/04 01:35:53 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stringft.h"
 
-static int	count_words(char *s)
+static int	word_len(const char *s, char c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] && s[i] != c)
+		i++;
+	return (i);
+}
+
+static int	count_words(char *s, char c)
 {
 	int	count;
-	int	in_word;
+	int	i;
 
 	count = 0;
-	in_word = 0;
-	while (*s)
+	i = 0;
+	if (!s || !*s)
+		return (count);
+	if (s[i++] != c)
+		count++;
+	while (s[i])
 	{
-		if (ft_isspace(*s))
-			in_word = 0;
-		else if (!in_word)
-		{
-			in_word = 1;
+		if (s[i] != c && s[i - 1] == c)
 			count++;
-		}
-		s++;
+		i++;
 	}
 	return (count);
 }
 
-static char	*word_dup(char *start, char *end)
+char	**ft_split(const char *s, char c)
 {
-	int		len;
-	char	*word;
+	char	**arr;
+	int		word;
+	int		letter;
 
-	len = end - start;
-	word = malloc(len + 1);
-	if (!word)
+	word = 0;
+	arr = ft_calloc((count_words((char *) s, c) + 1), sizeof(char *));
+	if (!arr)
 		return (NULL);
-	ft_memcpy(word, start, len);
-	word[len] = '\0';
-	return (word);
-}
-
-char	**ft_split(char *s)
-{
-	char	**result;
-	int		words;
-	int		i;
-	char	*start;
-
-	words = count_words(s);
-	i = 0;
-	result = malloc(sizeof(char *) * (words + 1));
-	if (!result)
-		return (NULL);
+	while (*s && *s == c)
+		s++;
 	while (*s)
 	{
-		while (*s && ft_isspace(*s))
+		letter = 0;
+		arr[word] = ft_calloc(word_len((char *)s, c) + 1, sizeof(char));
+		if (!arr[word])
+			return (ft_matrix_free(arr));
+		while (*s && *s != c)
+			arr[word][letter++] = *s++;
+		while (*s && *s == c)
 			s++;
-		if (*s)
-		{
-			start = s;
-			while (*s && !ft_isspace(*s))
-				s++;
-			result[i++] = word_dup(start, s);
-		}
+		word++;
 	}
-	result[i] = NULL;
-	return (result);
+	return (arr);
 }
