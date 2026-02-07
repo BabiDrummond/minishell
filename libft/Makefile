@@ -49,7 +49,9 @@ SRCS = charft/ft_isdigit.c	\
 	stringft/ft_putstr.c	\
 	stringft/ft_split.c		\
 	stringft/ft_strchr.c	\
+	stringft/ft_strjoin.c	\
 	stringft/ft_strlen.c	\
+	stringft/ft_strncmp.c	\
 	stringft/put_str.c		\
 	stringft/str_dup.c		\
 	stringft/str_free.c		\

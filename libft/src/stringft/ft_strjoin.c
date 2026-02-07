@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   build_cmd_path.c                                   :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/04 01:34:24 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/07 20:34:56 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/07/14 17:11:29 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/07 18:46:28 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "stringft.h"
 
-char	*build_cmd_path(char **path, char *cmd)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
-	char	*cmd_path;
-	char	*tmp;
-	int		i;
+	char	*new_str;
+	char	*temp;
 
-	i = 0;
-	while (path[i])
-	{
-		if (ft_strncmp(path[i] + ft_strlen(path[i]) - 1, "/", 1) != 0)
-		{
-			tmp = ft_strjoin(path[i], "/");
-			cmd_path = ft_strjoin(tmp, cmd);
-			free(tmp);
-			if (!access(cmd_path, F_OK))
-				return (cmd_path);
-		}
-		free(cmd_path);
-		cmd_path = NULL;
-		i++;
-	}
-	return (NULL);
+	new_str = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
+	temp = new_str;
+	if (!new_str)
+		return (NULL);
+	while (*s1)
+		*new_str++ = *s1++;
+	while (*s2)
+		*new_str++ = *s2++;
+	return (temp);
 }

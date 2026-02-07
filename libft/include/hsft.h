@@ -6,12 +6,13 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 00:01:18 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/09 20:29:21 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/07 18:43:41 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HSFT_H
 # define HSFT_H
+
 # include <stddef.h>
 # include <stdlib.h>
 # include "listft.h"
