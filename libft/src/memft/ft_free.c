@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memft.h                                            :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/12 00:01:18 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/02/07 21:10:31 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/10/23 18:01:07 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/07 21:10:16 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MEMFT_H
-# define MEMFT_H
+#include "memft.h"
 
-# include <stddef.h>
-# include <stdlib.h>
-
-int     ft_free(char **ptr);
-void	*ft_calloc(size_t nmemb, size_t type_size);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-void	*ft_memset(void *s, int c, size_t n);
-
-#endif
+int	ft_free(char **ptr)
+{
+	if (ptr && *ptr)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
+	return (0);
+}
