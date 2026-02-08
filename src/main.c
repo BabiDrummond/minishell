@@ -6,11 +6,53 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/07 20:43:13 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/07 20:59:08 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*reverse_split(char **split, char c)
+{
+	char	*str;
+	char	*tmp;
+	int		len;
+	int		i;
+
+	i = 0;
+	len = 0;
+	str = str_dup("");
+	while(split[len])
+		len++;
+	while (split[i])
+	{
+		tmp = str;
+		str = ft_strjoin(split[i], str);
+		free(tmp);
+		if (i != len - 1)
+		{
+			tmp = str;
+			str = ft_strjoin(str, " ");
+			free(tmp);
+		}
+	}
+	return (str);
+}
+
+void	execute_echo(t_shell *info)
+{	
+	int	i;
+	int	n_option;
+
+	n_option = 0;
+	if (ft_strncmp(info->cmd_args[1], "-n", 2) == 0)
+		n_option = 1;
+	i = n_option;
+	while (info->cmd_args[i++])
+		printf("%s ", info->cmd_args[i]);
+	if (!n_option)
+		printf("\n");
+}
 
 int	main(int argc, char **argv, char **envp)
 {

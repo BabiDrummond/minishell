@@ -1,18 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_str.c                                          :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/14 00:06:43 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/09 20:38:43 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/07/13 04:48:09 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/07 21:03:03 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stringft.h"
 
-size_t	put_string(t_string *str)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	return (write(1, str->value, str->length));
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	if (!*little)
+		return ((char *)(big));
+	while (len-- && big[i])
+	{
+		j = 0;
+		while (big[i + j] == little[j] && j <= len)
+		{
+			if (!little[j + 1])
+				return ((char *)(&big[i]));
+			j++;
+		}
+		i++;
+	}
+	return (NULL);
 }

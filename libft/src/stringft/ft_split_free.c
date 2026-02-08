@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_new_char.c                                     :+:      :+:    :+:   */
+/*   ft_split_free.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/14 20:18:47 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/09 20:39:00 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/11/04 20:43:14 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/07 21:05:31 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stringft.h"
 
-t_string	*str_new_char(char c)
+char	**ft_split_free(char **split)
 {
-	t_string	*str;
+	int	i;
 
-	str = str_new(1);
-	if (!str)
+	i = 0;
+	if (!split || !*split)
 		return (NULL);
-	str->value[0] = c;
-	return (str);
+	while (split[i])
+		free(split[i++]);
+	free(split);
+	return (NULL);
 }

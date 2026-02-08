@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_new.c                                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/13 22:01:46 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/09 20:39:11 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/07/12 22:24:57 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/07 21:02:08 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stringft.h"
 
-t_string	*str_new(size_t len)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	char	*value;
+	size_t	src_len;
 
-	value = ft_calloc(len + 1, sizeof(char));
-	if (!value)
-		return (NULL);
-	return (str_new_values(value, len));
+	src_len = ft_strlen(src);
+	if (size == 0)
+		return (src_len);
+	while (size-- > 1 && *src)
+		*dst++ = *src++;
+	*dst = '\0';
+	return (src_len);
 }

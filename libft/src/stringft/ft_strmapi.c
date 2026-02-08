@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/13 02:16:44 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/07 21:01:14 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/07/16 19:52:18 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/07 21:02:14 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strchr(const char *s, int c)
+#include "stringft.h"
+
+char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 {
-	while (*s)
-		if (*s++ == (char) c)
-			return ((char *)--s);
-	if (*s == (char) c)
-		return ((char *) s);
-	return (0);
+	int		i;
+	char	*result;
+
+	i = -1;
+	result = ft_calloc(ft_strlen(s) + 1, sizeof(char));
+	if (!result)
+		return (NULL);
+	while (s[++i])
+		result[i] = (*f)((unsigned int)i, (char)s[i]);
+	return (result);
 }

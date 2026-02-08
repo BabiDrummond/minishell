@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/09 12:41:04 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/02/07 18:46:39 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/07/17 18:21:44 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/07 21:01:43 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	**ft_split(const char *s, char c)
 		letter = 0;
 		arr[word] = ft_calloc(word_len((char *)s, c) + 1, sizeof(char));
 		if (!arr[word])
-			return (free_split(arr), NULL);
+			return (ft_split_free(arr));
 		while (*s && *s != c)
 			arr[word][letter++] = *s++;
 		while (*s && *s == c)

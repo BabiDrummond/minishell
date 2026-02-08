@@ -6,38 +6,33 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 00:01:18 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/02/07 18:44:10 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/07 21:05:13 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRINGFT_H
 # define STRINGFT_H
 
-# include <stddef.h>
-# include <stdlib.h>
 # include <unistd.h>
+# include <stdlib.h>
 # include "memft.h"
-# include "charft.h"
 
-typedef struct s_string
-{
-	char	*value;
-	size_t	length;
-}	t_string;
+char	**ft_split(const char *s, char c);
+char	**ft_split_free(char **split);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *s);
+char	*ft_strjoin(const char *s1, const char *s2);
+char	*ft_strjoin_free(char *s1, char *s2);
+char	*ft_strmapi(const char *s, char (*f)(unsigned int, char));
+char	*ft_strnstr(const char *big, const char *little, size_t len);
+char	*ft_strrchr(const char *s, int c);
+char	*ft_strtrim(const char *s1, const char *set);
+char	*ft_substr(const char *s, unsigned int start, size_t len);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	ft_striteri(char *s, void (*f)(unsigned int, char*));
+size_t	ft_strlcat(char *dst, const char *src, size_t size);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+size_t	ft_strlen(const char *s);
 
-t_string	*str_new(size_t len);
-t_string	*str_new_char(char c);
-t_string	*str_new_values(char *value, size_t len);
-t_string	*str_dup(const char *s);
-size_t		ft_strlen(const char *s);
-size_t		ft_putstr(char *str);
-size_t		put_string(t_string *str);
-void		str_free(void *str);
-void		free_split(char **split);
-char		*ft_strchr(const char *s, int c);
-char		*ft_strjoin(const char *s1, const char *s2);
-char		**ft_split(const char *s, char c);
-int			ft_strncmp(const char *s1, const char *s2, size_t n);
-int			ft_is_number(char *str);
 
 #endif

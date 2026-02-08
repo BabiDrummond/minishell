@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 20:27:05 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/07 20:43:16 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/07 20:49:21 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	execute_echo(t_shell *info)
 	int	n_option;
 
 	n_option = 0;
-	if (info->cmd_args[1] == "-n");
+	if (ft_strncmp(info->cmd_args[1], "-n", 2) == 0);
 		n_option = 1;
 	i = n_option;
 	while (info->cmd_args[i++])
-		printf("%s", info->cmd_args[i]);
+		printf("%s ", info->cmd_args[i]);
 	if (!n_option)
 		printf("\n");
 }

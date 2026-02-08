@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_new_values.c                                   :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/14 20:13:14 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/09 20:39:06 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/07/13 06:46:05 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/07 21:01:51 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stringft.h"
 
-t_string	*str_new_values(char *value, size_t len)
+char	*ft_strdup(const char *s)
 {
-	t_string	*str;
+	char	*new;
+	int		i;
 
-	str = ft_calloc(1, sizeof(t_string));
-	if (!str)
+	i = -1;
+	new = ft_calloc(ft_strlen(s) + 1, sizeof(char));
+	if (!new)
 		return (NULL);
-	str->value = value;
-	str->length = len;
-	return (str);
+	while (s[++i])
+		new[i] = s[i];
+	return (new);
 }

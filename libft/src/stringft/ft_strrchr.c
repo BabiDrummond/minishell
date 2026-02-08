@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_number.c                                     :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/09 18:44:28 by bcosta-b          #+#    #+#             */
-/*   Updated: 2025/12/09 18:53:34 by bcosta-b         ###   ########.fr       */
+/*   Created: 2025/07/13 02:41:11 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/07 21:02:24 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_is_number(char *str)
-{
-	int	i;
+#include "stringft.h"
 
-	i = 0;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	if (!str[i])
-		return (0);
-	while (str[i])
-	{
-		if (str[i] < '0' || str[i] > '9')
-			return (0);
-		i++;
-	}
-	return (1);
+char	*ft_strrchr(const char *s, int c)
+{
+	int	len;
+
+	len = ft_strlen(s) + 1;
+	while (len--)
+		if (s[len] == (char) c)
+			return ((char *) s + len);
+	return (0);
 }
