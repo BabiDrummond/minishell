@@ -45,8 +45,9 @@ SRCS = charft/ft_isdigit.c		\
 	memft/ft_free.c				\
 	memft/ft_memcpy.c			\
 	memft/ft_memset.c			\
-	stringft/ft_reverse_split.c	\
+	stringft/ft_join_split.c	\
 	stringft/ft_split_free.c	\
+	stringft/ft_split_size.c	\
 	stringft/ft_split.c			\
 	stringft/ft_strchr.c		\
 	stringft/ft_strdup.c		\

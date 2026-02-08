@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_reverse_split.c                                 :+:      :+:    :+:   */
+/*   ft_join_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 23:58:49 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/07 23:59:10 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/08 01:30:41 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stringft.h"
 
-char	*ft_reverse_split(char **split, int size, char c)
+char	*ft_join_split(char **split, char *separator)
 {
 	char	*tmp;
 	char	*str;
+	int		size;
 	int		i;
 
 	i = 0;
 	str = ft_strdup("");
+	size = ft_split_size(split);
 	while (i < size)
 	{
 		tmp = str;
@@ -28,7 +30,7 @@ char	*ft_reverse_split(char **split, int size, char c)
 		if (i < size - 1)
 		{
 			tmp = str;
-			str = ft_strjoin(str, &c);
+			str = ft_strjoin(str, separator);
 			ft_free(&tmp);
 		}
 		i++;

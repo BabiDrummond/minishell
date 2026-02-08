@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 00:01:18 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/02/07 23:59:19 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/08 01:30:35 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include <stdlib.h>
 # include "memft.h"
 
-char	*ft_reverse_split(char **split, int size, char c);
+int		ft_split_size(char **split);
+char	*ft_join_split(char **split, char *separator);
 char	**ft_split(const char *s, char c);
 char	**ft_split_free(char **split);
 char	*ft_strchr(const char *s, int c);
@@ -34,6 +35,5 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *s);
-
 
 #endif
