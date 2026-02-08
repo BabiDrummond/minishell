@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 00:01:18 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/02/07 21:05:13 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/07 23:59:19 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include "memft.h"
 
+char	*ft_reverse_split(char **split, int size, char c);
 char	**ft_split(const char *s, char c);
 char	**ft_split_free(char **split);
 char	*ft_strchr(const char *s, int c);
