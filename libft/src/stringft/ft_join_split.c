@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 23:58:49 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/08 01:30:41 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/08 01:53:49 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*ft_join_split(char **split, char *separator)
 
 	i = 0;
 	str = ft_strdup("");
+	if (!split || !*split)
+		return (str);
 	size = ft_split_size(split);
 	while (i < size)
 	{

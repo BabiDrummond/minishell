@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/08 01:38:57 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/08 02:05:42 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ void	execute_echo(t_shell *info)
 
 	i = 1;
 	n_option = 0;
-	str = NULL;
-	while (ft_strnstr(info->cmd_args[i++], "-n", 2))
+	while (ft_strnstr(info->cmd_args[i], "-n", 2))
+	{
 		n_option++;
-	str = ft_join_split(info->cmd_args + n_option + 1, " ");
+		i++;
+	}
+	str = ft_join_split(info->cmd_args + i, " ");
 	printf("%s", str);
 	if (!n_option)
 		printf("\n");
