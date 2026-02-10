@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/07 18:52:57 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/09 18:51:47 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@
 typedef struct s_shell
 {
 	char	**envp;
-	char	**path;
-	char	*cmd_path;
+	char	**env_path;
 	char	**cmd_args;
+	char	*cmd_path;
+	char	*curr_dir;
 }	t_shell;
 
 char	**get_env_path(char **envp);
