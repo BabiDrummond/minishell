@@ -6,11 +6,31 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/11 23:54:25 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/12 01:22:12 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	set_env_var(t_list *env, char *key, char *value)
+{
+	char	*var;
+	char	*tmp;
+
+	tmp = ft_strjoin(key, "=");
+	var = ft_strjoin(key, value);
+	if (!get_env_var(env, key))
+		lst_add_back(env, lst_new(var));
+	else
+	{
+		while (env)
+		{
+			if (ft_strncmp(env->content, key, ft_strlen(key)) == 0)
+				env->content = var;
+			env = env->next;
+		}
+	}
+}
 
 t_list	*set_env(t_list **env, char **envp)
 {
