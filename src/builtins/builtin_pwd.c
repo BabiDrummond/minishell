@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_env_path.c                                     :+:      :+:    :+:   */
+/*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/04 01:33:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/09 19:01:10 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/11 23:44:24 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/11 23:44:33 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**get_env_path(char **envp)
+void	builtin_pwd(t_list *env)
 {
-	int		i;
-
-	i = 0;
-	while (envp[i])
-	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-			return (ft_split(envp[i] + 5, ':'));
-		i++;
-	}
-	return (NULL);
+	printf("%s\n", get_env_var(env, "PATH"));
 }

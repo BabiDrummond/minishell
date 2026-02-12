@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_builtins.c                                 :+:      :+:    :+:   */
+/*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/06 20:27:05 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/09 19:32:18 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/11 23:44:45 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/11 23:44:54 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void	execute_cd(t_shell *info, char *dir);
-// void	execute_pwd(t_shell *info);
-// void	execute_export(t_shell *info, char *string);
-// void	execute_unset(t_shell *info, char *string);
-// void	execute_env(t_shell *info, char *string);
-// void	execute_exit(t_shell *info, char *string);
-
+void	builtin_env(t_list *env)
+{
+	while(env)
+	{
+		printf("%s\n", (char *)env->content);
+		env = env->next;
+	}
+}

@@ -9,9 +9,12 @@ LIBFT = $(LIBFT_DIR)/libft.a
 READLINE = -lreadline
 
 SRCS_DIR = src/
-SRCS = main.c \
-	builtins/build_cmd_path.c \
-	builtins/get_env_path.c
+SRCS = main.c 					\
+	builtins/build_cmd_path.c	\
+	builtins/builtin_echo.c		\
+	builtins/builtin_env.c		\
+	builtins/builtin_pwd.c		\
+	builtins/get_env_var.c
 OBJS_DIR = objs/
 OBJS = $(SRCS:%.c=$(OBJS_DIR)%.o)
 

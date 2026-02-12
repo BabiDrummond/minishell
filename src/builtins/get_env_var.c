@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   build_cmd_path.c                                   :+:      :+:    :+:   */
+/*   get_env_var.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/04 01:34:24 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/11 23:47:35 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/11 23:31:44 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/11 23:32:16 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*build_cmd_path(t_shell *info, char *cmd)
+char	*get_env_var(t_list *env, char *var_name)
 {
-	char	**path;
-	char	*cmd_path;
-	char	*tmp;
-	int		i;
+	int	var_len;
 
-	i = 0;
-	path = ft_split(get_env_var(info->env, "PATH"), ':');
-	while (path[i])
+	var_len = ft_strlen(var_name);
+	while (env)
 	{
-		if (ft_strncmp(path[i] + ft_strlen(path[i]) - 1, "/", 1) != 0)
-		{
-			tmp = ft_strjoin(path[i], "/");
-			cmd_path = ft_strjoin(tmp, cmd);
-			free(tmp);
-			if (!access(cmd_path, F_OK))
-				return (cmd_path);
-		}
-		free(cmd_path);
-		cmd_path = NULL;
-		i++;
+		if (ft_strncmp(env->content, var_name, var_len) == 0)
+			return (ft_split(env->content, '=')[1]);
+		env = env->next;
 	}
 	return (NULL);
 }
