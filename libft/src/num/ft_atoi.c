@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/10 20:47:05 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/07/13 05:31:35 by bmoreira          #+#    #+#             */
+/*   Updated: 2025/10/18 17:23:23 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "num.h"
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libft/include/libft.h"
-
-typedef struct s_shell
+int	ft_atoi(const char *nptr)
 {
-	t_list	*env;
-	char	**cmd_args;
-	char	*cmd_path;
-}	t_shell;
+	int	num;
+	int	negative;
 
-char	**get_env_path(char **envp);
-char	*build_cmd_path(char **path, char *cmd);
-
-#endif
+	num = 0;
+	negative = 1;
+	while (ft_isspace(*nptr))
+		nptr++;
+	if (*nptr == '-' || *nptr == '+')
+		if (*nptr++ == '-')
+			negative *= -1;
+	while (ft_isdigit(*nptr))
+		num = (num * 10) + *nptr++ - 48;
+	return (num * negative);
+}

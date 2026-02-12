@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   io.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/10 20:47:05 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/10/13 22:41:31 by bmoreira          #+#    #+#             */
+/*   Updated: 2025/10/15 19:52:56 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef IO_H
+# define IO_H
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libft/include/libft.h"
+# include <unistd.h>
+# include "ft_types.h"
 
-typedef struct s_shell
-{
-	t_list	*env;
-	char	**cmd_args;
-	char	*cmd_path;
-}	t_shell;
-
-char	**get_env_path(char **envp);
-char	*build_cmd_path(char **path, char *cmd);
+void	ft_putchar_fd(char c, int fd);
+void	ft_putendl_fd(char *s, int fd);
+void	ft_putnbr_fd(int n, int fd);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif

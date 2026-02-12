@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/10 20:47:05 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/07/13 06:46:05 by bmoreira          #+#    #+#             */
+/*   Updated: 2025/10/18 17:24:20 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "str.h"
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libft/include/libft.h"
-
-typedef struct s_shell
+char	*ft_strdup(const char *s)
 {
-	t_list	*env;
-	char	**cmd_args;
-	char	*cmd_path;
-}	t_shell;
+	char	*new;
+	int		i;
 
-char	**get_env_path(char **envp);
-char	*build_cmd_path(char **path, char *cmd);
-
-#endif
+	i = -1;
+	new = ft_calloc(ft_strlen(s) + 1, sizeof(char));
+	if (!new)
+		return (NULL);
+	while (s[++i])
+		new[i] = s[i];
+	return (new);
+}

@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   lst_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/10 20:47:05 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/07/19 17:53:12 by bmoreira          #+#    #+#             */
+/*   Updated: 2025/10/18 17:22:03 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "lst.h"
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libft/include/libft.h"
-
-typedef struct s_shell
+t_list	*lst_map(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*env;
-	char	**cmd_args;
-	char	*cmd_path;
-}	t_shell;
+	t_list	*head;
+	t_list	*node;
 
-char	**get_env_path(char **envp);
-char	*build_cmd_path(char **path, char *cmd);
-
-#endif
+	if (!lst || !f)
+		return (NULL);
+	head = NULL;
+	while (lst)
+	{
+		node = lst_new((*f)(lst->content));
+		if (!node)
+		{
+			lst_clear(&head, (*del));
+			return (NULL);
+		}
+		lst_add_back(&head, node);
+		lst = lst->next;
+	}
+	return (head);
+}

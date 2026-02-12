@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   lst_new.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/10 20:47:05 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/07/19 14:39:14 by bmoreira          #+#    #+#             */
+/*   Updated: 2025/10/18 17:22:06 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "lst.h"
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libft/include/libft.h"
-
-typedef struct s_shell
+t_list	*lst_new(void *content)
 {
-	t_list	*env;
-	char	**cmd_args;
-	char	*cmd_path;
-}	t_shell;
+	t_list	*node;
 
-char	**get_env_path(char **envp);
-char	*build_cmd_path(char **path, char *cmd);
-
-#endif
+	node = malloc(sizeof(t_list));
+	if (!node)
+		return (NULL);
+	node->content = content;
+	node->next = NULL;
+	return (node);
+}

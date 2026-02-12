@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   gnl.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: helios <helios@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2025/10/29 21:14:12 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/10/13 22:32:41 by bmoreira          #+#    #+#             */
+/*   Updated: 2025/10/17 02:25:24 by helios           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef GNL_H
+# define GNL_H
 
-# include "char.h"
-# include "ft_types.h"
-# include "gnl.h"
-# include "io.h"
-# include "lst.h"
-# include "matrix.h"
-# include "mem.h"
-# include "num.h"
-# include "printf.h"
-# include "sort.h"
+# include <unistd.h>
+# include <stdlib.h>
 # include "str.h"
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
+
+char	*get_next_line(int fd);
 
 #endif

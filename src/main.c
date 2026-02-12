@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/09 19:31:27 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/10 20:46:39 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,18 @@ char	*builtin_pwd(t_shell *info)
 	}
 	printf("%s\n", pwd);
 	return (pwd);
+}
+
+t_list	set_env(t_list *env, char **envp)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i])	
+	{
+		lst_add_last(env, lst_new_node(envp[i]));
+		i++;
+	}
 }
 
 int	main(int argc, char **argv, char **envp)

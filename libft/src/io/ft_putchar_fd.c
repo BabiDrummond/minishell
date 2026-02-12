@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/10 20:47:05 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/07/13 07:27:01 by bmoreira          #+#    #+#             */
+/*   Updated: 2025/10/18 17:21:05 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "io.h"
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libft/include/libft.h"
-
-typedef struct s_shell
+void	ft_putchar_fd(char c, int fd)
 {
-	t_list	*env;
-	char	**cmd_args;
-	char	*cmd_path;
-}	t_shell;
-
-char	**get_env_path(char **envp);
-char	*build_cmd_path(char **path, char *cmd);
-
-#endif
+	write(fd, &c, 1);
+}

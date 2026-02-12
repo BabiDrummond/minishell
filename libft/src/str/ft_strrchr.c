@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/10 20:47:05 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/07/13 02:41:11 by bmoreira          #+#    #+#             */
+/*   Updated: 2025/10/18 17:24:55 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "str.h"
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libft/include/libft.h"
-
-typedef struct s_shell
+char	*ft_strrchr(const char *s, int c)
 {
-	t_list	*env;
-	char	**cmd_args;
-	char	*cmd_path;
-}	t_shell;
+	int	len;
 
-char	**get_env_path(char **envp);
-char	*build_cmd_path(char **path, char *cmd);
+	len = ft_strlen(s) + 1;
+	while (len--)
+		if (s[len] == (char) c)
+			return ((char *) s + len);
+	return (0);
+}
 
-#endif
+/*
+int main(void)
+{
+	#include <stdio.h>
+
+	printf("%s\n", ft_strrchr("oie td bem?", 'i'));
+}
+*/

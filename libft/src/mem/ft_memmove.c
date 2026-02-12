@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/10 20:47:05 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/07/13 01:48:38 by bmoreira          #+#    #+#             */
+/*   Updated: 2025/10/18 17:22:41 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "mem.h"
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libft/include/libft.h"
-
-typedef struct s_shell
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	t_list	*env;
-	char	**cmd_args;
-	char	*cmd_path;
-}	t_shell;
+	unsigned char	*temp;
 
-char	**get_env_path(char **envp);
-char	*build_cmd_path(char **path, char *cmd);
-
-#endif
+	temp = (unsigned char *)dest;
+	if (!dest && !src)
+		return (NULL);
+	if (dest <= src)
+		while (n--)
+			*(unsigned char *)dest++ = *(unsigned char *)src++;
+	else if (dest > src)
+	{
+		src += n - 1;
+		dest += n - 1;
+		while (n--)
+			*(unsigned char *)dest-- = *(unsigned char *)src--;
+	}
+	return (temp);
+}
