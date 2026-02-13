@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 23:31:44 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/11 23:32:16 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/12 19:59:19 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	*get_env_var(t_list *env, char *var_name)
 {
 	int	var_len;
 
+	if (!var_name)
+		return (NULL);
 	var_len = ft_strlen(var_name);
 	while (env)
 	{
