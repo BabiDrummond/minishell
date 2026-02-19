@@ -22,23 +22,23 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
 	@$(CC) $(OBJS) $(LIBFT) -o $(NAME) $(READLINE)
-	@echo -n "\033[0;32mGenerated minishell\n"
+	@echo "\033[0;32mGenerated mminishell\033[0m"
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-	@echo "\033[95mCompiling $(notdir $<)"
+	@echo "\033[95mCompiling \033[0m$(notdir $<)"
 
 $(LIBFT):
 	@make --no-print-directory -C $(LIBFT_DIR)
 
 clean:
-	@echo "\033[0;34mCleaning minishell objects"
+	@echo "\033[0;34mCleaning minishell objects\033[0m"
 	@rm -rf $(OBJS_DIR)
 	@make --no-print-directory -C $(LIBFT_DIR) clean
 
 fclean: clean
-	@echo "\033[0;34mCleaning minishell"
+	@echo "\033[0;34mCleaning minishell\033[0m"
 	@rm -f $(NAME)
 	@make --no-print-directory -C $(LIBFT_DIR) fclean
 
