@@ -6,11 +6,12 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/19 22:59:53 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/19 23:17:06 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <string.h>
 
 // void	set_env_var(t_list **env, char *key, char *value)
 // {
@@ -43,45 +44,33 @@ t_var	*var_create(char *var_content, int exported)
 	t_var	*var;
 
 	var = ft_calloc(1, sizeof(t_var));
+	//ft_strchr
 	split = ft_split(var_content, '=');
-	var->key = ft_strdup(split[0]);
-	var->value = ft_strdup(split[1]);
+	if (split[0])
+		var->key = ft_strdup(split[0]);
+	if (split[1])
+		var->value = ft_strdup(split[1]);
 	var->exported = exported;
 	ft_split_free(split);
 	return (var);
 }
 
-// t_list	*envp_to_lst(char **envp)
-// {
-// 	t_list	*vars;
-// 	t_var	*var;
-// 	int		i;
-
-// 	i = 0;
-// 	while (envp[i])
-// 	{
-// 		var = var_create(envp[i++], TRUE);
-// 		//printf("key %s value %s exp %d\n", var->key, var->value, var->exported);
-// 		lst_add_back(&vars, lst_new(var));
-// 	}
-// 	printf("i: %d\n", i);
-// 	return (vars);
-// }
-
-void	envp_to_lst(t_list **vars, char **envp)
+t_list	*envp_to_lst(char **envp)
 {
+	t_list	*vars;
 	t_var	*var;
 	int		i;
 
 	i = 0;
-	*vars = NULL;
+	vars = NULL;
 	while (envp[i])
 	{
 		var = var_create(envp[i++], TRUE);
 		//printf("key %s value %s exp %d\n", var->key, var->value, var->exported);
-		lst_add_back(vars, lst_new(var));
+		lst_add_back(&vars, lst_new(var));
 	}
 	printf("i: %d\n", i);
+	return (vars);
 }
 
 char	**lst_to_envp(t_list *vars)
@@ -110,11 +99,10 @@ int	main(int argc, char **argv, char **envp)
 
 	line = readline("minishell> ");
 	printf("Comando digitado: %s\n", line);
-	//shell.vars = envp_to_lst(envp);
-	envp_to_lst(&shell.vars, envp);
+	shell.vars = envp_to_lst(envp);
 	//info.cmd_args = ft_split(line, ' ');
 	printf("funcionou??????????????????????????\n");
-	//builtin_env(&shell.vars);
+	builtin_env(shell.vars);
 	printf("key %s\n", ((t_var *)shell.vars->content)->key);
 	((t_var *)shell.vars->content)->key = "oi";
 	printf("key %s\n", ((t_var *)shell.vars->content)->key);
