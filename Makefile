@@ -22,7 +22,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
 	@$(CC) $(OBJS) $(LIBFT) -o $(NAME) $(READLINE)
-	@echo "\033[0;32mGenerated mminishell\033[0m"
+	@echo "\033[0;32mGenerated minishell\033[0m"
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(dir $@)

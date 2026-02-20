@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_env_var.c                                      :+:      :+:    :+:   */
+/*   var_get.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 23:31:44 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/12 19:59:19 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/19 19:20:03 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_env_var(t_list *env, char *var_name)
+char	*var_get(t_list *vars, char *var_name)
 {
-	int	var_len;
+	t_var	*var;
 
-	if (!var_name)
+	if (!vars || !var_name)
 		return (NULL);
-	var_len = ft_strlen(var_name);
-	while (env)
+	while (vars)
 	{
-		if (ft_strncmp(env->content, var_name, var_len) == 0)
-			return (ft_split(env->content, '=')[1]);
-		env = env->next;
+		var = (t_var *) vars->content;
+		if (var && var->key && !ft_strcmp(var->key, var_name))
+			return (var->value);
+		vars = vars->next;
 	}
 	return (NULL);
 }
