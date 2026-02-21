@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/21 00:46:43 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/21 00:52:19 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ int	main(int argc, char **argv, char **envp)
 	shell.vars = envp_to_lst(envp);
 	//info.cmd_args = ft_split(line, ' ');
 	printf("funcionou??????????????????????????\n");
-	builtin_pwd(shell.vars);
-	// printf("get1: %s\n", var_get(shell.vars, "PATH"));
-	// var_set(&shell.vars, "PATH=Oi");
-	// printf("get2: %s\n", var_get(shell.vars, "PATH"));
+	//builtin_pwd(shell.vars);
+	printf("get1: %s\n", var_get(shell.vars, "NPATH"));
+	var_set(&shell.vars, "NPATH=Oi");
+	printf("get2: %s\n", var_get(shell.vars, "NPATH"));
 	// printf("key %s\n", ((t_var *)shell.vars->content)->key);
 	// ((t_var *)shell.vars->content)->key = "oi";
 	// printf("key %s\n", ((t_var *)shell.vars->content)->key);

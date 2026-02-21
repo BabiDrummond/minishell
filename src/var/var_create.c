@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   var_update.c                                       :+:      :+:    :+:   */
+/*   var_create.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/21 00:40:59 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/21 00:41:10 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/21 00:41:36 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/21 00:54:02 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	var_update(t_list **vars, t_var *var)
+t_var	*var_create(char *var_content, int exported)
 {
-	t_var	*var_cmp;
-	t_list	*current;
+	char	*value;
+	t_var	*var;
 
-	current = *vars;
-	while(current)
+	var = ft_calloc(1, sizeof(t_var));
+	value = ft_strchr(var_content, '=');
+	if (value)
 	{
-		var_cmp = (t_var *)current->content;
-		if (var_cmp && var_cmp->key && !ft_strcmp(var_cmp->key, var->key))
-		{
-			free(var_cmp->value);
-			var_cmp->value = var->value;
-		}
-		current = current->next;
+		var->key = ft_substr(var_content, 0, value - var_content);
+		var->value = ft_strdup(value + 1);
 	}
+	else
+	{
+		var->key = ft_strdup(var_content);
+		var->value = ft_strdup("");
+	}
+	var->exported = exported;
+	return (var);
 }
