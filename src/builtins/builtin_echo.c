@@ -6,24 +6,40 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 23:42:57 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/21 18:17:23 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/21 19:14:19 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	builtin_echo(t_shell *shell)
+static int	is_n_option(char *arg)
+{
+	int	i;
+
+	i = 1;
+	if (!arg || arg[0] != '-')
+		return (FALSE);
+	while (arg[i] == 'n')
+		i++;
+	if (i > 1 && arg[i] == '\0')
+		return (TRUE);
+	return (FALSE);
+}
+
+void	builtin_echo(char **args)
 {	
 	char	*str;
-	int		n_option;
 	int		i;
 
 	i = 0;
-	n_option = 0;
-	while (ft_strncmp(shell->cmd_args[++i], "-n", 2) == 0)
-		n_option++;
-	str = ft_join_split(shell->cmd_args + i, " ");
-	printf("%s", str);
-	if (!n_option)
+	if (args)
+	{
+		while (is_n_option(args[i]))
+			i++;
+		str = ft_join_split(args + i, " ");
+		printf("%s", str);
+		free(str);
+	}
+	if (i == 0)
 		printf("\n");
 }
