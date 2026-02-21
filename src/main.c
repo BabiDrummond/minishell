@@ -6,37 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/21 00:52:19 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/21 18:17:51 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <string.h>
-
-// void	set_env_var(t_list **env, char *key, char *value)
-// {
-// 	t_list	**head;
-// 	char	*var;
-
-// 	var = ft_triple_join(key, "=", value);
-// 	printf("var, key, value %s %s %s\n", var, key, value);
-// 	head = env;
-// 	if (get_env_var(*env, key) == NULL)
-// 	{
-// 		lst_add_back(env, lst_new(var));
-// 		return ;
-// 	}
-// 	while (*env)
-// 	{
-// 		if (ft_strncmp((char *)(*env)->content, key, ft_strlen(key)) == 0)
-// 		{
-// 			printf("env key var len %s %s %s %zu\n", (char *) (*env)->content, key, var, ft_strlen(key));
-// 			(*env)->content = var;
-// 			return ;
-// 		}
-// 		*env = (*env)->next;
-// 	}
-// }
 
 t_list	*envp_to_lst(char **envp)
 {
@@ -59,7 +33,7 @@ char	**lst_to_envp(t_list *vars)
 	t_var	*var;
 	char	**envp;
 
-	envp = NULL;
+	envp = ft_calloc(1, sizeof(char *));
 	while (vars)
 	{
 		var = (t_var *) vars->content;
@@ -79,28 +53,11 @@ int	main(int argc, char **argv, char **envp)
 	line = readline("minishell> ");
 	printf("Comando digitado: %s\n", line);
 	shell.vars = envp_to_lst(envp);
-	//info.cmd_args = ft_split(line, ' ');
+	shell.cmd_args = ft_split(line, ' ');
 	printf("funcionou??????????????????????????\n");
+	//builtin_env(shell.vars);
 	//builtin_pwd(shell.vars);
-	printf("get1: %s\n", var_get(shell.vars, "NPATH"));
-	var_set(&shell.vars, "NPATH=Oi");
-	printf("get2: %s\n", var_get(shell.vars, "NPATH"));
-	// printf("key %s\n", ((t_var *)shell.vars->content)->key);
-	// ((t_var *)shell.vars->content)->key = "oi";
-	// printf("key %s\n", ((t_var *)shell.vars->content)->key);
-	// var = *(shell.vars);
-	// printf("key %s\n", var->key);
-	// printf("value %s\n", var->value);
-	// printf("exported %d\n", var->exported);
-	// var->exported = 2;
-	// printf("exported %d", var->exported);
-	//printf("PATH BEFORE: %s\n", get_env_var(info.env, "HALO"));
-	//set_env_var(&info.env, "HALO", "ola");
-	//printf("PATH AFTER: %s\n", get_env_var(info.env, "HALO"));
-	//info.cmd_path = build_cmd_path(info.env_path, info.cmd_args[0]);
-	//builtin_env(info.env);
-	//builtin_pwd(info.env);
-	//builtin_echo(&info);
+	builtin_echo(&shell);
 	//execve(info.cmd_path, info.cmd_args, info.envp);
 	//free(line);
 	return (0);

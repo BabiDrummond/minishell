@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 00:40:59 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/21 00:53:07 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/21 18:18:49 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	var_update(t_list **vars, t_var *var)
 		{
 			free(var_cmp->value);
 			var_cmp->value = var->value;
+			return ;
 		}
 		current = current->next;
 	}
