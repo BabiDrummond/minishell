@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/21 00:42:00 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/21 00:45:54 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*build_cmd_path(t_shell *info, char *cmd);
 
 /* Built-ins */
 void	builtin_echo(t_shell *info);
-void	builtin_env(t_list *var_list);
-void	builtin_pwd(t_list *env);
+void	builtin_env(t_list *vars);
+void	builtin_pwd(t_list *vars);
 
 #endif

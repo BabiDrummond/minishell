@@ -6,20 +6,21 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 23:44:45 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/19 21:57:08 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/21 00:44:25 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	builtin_env(t_list *var_list)
+void	builtin_env(t_list *vars)
 {
 	t_var	*var;
 
-	while(var_list)
+	while(vars)
 	{
-		var = (t_var *) var_list->content;
-		printf("%s=%s\n", var->key, var->value);
-		var_list = var_list->next;
+		var = (t_var *) vars->content;
+		if (var->exported)
+			printf("%s=%s\n", var->key, var->value);
+		vars = vars->next;
 	}
 }
