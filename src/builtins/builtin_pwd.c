@@ -6,13 +6,13 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 23:44:24 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/11 23:44:33 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/21 00:08:44 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	builtin_pwd(t_list *env)
-{
-	printf("%s\n", get_env_var(env, "PATH"));
-}
+// void	builtin_pwd(t_list *env)
+// {
+// 	printf("%s\n", get_env_var(env, "PATH"));
+// }

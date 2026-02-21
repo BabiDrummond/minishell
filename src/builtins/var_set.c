@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   var_get.c                                          :+:      :+:    :+:   */
+/*   var_set.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/11 23:31:44 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/21 00:37:10 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/21 00:39:38 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/21 00:39:55 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*var_get(t_list *vars, char *var_key)
+void	var_set(t_list **vars, char *var_content)
 {
 	t_var	*var;
 
-	if (!vars || !var_key)
-		return (NULL);
-	while (vars)
-	{
-		var = (t_var *) vars->content;
-		if (var && var->key && !ft_strcmp(var->key, var_key))
-			return (var)->value;
-		vars = vars->next;
-	}
-	return (NULL);
+	var = var_create(var_content, FALSE);
+	if (var_get(*vars, var->key))
+		var_update(vars, var);
+	else
+		lst_add_back(vars, lst_new(var));
 }

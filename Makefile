@@ -14,7 +14,10 @@ SRCS = main.c 					\
 	builtins/builtin_echo.c		\
 	builtins/builtin_env.c		\
 	builtins/builtin_pwd.c		\
-	builtins/get_env_var.c
+	builtins/var_create.c		\
+	builtins/var_get.c			\
+	builtins/var_set.c			\
+	builtins/var_update.c
 OBJS_DIR = objs/
 OBJS = $(SRCS:%.c=$(OBJS_DIR)%.o)
 

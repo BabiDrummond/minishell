@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/19 22:47:06 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/21 00:42:00 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,12 @@ typedef struct s_shell
 	char	*cmd_path;
 }	t_shell;
 
+t_var	*var_create(char *var_content, int exported);
+char	*var_get(t_list *vars, char *var_key);
+void	var_set(t_list **vars, char *var_content);
+void	var_update(t_list **vars, t_var *var);
+
 char	*build_cmd_path(t_shell *info, char *cmd);
-char	*var_get(t_list *var_list, char *var_name);
 
 /* Built-ins */
 void	builtin_echo(t_shell *info);
