@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 00:40:59 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/21 18:18:49 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/21 19:53:00 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,19 @@
 
 void	var_update(t_list **vars, t_var *var)
 {
-	t_var	*var_cmp;
+	t_var	*curr_var;
 	t_list	*current;
 
 	current = *vars;
 	while (current)
 	{
-		var_cmp = (t_var *)current->content;
-		if (var_cmp && var_cmp->key && !ft_strcmp(var_cmp->key, var->key))
+		curr_var = (t_var *)current->content;
+		if (curr_var && curr_var->key && !ft_strcmp(curr_var->key, var->key))
 		{
-			free(var_cmp->value);
-			var_cmp->value = var->value;
+			free(curr_var->key);
+			free(curr_var->value);
+			free(curr_var);
+			current->content = var;
 			return ;
 		}
 		current = current->next;
