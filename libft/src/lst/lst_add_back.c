@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   build_cmd_path.c                                   :+:      :+:    :+:   */
+/*   lst_add_back.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/04 01:34:24 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/22 04:18:59 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/07/19 16:12:58 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/19 16:52:04 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "lst.h"
 
-char	*build_cmd_path(t_list *vars, char *cmd)
+void	lst_add_back(t_list **head, t_list *new)
 {
-	char	**path;
-	char	*cmd_path;
-	int		i;
+	t_list	*last;
 
-	i = 0;
-	path = ft_split(var_get(vars, "PATH"), ':');
-	while (path[i])
+	if (!head || !new)
+		return ;
+	if (!*head)
 	{
-		if (ft_strncmp(path[i] + ft_strlen(path[i]) - 1, "/", 1) != 0)
-		{
-			cmd_path = ft_triple_join(path[i], "/", cmd);
-			if (!access(cmd_path, F_OK))
-				return (cmd_path);
-		}
-		free(cmd_path);
-		cmd_path = NULL;
-		i++;
+		*head = new;
+		return ;
 	}
-	return (NULL);
+	last = lst_last(*head);
+	last->next = new;
+	new->prev = last;
 }

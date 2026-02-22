@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/22 03:15:09 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/22 04:18:35 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ char	*var_get(t_list *vars, char *var_key);
 void	var_set(t_list **vars, char *var_content, int exported);
 void	var_update(t_list **vars, t_var *var);
 
-char	*build_cmd_path(t_shell *info, char *cmd);
+/* Execution */
+char	*build_cmd_path(t_list *vars, char *cmd);
 
 /* Built-ins */
 void	builtin_echo(char **args);
