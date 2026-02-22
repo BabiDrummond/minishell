@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/21 19:38:10 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/22 02:01:52 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,38 @@ char	**lst_to_envp(t_list *vars)
 	return (start);
 }
 
+void	builtin_export(t_list **vars, char *var_content)
+{
+	t_list	*current;
+	t_var	*var;
+
+	current = *vars;
+	var_set(vars, var_content, TRUE);
+
+	while(current)
+	{
+		var = (t_var *) current->content;
+		if (var && var->value && var->exported)
+			printf("declare -x %s=%s\n", var->key, var->value);
+		current = current->next;
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	(void) argc;
 	(void) argv;
 	t_shell shell;
-	char	**envp_copy;
+	//char	**envp_copy;
 	char	*line;
 
 	line = readline("minishell> ");
 	printf("Comando digitado: %s\n", line);
 	shell.vars = envp_to_lst(envp);
 	shell.args = ft_split(line, ' ');
-	envp_copy = lst_to_envp(shell.vars);
-	ft_matrix_print(envp_copy);
-	//builtin_env(shell.vars);
+	//envp_copy = lst_to_envp(shell.vars);
+	//ft_matrix_print(envp_copy);
+	builtin_env(shell.vars);
 	//builtin_pwd(shell.vars);
 	//builtin_echo(shell.args + 1);
 	//execve(info.cmd_path, shell.args, shell.env);

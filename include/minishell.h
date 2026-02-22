@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/21 19:39:31 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/22 03:15:09 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct s_shell
 {
 	t_list	*vars;
 	char	**args;
-	char	**env;
 }	t_shell;
 
 /* Variables */
