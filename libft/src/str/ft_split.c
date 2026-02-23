@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 18:21:44 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/08 00:45:06 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/23 01:17:46 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,3 @@ char	**ft_split(const char *s, char c)
 	}
 	return (arr);
 }
-
-/*
-int main(void)
-{
-	#include <stdio.h>
-	//char *teste = "1-2--3---4----5-----42";
-	char **ar = ft_split(0, '0');
-	int i;
-	
-	i = -1;
-	while(ar[++i])
-		printf("%s\n", ar[i]);
-}
-*/

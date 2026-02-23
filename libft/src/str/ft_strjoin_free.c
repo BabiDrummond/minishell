@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 17:11:29 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/19 17:43:07 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/23 01:17:35 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,3 @@ char	*ft_strjoin_free(char *s1, char *s2, int free_s1, int free_s2)
 		ft_free(&s2);
 	return (new);
 }
-
-/*
-int main(void)
-{
-	char *str1 = ft_strdup("manhê, phineas e pherb ");
-	char *str2 = ft_strdup("estão fazendo a abertura da serie");
-	char *result = ft_strjoin_free(str1, str2);
-	ft_printf("%s\n", result);
-	free(result);
-}
-*/

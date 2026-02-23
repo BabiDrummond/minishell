@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   var_create.c                                       :+:      :+:    :+:   */
+/*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/21 00:41:36 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 00:53:39 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/23 00:46:16 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/23 01:55:47 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,31 +21,35 @@ static int	is_valid_key(char *var_content)
 		return (FALSE);
 	while (ft_isalnum(var_content[i]) || var_content[i] == '_')
 		i++;
-	return (var_content[i] == '\0' || var_content[i] == '=');
+	return (var_content[i] == '\0');
 }
 
-t_var	*var_create(char *var_content, int exported)
+void	builtin_unset(t_list **vars, char *content)
 {
-	char	*value;
-	t_var	*var;
+	char	**split;
+	int		i;
 
-	if (!is_valid_key(var_content))
+	i = 0;
+	if (!ft_strlen(content))
 	{
-		printf("export: not a valid identifier\n");
-		return (NULL);
+		printf("unset: not enough arguments\n");
+		return ;
 	}
-	var = ft_calloc(1, sizeof(t_var));
-	value = ft_strchr(var_content, '=');
-	if (value)
+	split = ft_split(content, ' ');
+	while (split[i])
 	{
-		var->key = ft_substr(var_content, 0, value - var_content);
-		var->value = ft_strdup(value + 1);
+		if (!is_valid_key(split[i]))
+			printf("unset: invalid parameter name\n");
+		else
+			var_unset(vars, split[i]);
+		i++;
 	}
-	else
-	{
-		var->key = ft_strdup(var_content);
-		var->value = NULL;
-	}
-	var->exported = exported;
-	return (var);
+	ft_split_free(split);
 }
+
+
+
+// unset => vazio, erro not enough arguments
+// unset VAR-JAS => invalido, erro parametro invalido
+// unset VAR => valido, procura VAR, se nao tiver, nao faz nada
+// unset VAR => valido, procura VAR, se tiver, deleta da lista

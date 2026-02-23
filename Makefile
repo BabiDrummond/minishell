@@ -15,11 +15,12 @@ SRCS = main.c 					\
 	builtins/builtin_env.c		\
 	builtins/builtin_export.c	\
 	builtins/builtin_pwd.c		\
-	validation/is_valid_key.c	\
+	builtins/builtin_unset.c	\
 	var/var_clear.c				\
 	var/var_create.c			\
 	var/var_get.c				\
 	var/var_set.c				\
+	var/var_unset.c				\
 	var/var_update.c
 OBJS_DIR = objs/
 OBJS = $(SRCS:%.c=$(OBJS_DIR)%.o)

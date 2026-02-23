@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:13:20 by bmoreira          #+#    #+#             */
-/*   Updated: 2025/10/18 17:25:08 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/23 01:17:27 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,3 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 	ft_memcpy(substr, (s + start), len);
 	return (substr);
 }
-
-/*
-int main(void)
-{
-	#include <stdio.h>
-	char *teste = "meu amigo da escola é um macaco caco caoc caco";
-
-	printf("%s\n", ft_substr(teste, 38, 9));
-}
-*/

@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_valid_key.c                                     :+:      :+:    :+:   */
+/*   var_unset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/22 23:24:58 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 00:06:06 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/23 01:35:54 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/23 01:45:41 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_valid_key(char *var_content)
+void	var_unset(t_list **vars, char *var_key)
 {
-	int	i;
+	t_list	*current;
+	t_var	*curr_var;
 
-	i = 1;
-	if (!ft_isalpha(var_content[0]) && !(var_content[0] == '_'))
-		return (FALSE);
-	while (ft_isalnum(var_content[i]) || var_content[i] == '_')
-		i++;
-	return (var_content[i] == '\0' || var_content[i] == '=');
+	current = *vars;
+	while (current)
+	{
+		curr_var = (t_var *) current->content;
+		if (ft_strcmp(curr_var->key, var_key) == 0)
+		{
+			lst_del_node(vars, current, var_clear);
+			return ;
+		}
+		current = current->next;
+	}
 }

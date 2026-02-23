@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 23:31:44 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/22 23:15:39 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/23 01:26:25 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 t_var	*var_get(t_list *vars, char *var_key)
 {
-	t_var	*var;
+	t_var	*curr_var;
 
 	if (!vars || !var_key)
 		return (NULL);
 	while (vars)
 	{
-		var = (t_var *) vars->content;
-		if (var && var->key && !ft_strcmp(var->key, var_key))
-			return (var);
+		curr_var = (t_var *) vars->content;
+		if (curr_var && curr_var->key && !ft_strcmp(curr_var->key, var_key))
+			return (curr_var);
 		vars = vars->next;
 	}
 	return (NULL);
