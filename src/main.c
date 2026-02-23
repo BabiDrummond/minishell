@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/22 23:48:17 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/23 00:02:56 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ int	main(int argc, char **argv, char **envp)
 	//builtin_echo(shell.args + 1);
 	//execve(info.cmd_path, shell.args, shell.env);
 	//free(line);
+	lst_clear(&shell.vars, var_clear);
 	return (0);
 }

@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_valid_key.c                                     :+:      :+:    :+:   */
+/*   lst_clear_node.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/22 23:24:58 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 00:06:06 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/07/19 16:56:04 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/19 16:52:51 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "lst.h"
 
-int	is_valid_key(char *var_content)
+void	lst_clear_node(t_list *node, void (*del)(void *))
 {
-	int	i;
-
-	i = 1;
-	if (!ft_isalpha(var_content[0]) && !(var_content[0] == '_'))
-		return (FALSE);
-	while (ft_isalnum(var_content[i]) || var_content[i] == '_')
-		i++;
-	return (var_content[i] == '\0' || var_content[i] == '=');
+	if (!node)
+		return ;
+	if (del)
+		(*del)(node->content);
+	free(node);
 }

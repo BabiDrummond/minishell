@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 23:44:45 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/22 22:46:34 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/23 00:04:32 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	builtin_env(t_list *vars)
 {
 	t_var	*var;
 
-	while(vars)
+	while (vars)
 	{
 		var = (t_var *) vars->content;
 		if (var && var->value && var->exported)

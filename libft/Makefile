@@ -8,6 +8,9 @@ SRCS = char/ft_isalnum.c	\
 	char/ft_isalpha.c		\
 	char/ft_isdigit.c		\
 	lst/lst_add_back.c		\
+	lst/lst_clear_node.c	\
+	lst/lst_clear.c			\
+	lst/lst_del_node.c		\
 	lst/lst_last.c			\
 	lst/lst_new.c			\
 	lst/lst_size.c			\

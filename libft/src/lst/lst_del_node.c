@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_valid_key.c                                     :+:      :+:    :+:   */
+/*   lst_del_node.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/22 23:24:58 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 00:06:06 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/19 16:53:23 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/19 17:17:22 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "lst.h"
 
-int	is_valid_key(char *var_content)
-{
-	int	i;
-
-	i = 1;
-	if (!ft_isalpha(var_content[0]) && !(var_content[0] == '_'))
-		return (FALSE);
-	while (ft_isalnum(var_content[i]) || var_content[i] == '_')
-		i++;
-	return (var_content[i] == '\0' || var_content[i] == '=');
+void	lst_del_node(t_list **head, t_list *node, void (*del)(void *))
+{	
+	if (!head || !*head || !node)
+		return ;
+	if (node->prev)
+		node->prev->next = node->next;
+	else
+		*head = node->next;
+	if (node->next)
+		node->next->prev = node->prev;
+	node->prev = NULL;
+	node->next = NULL;
+	lst_clear_node(node, (*del));
 }
