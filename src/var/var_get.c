@@ -6,13 +6,13 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 23:31:44 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/21 18:21:48 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/22 23:15:39 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*var_get(t_list *vars, char *var_key)
+t_var	*var_get(t_list *vars, char *var_key)
 {
 	t_var	*var;
 
@@ -22,8 +22,18 @@ char	*var_get(t_list *vars, char *var_key)
 	{
 		var = (t_var *) vars->content;
 		if (var && var->key && !ft_strcmp(var->key, var_key))
-			return (var->value);
+			return (var);
 		vars = vars->next;
 	}
+	return (NULL);
+}
+
+char	*var_get_value(t_list *vars, char *var_key)
+{
+	t_var	*var;
+
+	var = var_get(vars, var_key);
+	if (var)
+		return (var->value);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/22 02:01:52 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/22 23:34:26 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,16 @@ char	**lst_to_envp(t_list *vars)
 
 void	builtin_export(t_list **vars, char *var_content)
 {
-	t_list	*current;
-	t_var	*var;
-
-	current = *vars;
-	var_set(vars, var_content, TRUE);
-
-	while(current)
+	char	**split;
+	int		i;
+	i = 0;
+	if (!var_content)
+		builtin_env(*vars);
+	else
 	{
-		var = (t_var *) current->content;
-		if (var && var->value && var->exported)
-			printf("declare -x %s=%s\n", var->key, var->value);
-		current = current->next;
+		split = var_content;
+		while (split[i])
+			var_set(vars, split[i], TRUE);
 	}
 }
 
@@ -75,6 +73,9 @@ int	main(int argc, char **argv, char **envp)
 	printf("Comando digitado: %s\n", line);
 	shell.vars = envp_to_lst(envp);
 	shell.args = ft_split(line, ' ');
+	var_set(&shell.vars, "SOA8jid-j=", TRUE);
+	printf("var: %s\n", var_get_value(shell.vars, "SOA8jidj"));
+	
 	//envp_copy = lst_to_envp(shell.vars);
 	//ft_matrix_print(envp_copy);
 	builtin_env(shell.vars);

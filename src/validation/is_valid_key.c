@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   is_valid_identifier.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/11 23:44:24 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/22 23:17:53 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/22 23:24:58 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/22 23:26:01 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	builtin_pwd(t_list *vars)
+int is_valid_key(char *var_content)
 {
-	printf("%s\n", var_get_value(vars, "PWD"));
+	int	i;
+
+	i = 1;
+	if (!ft_isalpha(var_content[0]) && !(var_content[0] == '_'))
+		return (FALSE);
+	while (ft_isalnum(var_content[i]) || var_content[i] == '_')
+		i++;
+	return (var_content[i] == '\0' || var_content[i] == '=');
 }

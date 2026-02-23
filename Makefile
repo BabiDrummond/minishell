@@ -14,6 +14,7 @@ SRCS = main.c 					\
 	builtins/builtin_echo.c		\
 	builtins/builtin_env.c		\
 	builtins/builtin_pwd.c		\
+	validation/is_valid_key.c	\
 	var/var_create.c			\
 	var/var_get.c				\
 	var/var_set.c				\
