@@ -13,6 +13,7 @@ SRCS = main.c 					\
 	builtins/build_cmd_path.c	\
 	builtins/builtin_echo.c		\
 	builtins/builtin_env.c		\
+	builtins/builtin_export.c	\
 	builtins/builtin_pwd.c		\
 	validation/is_valid_key.c	\
 	var/var_create.c			\
