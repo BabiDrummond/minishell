@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_unset.c                                    :+:      :+:    :+:   */
+/*   is_valid_key.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/23 00:46:16 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 03:13:03 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/23 03:05:57 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/23 03:06:06 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	builtin_unset(t_list **vars, char *content)
+int	is_valid_key(char *var_content)
 {
-	char	**split;
-	int		i;
+	int	i;
 
-	i = 0;
-	if (!ft_strlen(content))
-	{
-		printf("unset: not enough arguments\n");
-		return ;
-	}
-	split = ft_split(content, ' ');
-	while (split[i])
-	{
-		if (!is_valid_key(split[i]))
-			printf("unset: `%s': invalid parameter name\n", split[i]);
-		else
-			var_unset(vars, split[i]);
+	i = 1;
+	if (!var_content || !var_content[0])
+		return (FALSE);
+	if (!ft_isalpha(var_content[0]) && !(var_content[0] == '_'))
+		return (FALSE);
+	while (ft_isalnum(var_content[i]) || var_content[i] == '_')
 		i++;
-	}
-	ft_split_free(split);
+	return (var_content[i] == '\0');
 }

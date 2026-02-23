@@ -6,46 +6,50 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 00:41:36 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 00:53:39 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/23 03:06:13 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	is_valid_key(char *var_content)
+static char	*extract_key(char *var_content)
 {
-	int	i;
+	char	*equal;
 
-	i = 1;
-	if (!ft_isalpha(var_content[0]) && !(var_content[0] == '_'))
-		return (FALSE);
-	while (ft_isalnum(var_content[i]) || var_content[i] == '_')
-		i++;
-	return (var_content[i] == '\0' || var_content[i] == '=');
+	equal = ft_strchr(var_content, '=');
+	if (equal)
+		return (ft_substr(var_content, 0, equal - var_content));
+	return (ft_strdup(var_content));
+}
+
+static char	*extract_value(char *var_content)
+{
+	char	*equal;
+
+	equal = ft_strchr(var_content, '=');
+	if (equal)
+		return (ft_strdup(equal + 1));
+	return (NULL);
 }
 
 t_var	*var_create(char *var_content, int exported)
 {
-	char	*value;
 	t_var	*var;
+	char	*key;
+	char	*value;
 
-	if (!is_valid_key(var_content))
+	key = extract_key(var_content);
+	value = extract_value(var_content);
+	if (!is_valid_key(key))
 	{
-		printf("export: not a valid identifier\n");
-		return (NULL);
+		printf("export: `%s': not a valid identifier\n", key);
+		return (free(key), free(value), NULL);
 	}
 	var = ft_calloc(1, sizeof(t_var));
-	value = ft_strchr(var_content, '=');
-	if (value)
-	{
-		var->key = ft_substr(var_content, 0, value - var_content);
-		var->value = ft_strdup(value + 1);
-	}
-	else
-	{
-		var->key = ft_strdup(var_content);
-		var->value = NULL;
-	}
+	if (!var)
+		return (free(key), free(value), NULL);
+	var->key = key;
+	var->value = value;
 	var->exported = exported;
 	return (var);
 }
