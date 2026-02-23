@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 00:00:47 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 00:06:15 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/23 00:39:04 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ void	var_clear(void *var_content)
 	var = var_content;
 	ft_free(&var->key);
 	ft_free(&var->value);
-	ft_free(var_content);
+	ft_free((char **)&var_content);
 }

@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 00:02:56 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/23 00:37:46 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ int	main(int argc, char **argv, char **envp)
 	(void) argv;
 	t_shell shell;
 	//char	**envp_copy;
-	char	*line;
+	// char	*line;
 
-	line = readline("minishell> ");
-	printf("Comando digitado: %s\n", line);
+	// line = readline("minishell> ");
+	// printf("Comando digitado: %s\n", line);
 	shell.vars = envp_to_lst(envp);
-	shell.args = ft_split(line, ' ');
+	//shell.args = ft_split(line, ' ');
 	var_set(&shell.vars, "SOA8jid-j=", TRUE);
 	printf("var: %s\n", var_get_value(shell.vars, "SOA8jidj"));
 	builtin_export(&shell.vars, "ANI_MAL COloR=AZUL");
