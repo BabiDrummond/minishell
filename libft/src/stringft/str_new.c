@@ -13,7 +13,7 @@
 #include "stringft.h"
 #include "gcft.h"
 
-t_string	*str_new(size_t len)
+char	*str_new(size_t len)
 {
 	char	*value;
 

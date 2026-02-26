@@ -12,7 +12,7 @@
 
 #include "lexer_private.h"
 
-t_list	*tokenize(char *prompt, t_string **operators)
+t_list	*tokenize(char *prompt, char **operators)
 {
 	void	**result;
 	t_list	*tokens;

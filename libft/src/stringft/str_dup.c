@@ -12,9 +12,9 @@
 
 #include "stringft.h"
 
-t_string	*str_dup(const char *s)
+char	*str_dup(const char *s)
 {
-	t_string	*str;
+	char	*str;
 	size_t		len;
 
 	if (!s)
@@ -23,6 +23,6 @@ t_string	*str_dup(const char *s)
 	str = str_new(len);
 	if (!str)
 		return (NULL);
-	ft_memcpy(str->value, s, len);
+	ft_memcpy(str, s, len);
 	return (str);
 }

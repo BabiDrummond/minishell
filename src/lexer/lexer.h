@@ -39,7 +39,7 @@ typedef struct s_token
 }	t_token;
 
 
-t_string	**initialize_operators(void);
-t_list		*tokenize(char *prompt, t_string **operators);
+char	**initialize_operators(void);
+t_list		*tokenize(char *prompt, char **operators);
 void		print_tokens(t_list *tokens);
 #endif

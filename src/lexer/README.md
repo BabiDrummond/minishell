@@ -38,7 +38,7 @@ Include `lexer.h` in your project and link with `lexer.a`.
 #### Example usage
 
 ```c
-t_string **operators = initialize_operators();
+char **operators = initialize_operators();
 char *line = readline("prompt> ");
 t_list *tokens = tokenize(line, operators);
 print_tokens(tokens);
@@ -64,11 +64,11 @@ Token: {type: 'WORD', parts: [{ value: '-e', expandable: true }]}
 - Operators and words are recognized and separated.
 
 ## Operators Supported
-Operators are not hardcoded. You must provide a list of operators as a `t_string **operators` array when using the lexer functions. This allows you to fully customize which operators are recognized by the lexer.
+Operators are not hardcoded. You must provide a list of operators as a `char **operators` array when using the lexer functions. This allows you to fully customize which operators are recognized by the lexer.
 
 For example, to use the default set:
 ```c
-t_string **operators = initialize_operators();
+char **operators = initialize_operators();
 ```
 You can also create your own list of operators as needed.
 

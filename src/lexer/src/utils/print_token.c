@@ -39,7 +39,7 @@ int	print_token( t_token *token )
 	if (!token)
 		return (0);
 	if (token->is_operator)
-		printf(operator_text, ((t_string *)token->link.content)->value);
+		printf(operator_text, ((char *)token->link.content));
 	else
 	{
 		printf("Token: {type: 'WORD', parts: ");

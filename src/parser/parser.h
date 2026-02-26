@@ -18,7 +18,7 @@
 # include "stringft.h"
 # include "lexer.h"
 
-t_ast	*parse(t_list *tokens, t_string **operators);
+t_ast	*parse(t_list *tokens, char **operators);
 void	print_ast(t_ast *node, int depth);
 int		has_syntax_error(t_list *tokens);
 #endif

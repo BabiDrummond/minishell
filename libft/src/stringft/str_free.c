@@ -14,6 +14,6 @@
 
 void	str_free(void *str)
 {
-	free(((t_string *)str)->value);
+	free((char *)str);
 	free(str);
 }

@@ -15,7 +15,7 @@
 int	should_collect_heredoc(t_token *token)
 {
 	if (token->is_operator
-		&& ft_strcmp(((t_string *)token->link.content)->value, "<<") == 0)
+		&& ft_strcmp(((char *)token->link.content), "<<") == 0)
 		return (1);
 	return (0);
 }

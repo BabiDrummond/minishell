@@ -30,8 +30,8 @@ int	execute(t_ast *tokens)
 	
     if (token && token->is_operator)
     {
-        t_string *operator = token->link.content;
-        char *symbol = operator->value;
+        char *operator = token->link.content;
+        char *symbol = operator;
         printf("Operator \"%s\" is not implemented!\n", symbol);
         return (0);
 	}
@@ -43,7 +43,7 @@ int	execute(t_ast *tokens)
     t_node *current = words->first;
     while (current != NULL)
     {
-        argv[i++] = ((t_string *)current->content)->value;
+        argv[i++] = ((char *)current->content);
         current = current->next;
     }
     argv[i] = NULL;

@@ -12,7 +12,7 @@
 
 #include "stringft.h"
 
-size_t	put_string(t_string *str)
+size_t	put_string(char *str)
 {
-	return (write(1, str->value, str->length));
+	return (write(1, str, ft_strlen(str)));
 }

@@ -33,7 +33,7 @@ static void	print_ast_operator(t_ast *node, int depth)
 	printf("\"type\": \"OPERATOR\",\n");
 	print_ast_indent(depth + 1);
 	printf("\"symbol\": %s,\n",
-		((t_string *)((t_token *)node->value)->link.content)->value);
+		((char *)((t_token *)node->value)->link.content));
 	print_ast_indent(depth + 1);
 	printf("\"stdin_fd\": %d,\n", ((t_token *)node->value)->stdin_fd);
 	print_ast_indent(depth + 1);

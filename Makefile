@@ -21,7 +21,10 @@ LEXER_DIR = src/lexer
 LEXER = $(LEXER_DIR)/lexer.a
 
 READLINE = -lreadline
+READLINE_DIR = /opt/homebrew/opt/readline
 
+READLINE_INC = -I$(READLINE_DIR)/include
+READLINE_LIB = -L$(READLINE_DIR)/lib -lreadline
 
 SRCS_DIR = src
 SRCS = main.c \
@@ -38,7 +41,7 @@ all: $(NAME)
 
 
 $(NAME): $(LIBFT) $(LEXER) $(OBJS)
-	@$(CC) $(OBJS) $(LEXER) $(LIBFT) -o $(NAME) $(READLINE)
+	@$(CC) $(OBJS) $(LEXER) $(LIBFT) -o $(NAME) $(READLINE_LIB)
 	@echo -n "\033[0;32mGenerated minishell\n"
 
 
@@ -46,7 +49,7 @@ $(NAME): $(LIBFT) $(LEXER) $(OBJS)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDE) $(READLINE_INC) -c $< -o $@
 	@echo "\033[95mCompiling $(notdir $<)"
 
 

@@ -12,7 +12,7 @@
 
 #include "lexer_private.h"
 
-t_char_type	get_char_type(const char *str, t_string **operators)
+t_char_type	get_char_type(const char *str, char **operators)
 {
 	int	i;
 
@@ -21,7 +21,7 @@ t_char_type	get_char_type(const char *str, t_string **operators)
 		return (IS_NULL);
 	while (operators && operators[i])
 	{
-		if (ft_strncmp(str, operators[i]->value, operators[i]->length) == 0)
+		if (ft_strncmp(str, operators[i], ft_strlen(operators[i])) == 0)
 			return (IS_OPERATOR);
 		i++;
 	}

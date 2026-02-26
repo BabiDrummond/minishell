@@ -12,14 +12,14 @@
 
 #include "stringft.h"
 
-t_string	*str_new_values(char *value, size_t len)
+char	*str_new_values(char *value, size_t len)
 {
-	t_string	*str;
+	char	*str;
 
-	str = ft_calloc(1, sizeof(t_string));
+	str = ft_calloc(1, sizeof(char));
 	if (!str)
 		return (NULL);
-	str->value = value;
-	str->length = len;
+	str = value;
+	(void) len;
 	return (str);
 }

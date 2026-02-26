@@ -12,11 +12,11 @@
 
 #include "lexer_private.h"
 
-t_string	**initialize_operators(void)
+char	**initialize_operators(void)
 {
-	t_string	**operators;
+	char	**operators;
 
-	operators = ft_malloc(8 * sizeof(t_string *));
+	operators = ft_malloc(8 * sizeof(char *));
 	operators[0] = str_dup("||");
 	operators[1] = str_dup("&&");
 	operators[2] = str_dup("|");

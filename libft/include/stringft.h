@@ -19,20 +19,14 @@
 # include "memft.h"
 # include "charft.h"
 
-typedef struct s_string
-{
-	char	*value;
-	size_t	length;
-}	t_string;
-
-t_string	*str_new(size_t len);
-t_string	*str_new_char(char c);
-t_string	*str_new_values(char *value, size_t len);
-t_string	*str_dup(const char *s);
+char	*str_new(size_t len);
+char	*str_new_char(char c);
+char	*str_new_values(char *value, size_t len);
+char	*str_dup(const char *s);
 size_t		ft_strlen(const char *s);
 size_t		ft_putstr(char *str);
 char		*ft_strchr(const char *s, int c);
-size_t		put_string(t_string *str);
+size_t		put_string(char *str);
 void		str_free(void *str);
 void		free_split(char **split);
 char		**ft_split(char *s);

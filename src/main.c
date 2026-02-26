@@ -163,8 +163,8 @@ int	execute(t_ast *tokens, char **envp)
 	
     if (token && token->is_operator)
     {
-        t_string *operator = token->link.content;
-        char *symbol = operator->value;
+        char *operator = token->link.content;
+        char *symbol = operator;
         printf("Operator \"%s\" is not implemented!\n", symbol);
         return (0);
 	}
@@ -210,7 +210,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	char		*prompt;
-	t_string	**operators;
+	char	**operators;
 	t_list		*tokens;
 	t_ast		*ast;
 

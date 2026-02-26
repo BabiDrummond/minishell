@@ -32,7 +32,7 @@ static void	set_left(t_list *left, t_token *current_token, t_list *tokens)
 }
 
 static t_ast	*parse_operators(t_token *token,
-	t_string **operators, t_list *tokens)
+	char **operators, t_list *tokens)
 {
 	t_ast		*node;
 	t_list		right;
@@ -52,16 +52,16 @@ static t_ast	*parse_operators(t_token *token,
 	return (node);
 }
 
-static int	operator_is_equal(t_token *token, t_string *operator)
+static int	operator_is_equal(t_token *token, char *operator)
 {
 	return (token->is_operator
-		&& ft_strcmp(((t_string*)token->link.content)->value,
-			operator->value) == 0);
+		&& ft_strcmp(((char*)token->link.content),
+			operator) == 0);
 }
 
-t_ast	*parse(t_list *tokens, t_string **operators)
+t_ast	*parse(t_list *tokens, char **operators)
 {
-	t_string	**operator;
+	char	**operator;
 	t_token		*current_token;
 
 	if (has_syntax_error(tokens))

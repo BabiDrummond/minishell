@@ -13,6 +13,7 @@
 #ifndef HEREDOC_H
 # define HEREDOC_H
 
+# include <stdio.h>
 # include "lexer.h"
 # include "parser.h"
 # include <readline/readline.h>

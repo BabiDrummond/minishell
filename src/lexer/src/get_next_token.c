@@ -12,7 +12,7 @@
 
 #include "lexer_private.h"
 
-void	**get_not_quoted_word(char *str, t_string **operators)
+void	**get_not_quoted_word(char *str, char **operators)
 {
 	t_word	*word;
 	char	*start;
@@ -28,7 +28,7 @@ void	**get_not_quoted_word(char *str, t_string **operators)
 	return (create_token_result(str + len, word));
 	}
 
-void	**get_quoted_word(char *str, t_string **operators, t_char_type type)
+void	**get_quoted_word(char *str, char **operators, t_char_type type)
 {
 	t_word	*word;
 	char	*start;
@@ -46,7 +46,7 @@ void	**get_quoted_word(char *str, t_string **operators, t_char_type type)
 	return (create_token_result(str + len + 2, word));
 }
 
-void	**get_word_token(char *str, t_string **operators)
+void	**get_word_token(char *str, char **operators)
 {
 	t_char_type	type;
 	t_list		*parts;
@@ -72,22 +72,22 @@ void	**get_word_token(char *str, t_string **operators)
 	return (create_token_result(str, create_token(parts, 0)));
 }
 
-void	**get_operator_token(char *str, t_string **operators)
+void	**get_operator_token(char *str, char **operators)
 {
 	int	i;
 
 	i = 0;
 	while (operators[i])
 	{
-		if (ft_strncmp(str, operators[i]->value, operators[i]->length) == 0)
-			return (create_token_result(str + operators[i]->length,
+		if (ft_strncmp(str, operators[i], ft_strlen(operators[i])) == 0)
+			return (create_token_result(str + ft_strlen(operators[i]),
 					create_token(operators[i], 1)));
 		i++;
 	}
 	return (create_token_result(str, NULL));
 }
 
-void	**get_next_token(char *str, t_string **operators)
+void	**get_next_token(char *str, char **operators)
 {
 	t_char_type		char_type;
 

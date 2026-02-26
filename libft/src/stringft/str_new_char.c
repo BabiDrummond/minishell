@@ -12,13 +12,13 @@
 
 #include "stringft.h"
 
-t_string	*str_new_char(char c)
+char	*str_new_char(char c)
 {
-	t_string	*str;
+	char	*str;
 
 	str = str_new(1);
 	if (!str)
 		return (NULL);
-	str->value[0] = c;
+	str[0] = c;
 	return (str);
 }

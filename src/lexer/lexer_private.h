@@ -26,10 +26,10 @@ enum e_char_type
 };
 
 void		**create_token_result(void *str, void *token_value);
-t_char_type	get_char_type(const char *str, t_string **operators);
+t_char_type	get_char_type(const char *str, char **operators);
 t_word		*create_word(const char *value, int length, t_quote_state quote_state);
 t_token		*create_token(void *content, int is_operator);
 void		syntax_error(void);
-void		**get_next_token(char *str, t_string **operators);
+void		**get_next_token(char *str, char **operators);
 int			print_token( t_token *token );
 #endif
