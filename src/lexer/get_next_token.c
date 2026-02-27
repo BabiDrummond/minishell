@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer_private.h"
+#include "minishell.h"
 
 void	**get_not_quoted_word(char *str, char **operators)
 {

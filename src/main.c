@@ -10,11 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
-#include "parser.h"
-#include "heredoc.h"
-#include <signal.h>
-#include <readline/readline.h>
+#include "minishell.h"
 
 static void	handle_exit(char *prompt)
 {
@@ -36,14 +32,6 @@ void	signal_handler(int sig)
 		rl_redisplay();
 	}
 }
-
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <fcntl.h>
-#include <sys/wait.h>
-#include "ast.h"
 
 char *find_comand_in_path(char *command)
 {
@@ -68,9 +56,6 @@ char *find_comand_in_path(char *command)
 	return NULL;
 }
 
-#include <stdlib.h>
-#include <string.h>
-
 static int	count_tokens(t_token *token)
 {
 	int	total;
@@ -83,8 +68,6 @@ static int	count_tokens(t_token *token)
 	}
 	return (total);
 }
-#include <stdlib.h>
-#include <string.h>
 
 static size_t	get_token_parts_length(t_token *token)
 {
@@ -127,6 +110,7 @@ char	*join_token_parts(t_token *token)
 	result[i] = '\0';
 	return (result);
 }
+
 char **build_argv(t_token *token)
 {
 	int count;

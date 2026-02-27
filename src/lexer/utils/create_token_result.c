@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   create_token_result.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/30 15:14:43 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/02/04 15:36:49 by bcosta-b         ###   ########.fr       */
+/*   Created: 2026/01/29 16:20:06 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/01/30 18:35:03 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "minishell.h"
 
-# include "ast.h"
-# include "list.h"
-# include "lexer.h"
+void	**create_token_result(void *str, void *token_value)
+{
+	void	**result;
 
-t_ast	*parse(t_head *tokens, char **operators);
-void	print_ast(t_ast *node, int depth);
-int		has_syntax_error(t_head *tokens);
-#endif
+	result = (void **)ft_calloc(1, sizeof(void *) * 2);
+	result[0] = str;
+	result[1] = token_value;
+	return (result);
+}

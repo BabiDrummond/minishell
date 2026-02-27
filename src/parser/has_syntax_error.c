@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include <stdio.h>
+#include "minishell.h"
 
 static int	print_error(void)
 {

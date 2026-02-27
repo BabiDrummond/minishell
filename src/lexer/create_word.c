@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_token_result.c                              :+:      :+:    :+:   */
+/*   create_word.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/29 16:20:06 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/30 18:35:03 by bcosta-b         ###   ########.fr       */
+/*   Created: 2026/01/21 19:45:02 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/02/04 20:36:17 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer_private.h"
+#include "minishell.h"
 
-void	**create_token_result(void *str, void *token_value)
+t_word	*create_word(const char *value, int length, t_quote_state quote_state)
 {
-	void	**result;
+	t_word	*new_word;
 
-	result = (void **)ft_calloc(1, sizeof(void *) * 2);
-	result[0] = str;
-	result[1] = token_value;
-	return (result);
+	new_word = (t_word *) ft_calloc(1, sizeof(t_word));
+	new_word->link.list = NULL;
+	new_word->link.next = NULL;
+	new_word->link.prev = NULL;
+	new_word->link.content = ft_strndup(value, length);
+	new_word->link.list = NULL;
+	new_word->quote_state = quote_state;
+	return (new_word);
 }

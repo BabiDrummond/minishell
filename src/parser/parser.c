@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include "str.h"
-#include "gc.h"
-#include <stdio.h>
+#include "minishell.h"
 
 static void	set_right(t_head *right, t_token *current_token, t_head *tokens)
 {

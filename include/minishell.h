@@ -13,9 +13,18 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <signal.h>
+# include <unistd.h>
+# include <stdlib.h>
 # include <stdio.h>
+# include <string.h>
+# include <fcntl.h>
+# include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/include/libft.h"
+# include "heredoc.h"
+# include "lexer.h"
+# include "parser.h"
 
 #endif

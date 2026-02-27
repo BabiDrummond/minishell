@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer_private.h"
-#include <stdio.h>
+#include "minishell.h"
 
 static char	*quote_state_to_str(t_quote_state quote_state)
 {

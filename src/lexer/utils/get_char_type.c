@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer_private.h"
+#include "minishell.h"
 
 t_char_type	get_char_type(const char *str, char **operators)
 {

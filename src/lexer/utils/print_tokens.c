@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer_private.h"
+#include "minishell.h"
 
 void	print_tokens(t_head *tokens)
 {

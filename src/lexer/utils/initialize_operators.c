@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.h                                          :+:      :+:    :+:   */
+/*   initialize_operators.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/30 15:14:43 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/02/04 17:49:56 by bcosta-b         ###   ########.fr       */
+/*   Created: 2026/01/21 20:36:06 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/01/30 19:03:21 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEREDOC_H
-# define HEREDOC_H
+#include "minishell.h"
 
-# include <stdio.h>
-# include "lexer.h"
-# include "parser.h"
-# include "str.h"
-# include <readline/readline.h>
-# include <signal.h>
-# include <sys/wait.h>
-# include <unistd.h>
+char	**initialize_operators(void)
+{
+	char	**operators;
 
-int	collect_heredocs(t_ast *tokens);
-int	should_collect_heredoc(t_token *token);
-
-#endif
+	operators = ft_calloc(8, sizeof(char *));
+	operators[0] = ft_strdup("||");
+	operators[1] = ft_strdup("&&");
+	operators[2] = ft_strdup("|");
+	operators[3] = ft_strdup("<<");
+	operators[4] = ft_strdup(">>");
+	operators[5] = ft_strdup("<");
+	operators[6] = ft_strdup(">");
+	operators[7] = NULL;
+	return (operators);
+}

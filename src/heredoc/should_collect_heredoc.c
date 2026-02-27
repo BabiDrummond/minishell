@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "heredoc.h"
+#include "minishell.h"
 
 int	should_collect_heredoc(t_token *token)
 {

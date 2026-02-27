@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "heredoc.h"
-#include <unistd.h>
+#include "minishell.h"
 
 int	execute(t_ast *tokens)
 {

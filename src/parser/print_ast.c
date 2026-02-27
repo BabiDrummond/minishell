@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include <stdio.h>
+#include "minishell.h"
 
 static void	print_ast_indent(int depth)
 {

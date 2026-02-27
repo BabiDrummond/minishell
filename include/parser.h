@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syntax_error.c                                     :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/21 19:48:46 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/29 18:22:17 by bcosta-b         ###   ########.fr       */
+/*   Created: 2026/01/30 15:14:43 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/02/04 15:36:49 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "gc.h"
+#ifndef PARSER_H
+# define PARSER_H
 
+# include <stdio.h>
+# include "ast.h"
+# include "lexer.h"
+# include "list.h"
 
-void	syntax_error(void)
-{
-	printf("Syntax Error: Unclosed quote\n");
-	gc_free_all();
-	exit(1);
-}
+t_ast	*parse(t_head *tokens, char **operators);
+void	print_ast(t_ast *node, int depth);
+int		has_syntax_error(t_head *tokens);
+
+#endif

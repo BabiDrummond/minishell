@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "heredoc.h"
+#include "minishell.h"
 
 char	*get_delimiter(t_token *token)
 {

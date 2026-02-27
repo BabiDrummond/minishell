@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer_private.h"
+#include "minishell.h"
 
 t_head	*tokenize(char *prompt, char **operators)
 {
