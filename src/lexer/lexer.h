@@ -13,9 +13,8 @@
 #ifndef LEXER_H
 # define LEXER_H
 
-# include "listft.h"
-# include "stringft.h"
-# include "gcft.h"
+# include "list.h"
+# include "gc.h"
 
 typedef enum e_char_type	t_char_type;
 typedef enum e_quote_state
@@ -40,6 +39,6 @@ typedef struct s_token
 
 
 char	**initialize_operators(void);
-t_list		*tokenize(char *prompt, char **operators);
-void		print_tokens(t_list *tokens);
+t_head		*tokenize(char *prompt, char **operators);
+void		print_tokens(t_head *tokens);
 #endif

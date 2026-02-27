@@ -43,7 +43,7 @@ void	signal_handler(int sig)
 #include <string.h>
 #include <fcntl.h>
 #include <sys/wait.h>
-#include "astft.h"
+#include "ast.h"
 
 char *find_comand_in_path(char *command)
 {
@@ -92,7 +92,7 @@ static size_t	get_token_parts_length(t_token *token)
 	t_word	*part;
 
 	total = 0;
-	part = (t_word *)((t_list *)token->link.content)->first;
+	part = (t_word *)((t_head *)token->link.content)->first;
 	while (part)
 	{
 		total += strlen((char *)part->link.content);
@@ -115,7 +115,7 @@ char	*join_token_parts(t_token *token)
 		return (NULL);
 
 	i = 0;
-	part = (t_word *)((t_list *)token->link.content)->first;
+	part = (t_word *)((t_head *)token->link.content)->first;
 	while (part)
 	{
 		len = strlen((char *)part->link.content);
@@ -211,7 +211,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	char		*prompt;
 	char	**operators;
-	t_list		*tokens;
+	t_head		*tokens;
 	t_ast		*ast;
 
 	operators = initialize_operators();

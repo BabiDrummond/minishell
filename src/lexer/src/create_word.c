@@ -16,7 +16,7 @@ t_word	*create_word(const char *value, int length, t_quote_state quote_state)
 {
 	t_word	*new_word;
 
-	new_word = (t_word *) ft_malloc(sizeof(t_word));
+	new_word = (t_word *) ft_calloc(1, sizeof(t_word));
 	new_word->link.list = NULL;
 	new_word->link.next = NULL;
 	new_word->link.prev = NULL;

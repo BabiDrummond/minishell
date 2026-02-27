@@ -16,7 +16,7 @@ t_token	*create_token(void *content, int is_operator)
 {
 	t_token	*new_token;
 
-	new_token = (t_token *) ft_malloc(sizeof(t_token));
+	new_token = (t_token *) ft_calloc(1, sizeof(t_token));
 	new_token->link.list = NULL;
 	new_token->link.next = NULL;
 	new_token->link.prev = NULL;

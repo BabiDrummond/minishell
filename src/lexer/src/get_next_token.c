@@ -49,10 +49,10 @@ void	**get_quoted_word(char *str, char **operators, t_char_type type)
 void	**get_word_token(char *str, char **operators)
 {
 	t_char_type	type;
-	t_list		*parts;
+	t_head		*parts;
 	void		**result;
 
-	parts = lst_new();
+	parts = lst_new_head();
 	while (1)
 	{
 		type = get_char_type(str, operators);

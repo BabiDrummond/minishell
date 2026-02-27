@@ -11,11 +11,11 @@
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "stringft.h"
-#include "gcft.h"
+#include "str.h"
+#include "gc.h"
 #include <stdio.h>
 
-static void	set_right(t_list *right, t_token *current_token, t_list *tokens)
+static void	set_right(t_head *right, t_token *current_token, t_head *tokens)
 {
 	right->first = current_token->link.next;
 	right->last = tokens->last;
@@ -23,7 +23,7 @@ static void	set_right(t_list *right, t_token *current_token, t_list *tokens)
 		current_token->link.next->prev = NULL;
 }
 
-static void	set_left(t_list *left, t_token *current_token, t_list *tokens)
+static void	set_left(t_head *left, t_token *current_token, t_head *tokens)
 {
 	left->first = tokens->first;
 	left->last = current_token->link.prev;
@@ -32,11 +32,11 @@ static void	set_left(t_list *left, t_token *current_token, t_list *tokens)
 }
 
 static t_ast	*parse_operators(t_token *token,
-	char **operators, t_list *tokens)
+	char **operators, t_head *tokens)
 {
 	t_ast		*node;
-	t_list		right;
-	t_list		left;
+	t_head		right;
+	t_head		left;
 
 	right.first = NULL;
 	right.last = NULL;
@@ -59,7 +59,7 @@ static int	operator_is_equal(t_token *token, char *operator)
 			operator) == 0);
 }
 
-t_ast	*parse(t_list *tokens, char **operators)
+t_ast	*parse(t_head *tokens, char **operators)
 {
 	char	**operator;
 	t_token		*current_token;

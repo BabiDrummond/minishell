@@ -16,7 +16,7 @@ void	**create_token_result(void *str, void *token_value)
 {
 	void	**result;
 
-	result = (void **)ft_malloc(sizeof(void *) * 2);
+	result = (void **)ft_calloc(1, sizeof(void *) * 2);
 	result[0] = str;
 	result[1] = token_value;
 	return (result);

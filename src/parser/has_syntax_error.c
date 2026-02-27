@@ -20,7 +20,7 @@ static int	print_error(void)
 	return (1);
 }
 
-int	has_syntax_error(t_list *tokens)
+int	has_syntax_error(t_head *tokens)
 {
 	t_token	*current_token;
 

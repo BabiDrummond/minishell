@@ -56,7 +56,7 @@ static void	print_ast_cmd_argv(t_token *token)
 	first_arg = 1;
 	while (token)
 	{
-		part = (t_word *)((t_list *)token->link.content)->first;
+		part = (t_word *)((t_head *)token->link.content)->first;
 		while (part)
 		{
 			if (!first_arg)

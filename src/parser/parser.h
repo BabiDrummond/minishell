@@ -13,12 +13,11 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "astft.h"
-# include "listft.h"
-# include "stringft.h"
+# include "ast.h"
+# include "list.h"
 # include "lexer.h"
 
-t_ast	*parse(t_list *tokens, char **operators);
+t_ast	*parse(t_head *tokens, char **operators);
 void	print_ast(t_ast *node, int depth);
-int		has_syntax_error(t_list *tokens);
+int		has_syntax_error(t_head *tokens);
 #endif

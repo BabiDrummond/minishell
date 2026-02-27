@@ -14,12 +14,12 @@
 
 char	*get_delimiter(t_token *token)
 {
-	t_list	*parts;
+	t_head	*parts;
 	t_word	*word;
 
 	if (token->is_operator)
 		return (NULL);
-	parts = (t_list *)token->link.content;
+	parts = (t_head *)token->link.content;
 	word = (t_word *)lst_pop(parts);
 	return ((char *)word->link.content);
 }

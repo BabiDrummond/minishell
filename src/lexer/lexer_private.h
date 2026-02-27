@@ -14,7 +14,8 @@
 # define LEXER_PRIVATE_H
 
 # include "lexer.h"
-
+# include "str.h"
+# include "char.h"
 enum e_char_type
 {
 	IS_NORMAL,

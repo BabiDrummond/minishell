@@ -13,11 +13,14 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include "charft.h"
-# include "hsft.h"
-# include "listft.h"
-# include "mathft.h"
-# include "memft.h"
-# include "stringft.h"
+# include "ast.h"
+# include "char.h"
+# include "list.h"
+# include "gc.h"
+# include "lst.h"
+# include "matrix.h"
+# include "mem.h"
+# include "str.h"
+# include "types.h"
 
 #endif

@@ -12,7 +12,7 @@
 
 #include "lexer_private.h"
 
-void	print_tokens(t_list *tokens)
+void	print_tokens(t_head *tokens)
 {
 	t_token	*token;
 

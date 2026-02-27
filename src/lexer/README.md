@@ -40,7 +40,7 @@ Include `lexer.h` in your project and link with `lexer.a`.
 ```c
 char **operators = initialize_operators();
 char *line = readline("prompt> ");
-t_list *tokens = tokenize(line, operators);
+t_head *tokens = tokenize(line, operators);
 print_tokens(tokens);
 ```
 

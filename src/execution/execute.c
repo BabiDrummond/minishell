@@ -36,7 +36,7 @@ int	execute(t_ast *tokens)
         return (0);
 	}
 
-    t_list *words = (t_list *)tokens->value;
+    t_head *words = (t_head *)tokens->value;
 
     char **argv = malloc(sizeof(char *) * (words->count + 1));
     int i = 0;

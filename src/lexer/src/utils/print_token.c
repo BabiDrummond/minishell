@@ -43,7 +43,7 @@ int	print_token( t_token *token )
 	else
 	{
 		printf("Token: {type: 'WORD', parts: ");
-		part = (t_word *)((t_list *)token->link.content)->first;
+		part = (t_word *)((t_head *)token->link.content)->first;
 		printf("[");
 		while (part)
 		{
