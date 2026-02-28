@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   build_cmd_path.c                                   :+:      :+:    :+:   */
+/*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 01:34:24 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/22 23:17:59 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/02/27 22:14:32 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    builtin_cd(t_shell *shell)
+void	builtin_cd(t_shell *shell)
 {
+	char	**arg;
 
+	arg = shell->args + 1;
+	if (ft_split_size(arg))
+	{
+		
+	}
 }
 
 // cd (empty args) => changes to home
