@@ -12,21 +12,44 @@
 
 #include "minishell.h"
 
-void	builtin_cd(t_shell *shell)
+void	builtin_cd(t_list **vars, char **args)
 {
-	char	**arg;
+    char    buffer[1024];
+    char    *old_pwd;
+    char    *new_pwd;
+    char    *path;
 
-	arg = shell->args + 1;
-	if (ft_split_size(arg))
-	{
-		
-	}
+    if (getcwd(buffer, sizeof(buffer)) == -1)
+        return ;
+    path = *(args + 1);
+    if (!path || ft_strcmp(path, "~") == 0)
+        path = var_get_value(*vars, "HOME");
+    if (!path)
+    {
+        printf("cd: HOME not set\n");
+        return ;
+    }
+    if (chdir(path) == -1)
+    {
+        printf("cd: %s: no such file or directory\n", path);
+        return ;
+    }
+    old_pwd = ft_strjoin_free("OLD_PWD=", buffer, FALSE, FALSE);
+    var_set(vars, old_pwd, TRUE);
+    if (getcwd(buffer, sizeof(buffer)) == -1)
+    {
+        free(old_pwd);
+        return ;
+    }
+    new_pwd = ft_strjoin_free("PWD=", buffer, FALSE, FALSE);
+    var_set(vars, new_pwd, TRUE);
+    free(old_pwd);
+    free(new_pwd);
 }
 
-// cd (empty args) => changes to home
+// cd (empty args) / cd ~ => changes to home
 // cd . => stays on current dir
 // cd .. => changes to previous dir
-// cd ~ => changes to home
 // cd / (one or more slashes) => changes to root
 // cd /(one or more slashes)dirname => changes to folder in root
-// cd ex/dir => check if exists. if yes, change to dir. if not, shows error msg\
+// cd path => check if exists. if yes, change to path. if not, shows error msg
