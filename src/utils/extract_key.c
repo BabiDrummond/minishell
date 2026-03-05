@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_export.c                                   :+:      :+:    :+:   */
+/*   var_extract_key.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/21 20:02:42 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/05 20:06:43 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/03/05 20:02:11 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/05 20:03:44 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	builtin_export(t_list **vars, char **args)
+char	*extract_key(char *var_content)
 {
-	char	*key;
-	char	*value;
-	int		exit_code;
-	int		i;
+	char	*equal;
 
-	i = 1;
-	exit_code = EXIT_SUCCESS;
-	if (!args[i])
-		builtin_env(*vars);
-	else
-	{
-		while (args[i])
-		{
-			key = extract_key(args[i]);
-			value = extract_value(args[i]);
-			if (var_set(vars, key, value, TRUE) == EXIT_FAILURE)
-				exit_code = EXIT_FAILURE;
-			i++;
-		}
-	}
-	return (exit_code);
+	equal = ft_strchr(var_content, '=');
+	if (equal)
+		return (ft_substr(var_content, 0, equal - var_content));
+	return (ft_strdup(var_content));
 }

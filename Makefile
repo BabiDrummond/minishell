@@ -16,7 +16,9 @@ SRCS = main.c 					\
 	builtins/builtin_export.c	\
 	builtins/builtin_pwd.c		\
 	builtins/builtin_unset.c	\
-	validation/is_valid_key.c	\
+	utils/extract_key.c			\
+	utils/extract_value.c		\
+	utils/is_valid_key.c		\
 	var/var_clear.c				\
 	var/var_create.c			\
 	var/var_get.c				\

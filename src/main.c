@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 03:20:35 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/05 20:06:03 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,19 @@ t_list	*envp_to_lst(char **envp)
 {
 	t_list	*vars;
 	t_var	*var;
+	char	*key;
+	char	*value;
 	int		i;
 
 	i = 0;
 	vars = NULL;
 	while (envp[i])
 	{
-		var = var_create(envp[i++], TRUE);
+		key = extract_key(envp[i]);
+		value = extract_value(envp[i]);
+		var = var_create(key, value, TRUE);
 		lst_add_back(&vars, lst_new(var));
+		i++;
 	}
 	return (vars);
 }
@@ -58,28 +63,28 @@ int	main(int argc, char **argv, char **envp)
 	// printf("Comando digitado: %s\n", line);
 	shell.vars = envp_to_lst(envp);
 	// shell.args = ft_split(line, ' ');
-	var_set(&shell.vars, "SOA8jid-j=", TRUE);
-	printf("var: %s\n", var_get_value(shell.vars, "SOA8jidj"));
-	var_set(&shell.vars, "CACHORRO=animal", TRUE);
-	var_set(&shell.vars, "GATO=animal", TRUE);
-	builtin_export(&shell.vars, "PINGU=PENGUIM EFEITO=BUTTERFLY ASIJAD0-=3984 mais=um w= eesse PATH=NOVOOOOOOOO");
-	//envp_copy = lst_to_envp(shell.vars);
-	//ft_matrix_print(envp_copy);
-	builtin_env(shell.vars);
-	printf("eesse: %s\n", var_get_value(shell.vars, "eesse"));
-	printf("cachorro: %s\n", var_get_value(shell.vars, "CACHORRO"));
-	printf("gato: %s\n", var_get_value(shell.vars, "GATO"));
-	builtin_unset(&shell.vars, "CACHORRO");
-	printf("cachorro: %s\n", var_get_value(shell.vars, "CACHORRO"));
-	printf("gato: %s\n", var_get_value(shell.vars, "GATO"));
-	builtin_env(shell.vars);
-	builtin_unset(&shell.vars, "CACHORRO GATO");
-	printf("cachorro: %s\n", var_get_value(shell.vars, "CACHORRO"));
-	printf("gato: %s\n", var_get_value(shell.vars, "GATO"));
-	builtin_unset(&shell.vars, "CACHORRO GATO AAASND-O");
-	printf("cachorro: %s\n", var_get_value(shell.vars, "CACHORRO"));
-	printf("gato: %s\n", var_get_value(shell.vars, "GATO"));
-	builtin_unset(&shell.vars, "");
+	// var_set(&shell.vars, "SOA8jid-j=", TRUE);
+	// printf("var: %s\n", var_get_value(shell.vars, "SOA8jidj"));
+	// var_set(&shell.vars, "CACHORRO=animal", TRUE);
+	// var_set(&shell.vars, "GATO=animal", TRUE);
+	// builtin_export(&shell.vars, "PINGU=PENGUIM EFEITO=BUTTERFLY ASIJAD0-=3984 mais=um w= eesse PATH=NOVOOOOOOOO");
+	// //envp_copy = lst_to_envp(shell.vars);
+	// //ft_matrix_print(envp_copy);
+	// builtin_env(shell.vars);
+	// printf("eesse: %s\n", var_get_value(shell.vars, "eesse"));
+	// printf("cachorro: %s\n", var_get_value(shell.vars, "CACHORRO"));
+	// printf("gato: %s\n", var_get_value(shell.vars, "GATO"));
+	// builtin_unset(&shell.vars, "CACHORRO");
+	// printf("cachorro: %s\n", var_get_value(shell.vars, "CACHORRO"));
+	// printf("gato: %s\n", var_get_value(shell.vars, "GATO"));
+	// builtin_env(shell.vars);
+	// builtin_unset(&shell.vars, "CACHORRO GATO");
+	// printf("cachorro: %s\n", var_get_value(shell.vars, "CACHORRO"));
+	// printf("gato: %s\n", var_get_value(shell.vars, "GATO"));
+	// builtin_unset(&shell.vars, "CACHORRO GATO AAASND-O");
+	// printf("cachorro: %s\n", var_get_value(shell.vars, "CACHORRO"));
+	// printf("gato: %s\n", var_get_value(shell.vars, "GATO"));
+	// builtin_unset(&shell.vars, "");
 	//builtin_pwd(shell.vars);
 	//builtin_echo(shell.args + 1);
 	//execve(info.cmd_path, shell.args, shell.env);
