@@ -6,13 +6,24 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 23:44:24 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/22 23:17:53 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/05 19:57:04 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	builtin_pwd(t_list *vars)
+int	builtin_pwd(t_list *vars)
 {
-	printf("%s\n", var_get_value(vars, "PWD"));
+	char	buffer[1024];
+	char	*pwd;
+
+	pwd = var_get_value(vars, "PWD");
+	if (pwd)
+		printf("%s\n", pwd);
+	else
+	{
+		getcwd(buffer, sizeof(buffer));
+		printf("%s\n", buffer);
+	}
+	return (EXIT_SUCCESS);
 }

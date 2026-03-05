@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 23:42:57 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/21 19:14:19 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/05 19:42:24 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	is_n_option(char *arg)
 	return (FALSE);
 }
 
-void	builtin_echo(char **args)
+int	builtin_echo(char **args)
 {	
 	char	*str;
 	int		i;
@@ -42,4 +42,5 @@ void	builtin_echo(char **args)
 	}
 	if (i == 1)
 		printf("\n");
+	return (EXIT_SUCCESS);
 }

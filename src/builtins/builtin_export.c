@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 20:02:42 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 01:59:00 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/05 19:53:52 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,15 @@ static char	*extract_value(char *var_content)
 	return (NULL);
 }
 
-void	builtin_export(t_list **vars, char **args)
+int	builtin_export(t_list **vars, char **args)
 {
 	char	*key;
 	char	*value;
+	int		exit_code;
 	int		i;
 
 	i = 1;
+	exit_code = EXIT_SUCCESS;
 	if (!args[i])
 		builtin_env(*vars);
 	else
@@ -47,8 +49,10 @@ void	builtin_export(t_list **vars, char **args)
 		{
 			key = extract_key(args[i]);
 			value = extract_value(args[i]);
-			var_set(vars, key, value, TRUE);
+			if (var_set(vars, key, value, TRUE) == EXIT_FAILURE)
+				exit_code = EXIT_FAILURE;
 			i++;
 		}
 	}
+	return (exit_code);
 }

@@ -6,13 +6,13 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 23:44:45 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 00:04:32 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/05 19:43:47 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	builtin_env(t_list *vars)
+int	builtin_env(t_list *vars)
 {
 	t_var	*var;
 
@@ -23,4 +23,5 @@ void	builtin_env(t_list *vars)
 			printf("%s=%s\n", var->key, var->value);
 		vars = vars->next;
 	}
+	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 03:08:14 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/05 19:47:33 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ typedef struct s_shell
 }	t_shell;
 
 /* Built-ins */
-void	builtin_echo(char **args);
-void	builtin_env(t_list *vars);
-void	builtin_export(t_list **vars, char **args);
-void	builtin_pwd(t_list *vars);
+int		builtin_cd(t_list **vars, char **args);
+int		builtin_echo(char **args);
+int		builtin_env(t_list *vars);
+int		builtin_export(t_list **vars, char **args);
+int		builtin_pwd(t_list *vars);
 void	builtin_unset(t_list **vars, char *content);
 
 /* Execution */
@@ -49,7 +50,7 @@ void	var_clear(void *var_content);
 t_var	*var_create(char *key, char *value, int exported);
 t_var	*var_get(t_list *vars, char *key);
 char	*var_get_value(t_list *vars, char *key);
-void	var_set(t_list **vars, char *key, char *value, int exported);
+int		var_set(t_list **vars, char *key, char *value, int exported);
 void	var_unset(t_list **vars, char *key);
 void	var_update(t_list **vars, t_var *var);
 

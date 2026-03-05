@@ -6,13 +6,13 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 00:39:38 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 00:05:44 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/05 19:45:42 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	var_set(t_list **vars, char *key, char *value, int exported)
+int	var_set(t_list **vars, char *key, char *value, int exported)
 {
 	t_var	*var;
 
@@ -24,4 +24,7 @@ void	var_set(t_list **vars, char *key, char *value, int exported)
 		else
 			lst_add_back(vars, lst_new(var));
 	}
+	else
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
