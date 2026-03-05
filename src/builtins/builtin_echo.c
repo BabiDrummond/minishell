@@ -31,8 +31,8 @@ void	builtin_echo(char **args)
 	char	*str;
 	int		i;
 
-	i = 0;
-	if (args)
+	i = 1;
+	if (args && args[i])
 	{
 		while (is_n_option(args[i]))
 			i++;
