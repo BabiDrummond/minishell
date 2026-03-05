@@ -40,6 +40,6 @@ void	builtin_echo(char **args)
 		printf("%s", str);
 		free(str);
 	}
-	if (i == 0)
+	if (i == 1)
 		printf("\n");
 }
