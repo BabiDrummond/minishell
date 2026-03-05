@@ -12,19 +12,17 @@
 
 #include "minishell.h"
 
-void	builtin_export(t_list **vars, char *content)
+void	builtin_export(t_list **vars, char **args)
 {
-	char	**split;
 	int		i;
 
-	i = 0;
-	if (!ft_strlen(content))
+	i = 1;
+	if (!args[i])
 		builtin_env(*vars);
 	else
 	{
-		split = ft_split(content, ' ');
-		while (split[i])
-			var_set(vars, split[i++], TRUE);
-		ft_split_free(split);
+		while (args[i])
+			var_set(vars, args[i++], TRUE);
+		ft_split_free(args);
 	}
 }
