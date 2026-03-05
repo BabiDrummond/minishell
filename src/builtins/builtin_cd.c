@@ -14,37 +14,22 @@
 
 void	builtin_cd(t_list **vars, char **args)
 {
-    char    buffer[1024];
-    char    *old_pwd;
-    char    *new_pwd;
-    char    *path;
+	char	new_pwd[1024];
+	char	*old_pwd;
+	char	*path;
 
-    if (getcwd(buffer, sizeof(buffer)) == -1)
-        return ;
-    path = *(args + 1);
-    if (!path || ft_strcmp(path, "~") == 0)
-        path = var_get_value(*vars, "HOME");
-    if (!path)
-    {
-        printf("cd: HOME not set\n");
-        return ;
-    }
-    if (chdir(path) == -1)
-    {
-        printf("cd: %s: no such file or directory\n", path);
-        return ;
-    }
-    old_pwd = ft_strjoin_free("OLD_PWD=", buffer, FALSE, FALSE);
-    var_set(vars, old_pwd, TRUE);
-    if (getcwd(buffer, sizeof(buffer)) == -1)
-    {
-        free(old_pwd);
-        return ;
-    }
-    new_pwd = ft_strjoin_free("PWD=", buffer, FALSE, FALSE);
-    var_set(vars, new_pwd, TRUE);
-    free(old_pwd);
-    free(new_pwd);
+	path = *(args + 1);
+	if (!path || ft_strcmp(path, "~") == 0)
+		path = var_get_value(*vars, "HOME");
+	if (!path && printf("cd: HOME not set\n"))
+		return ;
+	if (chdir(path) == -1 && printf("cd: %s: no such file or directory\n", path))
+		return ;
+	old_pwd = var_get_value(*vars, "PWD");
+	var_set(vars, ft_strdup("OLD_PWD"), ft_strdup(old_pwd), TRUE);
+	if (getcwd(new_pwd, sizeof(new_pwd)) == -1)
+		return ;
+	var_set(vars, ft_strdup("PWD"), ft_strdup(new_pwd), TRUE);
 }
 
 // cd (empty args) / cd ~ => changes to home

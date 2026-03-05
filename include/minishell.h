@@ -34,7 +34,7 @@ typedef struct s_shell
 /* Built-ins */
 void	builtin_echo(char **args);
 void	builtin_env(t_list *vars);
-void	builtin_export(t_list **vars, char *content);
+void	builtin_export(t_list **vars, char **args);
 void	builtin_pwd(t_list *vars);
 void	builtin_unset(t_list **vars, char *content);
 
@@ -46,11 +46,11 @@ int		is_valid_key(char *var_content);
 
 /* Variables */
 void	var_clear(void *var_content);
-t_var	*var_create(char *var_content, int exported);
-t_var	*var_get(t_list *vars, char *var_key);
-char	*var_get_value(t_list *vars, char *var_key);
-void	var_set(t_list **vars, char *var_content, int exported);
-void	var_unset(t_list **vars, char *var_key);
+t_var	*var_create(char *key, char *value, int exported);
+t_var	*var_get(t_list *vars, char *key);
+char	*var_get_value(t_list *vars, char *key);
+void	var_set(t_list **vars, char *key, char *value, int exported);
+void	var_unset(t_list **vars, char *key);
 void	var_update(t_list **vars, t_var *var);
 
 #endif

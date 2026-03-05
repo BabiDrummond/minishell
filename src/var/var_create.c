@@ -12,34 +12,10 @@
 
 #include "minishell.h"
 
-static char	*extract_key(char *var_content)
-{
-	char	*equal;
-
-	equal = ft_strchr(var_content, '=');
-	if (equal)
-		return (ft_substr(var_content, 0, equal - var_content));
-	return (ft_strdup(var_content));
-}
-
-static char	*extract_value(char *var_content)
-{
-	char	*equal;
-
-	equal = ft_strchr(var_content, '=');
-	if (equal)
-		return (ft_strdup(equal + 1));
-	return (NULL);
-}
-
-t_var	*var_create(char *var_content, int exported)
+t_var	*var_create(char *key, char *value, int exported)
 {
 	t_var	*var;
-	char	*key;
-	char	*value;
 
-	key = extract_key(var_content);
-	value = extract_value(var_content);
 	if (!is_valid_key(key))
 	{
 		printf("export: `%s': not a valid identifier\n", key);

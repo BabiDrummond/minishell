@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	var_unset(t_list **vars, char *var_key)
+void	var_unset(t_list **vars, char *key)
 {
 	t_list	*current;
 	t_var	*curr_var;
@@ -21,7 +21,7 @@ void	var_unset(t_list **vars, char *var_key)
 	while (current)
 	{
 		curr_var = (t_var *) current->content;
-		if (ft_strcmp(curr_var->key, var_key) == 0)
+		if (ft_strcmp(curr_var->key, key) == 0)
 		{
 			lst_del_node(vars, current, var_clear);
 			return ;

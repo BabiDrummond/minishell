@@ -12,25 +12,23 @@
 
 #include "minishell.h"
 
-void	builtin_unset(t_list **vars, char *content)
+void	builtin_unset(t_list **vars, char **args)
 {
-	char	**split;
+
 	int		i;
 
-	i = 0;
-	if (!ft_strlen(content))
+	i = 1;
+	if (!args[i])
 	{
 		printf("unset: not enough arguments\n");
 		return ;
 	}
-	split = ft_split(content, ' ');
-	while (split[i])
+	while (args[i])
 	{
-		if (!is_valid_key(split[i]))
-			printf("unset: `%s': invalid parameter name\n", split[i]);
+		if (!is_valid_key(args[i]))
+			printf("unset: `%s': invalid parameter name\n", args[i]);
 		else
-			var_unset(vars, split[i]);
+			var_unset(vars, args[i]);
 		i++;
 	}
-	ft_split_free(split);
 }

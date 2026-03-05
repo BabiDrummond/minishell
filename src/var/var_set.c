@@ -12,11 +12,11 @@
 
 #include "minishell.h"
 
-void	var_set(t_list **vars, char *var_content, int exported)
+void	var_set(t_list **vars, char *key, char *value, int exported)
 {
 	t_var	*var;
 
-	var = var_create(var_content, exported);
+	var = var_create(key, value, exported);
 	if (var)
 	{
 		if (var_get(*vars, var->key))

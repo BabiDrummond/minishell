@@ -12,8 +12,30 @@
 
 #include "minishell.h"
 
+static char	*extract_key(char *var_content)
+{
+	char	*equal;
+
+	equal = ft_strchr(var_content, '=');
+	if (equal)
+		return (ft_substr(var_content, 0, equal - var_content));
+	return (ft_strdup(var_content));
+}
+
+static char	*extract_value(char *var_content)
+{
+	char	*equal;
+
+	equal = ft_strchr(var_content, '=');
+	if (equal)
+		return (ft_strdup(equal + 1));
+	return (NULL);
+}
+
 void	builtin_export(t_list **vars, char **args)
 {
+	char	*key;
+	char	*value;
 	int		i;
 
 	i = 1;
@@ -22,7 +44,11 @@ void	builtin_export(t_list **vars, char **args)
 	else
 	{
 		while (args[i])
-			var_set(vars, args[i++], TRUE);
-		ft_split_free(args);
+		{
+			key = extract_key(args[i]);
+			value = extract_value(args[i]);
+			var_set(vars, key, value, TRUE);
+			i++;
+		}
 	}
 }
