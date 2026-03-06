@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:14:43 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/02/04 17:49:56 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/06 19:48:47 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 # include "lexer.h"
-# include "parser.h"
-# include "str.h"
+# include "../libft/include/libft.h"
 
 int	collect_heredocs(t_ast *tokens);
 int	should_collect_heredoc(t_token *token);

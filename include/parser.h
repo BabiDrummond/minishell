@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:14:43 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/02/04 15:36:49 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/06 19:46:07 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 # define PARSER_H
 
 # include <stdio.h>
-# include "ast.h"
 # include "lexer.h"
-# include "list.h"
+# include "../libft/include/libft.h"
 
 t_ast	*parse(t_head *tokens, char **operators);
 void	print_ast(t_ast *node, int depth);

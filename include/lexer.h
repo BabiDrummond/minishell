@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:40:23 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/06 19:27:33 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/06 19:45:59 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include "char.h"
-# include "gc.h"
-# include "lexer.h"
-# include "list.h"
-# include "str.h"
+# include "../libft/include/libft.h"
 
 typedef enum e_char_type
 {
