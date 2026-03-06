@@ -51,6 +51,17 @@ int main(int argc, char **argv, char **envp)
     test_unset_invalid_name(&vars);
     test_unset_multiple_variables(&vars);
     test_unset_with_valid_and_invalid_names(&vars);
+    
+    printf("\n--- ENV TESTS ---\n");
+    test_env_shows_exported_variables(&vars);
+    test_env_returns_success(&vars);
+    test_env_with_empty_value(&vars);
+    
+    printf("\n--- PWD TESTS ---\n");
+    test_pwd_returns_success(&vars);
+    test_pwd_prints_current_directory(&vars);
+    test_pwd_uses_pwd_variable(&vars);
+    test_pwd_after_cd(&vars);
 
     lst_clear(&vars, var_clear);
     

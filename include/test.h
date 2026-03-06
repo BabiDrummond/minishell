@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 20:18:17 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/05 21:53:23 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/05 22:05:27 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,16 @@ void test_unset_without_arguments(t_list **vars);
 void test_unset_invalid_name(t_list **vars);
 void test_unset_multiple_variables(t_list **vars);
 void test_unset_with_valid_and_invalid_names(t_list **vars);
+
+/* Env Tests */
+void test_env_shows_exported_variables(t_list **vars);
+void test_env_returns_success(t_list **vars);
+void test_env_with_empty_value(t_list **vars);
+
+/* Pwd Tests */
+void test_pwd_returns_success(t_list **vars);
+void test_pwd_prints_current_directory(t_list **vars);
+void test_pwd_uses_pwd_variable(t_list **vars);
+void test_pwd_after_cd(t_list **vars);
 
 #endif

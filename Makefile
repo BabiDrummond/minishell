@@ -35,7 +35,9 @@ TEST_DIR = test/
 TEST_SRCS = $(TEST_DIR)main.c \
 			$(TEST_DIR)builtins/test_builtin_echo.c \
 			$(TEST_DIR)builtins/test_builtin_export.c \
-			$(TEST_DIR)builtins/test_builtin_unset.c
+			$(TEST_DIR)builtins/test_builtin_unset.c \
+			$(TEST_DIR)builtins/test_builtin_env.c \
+			$(TEST_DIR)builtins/test_builtin_pwd.c
 
 TEST_OBJS = $(filter-out $(OBJS_DIR)main.o, $(OBJS))
 
