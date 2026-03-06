@@ -34,6 +34,7 @@ int main(int argc, char **argv, char **envp)
     test_echo_with_multiple_empty_string_should_print_nothing();
 
     t_list *vars = envp_to_lst(envp);
+    
     printf("\n--- EXPORT TESTS ---\n");
     test_export_new_variable(&vars);
     test_export_override_existing_variable(&vars);
@@ -42,6 +43,14 @@ int main(int argc, char **argv, char **envp)
     test_export_invalid_name_starting_with_number(&vars);
     test_export_multiple_variables(&vars);
     test_export_variable_with_underscore(&vars);
+    
+    printf("\n--- UNSET TESTS ---\n");
+    test_unset_existing_variable(&vars);
+    test_unset_nonexistent_variable(&vars);
+    test_unset_without_arguments(&vars);
+    test_unset_invalid_name(&vars);
+    test_unset_multiple_variables(&vars);
+    test_unset_with_valid_and_invalid_names(&vars);
 
     lst_clear(&vars, var_clear);
     

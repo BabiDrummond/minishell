@@ -42,4 +42,12 @@ void test_export_invalid_name_starting_with_number(t_list **vars);
 void test_export_multiple_variables(t_list **vars);
 void test_export_variable_with_underscore(t_list **vars);
 
+/* Unset Tests */
+void test_unset_existing_variable(t_list **vars);
+void test_unset_nonexistent_variable(t_list **vars);
+void test_unset_without_arguments(t_list **vars);
+void test_unset_invalid_name(t_list **vars);
+void test_unset_multiple_variables(t_list **vars);
+void test_unset_with_valid_and_invalid_names(t_list **vars);
+
 #endif
