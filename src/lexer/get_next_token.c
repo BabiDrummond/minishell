@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:53:16 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/02/04 20:33:05 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/06 18:51:54 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	**get_not_quoted_word(char *str, char **operators)
 	len = end - start;
 	word = create_word(start, len, QUOTE_NONE);
 	return (create_token_result(str + len, word));
-	}
+}
 
 void	**get_quoted_word(char *str, char **operators, t_char_type type)
 {
@@ -42,7 +42,10 @@ void	**get_quoted_word(char *str, char **operators, t_char_type type)
 	if (get_char_type(end, operators) == IS_NULL)
 		syntax_error();
 	len = end - start;
-	word = create_word(start, len, type == IS_SINGLE_QUOTE ? QUOTE_SINGLE : QUOTE_DOUBLE);
+	if (type == IS_SINGLE_QUOTE)
+		word = create_word(start, len, QUOTE_SINGLE);
+	else
+		word = create_word(start, len, QUOTE_DOUBLE);
 	return (create_token_result(str + len + 2, word));
 }
 
