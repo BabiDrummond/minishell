@@ -74,4 +74,35 @@ void test_cd_updates_oldpwd(t_list **vars);
 void test_cd_dash_without_oldpwd_fails(t_list **vars);
 void test_cd_with_too_many_arguments_fails(t_list **vars);
 
+/* Var Tests */
+void test_var_create_valid_variable(t_list **vars);
+void test_var_create_invalid_key(t_list **vars);
+void test_var_create_with_empty_value(t_list **vars);
+void test_var_set_new_variable(t_list **vars);
+void test_var_set_override_existing(t_list **vars);
+void test_var_set_with_empty_value(t_list **vars);
+void test_var_get_existing_variable(t_list **vars);
+void test_var_get_nonexistent_variable(t_list **vars);
+void test_var_get_value_existing_variable(t_list **vars);
+void test_var_get_value_nonexistent_variable(t_list **vars);
+void test_var_unset_existing_variable(t_list **vars);
+void test_var_unset_nonexistent_variable(t_list **vars);
+void test_var_update_changes_value_and_export_status(t_list **vars);
+
+/* Utils Tests */
+void test_is_valid_key_with_valid_name(t_list **vars);
+void test_is_valid_key_with_underscore(t_list **vars);
+void test_is_valid_key_starting_with_number(t_list **vars);
+void test_is_valid_key_with_special_char(t_list **vars);
+void test_is_valid_key_with_dash(t_list **vars);
+void test_is_valid_key_empty_string(t_list **vars);
+void test_extract_key_with_equal_sign(t_list **vars);
+void test_extract_key_without_equal_sign(t_list **vars);
+void test_extract_key_with_empty_value(t_list **vars);
+void test_extract_key_with_multiple_equals(t_list **vars);
+void test_extract_value_with_equal_sign(t_list **vars);
+void test_extract_value_without_equal_sign(t_list **vars);
+void test_extract_value_with_empty_value(t_list **vars);
+void test_extract_value_with_multiple_equals(t_list **vars);
+
 #endif

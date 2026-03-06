@@ -75,6 +75,37 @@ int main(int argc, char **argv, char **envp)
     test_cd_updates_oldpwd(&vars);
     test_cd_dash_without_oldpwd_fails(&vars);
     test_cd_with_too_many_arguments_fails(&vars);
+    
+    printf("\n--- VAR TESTS ---\n");
+    test_var_create_valid_variable(&vars);
+    test_var_create_invalid_key(&vars);
+    test_var_create_with_empty_value(&vars);
+    test_var_set_new_variable(&vars);
+    test_var_set_override_existing(&vars);
+    test_var_set_with_empty_value(&vars);
+    test_var_get_existing_variable(&vars);
+    test_var_get_nonexistent_variable(&vars);
+    test_var_get_value_existing_variable(&vars);
+    test_var_get_value_nonexistent_variable(&vars);
+    test_var_unset_existing_variable(&vars);
+    test_var_unset_nonexistent_variable(&vars);
+    test_var_update_changes_value_and_export_status(&vars);
+    
+    printf("\n--- UTILS TESTS ---\n");
+    test_is_valid_key_with_valid_name(&vars);
+    test_is_valid_key_with_underscore(&vars);
+    test_is_valid_key_starting_with_number(&vars);
+    test_is_valid_key_with_special_char(&vars);
+    test_is_valid_key_with_dash(&vars);
+    test_is_valid_key_empty_string(&vars);
+    test_extract_key_with_equal_sign(&vars);
+    test_extract_key_without_equal_sign(&vars);
+    test_extract_key_with_empty_value(&vars);
+    test_extract_key_with_multiple_equals(&vars);
+    test_extract_value_with_equal_sign(&vars);
+    test_extract_value_without_equal_sign(&vars);
+    test_extract_value_with_empty_value(&vars);
+    test_extract_value_with_multiple_equals(&vars);
 
     lst_clear(&vars, var_clear);
     

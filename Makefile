@@ -38,7 +38,15 @@ TEST_SRCS = $(TEST_DIR)main.c \
 			$(TEST_DIR)builtins/test_builtin_unset.c \
 			$(TEST_DIR)builtins/test_builtin_env.c \
 			$(TEST_DIR)builtins/test_builtin_pwd.c \
-			$(TEST_DIR)builtins/test_builtin_cd.c
+			$(TEST_DIR)builtins/test_builtin_cd.c \
+			$(TEST_DIR)var/test_var_create.c \
+			$(TEST_DIR)var/test_var_set.c \
+			$(TEST_DIR)var/test_var_get.c \
+			$(TEST_DIR)var/test_var_unset.c \
+			$(TEST_DIR)var/test_var_update.c \
+			$(TEST_DIR)utils/test_is_valid_key.c \
+			$(TEST_DIR)utils/test_extract_key.c \
+			$(TEST_DIR)utils/test_extract_value.c
 
 TEST_OBJS = $(filter-out $(OBJS_DIR)main.o, $(OBJS))
 
