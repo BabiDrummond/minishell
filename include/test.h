@@ -41,6 +41,7 @@ void test_export_invalid_name_with_special_char(t_list **vars);
 void test_export_invalid_name_starting_with_number(t_list **vars);
 void test_export_multiple_variables(t_list **vars);
 void test_export_variable_with_underscore(t_list **vars);
+void test_export_without_value_marks_as_exported(t_list **vars);
 
 /* Unset Tests */
 void test_unset_existing_variable(t_list **vars);
@@ -54,6 +55,7 @@ void test_unset_with_valid_and_invalid_names(t_list **vars);
 void test_env_shows_exported_variables(t_list **vars);
 void test_env_returns_success(t_list **vars);
 void test_env_with_empty_value(t_list **vars);
+void test_env_does_not_show_unexported_variables(t_list **vars);
 
 /* Pwd Tests */
 void test_pwd_returns_success(t_list **vars);
@@ -70,5 +72,6 @@ void test_cd_to_nonexistent_directory_fails(t_list **vars);
 void test_cd_without_home_variable_fails(t_list **vars);
 void test_cd_updates_oldpwd(t_list **vars);
 void test_cd_dash_without_oldpwd_fails(t_list **vars);
+void test_cd_with_too_many_arguments_fails(t_list **vars);
 
 #endif

@@ -142,3 +142,42 @@ void test_export_variable_with_underscore(t_list **vars)
     assert_export_result("test_export_variable_with_underscore", "VALID_VAR_NAME", "test", 
                         EXIT_SUCCESS, args, vars);
 }
+
+void test_export_without_value_marks_as_exported(t_list **vars)
+{
+	printf("--- test_export_without_value_marks_as_exported ---\n");
+	
+	// Criar variável não exportada primeiro
+	var_set(vars, ft_strdup("NOT_EXPORTED"), ft_strdup("value"), 0);
+	
+	// Export sem valor
+	char *args[] = {"export", "NOT_EXPORTED", NULL};
+	int exit_status = builtin_export(vars, args);
+	
+	// Verificar se foi marcada como exportada
+	t_list *current = *vars;
+	int is_exported = 0;
+	while (current)
+	{
+		t_var *var = (t_var *)current->content;
+		if (var && var->key && strcmp(var->key, "NOT_EXPORTED") == 0)
+		{
+			is_exported = var->exported;
+			break;
+		}
+		current = current->next;
+	}
+	
+	if (exit_status == EXIT_SUCCESS && is_exported)
+	{
+		printf("Expected: SUCCESS and exported=1\n");
+		printf("Got: SUCCESS and exported=%d\n", is_exported);
+		printf("\033[0;32m✓ PASS\033[0m\n");
+	}
+	else
+	{
+		printf("Expected: SUCCESS and exported=1\n");
+		printf("Got: exit_status=%d, exported=%d\n", exit_status, is_exported);
+		printf("\033[0;31m✗ FAIL\033[0m\n");
+	}
+}

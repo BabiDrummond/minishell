@@ -43,6 +43,7 @@ int main(int argc, char **argv, char **envp)
     test_export_invalid_name_starting_with_number(&vars);
     test_export_multiple_variables(&vars);
     test_export_variable_with_underscore(&vars);
+    test_export_without_value_marks_as_exported(&vars);
     
     printf("\n--- UNSET TESTS ---\n");
     test_unset_existing_variable(&vars);
@@ -56,6 +57,7 @@ int main(int argc, char **argv, char **envp)
     test_env_shows_exported_variables(&vars);
     test_env_returns_success(&vars);
     test_env_with_empty_value(&vars);
+    test_env_does_not_show_unexported_variables(&vars);
     
     printf("\n--- PWD TESTS ---\n");
     test_pwd_returns_success(&vars);
@@ -72,6 +74,7 @@ int main(int argc, char **argv, char **envp)
     test_cd_without_home_variable_fails(&vars);
     test_cd_updates_oldpwd(&vars);
     test_cd_dash_without_oldpwd_fails(&vars);
+    test_cd_with_too_many_arguments_fails(&vars);
 
     lst_clear(&vars, var_clear);
     

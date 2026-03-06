@@ -262,3 +262,23 @@ void test_cd_dash_without_oldpwd_fails(t_list **vars)
 		printf("\033[0;31m✗ FAIL\033[0m\n");
 	}
 }
+
+void test_cd_with_too_many_arguments_fails(t_list **vars)
+{
+	printf("--- test_cd_with_too_many_arguments_fails ---\n");
+	
+	char *args[] = {"cd", "/tmp", "/home", NULL};
+	int exit_status = builtin_cd(vars, args);
+	
+	if (exit_status == EXIT_FAILURE)
+	{
+		printf("Expected: FAILURE (too many arguments)\n");
+		printf("Got: FAILURE\n");
+		printf("\033[0;32m✓ PASS\033[0m\n");
+	}
+	else
+	{
+		printf("Expected: FAILURE, Got: %d\n", exit_status);
+		printf("\033[0;31m✗ FAIL\033[0m\n");
+	}
+}
