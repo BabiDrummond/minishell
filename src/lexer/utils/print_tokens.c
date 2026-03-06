@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:38:30 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/06 19:26:08 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/06 19:31:14 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*quote_state_to_str(t_quote_state quote_state)
 	return ("UNKNOWN");
 }
 
-static char	*coma_if_has_next(t_word *word)
+static char	*comma_if_has_next(t_word *word)
 {
 	if (word == NULL)
 		return ("");
@@ -49,7 +49,7 @@ static int	print_token(t_token *token)
 			printf("{ value: '%s', quote_state: %s }%s",
 				(char *)part->link.content,
 				quote_state_to_str(part->quote_state),
-				coma_if_has_next((t_word *)part->link.next)
+				comma_if_has_next((t_word *)part->link.next)
 				);
 			part = (t_word *)part->link.next;
 		}
