@@ -1,27 +1,12 @@
 NAME = minishell
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-INCLUDE = -Iinclude/ \
-	-Isrc/heredoc/ \
-	-Isrc/lexer/ \
-	-Isrc/parser/ \
-	-Ilibft/include -Ilibft \
-	-Ilibft/include/charft \
-	-Ilibft/include/gcft \
-	-Ilibft/include/hsft \
-	-Ilibft/include/listft \
-	-Ilibft/include/mathft \
-	-Ilibft/include/memft \
-	-Ilibft/include/stringft
+INCLUDE = -Iinclude/
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 READLINE = -lreadline
-READLINE_DIR = /opt/homebrew/opt/readline
-
-READLINE_INC = -I$(READLINE_DIR)/include
-READLINE_LIB = -L$(READLINE_DIR)/lib -lreadline
 
 SRCS_DIR = src
 SRCS = main.c 							\
@@ -45,12 +30,12 @@ OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	@$(CC) $(OBJS) $(LIBFT) -o $(NAME) $(READLINE_LIB)
+	@$(CC) $(OBJS) $(LIBFT) -o $(NAME) $(READLINE)
 	@echo -n "\033[0;32mGenerated minishell\n"
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $(INCLUDE) $(READLINE_INC) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDE) $(READLINE) -c $< -o $@
 	@echo "\033[95mCompiling $(notdir $<)"
 
 $(LIBFT):
