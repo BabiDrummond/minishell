@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 01:34:24 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/05 19:42:37 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/05 21:53:57 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int	builtin_cd(t_list **vars, char **args)
 	if (ft_split_size(args) > 2 && printf("cd: too many arguments\n"))
 		return (EXIT_FAILURE);
 	if (!args[i] || ft_strcmp(args[i], "~") == 0)
-		dir = var_get_value(vars, "HOME");
+		dir = var_get_value(*vars, "HOME");
 	if (!dir && printf("cd: HOME not set\n"))
 		return (EXIT_FAILURE);
 	if (ft_strcmp(args[i], "-") == 0)
-		dir = var_get_value(vars, "OLDPWD");
+		dir = var_get_value(*vars, "OLDPWD");
 	if (!dir && printf("cd: OLDPWD not set\n"))
 		return (EXIT_FAILURE);
 	if (getcwd(buffer, sizeof(buffer)) != NULL)

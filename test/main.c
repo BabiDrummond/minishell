@@ -1,0 +1,50 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/05 20:31:02 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/05 21:48:46 by bmoreira         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "test.h"
+
+int main(int argc, char **argv, char **envp)
+{
+    (void) argc;
+    (void) argv;
+    printf("\n=== RUNNING TESTS ===\n\n");
+    printf("\n--- ECHO TESTS ---\n");
+    test_echo_with_empty_args_should_print_new_line();
+    test_echo_with_n_option_and_empty_args_should_print_nothing();
+    test_echo_with_n_option_should_print_text_without_new_line();
+    test_echo_with_multiple_n_options_should_print_text_without_new_line();
+    test_echo_with_multiple_n_chars_should_print_text_without_new_line();
+    test_echo_with_multiple_words_should_print_text_with_space();
+    test_echo_with_unknown_option_should_print_as_text();
+    test_echo_with_option_between_text_should_print_as_text();
+    test_echo_with_n_option_and_unknown_option_should_print_as_text_without_new_line();
+    test_echo_with_only_spaces_should_print_spaces();
+    test_echo_with_n_option_uppercase_should_print_as_text();
+    test_echo_with_n_option_and_empty_string_should_print_nothing();
+    test_echo_with_empty_string_should_print_nothing();
+    test_echo_with_multiple_empty_string_should_print_nothing();
+
+    t_list *vars = envp_to_lst(envp);
+    printf("\n--- EXPORT TESTS ---\n");
+    test_export_new_variable(&vars);
+    test_export_override_existing_variable(&vars);
+    test_export_empty_value(&vars);
+    test_export_invalid_name_with_special_char(&vars);
+    test_export_invalid_name_starting_with_number(&vars);
+    test_export_multiple_variables(&vars);
+    test_export_variable_with_underscore(&vars);
+
+    lst_clear(&vars, var_clear);
+    
+    printf("\n=== TESTS COMPLETE ===\n");
+    return 0;
+}

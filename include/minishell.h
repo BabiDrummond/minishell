@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/05 20:04:19 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/05 21:53:14 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ int		builtin_unset(t_list **vars, char **args);
 char	*build_cmd_path(t_list *vars, char *cmd);
 
 /* Utils */
-int		is_valid_key(char *var_content);
+t_list	*envp_to_lst(char **envp);
 char	*extract_key(char *var_content);
 char	*extract_value(char *var_content);
+int		is_valid_key(char *var_content);
 
 /* Variables */
 void	var_clear(void *var_content);

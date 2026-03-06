@@ -12,27 +12,6 @@
 
 #include "minishell.h"
 
-t_list	*envp_to_lst(char **envp)
-{
-	t_list	*vars;
-	t_var	*var;
-	char	*key;
-	char	*value;
-	int		i;
-
-	i = 0;
-	vars = NULL;
-	while (envp[i])
-	{
-		key = extract_key(envp[i]);
-		value = extract_value(envp[i]);
-		var = var_create(key, value, TRUE);
-		lst_add_back(&vars, lst_new(var));
-		i++;
-	}
-	return (vars);
-}
-
 char	**lst_to_envp(t_list *vars)
 {
 	t_var	*var;
