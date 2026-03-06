@@ -61,4 +61,14 @@ void test_pwd_prints_current_directory(t_list **vars);
 void test_pwd_uses_pwd_variable(t_list **vars);
 void test_pwd_after_cd(t_list **vars);
 
+/* Cd Tests */
+void test_cd_to_valid_directory(t_list **vars);
+void test_cd_without_arguments_goes_to_home(t_list **vars);
+void test_cd_with_tilde_goes_to_home(t_list **vars);
+void test_cd_with_dash_goes_to_oldpwd(t_list **vars);
+void test_cd_to_nonexistent_directory_fails(t_list **vars);
+void test_cd_without_home_variable_fails(t_list **vars);
+void test_cd_updates_oldpwd(t_list **vars);
+void test_cd_dash_without_oldpwd_fails(t_list **vars);
+
 #endif

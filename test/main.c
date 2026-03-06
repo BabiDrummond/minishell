@@ -62,6 +62,16 @@ int main(int argc, char **argv, char **envp)
     test_pwd_prints_current_directory(&vars);
     test_pwd_uses_pwd_variable(&vars);
     test_pwd_after_cd(&vars);
+    
+    printf("\n--- CD TESTS ---\n");
+    test_cd_to_valid_directory(&vars);
+    test_cd_without_arguments_goes_to_home(&vars);
+    test_cd_with_tilde_goes_to_home(&vars);
+    test_cd_with_dash_goes_to_oldpwd(&vars);
+    test_cd_to_nonexistent_directory_fails(&vars);
+    test_cd_without_home_variable_fails(&vars);
+    test_cd_updates_oldpwd(&vars);
+    test_cd_dash_without_oldpwd_fails(&vars);
 
     lst_clear(&vars, var_clear);
     

@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 01:34:24 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/05 21:53:57 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/05 22:17:42 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	builtin_cd(t_list **vars, char **args)
 {
-	char	buffer[1024];
+	char	new_pwd[1024];
+	char	*old_pwd;
 	char	*dir;
 	int		i;
 
@@ -26,15 +27,15 @@ int	builtin_cd(t_list **vars, char **args)
 		dir = var_get_value(*vars, "HOME");
 	if (!dir && printf("cd: HOME not set\n"))
 		return (EXIT_FAILURE);
-	if (ft_strcmp(args[i], "-") == 0)
+	if (args[i] && ft_strcmp(args[i], "-") == 0)
 		dir = var_get_value(*vars, "OLDPWD");
 	if (!dir && printf("cd: OLDPWD not set\n"))
 		return (EXIT_FAILURE);
-	if (getcwd(buffer, sizeof(buffer)) != NULL)
-		var_set(vars, ft_strdup("OLDPWD"), ft_strdup(buffer), TRUE);
 	if (chdir(dir) == -1 && printf("cd: %s: No such file or directory\n", dir))
 		return (EXIT_FAILURE);
-	if (getcwd(buffer, sizeof(buffer)) != NULL)
-		var_set(vars, ft_strdup("PWD"), ft_strdup(buffer), TRUE);
+	old_pwd = var_get_value(*vars, "PWD");
+	var_set(vars, ft_strdup("OLDPWD"), ft_strdup(old_pwd), TRUE);
+	if (getcwd(new_pwd, sizeof(new_pwd)) != NULL)
+		var_set(vars, ft_strdup("PWD"), ft_strdup(new_pwd), TRUE);
 	return (EXIT_SUCCESS);
 }
