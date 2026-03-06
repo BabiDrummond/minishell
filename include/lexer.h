@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:40:23 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/02/04 20:35:43 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/06 19:27:33 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,12 @@ typedef struct s_token
 
 char		**initialize_operators(void);
 t_head		*tokenize(char *prompt, char **operators);
-void		print_tokens(t_head *tokens);
-void		**create_token_result(void *str, void *token_value);
 t_char_type	get_char_type(const char *str, char **operators);
 t_word		*create_word(const char *value, int length, t_quote_state quote_state);
 t_token		*create_token(void *content, int is_operator);
-void		syntax_error(void);
 void		**get_next_token(char *str, char **operators);
-int			print_token( t_token *token );
+void		**create_token_result(void *str, void *token_value);
+void		print_tokens(t_head *tokens);
+void		syntax_error(void);
 
 #endif

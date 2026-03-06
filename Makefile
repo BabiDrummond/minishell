@@ -29,7 +29,6 @@ SRCS = main.c 							\
 	lexer/utils/create_token_result.c	\
 	lexer/utils/get_char_type.c			\
 	lexer/utils/initialize_operators.c	\
-	lexer/utils/print_token.c			\
 	lexer/utils/print_tokens.c			\
 	lexer/create_token.c				\
 	lexer/create_word.c					\
