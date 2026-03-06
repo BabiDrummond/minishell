@@ -17,17 +17,15 @@ int	builtin_cd(t_list **vars, char **args)
 	char	new_pwd[1024];
 	char	*old_pwd;
 	char	*dir;
-	int		i;
 
-	i = 1;
-	dir = args[i];
+	dir = args[1];
 	if (ft_split_size(args) > 2 && printf("cd: too many arguments\n"))
 		return (EXIT_FAILURE);
-	if (!args[i] || ft_strcmp(args[i], "~") == 0)
+	if (!args[1] || ft_strcmp(args[1], "~") == 0)
 		dir = var_get_value(*vars, "HOME");
 	if (!dir && printf("cd: HOME not set\n"))
 		return (EXIT_FAILURE);
-	if (args[i] && ft_strcmp(args[i], "-") == 0)
+	if (args[1] && ft_strcmp(args[1], "-") == 0)
 		dir = var_get_value(*vars, "OLDPWD");
 	if (!dir && printf("cd: OLDPWD not set\n"))
 		return (EXIT_FAILURE);
