@@ -30,7 +30,7 @@ SRCS = main.c 					\
 OBJS_DIR = objs/
 OBJS = $(SRCS:%.c=$(OBJS_DIR)%.o)
 
-TEST_NAME = test_runner
+TEST_NAME = test
 TEST_DIR = test/
 TEST_SRCS = $(TEST_DIR)main.c \
 			$(TEST_DIR)builtins/test_builtin_echo.c \
