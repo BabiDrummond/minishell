@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/07 04:37:14 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 05:50:03 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,3 +166,14 @@ int	execute(t_ast *node, char **envp)
 	else
 		return (execute_command(token, envp));
 }
+
+// todo PIPE
+// add in_child to execute args
+// in_child default is false
+// execute_pipe
+// fork
+// pass in_child as true
+// execute_external_cmd receives in_child
+// execute_external_cmd checks in_child
+// if true -> execve directly (calls execute_in_parent)
+// if false -> fork + execve (calls execute_in_child)
