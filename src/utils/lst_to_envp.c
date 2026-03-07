@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   envp_to_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 01:52:28 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/03/07 01:50:27 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/07 01:50:58 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libft/include/libft.h"
-# include "execution.h"
-# include "heredoc.h"
-# include "lexer.h"
-# include "parser.h"
+char	**lst_to_envp(t_list *vars)
+{
+	t_var	*var;
+	char	**envp;
+	char	**start;
 
-#endif
+	envp = ft_calloc(lst_size(vars) + 1, sizeof(char *));
+	start = envp;
+	while (vars)
+	{
+		var = (t_var *) vars->content;
+		if (var && var->exported)
+			*envp++ = ft_triple_join(var->key, "=", var->value);
+		vars = vars->next;
+	}
+	return (start);
+}

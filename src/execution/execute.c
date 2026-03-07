@@ -6,17 +6,17 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/07 00:26:03 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 01:54:09 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char **build_argv(t_token *token)
+char	**build_argv(t_token *token)
 {
-	char    **argv;
-	int     count;
-	int     i;
+	char	**argv;
+	int		count;
+	int		i;
 
 	count = count_tokens(token);
 	argv = malloc(sizeof(char *) * (count + 1));
@@ -61,19 +61,22 @@ int	is_builtin(char *cmd)
 		|| ft_strcmp(cmd, "export") == 0
 		|| ft_strcmp(cmd, "pwd") == 0
 		|| ft_strcmp(cmd, "unset") == 0
-		)
+	)
 		return (TRUE);
 	return (FALSE);
 }
 
-int	execute_command(t_token *token, char *envp)
+int	execute_command(t_token *token, char **envp)
 {
 	t_list	*vars;
+	pid_t	pid;
 	char	*cmd_path;
 	char	*argv;
+	int		status;
 
 	argv = build_argv(token);
-	pid_t pid = fork();
+	vars = envp_to_lst(envp);
+	pid = fork();
 	if (pid == 0)
 	{
 		cmd_path = find_cmd_path(vars, argv[0]);
@@ -82,7 +85,7 @@ int	execute_command(t_token *token, char *envp)
 			printf("Command not found: %s\n", argv[0]);
 			exit(127);
 		}
-		if(execve(cmd_path, argv, envp) == -1)
+		if (execve(cmd_path, argv, envp) == -1)
 		{
 			perror("execv failed");
 			free(cmd_path);
@@ -92,7 +95,6 @@ int	execute_command(t_token *token, char *envp)
 	}
 	else if (pid > 0)
 	{
-		int status;
 		waitpid(pid, &status, 0);
 		free(argv);
 		return (WEXITSTATUS(status));
@@ -108,7 +110,7 @@ int	execute_command(t_token *token, char *envp)
 
 int	execute(t_ast *node, char **envp)
 {
-	t_token *token;
+	t_token	*token;
 
 	if (!node)
 		return (0);
