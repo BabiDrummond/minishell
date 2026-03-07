@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/07 03:24:02 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 04:34:12 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,12 @@ int	is_builtin(char *cmd)
 	return (FALSE);
 }
 
-int	execute_command(t_token *token, char **envp)
+int	execute_external_cmd(t_list *vars, char **argv, char **envp)
 {
-	t_list	*vars;
 	pid_t	pid;
 	char	*cmd_path;
-	char	**argv;
 	int		status;
 
-	argv = build_argv(token);
-	vars = envp_to_lst(envp);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -100,7 +96,6 @@ int	execute_command(t_token *token, char **envp)
 		{
 			printf("Command not found: %s\n", argv[0]);
 			ft_split_free(argv);
-			lst_clear(&vars, var_clear);
 			exit(127);
 		}
 		if (execve(cmd_path, argv, envp) == -1)
@@ -108,26 +103,53 @@ int	execute_command(t_token *token, char **envp)
 			perror("execv failed");
 			free(cmd_path);
 			ft_split_free(argv);
-			lst_clear(&vars, var_clear);
 			exit(1);
 		}
-		lst_clear(&vars, var_clear);
 		return (0);
 	}
 	else if (pid > 0)
 	{
 		waitpid(pid, &status, 0);
-		ft_split_free(argv);
-		lst_clear(&vars, var_clear);
 		return (WEXITSTATUS(status));
 	}
 	else
 	{
 		perror("fork failed");
-		ft_split_free(argv);
-		lst_clear(&vars, var_clear);
 		return (1);
 	}
+}
+
+int	execute_builtin_cmd(t_list *vars, char **argv, char **envp)
+{
+	if (ft_strcmp(argv[0], "cd") == 0)
+		return (builtin_cd(&vars, argv));
+	else if (ft_strcmp(argv[0], "echo") == 0)
+		return (builtin_echo(argv));
+	else if (ft_strcmp(argv[0], "env") == 0)
+		return (builtin_env(vars));
+	else if (ft_strcmp(argv[0], "exit") == 0)
+		return (builtin_exit());
+	else if (ft_strcmp(argv[0], "export") == 0)
+		return (builtin_export(&vars, argv));
+	else if (ft_strcmp(argv[0], "pwd") == 0)
+		return (builtin_pwd(vars));
+	else if (ft_strcmp(argv[0], "unset") == 0)
+		return (builtin_unset(&vars, argv));
+	return (TRUE);
+}
+
+int	execute_command(t_token *token, char **envp)
+{
+	t_list	*vars;
+	char	**argv;
+
+	argv = build_argv(token);
+	vars = envp_to_lst(envp);
+	if (is_builtin(argv[0]))
+		execute_builtin_cmd(vars, argv, envp);
+	else
+		execute_external_cmd(vars, argv, envp);
+	ft_split_free(argv);
 	lst_clear(&vars, var_clear);
 	return (0);
 }
