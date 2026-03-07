@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/06 23:16:09 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/06 23:39:26 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	execute_command(t_token *token, char **envp)
 	pid_t pid = fork();
 	if (pid == 0)
 	{
-		char *command_path = find_comand_in_path(argv[0]);
+		char *command_path = find_cmd_path(argv[0]);
 		if (!command_path)
 		{
 			fprintf(stderr, "Command not found: %s\n", argv[0]);
