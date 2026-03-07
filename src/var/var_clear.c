@@ -6,11 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 00:00:47 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 00:39:04 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 01:59:29 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "execution.h"
 
 void	var_clear(void *var_content)
 {

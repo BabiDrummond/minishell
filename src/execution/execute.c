@@ -6,11 +6,24 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/07 01:54:09 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 02:01:08 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "execution.h"
+
+static int	count_tokens(t_token *token)
+{
+	int	total;
+
+	total = 0;
+	while (token)
+	{
+		total++;
+		token = (t_token *)token->link.next;
+	}
+	return (total);
+}
 
 char	**build_argv(t_token *token)
 {
@@ -35,21 +48,24 @@ char	**build_argv(t_token *token)
 
 int	execute_operator(t_ast *node, t_token *token)
 {
-	char	*operator;
+	(void) node;
+	(void) token;
+	return (0);
+	// char	*operator;
 
-	operator = (char *)token->link.content;
-	if (ft_strcmp(operator, "|") == 0)
-		return (execute_pipe(node->left, node->right));
-	else if (ft_strcmp(operator, "&&") == 0)
-		return (execute_and(node->left, node->right));
-	else if (ft_strcmp(operator, "||") == 0)
-		return (execute_or(node->left, node->right));
-	else if (ft_strcmp(operator, "<") == 0)
-		return (execute_redir_in(node->left, node->right));
-	else if (ft_strcmp(operator, ">") == 0)
-		return (execute_redir_out(node->left, node->right));
-	else if (ft_strcmp(operator, ">>") == 0)
-		return (execute_redir_append(node->left, node->right));
+	// operator = (char *)token->link.content;
+	// if (ft_strcmp(operator, "|") == 0)
+	// 	return (execute_pipe(node->left, node->right));
+	// else if (ft_strcmp(operator, "&&") == 0)
+	// 	return (execute_and(node->left, node->right));
+	// else if (ft_strcmp(operator, "||") == 0)
+	// 	return (execute_or(node->left, node->right));
+	// else if (ft_strcmp(operator, "<") == 0)
+	// 	return (execute_redir_in(node->left, node->right));
+	// else if (ft_strcmp(operator, ">") == 0)
+	// 	return (execute_redir_out(node->left, node->right));
+	// else if (ft_strcmp(operator, ">>") == 0)
+	// 	return (execute_redir_append(node->left, node->right));
 }
 
 int	is_builtin(char *cmd)
@@ -71,7 +87,7 @@ int	execute_command(t_token *token, char **envp)
 	t_list	*vars;
 	pid_t	pid;
 	char	*cmd_path;
-	char	*argv;
+	char	**argv;
 	int		status;
 
 	argv = build_argv(token);

@@ -6,11 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 01:35:54 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 01:45:41 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 01:59:41 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "execution.h"
 
 void	var_unset(t_list **vars, char *key)
 {

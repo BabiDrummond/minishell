@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 23:19:10 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 01:53:57 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 02:00:12 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <sys/wait.h>
 # include "lexer.h"
 # include "parser.h"
 # include "../libft/include/libft.h"
@@ -42,7 +43,7 @@ int		builtin_pwd(t_list *vars);
 int		builtin_unset(t_list **vars, char **args);
 
 /* Execution */
-int     execute(t_ast *node, char **envp);
+int		execute(t_ast *node, char **envp);
 char	*find_cmd_path(t_list *vars, char *cmd);
 char	*join_token_parts(t_token *token);
 

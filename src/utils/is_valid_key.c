@@ -6,11 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 03:05:57 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 03:06:06 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 01:59:21 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "execution.h"
 
 int	is_valid_key(char *var_content)
 {

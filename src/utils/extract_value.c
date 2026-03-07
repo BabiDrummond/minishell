@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   var_extract_value.c                                :+:      :+:    :+:   */
+/*   extract_value.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 20:02:36 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/05 20:03:39 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 01:59:18 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "execution.h"
 
 char	*extract_value(char *var_content)
 {

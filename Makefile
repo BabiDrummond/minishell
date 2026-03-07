@@ -16,6 +16,9 @@ SRCS = main.c 							\
 	builtins/builtin_export.c			\
 	builtins/builtin_pwd.c				\
 	builtins/builtin_unset.c			\
+	execution/execute.c					\
+	execution/find_cmd_path.c			\
+	execution/join_token_parts.c		\
 	heredoc/collect_heredocs.c 			\
 	heredoc/should_collect_heredoc.c	\
 	lexer/errors/syntax_error.c			\
@@ -34,6 +37,7 @@ SRCS = main.c 							\
 	utils/extract_key.c					\
 	utils/extract_value.c				\
 	utils/is_valid_key.c				\
+	utils/lst_to_envp.c					\
 	var/var_clear.c						\
 	var/var_create.c					\
 	var/var_get.c						\

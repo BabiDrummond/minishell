@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 01:50:19 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 01:56:29 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		print_ast(ast, 0);
 
-		// execute(ast, envp);
+		execute(ast, envp);
 		gc_free_all();
 	}
 	gc_free_all();

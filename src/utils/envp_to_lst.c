@@ -6,11 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 21:55:00 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/05 21:55:00 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 01:59:14 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "execution.h"
 
 t_list	*envp_to_lst(char **envp)
 {

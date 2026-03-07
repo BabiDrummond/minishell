@@ -6,11 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 00:41:36 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 03:06:13 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 01:59:32 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "execution.h"
 
 t_var	*var_create(char *key, char *value, int exported)
 {

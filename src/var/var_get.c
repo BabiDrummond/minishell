@@ -6,11 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 23:31:44 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 01:26:25 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 01:59:36 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "execution.h"
 
 t_var	*var_get(t_list *vars, char *key)
 {
