@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/06 23:39:26 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 00:26:03 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,26 +52,40 @@ int	execute_operator(t_ast *node, t_token *token)
 		return (execute_redir_append(node->left, node->right));
 }
 
-int	execute_command(t_token *token, char **envp)
+int	is_builtin(char *cmd)
 {
+	if (ft_strcmp(cmd, "cd") == 0
+		|| ft_strcmp(cmd, "echo") == 0
+		|| ft_strcmp(cmd, "env") == 0
+		|| ft_strcmp(cmd, "exit") == 0
+		|| ft_strcmp(cmd, "export") == 0
+		|| ft_strcmp(cmd, "pwd") == 0
+		|| ft_strcmp(cmd, "unset") == 0
+		)
+		return (TRUE);
+	return (FALSE);
+}
+
+int	execute_command(t_token *token, char *envp)
+{
+	t_list	*vars;
+	char	*cmd_path;
 	char	*argv;
 
 	argv = build_argv(token);
-	 
 	pid_t pid = fork();
 	if (pid == 0)
 	{
-		char *command_path = find_cmd_path(argv[0]);
-		if (!command_path)
+		cmd_path = find_cmd_path(vars, argv[0]);
+		if (!cmd_path)
 		{
-			fprintf(stderr, "Command not found: %s\n", argv[0]);
+			printf("Command not found: %s\n", argv[0]);
 			exit(127);
 		}
-
-		if(execve(command_path, argv, envp) == -1)
+		if(execve(cmd_path, argv, envp) == -1)
 		{
 			perror("execv failed");
-			free(command_path);
+			free(cmd_path);
 			exit(1);
 		}
 		return (0);
