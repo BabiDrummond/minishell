@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 04:37:35 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 04:42:39 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,11 @@ void	signal_handler(int sig)
 
 int	main(int argc, char **argv, char **envp)
 {
-	// (void) argc;
-	// (void) argv;
 	// t_shell shell;
-	// // char	**envp_copy;
-	// // char	*line;
-	// // line = readline("minishell> ");
-	// // printf("Comando digitado: %s\n", line);
 	// shell.vars = envp_to_lst(envp);
-	// // shell.args = ft_split(line, ' ');
-	// // envp_copy = lst_to_envp(shell.vars);
+	// shell.args = ft_split(line, ' ');
 	// lst_clear(&shell.vars, var_clear);
-	// // ft_split_free(&shell.args);
+	// ft_split_free(&shell.args);
 	(void)argc;
 	(void)argv;
 	(void)envp;
@@ -58,37 +51,37 @@ int	main(int argc, char **argv, char **envp)
 	operators = initialize_operators();
 	prompt = NULL;
 	tokens = NULL;
-	// while (1)
-	// {
+	while (1)
+	{
 		signal(SIGINT, signal_handler);
-		//prompt = readline("prompt> ");
-		prompt = ft_strdup("echo oiiii");
-		// if (!prompt)
-		// 	continue ;
+		prompt = readline("prompt> ");
+		//prompt = ft_strdup("echo oiiii");
+		if (!prompt)
+			continue ;
 		gc_add(prompt, free);
-		// if (strlen(prompt) == 0)
-		// 	continue ;
+		if (strlen(prompt) == 0)
+			continue ;
 		gc_set_current_scope(GC_SCOPE_FUNCTION);
 		tokens = tokenize(prompt, operators);
 		handle_exit(prompt);
-		print_tokens(tokens);
+		// print_tokens(tokens);
 		ast = parse(tokens, operators);
 		if (!ast)
 		{
 			gc_free_all();
-			// continue ;
+			continue ;
 		}
-		print_ast(ast, 0);
+		// print_ast(ast, 0);
 		if (collect_heredocs(ast))
 		{
 			gc_free_all();
-			// continue ;
+			continue ;
 		}
-		print_ast(ast, 0);
+		// print_ast(ast, 0);
 
 		execute(ast, envp);
 		gc_free_all();
-	// }
+	}
 	ft_split_free(operators);
 	gc_free_all();
 	return (0);
