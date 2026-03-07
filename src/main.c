@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 03:24:37 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 04:37:35 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(int argc, char **argv, char **envp)
 	// {
 		signal(SIGINT, signal_handler);
 		//prompt = readline("prompt> ");
-		prompt = ft_strdup("ls -l");
+		prompt = ft_strdup("echo oiiii");
 		// if (!prompt)
 		// 	continue ;
 		gc_add(prompt, free);

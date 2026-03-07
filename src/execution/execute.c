@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/07 04:34:12 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 04:37:14 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	execute_external_cmd(t_list *vars, char **argv, char **envp)
 	}
 }
 
-int	execute_builtin_cmd(t_list *vars, char **argv, char **envp)
+int	execute_builtin_cmd(t_list *vars, char **argv)
 {
 	if (ft_strcmp(argv[0], "cd") == 0)
 		return (builtin_cd(&vars, argv));
@@ -127,8 +127,8 @@ int	execute_builtin_cmd(t_list *vars, char **argv, char **envp)
 		return (builtin_echo(argv));
 	else if (ft_strcmp(argv[0], "env") == 0)
 		return (builtin_env(vars));
-	else if (ft_strcmp(argv[0], "exit") == 0)
-		return (builtin_exit());
+	// else if (ft_strcmp(argv[0], "exit") == 0)
+	// 	return (builtin_exit());
 	else if (ft_strcmp(argv[0], "export") == 0)
 		return (builtin_export(&vars, argv));
 	else if (ft_strcmp(argv[0], "pwd") == 0)
@@ -146,7 +146,7 @@ int	execute_command(t_token *token, char **envp)
 	argv = build_argv(token);
 	vars = envp_to_lst(envp);
 	if (is_builtin(argv[0]))
-		execute_builtin_cmd(vars, argv, envp);
+		execute_builtin_cmd(vars, argv);
 	else
 		execute_external_cmd(vars, argv, envp);
 	ft_split_free(argv);
