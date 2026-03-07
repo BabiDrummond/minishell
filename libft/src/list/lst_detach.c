@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_del_node.c                                     :+:      :+:    :+:   */
+/*   lst_detach.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/19 16:53:23 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/19 17:17:22 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/08/13 17:36:30 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/01/09 20:31:19 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-<<<<<<<< HEAD:libft/src/list/lst_detach.c
 #include "list.h"
 
 t_node	*lst_detach(t_head *list, t_node *node)
 {
 	if (!list || !node)
 		return (NULL);
-========
-#include "lst.h"
-
-void	lst_del_node(t_list **head, t_list *node, void (*del)(void *))
-{	
-	if (!head || !*head || !node)
-		return ;
->>>>>>>> builtins:libft/src/lst/lst_del_node.c
 	if (node->prev)
 		node->prev->next = node->next;
 	else
-		*head = node->next;
+		list->first = node->next;
 	if (node->next)
 		node->next->prev = node->prev;
+	else
+		list->last = node->prev;
+	list->count--;
 	node->prev = NULL;
 	node->next = NULL;
-	lst_clear_node(node, (*del));
+	return (node);
 }

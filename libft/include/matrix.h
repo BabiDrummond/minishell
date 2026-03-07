@@ -1,7 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-<<<<<<<< HEAD:libft/include/matrix.h
 /*   matrix.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
@@ -19,21 +18,3 @@
 void	ft_matrix_print(char **matrix);
 
 #endif
-========
-/*   ft_matrix_print.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 21:00:01 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/22 04:09:38 by bmoreira         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "matrix.h"
-
-void	ft_matrix_print(char **matrix)
-{
-	while (*matrix)
-		printf("%s\n", *matrix++);
-}
->>>>>>>> builtins:libft/src/matrix/ft_matrix_print.c
