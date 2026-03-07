@@ -3,68 +3,104 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/02/22 04:04:21 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/06 23:16:09 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	execute(t_ast *tokens)
+char **build_argv(t_token *token)
 {
-	char	*delimiter;
-	int		pipefd[2];
-	pid_t	pid;
+	char    **argv;
+	int     count;
+	int     i;
 
-	if (tokens == NULL)
-		return (0);
-	if (execute(tokens->left))
-		return (1);
-	if (execute(tokens->right))
-		return (1);
-    
-    t_token *token = (t_token *)tokens->value;
-	
-    if (token && token->is_operator)
-    {
-        char *operator = token->link.content;
-        char *symbol = operator;
-        printf("Operator \"%s\" is not implemented!\n", symbol);
-        return (0);
+	count = count_tokens(token);
+	argv = malloc(sizeof(char *) * (count + 1));
+	if (!argv)
+		return (NULL);
+	i = 0;
+	while (token)
+	{
+		argv[i] = join_token_parts(token);
+		i++;
+		token = (t_token *)token->link.next;
 	}
+	argv[i] = NULL;
+	return (argv);
+}
 
-    t_head *words = (t_head *)tokens->value;
+int	execute_operator(t_ast *node, t_token *token)
+{
+	char	*operator;
 
-    char **argv = malloc(sizeof(char *) * (words->count + 1));
-    int i = 0;
-    t_node *current = words->first;
-    while (current != NULL)
-    {
-        argv[i++] = ((char *)current->content);
-        current = current->next;
-    }
-    argv[i] = NULL;
-    
-    pid_t pid = fork();
-    if (pid == 0)
-    {
-        execvp(argv[0], argv);
-        perror("execvp failed");
-        exit(1);
-    }
-    else if (pid > 0)
-    {
-        int status;
-        waitpid(pid, &status, 0);
-        free(argv);
-        return (WEXITSTATUS(status));
-    }
-    else
-    {
-        perror("fork failed");
-        free(argv);
-        return (1);
-    }
+	operator = (char *)token->link.content;
+	if (ft_strcmp(operator, "|") == 0)
+		return (execute_pipe(node->left, node->right));
+	else if (ft_strcmp(operator, "&&") == 0)
+		return (execute_and(node->left, node->right));
+	else if (ft_strcmp(operator, "||") == 0)
+		return (execute_or(node->left, node->right));
+	else if (ft_strcmp(operator, "<") == 0)
+		return (execute_redir_in(node->left, node->right));
+	else if (ft_strcmp(operator, ">") == 0)
+		return (execute_redir_out(node->left, node->right));
+	else if (ft_strcmp(operator, ">>") == 0)
+		return (execute_redir_append(node->left, node->right));
+}
+
+int	execute_command(t_token *token, char **envp)
+{
+	char	*argv;
+
+	argv = build_argv(token);
+	 
+	pid_t pid = fork();
+	if (pid == 0)
+	{
+		char *command_path = find_comand_in_path(argv[0]);
+		if (!command_path)
+		{
+			fprintf(stderr, "Command not found: %s\n", argv[0]);
+			exit(127);
+		}
+
+		if(execve(command_path, argv, envp) == -1)
+		{
+			perror("execv failed");
+			free(command_path);
+			exit(1);
+		}
+		return (0);
+	}
+	else if (pid > 0)
+	{
+		int status;
+		waitpid(pid, &status, 0);
+		free(argv);
+		return (WEXITSTATUS(status));
+	}
+	else
+	{
+		perror("fork failed");
+		free(argv);
+		return (1);
+	}
+	return (0);
+}
+
+int	execute(t_ast *node, char **envp)
+{
+	t_token *token;
+
+	if (!node)
+		return (0);
+	token = (t_token *)node->value;
+	if (token && token->is_operator)
+		return (execute_operator(node, token));
+	else
+		return (execute_command(token, envp));
 }
