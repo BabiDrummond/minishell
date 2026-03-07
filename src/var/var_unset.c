@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   var_unset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 00:30:56 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/23 01:35:54 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/23 01:45:41 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "minishell.h"
 
-# include "ast.h"
-# include "char.h"
-# include "list.h"
-# include "gc.h"
-# include "lst.h"
-# include "matrix.h"
-# include "mem.h"
-# include "str.h"
-# include "types.h"
+void	var_unset(t_list **vars, char *key)
+{
+	t_list	*current;
+	t_var	*curr_var;
 
-#endif
+	current = *vars;
+	while (current)
+	{
+		curr_var = (t_var *) current->content;
+		if (ft_strcmp(curr_var->key, key) == 0)
+		{
+			lst_del_node(vars, current, var_clear);
+			return ;
+		}
+		current = current->next;
+	}
+}

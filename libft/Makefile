@@ -52,19 +52,19 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@ar rcs $(NAME) $(OBJS)
-	@echo -n "\033[0;32mGenerated libft.a\n"
+	@echo "\033[0;32mGenerated libft.a\033[0m"
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-	@echo "\033[95mCompiling $(notdir $<)"
+	@echo "\033[95mCompiling \033[0m$(notdir $<)"
 
 clean:
-	@echo "\033[0;34mCleaning libft objects"
+	@echo "\033[0;34mCleaning libft objects\033[0m"
 	@rm -rf $(OBJS_DIR)
 
 fclean: clean
-	@echo "\033[0;34mCleaning libft"
+	@echo "\033[0;34mCleaning libft\033[0m"
 	@rm -f $(NAME)
 
 re:	fclean all

@@ -1,0 +1,11 @@
+Tarefas:
+- Mudar t_string -> char *
+    t_token = char * ou t_head (Brunão)
+- Mudar t_list => t_head (Brunão)
+- Entender o que mais vamos precisar de contexto pras funções dos operadores (Ambos)
+- Definir se o t_shell vai ser mesmo necessário (apenas t_list var ou mais contexto?) (Babi)
+- Deixar apenas funções que estamos utilizando das libs (fazer a limpa) (Ambos)
+- Percorrer árvore (Brunão)
+- Função que executa o execve (Babi)
+- Finalizar builtins (export/unset)
+- Descobrir como o shell atualiza com o comando source. Precisamos implementar isso?

@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 00:30:56 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/11 23:44:45 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/05 19:43:47 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "minishell.h"
 
-# include "ast.h"
-# include "char.h"
-# include "list.h"
-# include "gc.h"
-# include "lst.h"
-# include "matrix.h"
-# include "mem.h"
-# include "str.h"
-# include "types.h"
+int	builtin_env(t_list *vars)
+{
+	t_var	*var;
 
-#endif
+	while (vars)
+	{
+		var = (t_var *) vars->content;
+		if (var && var->value && var->exported)
+			printf("%s=%s\n", var->key, var->value);
+		vars = vars->next;
+	}
+	return (EXIT_SUCCESS);
+}
