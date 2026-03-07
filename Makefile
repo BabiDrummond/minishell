@@ -9,23 +9,15 @@ LIBFT = $(LIBFT_DIR)/libft.a
 READLINE = -lreadline
 
 SRCS_DIR = src/
-SRCS = main.c 					\
-	builtins/builtin_cd.c		\
-	builtins/builtin_echo.c		\
-	builtins/builtin_env.c		\
-	builtins/builtin_export.c	\
-	builtins/builtin_pwd.c		\
-	builtins/builtin_unset.c	\
-	utils/envp_to_lst.c			\
-	utils/extract_key.c			\
-	utils/extract_value.c		\
-	utils/is_valid_key.c		\
-	var/var_clear.c				\
-	var/var_create.c			\
-	var/var_get.c				\
-	var/var_set.c				\
-	var/var_unset.c				\
-	var/var_update.c			\
+SRCS = main.c 							\
+	builtins/builtin_cd.c				\
+	builtins/builtin_echo.c				\
+	builtins/builtin_env.c				\
+	builtins/builtin_export.c			\
+	builtins/builtin_pwd.c				\
+	builtins/builtin_unset.c			\
+	heredoc/collect_heredocs.c 			\
+	heredoc/should_collect_heredoc.c	\
 	lexer/errors/syntax_error.c			\
 	lexer/utils/create_token_result.c	\
 	lexer/utils/get_char_type.c			\
@@ -38,8 +30,16 @@ SRCS = main.c 					\
 	parser/has_syntax_error.c 			\
 	parser/parser.c 					\
 	parser/print_ast.c 					\
-	heredoc/collect_heredocs.c 			\
-	heredoc/should_collect_heredoc.c
+	utils/envp_to_lst.c					\
+	utils/extract_key.c					\
+	utils/extract_value.c				\
+	utils/is_valid_key.c				\
+	var/var_clear.c						\
+	var/var_create.c					\
+	var/var_get.c						\
+	var/var_set.c						\
+	var/var_unset.c						\
+	var/var_update.c
 OBJS_DIR = objs/
 OBJS = $(SRCS:%.c=$(OBJS_DIR)%.o)
 
@@ -69,7 +69,7 @@ all: $(NAME)
 
 test: $(LIBFT) $(OBJS)
 	@echo "\033[0;33mCompiling tests...\033[0m"
-	@$(CC) $(CFLAGS) $(INCLUDE) $(TEST_SRCS) $(TEST_OBJS) $(LIBFT) -o $(TEST_EXEC)
+	@$(CC) $(CFLAGS) $(INCLUDE) $(TEST_SRCS) $(TEST_OBJS) $(LIBFT) $(READLINE) -o $(TEST_EXEC)
 	@echo "\033[0;32mRunning tests...\033[0m"
 	@./$(TEST_EXEC)
 
