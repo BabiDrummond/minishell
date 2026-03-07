@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/07 02:01:08 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 03:24:02 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,28 +99,36 @@ int	execute_command(t_token *token, char **envp)
 		if (!cmd_path)
 		{
 			printf("Command not found: %s\n", argv[0]);
+			ft_split_free(argv);
+			lst_clear(&vars, var_clear);
 			exit(127);
 		}
 		if (execve(cmd_path, argv, envp) == -1)
 		{
 			perror("execv failed");
 			free(cmd_path);
+			ft_split_free(argv);
+			lst_clear(&vars, var_clear);
 			exit(1);
 		}
+		lst_clear(&vars, var_clear);
 		return (0);
 	}
 	else if (pid > 0)
 	{
 		waitpid(pid, &status, 0);
-		free(argv);
+		ft_split_free(argv);
+		lst_clear(&vars, var_clear);
 		return (WEXITSTATUS(status));
 	}
 	else
 	{
 		perror("fork failed");
-		free(argv);
+		ft_split_free(argv);
+		lst_clear(&vars, var_clear);
 		return (1);
 	}
+	lst_clear(&vars, var_clear);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 01:56:29 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 03:24:37 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,16 @@ int	main(int argc, char **argv, char **envp)
 	operators = initialize_operators();
 	prompt = NULL;
 	tokens = NULL;
-	while (1)
-	{
+	// while (1)
+	// {
 		signal(SIGINT, signal_handler);
-		prompt = readline("prompt> ");
-		if (!prompt)
-			continue ;
+		//prompt = readline("prompt> ");
+		prompt = ft_strdup("ls -l");
+		// if (!prompt)
+		// 	continue ;
 		gc_add(prompt, free);
-		if (strlen(prompt) == 0)
-			continue ;
+		// if (strlen(prompt) == 0)
+		// 	continue ;
 		gc_set_current_scope(GC_SCOPE_FUNCTION);
 		tokens = tokenize(prompt, operators);
 		handle_exit(prompt);
@@ -75,19 +76,20 @@ int	main(int argc, char **argv, char **envp)
 		if (!ast)
 		{
 			gc_free_all();
-			continue ;
+			// continue ;
 		}
 		print_ast(ast, 0);
 		if (collect_heredocs(ast))
 		{
 			gc_free_all();
-			continue ;
+			// continue ;
 		}
 		print_ast(ast, 0);
 
 		execute(ast, envp);
 		gc_free_all();
-	}
+	// }
+	ft_split_free(operators);
 	gc_free_all();
 	return (0);
 }
