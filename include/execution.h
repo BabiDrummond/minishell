@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 23:19:10 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 02:00:12 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 05:03:58 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ typedef struct s_shell
 	t_list	*vars;
 	char	**args;
 }	t_shell;
+
+// t_shell
+// ast
+// tokens?
+// vars
+// argv
+// envp
+// exit_status
+// redirs
 
 /* Built-ins */
 int		builtin_cd(t_list **vars, char **args);
