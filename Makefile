@@ -10,7 +10,6 @@ READLINE = -lreadline
 
 SRCS_DIR = src/
 SRCS = main.c 					\
-	builtins/build_cmd_path.c	\
 	builtins/builtin_cd.c		\
 	builtins/builtin_echo.c		\
 	builtins/builtin_env.c		\
@@ -78,7 +77,7 @@ $(NAME): $(LIBFT) $(OBJS)
 	@$(CC) $(OBJS) $(LIBFT) -o $(NAME) $(READLINE)
 	@echo "\033[0;32mGenerated minishell\033[0m"
 
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDE) $(READLINE) -c $< -o $@
 	@echo "\033[95mCompiling \033[0m$(notdir $<)"

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   should_collect_heredoc.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 15:30:25 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/02/04 17:49:46 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/07 00:51:23 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "heredoc.h"
 
 int	should_collect_heredoc(t_token *token)
 {

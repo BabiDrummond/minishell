@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   collect_heredocs.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 21:16:37 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/02/04 20:02:56 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/07 00:51:19 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "heredoc.h"
 
 char	*get_delimiter(t_token *token)
 {
