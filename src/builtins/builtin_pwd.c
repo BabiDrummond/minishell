@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 23:44:24 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/05 19:57:04 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 23:35:20 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,13 @@ int	builtin_pwd(t_list *vars)
 		printf("%s\n", pwd);
 	else
 	{
-		getcwd(buffer, sizeof(buffer));
+		if (getcwd(buffer, sizeof(buffer)) == NULL)
+		{
+			printf("pwd: error retrieving current directory: \
+				getcwd: cannot access parent directories: \
+				No such file or directory\n");
+			return (EXIT_FAILURE);
+		}
 		printf("%s\n", buffer);
 	}
 	return (EXIT_SUCCESS);

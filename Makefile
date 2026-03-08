@@ -16,9 +16,11 @@ SRCS = main.c 							\
 	builtins/builtin_export.c			\
 	builtins/builtin_pwd.c				\
 	builtins/builtin_unset.c			\
+	execution/build_argv.c				\
+	execution/execute_builtin_cmd.c		\
+	execution/execute_external_cmd.c	\
 	execution/execute.c					\
 	execution/find_cmd_path.c			\
-	execution/join_token_parts.c		\
 	heredoc/collect_heredocs.c 			\
 	heredoc/should_collect_heredoc.c	\
 	lexer/errors/syntax_error.c			\

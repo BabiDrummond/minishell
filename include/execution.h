@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 23:19:10 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 05:03:58 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/08 00:08:07 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,17 @@
 # include "parser.h"
 # include "../libft/include/libft.h"
 
+typedef enum s_exit_status
+{
+	SUCCESS = 0,
+	FAILURE = 1,
+	SYNTAX_ERROR = 2,
+	PERMISSION_DENIED = 126,
+	CMD_NOT_FOUND = 127,
+	CTRL_C = 130,
+	CTRL_QUIT = 131
+}	t_exit_status;
+
 typedef struct s_var
 {
 	char	*key;
@@ -30,8 +41,10 @@ typedef struct s_var
 
 typedef struct s_shell
 {
-	t_list	*vars;
-	char	**args;
+	t_head			*tokens;
+	t_list			*vars;
+	t_ast			*ast;
+	t_exit_status	exit_status;
 }	t_shell;
 
 // t_shell
@@ -46,15 +59,17 @@ typedef struct s_shell
 /* Built-ins */
 int		builtin_cd(t_list **vars, char **args);
 int		builtin_echo(char **args);
-int		builtin_env(t_list *vars);
+int		builtin_env(t_list *vars, char **args);
 int		builtin_export(t_list **vars, char **args);
 int		builtin_pwd(t_list *vars);
 int		builtin_unset(t_list **vars, char **args);
 
 /* Execution */
-int		execute(t_ast *node, char **envp);
+int		execute(t_ast *node, t_list *vars, int is_child);
+int		execute_builtin_cmd(t_list *vars, char **argv);
+int		execute_external_cmd(t_list *vars, char **argv, int is_child);
+char	**build_argv(t_token *token);
 char	*find_cmd_path(t_list *vars, char *cmd);
-char	*join_token_parts(t_token *token);
 
 /* Utils */
 t_list	*envp_to_lst(char **envp);

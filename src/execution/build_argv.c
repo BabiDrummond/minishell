@@ -1,16 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   join_token_parts.c                                 :+:      :+:    :+:   */
+/*   build_argv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/06 23:17:05 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 02:02:03 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/03/07 23:54:57 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/07 23:59:36 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
+
+static int	count_tokens(t_token *token)
+{
+	int	total;
+
+	total = 0;
+	while (token)
+	{
+		total++;
+		token = (t_token *)token->link.next;
+	}
+	return (total);
+}
 
 static size_t	get_token_parts_length(t_token *token)
 {
@@ -27,7 +40,7 @@ static size_t	get_token_parts_length(t_token *token)
 	return (total);
 }
 
-char	*join_token_parts(t_token *token)
+static char	*join_token_parts(t_token *token)
 {
 	char	*result;
 	t_word	*part;
@@ -50,4 +63,25 @@ char	*join_token_parts(t_token *token)
 	}
 	result[i] = '\0';
 	return (result);
+}
+
+char	**build_argv(t_token *token)
+{
+	char	**argv;
+	int		count;
+	int		i;
+
+	count = count_tokens(token);
+	argv = malloc(sizeof(char *) * (count + 1));
+	if (!argv)
+		return (NULL);
+	i = 0;
+	while (token)
+	{
+		argv[i] = join_token_parts(token);
+		i++;
+		token = (t_token *)token->link.next;
+	}
+	argv[i] = NULL;
+	return (argv);
 }

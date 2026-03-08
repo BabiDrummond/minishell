@@ -21,7 +21,8 @@ void test_env_shows_exported_variables(t_list **vars)
     printf("--- test_env_shows_exported_variables ---\n");
     printf("Running env (check if TEST_ENV_VAR=exported_value appears):\n");
     
-    int exit_status = builtin_env(*vars);
+    char *env_args[] = {"env", NULL};
+    int exit_status = builtin_env(*vars, env_args);
     
     // Verificar se a variável está na lista
     char *value = var_get_value(*vars, "TEST_ENV_VAR");
@@ -43,7 +44,8 @@ void test_env_returns_success(t_list **vars)
 {
     printf("--- test_env_returns_success ---\n");
     
-    int exit_status = builtin_env(*vars);
+    char *env_args[] = {"env", NULL};
+    int exit_status = builtin_env(*vars, env_args);
     
     if (exit_status == EXIT_SUCCESS)
     {
@@ -67,7 +69,8 @@ void test_env_with_empty_value(t_list **vars)
     printf("--- test_env_with_empty_value ---\n");
     printf("Running env (check if EMPTY_ENV= appears):\n");
     
-    int exit_status = builtin_env(*vars);
+    char *env_args[] = {"env", NULL};
+    int exit_status = builtin_env(*vars, env_args);
     
     char *value = var_get_value(*vars, "EMPTY_ENV");
     
@@ -96,7 +99,8 @@ void test_env_does_not_show_unexported_variables(t_list **vars)
 	int saved_stdout = dup(STDOUT_FILENO);
 	dup2(fileno(tmp), STDOUT_FILENO);
 	
-	builtin_env(*vars);
+	char *env_args[] = {"env", NULL};
+	builtin_env(*vars, env_args);
 	
 	// Restaurar stdout
 	fflush(stdout);
@@ -128,4 +132,24 @@ void test_env_does_not_show_unexported_variables(t_list **vars)
 	// Limpar
 	char *unset_args[] = {"unset", "NOT_EXPORTED_VAR", NULL};
 	builtin_unset(vars, unset_args);
+}
+
+void test_env_with_arguments_fails(t_list **vars)
+{
+	printf("--- test_env_with_arguments_fails ---\n");
+	
+	char *args[] = {"env", "some_argument", NULL};
+	int exit_status = builtin_env(*vars, args);
+	
+	if (exit_status == CMD_NOT_FOUND)
+	{
+		printf("Expected: CMD_NOT_FOUND (127)\n");
+		printf("Got: CMD_NOT_FOUND (127)\n");
+		printf("\033[0;32m✓ PASS\033[0m\n");
+	}
+	else
+	{
+		printf("Expected: CMD_NOT_FOUND (127), Got: %d\n", exit_status);
+		printf("\033[0;31m✗ FAIL\033[0m\n");
+	}
 }

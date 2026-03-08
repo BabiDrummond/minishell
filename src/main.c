@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 04:42:39 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/07 22:58:16 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,13 @@ int	main(int argc, char **argv, char **envp)
 	// ft_split_free(&shell.args);
 	(void)argc;
 	(void)argv;
-	(void)envp;
-	char		*prompt;
 	char	**operators;
-	t_head		*tokens;
-	t_ast		*ast;
-
+	char	*prompt;
+	t_list	*vars;
+	t_head	*tokens;
+	t_ast	*ast;
+	
+	vars = envp_to_lst(envp);
 	operators = initialize_operators();
 	prompt = NULL;
 	tokens = NULL;
@@ -64,14 +65,14 @@ int	main(int argc, char **argv, char **envp)
 		gc_set_current_scope(GC_SCOPE_FUNCTION);
 		tokens = tokenize(prompt, operators);
 		handle_exit(prompt);
-		// print_tokens(tokens);
+		print_tokens(tokens);
 		ast = parse(tokens, operators);
 		if (!ast)
 		{
 			gc_free_all();
 			continue ;
 		}
-		// print_ast(ast, 0);
+		print_ast(ast, 0);
 		if (collect_heredocs(ast))
 		{
 			gc_free_all();
@@ -79,10 +80,11 @@ int	main(int argc, char **argv, char **envp)
 		}
 		// print_ast(ast, 0);
 
-		execute(ast, envp);
+		execute(ast, vars, FALSE);
 		gc_free_all();
 	}
 	ft_split_free(operators);
+	lst_clear(&vars, var_clear);
 	gc_free_all();
 	return (0);
 }
