@@ -6,13 +6,13 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 20:20:37 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/05 21:40:58 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/09 16:45:09 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
 
-void assert_echo_output(char *test_name, char *expected, char **args)
+void assert_echo_output(char *test_name, char *expected, char **argv)
 {
     int saved_stdout = dup(STDOUT_FILENO);
     FILE *temp = tmpfile();
@@ -21,7 +21,7 @@ void assert_echo_output(char *test_name, char *expected, char **args)
     fflush(stdout);
     dup2(temp_fd, STDOUT_FILENO);
     
-    builtin_echo(args);
+    builtin_echo(argv);
     fflush(stdout);
     
     dup2(saved_stdout, STDOUT_FILENO);
@@ -65,84 +65,84 @@ void assert_echo_output(char *test_name, char *expected, char **args)
 }
 void test_echo_with_empty_args_should_print_new_line(void)
 {
-    char *args[] = {"echo", NULL};
-    assert_echo_output("test_echo_with_empty_args_should_print_new_line", "\n", args);
+    char *argv[] = {"echo", NULL};
+    assert_echo_output("test_echo_with_empty_args_should_print_new_line", "\n", argv);
 }
 
 void test_echo_with_n_option_and_empty_args_should_print_nothing(void)
 {
-    char *args[] = {"echo", "-n", NULL};
-    assert_echo_output("test_echo_with_n_option_and_empty_args_should_print_nothing", NULL, args);
+    char *argv[] = {"echo", "-n", NULL};
+    assert_echo_output("test_echo_with_n_option_and_empty_args_should_print_nothing", NULL, argv);
 }
 
 void test_echo_with_n_option_should_print_text_without_new_line(void)
 {
-    char *args[] = {"echo", "-n", "hello", NULL};
-    assert_echo_output("test_echo_with_n_option_should_print_text_without_new_line", "hello", args);
+    char *argv[] = {"echo", "-n", "hello", NULL};
+    assert_echo_output("test_echo_with_n_option_should_print_text_without_new_line", "hello", argv);
 }
 
 void test_echo_with_multiple_n_options_should_print_text_without_new_line(void)
 {
-    char *args[] = {"echo", "-n", "-n", "hello", NULL};
-    assert_echo_output("test_echo_with_multiple_n_options_should_print_text_without_new_line", "hello", args);
+    char *argv[] = {"echo", "-n", "-n", "hello", NULL};
+    assert_echo_output("test_echo_with_multiple_n_options_should_print_text_without_new_line", "hello", argv);
 }
 
 void test_echo_with_multiple_n_chars_should_print_text_without_new_line(void)
 {
-    char *args[] = {"echo", "-nnnnnn", "hello", NULL};
-    assert_echo_output("test_echo_with_multiple_n_chars_should_print_text_without_new_line", "hello", args);
+    char *argv[] = {"echo", "-nnnnnn", "hello", NULL};
+    assert_echo_output("test_echo_with_multiple_n_chars_should_print_text_without_new_line", "hello", argv);
 }
 
 void test_echo_with_multiple_words_should_print_text_with_space(void)
 {
-    char *args[] = {"echo", "hello", "world", NULL};
-    assert_echo_output("test_echo_with_multiple_words_should_print_text_with_space", "hello world\n", args);
+    char *argv[] = {"echo", "hello", "world", NULL};
+    assert_echo_output("test_echo_with_multiple_words_should_print_text_with_space", "hello world\n", argv);
 }
 
 void test_echo_with_unknown_option_should_print_as_text(void)
 {
-    char *args[] = {"echo", "--", "-n", NULL};
-    assert_echo_output("test_echo_with_unknown_option_should_print_as_text", "-- -n\n", args);
+    char *argv[] = {"echo", "--", "-n", NULL};
+    assert_echo_output("test_echo_with_unknown_option_should_print_as_text", "-- -n\n", argv);
 }
 
 void test_echo_with_option_between_text_should_print_as_text(void)
 {
-    char *args[] = {"echo", "-n", "hello", "world", "-n", NULL};
-    assert_echo_output("test_echo_with_option_between_text_should_print_as_text", "hello world -n", args);
+    char *argv[] = {"echo", "-n", "hello", "world", "-n", NULL};
+    assert_echo_output("test_echo_with_option_between_text_should_print_as_text", "hello world -n", argv);
 }
 
 void test_echo_with_n_option_and_unknown_option_should_print_as_text_without_new_line(void)
 {
-    char *args[] = {"echo", "-n", "-a", NULL};
-    assert_echo_output("test_echo_with_n_option_and_unknown_option_should_print_as_text_without_new_line", "-a", args);
+    char *argv[] = {"echo", "-n", "-a", NULL};
+    assert_echo_output("test_echo_with_n_option_and_unknown_option_should_print_as_text_without_new_line", "-a", argv);
 }
 
 void test_echo_with_only_spaces_should_print_spaces(void)
 {
-    char *args[] = {"echo", "    ", NULL};
-    assert_echo_output("test_echo_with_only_spaces_should_print_spaces", "    \n", args);
+    char *argv[] = {"echo", "    ", NULL};
+    assert_echo_output("test_echo_with_only_spaces_should_print_spaces", "    \n", argv);
 }
 
 void test_echo_with_n_option_uppercase_should_print_as_text(void)
 {
-    char *args[] = {"echo", "-N", "hello", NULL};
-    assert_echo_output("test_echo_with_n_option_uppercase_should_print_as_text", "-N hello\n", args);
+    char *argv[] = {"echo", "-N", "hello", NULL};
+    assert_echo_output("test_echo_with_n_option_uppercase_should_print_as_text", "-N hello\n", argv);
 }
 
 void test_echo_with_n_option_and_empty_string_should_print_nothing(void)
 {
-    char *args[] = {"echo", "-n", "", NULL};
-    assert_echo_output("test_echo_with_n_option_and_empty_string_should_print_nothing", NULL, args);
+    char *argv[] = {"echo", "-n", "", NULL};
+    assert_echo_output("test_echo_with_n_option_and_empty_string_should_print_nothing", NULL, argv);
 }
 
 void test_echo_with_empty_string_should_print_nothing(void)
 {
-    char *args[] = {"echo", "", NULL};
-    assert_echo_output("test_echo_with_empty_string_should_print_nothing", "\n", args);
+    char *argv[] = {"echo", "", NULL};
+    assert_echo_output("test_echo_with_empty_string_should_print_nothing", "\n", argv);
 }
 
 void test_echo_with_multiple_empty_string_should_print_nothing(void)
 {
-    char *args[] = {"echo", "", "", "", NULL};
-    assert_echo_output("test_echo_with_multiple_empty_string_should_print_nothing", "  \n", args);
+    char *argv[] = {"echo", "", "", "", NULL};
+    assert_echo_output("test_echo_with_multiple_empty_string_should_print_nothing", "  \n", argv);
 }

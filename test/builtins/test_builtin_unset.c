@@ -6,16 +6,16 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 21:43:55 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/05 22:00:00 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/09 16:45:09 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
 
 void assert_unset_result(char *test_name, char *var_name, int should_exist, 
-                         int expected_exit, char **args, t_list **vars)
+                         int expected_exit, char **argv, t_list **vars)
 {
-    int exit_status = builtin_unset(vars, args);
+    int exit_status = builtin_unset(vars, argv);
     char *actual_value = var_get_value(*vars, var_name);
     
     printf("--- %s ---\n", test_name);
@@ -60,8 +60,8 @@ void test_unset_existing_variable(t_list **vars)
 
 void test_unset_nonexistent_variable(t_list **vars)
 {
-    char *args[] = {"unset", "DOES_NOT_EXIST", NULL};
-    int exit_status = builtin_unset(vars, args);
+    char *argv[] = {"unset", "DOES_NOT_EXIST", NULL};
+    int exit_status = builtin_unset(vars, argv);
     
     printf("--- test_unset_nonexistent_variable ---\n");
     if (exit_status == EXIT_SUCCESS)
@@ -79,13 +79,13 @@ void test_unset_nonexistent_variable(t_list **vars)
 
 void test_unset_without_arguments(t_list **vars)
 {
-    char *args[] = {"unset", NULL};
-    int exit_status = builtin_unset(vars, args);
+    char *argv[] = {"unset", NULL};
+    int exit_status = builtin_unset(vars, argv);
     
     printf("--- test_unset_without_arguments ---\n");
     if (exit_status == EXIT_SUCCESS)
     {
-        printf("Expected: SUCCESS (bash returns 0 for unset without args)\n");
+        printf("Expected: SUCCESS (bash returns 0 for unset without argv)\n");
         printf("Got: SUCCESS\n");
         printf("\033[0;32m✓ PASS\033[0m\n");
     }
@@ -98,8 +98,8 @@ void test_unset_without_arguments(t_list **vars)
 
 void test_unset_invalid_name(t_list **vars)
 {
-    char *args[] = {"unset", "INVALID@NAME", NULL};
-    int exit_status = builtin_unset(vars, args);
+    char *argv[] = {"unset", "INVALID@NAME", NULL};
+    int exit_status = builtin_unset(vars, argv);
     
     printf("--- test_unset_invalid_name ---\n");
     if (exit_status == EXIT_FAILURE)

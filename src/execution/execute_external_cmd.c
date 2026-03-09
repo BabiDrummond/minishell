@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 23:58:08 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/08 00:06:13 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/09 16:40:39 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static int	execute_in_child(char *path, char **argv, char **envp)
 	if (execve(path, argv, envp) == -1)
 	{
 		perror("execv failed");
-		free(path);
-		ft_split_free(argv);
 		exit(1);
 	}
 	return (0);
@@ -35,8 +33,6 @@ static int	execute_in_parent(char *path, char **argv, char **envp)
 		if (execve(path, argv, envp) == -1)
 		{
 			perror("execv failed");
-			free(path);
-			ft_split_free(argv);
 			exit(1);
 		}
 		return (0);

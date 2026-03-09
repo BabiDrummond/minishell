@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 22:58:16 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/09 16:45:09 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int	main(int argc, char **argv, char **envp)
 {
 	// t_shell shell;
 	// shell.vars = envp_to_lst(envp);
-	// shell.args = ft_split(line, ' ');
+	// shell.argv = ft_split(line, ' ');
 	// lst_clear(&shell.vars, var_clear);
-	// ft_split_free(&shell.args);
+	// ft_split_free(&shell.argv);
 	(void)argc;
 	(void)argv;
 	char	**operators;

@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/07 23:57:58 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/09 16:45:09 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	execute(t_ast *node, t_list *vars, int is_child)
 }
 
 // todo PIPE
-// add in_child to execute args
+// add in_child to execute argv
 // in_child default is false
 // execute_pipe
 // fork

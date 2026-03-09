@@ -6,26 +6,26 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 01:34:24 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/08 00:24:49 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/09 16:45:09 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	builtin_cd(t_list **vars, char **args)
+int	builtin_cd(t_list **vars, char **argv)
 {
 	char	new_pwd[1024];
 	char	*old_pwd;
 	char	*dir;
 
-	dir = args[1];
-	if (ft_split_size(args) > 2 && printf("cd: too many arguments\n"))
+	dir = argv[1];
+	if (ft_split_size(argv) > 2 && printf("cd: too many arguments\n"))
 		return (EXIT_FAILURE);
-	if (!args[1] || ft_strcmp(args[1], "~") == 0)
+	if (!argv[1] || ft_strcmp(argv[1], "~") == 0)
 		dir = var_get_value(*vars, "HOME");
 	if (!dir && printf("cd: HOME not set\n"))
 		return (EXIT_FAILURE);
-	if (args[1] && ft_strcmp(args[1], "-") == 0)
+	if (argv[1] && ft_strcmp(argv[1], "-") == 0)
 		dir = var_get_value(*vars, "OLDPWD");
 	if (!dir && printf("cd: OLDPWD not set\n"))
 		return (EXIT_FAILURE);

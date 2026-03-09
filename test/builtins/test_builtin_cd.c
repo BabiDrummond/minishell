@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 20:17:31 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/05 20:20:02 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/09 16:45:09 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void test_cd_to_valid_directory(t_list **vars)
 {
 	printf("--- test_cd_to_valid_directory ---\n");
 	
-	char *args[] = {"cd", "/tmp", NULL};
-	int exit_status = builtin_cd(vars, args);
+	char *argv[] = {"cd", "/tmp", NULL};
+	int exit_status = builtin_cd(vars, argv);
 	
 	char *pwd = var_get_value(*vars, "PWD");
 	
@@ -47,8 +47,8 @@ void test_cd_without_arguments_goes_to_home(t_list **vars)
 		return;
 	}
 	
-	char *args[] = {"cd", NULL};
-	int exit_status = builtin_cd(vars, args);
+	char *argv[] = {"cd", NULL};
+	int exit_status = builtin_cd(vars, argv);
 	
 	char *pwd = var_get_value(*vars, "PWD");
 	
@@ -78,8 +78,8 @@ void test_cd_with_tilde_goes_to_home(t_list **vars)
 		return;
 	}
 	
-	char *args[] = {"cd", "~", NULL};
-	int exit_status = builtin_cd(vars, args);
+	char *argv[] = {"cd", "~", NULL};
+	int exit_status = builtin_cd(vars, argv);
 	
 	char *pwd = var_get_value(*vars, "PWD");
 	
@@ -142,8 +142,8 @@ void test_cd_to_nonexistent_directory_fails(t_list **vars)
 {
 	printf("--- test_cd_to_nonexistent_directory_fails ---\n");
 	
-	char *args[] = {"cd", "/nonexistent_directory_12345", NULL};
-	int exit_status = builtin_cd(vars, args);
+	char *argv[] = {"cd", "/nonexistent_directory_12345", NULL};
+	int exit_status = builtin_cd(vars, argv);
 	
 	if (exit_status == EXIT_FAILURE)
 	{
@@ -173,8 +173,8 @@ void test_cd_without_home_variable_fails(t_list **vars)
 	builtin_unset(vars, unset_args);
 	
 	// Tentar cd sem argumentos
-	char *args[] = {"cd", NULL};
-	int exit_status = builtin_cd(vars, args);
+	char *argv[] = {"cd", NULL};
+	int exit_status = builtin_cd(vars, argv);
 	
 	// Restaurar HOME
 	if (home_copy)
@@ -243,8 +243,8 @@ void test_cd_dash_without_oldpwd_fails(t_list **vars)
 	builtin_unset(vars, unset_args);
 	
 	// Tentar cd -
-	char *args[] = {"cd", "-", NULL};
-	int exit_status = builtin_cd(vars, args);
+	char *argv[] = {"cd", "-", NULL};
+	int exit_status = builtin_cd(vars, argv);
 	
 	// Restaurar OLDPWD
 	if (oldpwd_copy)
@@ -267,8 +267,8 @@ void test_cd_with_too_many_arguments_fails(t_list **vars)
 {
 	printf("--- test_cd_with_too_many_arguments_fails ---\n");
 	
-	char *args[] = {"cd", "/tmp", "/home", NULL};
-	int exit_status = builtin_cd(vars, args);
+	char *argv[] = {"cd", "/tmp", "/home", NULL};
+	int exit_status = builtin_cd(vars, argv);
 	
 	if (exit_status == EXIT_FAILURE)
 	{

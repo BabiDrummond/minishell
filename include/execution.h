@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 23:19:10 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/08 00:08:07 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/09 16:45:09 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ typedef struct s_shell
 // redirs
 
 /* Built-ins */
-int		builtin_cd(t_list **vars, char **args);
-int		builtin_echo(char **args);
-int		builtin_env(t_list *vars, char **args);
-int		builtin_export(t_list **vars, char **args);
+int		builtin_cd(t_list **vars, char **argv);
+int		builtin_echo(char **argv);
+int		builtin_env(t_list *vars, char **argv);
+int		builtin_export(t_list **vars, char **argv);
 int		builtin_pwd(t_list *vars);
-int		builtin_unset(t_list **vars, char **args);
+int		builtin_unset(t_list **vars, char **argv);
 
 /* Execution */
 int		execute(t_ast *node, t_list *vars, int is_child);

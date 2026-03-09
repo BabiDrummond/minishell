@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 22:05:00 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/05 22:05:00 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/09 16:45:09 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void test_env_shows_exported_variables(t_list **vars)
 {
     // Criar uma variável exportada
-    char *args[] = {"export", "TEST_ENV_VAR=exported_value", NULL};
-    builtin_export(vars, args);
+    char *argv[] = {"export", "TEST_ENV_VAR=exported_value", NULL};
+    builtin_export(vars, argv);
     
     printf("--- test_env_shows_exported_variables ---\n");
     printf("Running env (check if TEST_ENV_VAR=exported_value appears):\n");
@@ -63,8 +63,8 @@ void test_env_returns_success(t_list **vars)
 void test_env_with_empty_value(t_list **vars)
 {
     // Criar variável com valor vazio
-    char *args[] = {"export", "EMPTY_ENV=", NULL};
-    builtin_export(vars, args);
+    char *argv[] = {"export", "EMPTY_ENV=", NULL};
+    builtin_export(vars, argv);
     
     printf("--- test_env_with_empty_value ---\n");
     printf("Running env (check if EMPTY_ENV= appears):\n");
@@ -138,8 +138,8 @@ void test_env_with_arguments_fails(t_list **vars)
 {
 	printf("--- test_env_with_arguments_fails ---\n");
 	
-	char *args[] = {"env", "some_argument", NULL};
-	int exit_status = builtin_env(*vars, args);
+	char *argv[] = {"env", "some_argument", NULL};
+	int exit_status = builtin_env(*vars, argv);
 	
 	if (exit_status == CMD_NOT_FOUND)
 	{

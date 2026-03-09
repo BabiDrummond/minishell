@@ -6,16 +6,16 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 21:43:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/05 21:49:14 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/09 16:45:09 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
 
 void assert_export_result(char *test_name, char *var_name, char *expected_value, 
-                         int expected_exit, char **args, t_list **vars)
+                         int expected_exit, char **argv, t_list **vars)
 {
-    int exit_status = builtin_export(vars, args);
+    int exit_status = builtin_export(vars, argv);
     char *actual_value = var_get_value(*vars, var_name);
     
     printf("--- %s ---\n", test_name);
@@ -47,9 +47,9 @@ void assert_export_result(char *test_name, char *var_name, char *expected_value,
 
 void test_export_new_variable(t_list **vars)
 {
-    char *args[] = {"export", "TEST_VAR=hello", NULL};
+    char *argv[] = {"export", "TEST_VAR=hello", NULL};
     assert_export_result("test_export_new_variable", "TEST_VAR", "hello", 
-                        EXIT_SUCCESS, args, vars);
+                        EXIT_SUCCESS, argv, vars);
 }
 
 void test_export_override_existing_variable(t_list **vars)
@@ -64,15 +64,15 @@ void test_export_override_existing_variable(t_list **vars)
 
 void test_export_empty_value(t_list **vars)
 {
-    char *args[] = {"export", "EMPTY_VAR=", NULL};
+    char *argv[] = {"export", "EMPTY_VAR=", NULL};
     assert_export_result("test_export_empty_value", "EMPTY_VAR", "", 
-                        EXIT_SUCCESS, args, vars);
+                        EXIT_SUCCESS, argv, vars);
 }
 
 void test_export_invalid_name_with_special_char(t_list **vars)
 {
-    char *args[] = {"export", "INVALID@VAR=value", NULL};
-    int exit_status = builtin_export(vars, args);
+    char *argv[] = {"export", "INVALID@VAR=value", NULL};
+    int exit_status = builtin_export(vars, argv);
     
     printf("--- test_export_invalid_name_with_special_char ---\n");
     if (exit_status == EXIT_FAILURE)
@@ -89,8 +89,8 @@ void test_export_invalid_name_with_special_char(t_list **vars)
 
 void test_export_invalid_name_starting_with_number(t_list **vars)
 {
-    char *args[] = {"export", "1INVALID=value", NULL};
-    int exit_status = builtin_export(vars, args);
+    char *argv[] = {"export", "1INVALID=value", NULL};
+    int exit_status = builtin_export(vars, argv);
     
     printf("--- test_export_invalid_name_starting_with_number ---\n");
     if (exit_status == EXIT_FAILURE)
@@ -107,8 +107,8 @@ void test_export_invalid_name_starting_with_number(t_list **vars)
 
 void test_export_multiple_variables(t_list **vars)
 {
-    char *args[] = {"export", "VAR1=value1", "VAR2=value2", "VAR3=value3", NULL};
-    int exit_status = builtin_export(vars, args);
+    char *argv[] = {"export", "VAR1=value1", "VAR2=value2", "VAR3=value3", NULL};
+    int exit_status = builtin_export(vars, argv);
     
     char *val1 = var_get_value(*vars, "VAR1");
     char *val2 = var_get_value(*vars, "VAR2");
@@ -138,9 +138,9 @@ void test_export_multiple_variables(t_list **vars)
 
 void test_export_variable_with_underscore(t_list **vars)
 {
-    char *args[] = {"export", "VALID_VAR_NAME=test", NULL};
+    char *argv[] = {"export", "VALID_VAR_NAME=test", NULL};
     assert_export_result("test_export_variable_with_underscore", "VALID_VAR_NAME", "test", 
-                        EXIT_SUCCESS, args, vars);
+                        EXIT_SUCCESS, argv, vars);
 }
 
 void test_export_without_value_marks_as_exported(t_list **vars)
@@ -151,8 +151,8 @@ void test_export_without_value_marks_as_exported(t_list **vars)
 	var_set(vars, ft_strdup("NOT_EXPORTED"), ft_strdup("value"), 0);
 	
 	// Export sem valor
-	char *args[] = {"export", "NOT_EXPORTED", NULL};
-	int exit_status = builtin_export(vars, args);
+	char *argv[] = {"export", "NOT_EXPORTED", NULL};
+	int exit_status = builtin_export(vars, argv);
 	
 	// Verificar se foi marcada como exportada
 	t_list *current = *vars;
