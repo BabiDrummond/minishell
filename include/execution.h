@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 23:19:10 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/09 16:45:09 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/09 22:29:23 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/wait.h>
+# include <errno.h>
 # include "lexer.h"
 # include "parser.h"
 # include "../libft/include/libft.h"
@@ -29,7 +30,8 @@ typedef enum s_exit_status
 	PERMISSION_DENIED = 126,
 	CMD_NOT_FOUND = 127,
 	CTRL_C = 130,
-	CTRL_QUIT = 131
+	CTRL_QUIT = 131,
+	INVALID_EXIT = 255
 }	t_exit_status;
 
 typedef struct s_var

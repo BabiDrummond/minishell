@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 22:40:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/12 21:09:01 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/09 18:13:56 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@
 # ifndef INT_MIN
 #  define INT_MIN -2147483648
 # endif
+
+#ifndef LLONG_MAX
+# define LLONG_MAX 9223372036854775807
+#endif
+
+#ifndef LLONG_MIN
+# define LLONG_MIN -9223372036854775808
+#endif
 
 # ifndef BYTE_SIZE
 #  define BYTE_SIZE 8
