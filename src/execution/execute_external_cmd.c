@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 23:58:08 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/09 23:20:29 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/10 20:03:27 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	execute_in_child(char *path, char **argv, char **envp)
 	else if (errno == EACCES)
 		exit(PERMISSION_DENIED);
 	else
-		exit(FAILURE);
+		exit(EXIT_FAILURE);
 }
 
 static int	execute_in_parent(char *path, char **argv, char **envp)
@@ -40,7 +40,7 @@ static int	execute_in_parent(char *path, char **argv, char **envp)
 	else
 	{
 		perror("fork");
-		return (FAILURE);
+		return (EXIT_FAILURE);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 16:42:32 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/09 23:20:09 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/10 20:01:16 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ long long	exit_atoll(char *ascii)
 	while (*ascii)
 	{
 		if (!ft_isdigit(*ascii))
-			return (INVALID_EXIT);
+			return (SYNTAX_ERROR);
 		if (num > LLONG_MAX / 10
 			|| (negative == 1 && num == LLONG_MAX / 10 && *ascii > '7')
 			|| (negative == -1 && num == LLONG_MAX / 10 && *ascii > '8'))
-			return (INVALID_EXIT);
+			return (SYNTAX_ERROR);
 		num = (num * 10) + *ascii++ - '0';
 	}
 	return (num * negative);
@@ -45,15 +45,14 @@ int	builtin_exit(t_shell *shell, char **argv)
 	if (!argv[1])
 		exit(shell->exit_status);
 	exit_code = exit_atoll(argv[1]);
-	if (exit_code == INVALID_EXIT
+	if (exit_code == SYNTAX_ERROR
 		&& printf("exit: %s: numeric argument required\n", argv[1]))
-		exit(INVALID_EXIT);
+		exit(SYNTAX_ERROR);
 	if (ft_split_size(argv) > 2 && printf("exit: too many arguments\n"))
-		return (FAILURE);
+		return (EXIT_FAILURE);
 	if (exit_code < 0 || exit_code > 255)
 		exit_code = exit_code % 256;
 	exit(exit_code);
-	return (SUCCESS);
 }
 
 // exit vazio => exit com status do último comando executado

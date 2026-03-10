@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 23:19:10 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/09 22:29:23 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/10 20:00:34 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 
 typedef enum s_exit_status
 {
-	SUCCESS = 0,
-	FAILURE = 1,
 	SYNTAX_ERROR = 2,
 	PERMISSION_DENIED = 126,
 	CMD_NOT_FOUND = 127,
