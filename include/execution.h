@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 23:19:10 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/10 20:00:34 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/10 20:27:39 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ int		builtin_unset(t_list **vars, char **argv);
 
 /* Execution */
 int		execute(t_ast *node, t_list *vars, int is_child);
-int		execute_builtin_cmd(t_list *vars, char **argv);
+int		execute_command(t_token *token, t_list *vars, int is_child);
 int		execute_external_cmd(t_list *vars, char **argv, int is_child);
+int		execute_builtin_cmd(t_list *vars, char **argv);
 char	**build_argv(t_token *token);
 char	*find_cmd_path(t_list *vars, char *cmd);
 

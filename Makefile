@@ -18,6 +18,7 @@ SRCS = main.c 							\
 	builtins/builtin_unset.c			\
 	execution/build_argv.c				\
 	execution/execute_builtin_cmd.c		\
+	execution/execute_command.c			\
 	execution/execute_external_cmd.c	\
 	execution/execute.c					\
 	execution/find_cmd_path.c			\
