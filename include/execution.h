@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 23:19:10 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/10 20:27:39 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/10 22:36:47 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,34 +41,27 @@ typedef struct s_var
 
 typedef struct s_shell
 {
-	t_head			*tokens;
+	pid_t			pid;
 	t_list			*vars;
-	t_ast			*ast;
 	t_exit_status	exit_status;
+	int				stdin_backup;
+	int				stdout_backup;
 }	t_shell;
-
-// t_shell
-// ast
-// tokens?
-// vars
-// argv
-// envp
-// exit_status
-// redirs
 
 /* Built-ins */
 int		builtin_cd(t_list **vars, char **argv);
 int		builtin_echo(char **argv);
 int		builtin_env(t_list *vars, char **argv);
+int		builtin_exit(t_shell *shell, char **argv);
 int		builtin_export(t_list **vars, char **argv);
 int		builtin_pwd(t_list *vars);
 int		builtin_unset(t_list **vars, char **argv);
 
 /* Execution */
-int		execute(t_ast *node, t_list *vars, int is_child);
-int		execute_command(t_token *token, t_list *vars, int is_child);
-int		execute_external_cmd(t_list *vars, char **argv, int is_child);
-int		execute_builtin_cmd(t_list *vars, char **argv);
+int		execute(t_shell *shell, t_ast *node, int is_child);
+int		execute_command(t_shell *shell, t_token *token, int is_child);
+int		execute_external_cmd(t_shell *shell, char **argv, int is_child);
+int		execute_builtin_cmd(t_shell *shell, char **argv);
 char	**build_argv(t_token *token);
 char	*find_cmd_path(t_list *vars, char *cmd);
 

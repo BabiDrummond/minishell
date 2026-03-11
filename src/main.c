@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/09 16:45:09 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/10 22:36:31 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,26 @@ void	signal_handler(int sig)
 	}
 }
 
+void	init_shell(t_shell *shell, char **envp)
+{
+	shell->pid = getpid();
+	shell->vars = envp_to_lst(envp);
+	shell->exit_status = EXIT_SUCCESS;
+	shell->stdin_backup = dup(STDIN_FILENO);
+	shell->stdout_backup = dup(STDOUT_FILENO);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
-	// t_shell shell;
-	// shell.vars = envp_to_lst(envp);
-	// shell.argv = ft_split(line, ' ');
-	// lst_clear(&shell.vars, var_clear);
-	// ft_split_free(&shell.argv);
 	(void)argc;
 	(void)argv;
 	char	**operators;
 	char	*prompt;
-	t_list	*vars;
+	t_shell shell;
 	t_head	*tokens;
 	t_ast	*ast;
 	
-	vars = envp_to_lst(envp);
+	init_shell(&shell, envp);
 	operators = initialize_operators();
 	prompt = NULL;
 	tokens = NULL;
@@ -80,11 +84,11 @@ int	main(int argc, char **argv, char **envp)
 		}
 		// print_ast(ast, 0);
 
-		execute(ast, vars, FALSE);
+		shell.exit_status = execute(&shell, ast, FALSE);
 		gc_free_all();
 	}
 	ft_split_free(operators);
-	lst_clear(&vars, var_clear);
+	lst_clear(shell.vars, var_clear);
 	gc_free_all();
-	return (0);
+	return (shell.exit_status);
 }
