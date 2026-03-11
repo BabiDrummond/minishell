@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/10 23:07:01 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/10 23:34:16 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,22 @@ int	execute_or(t_shell *shell, t_ast *left, t_ast *right, int is_child)
 	return (shell->exit_status);
 }
 
-// int	execute_redir_in(t_shell *shell, t_ast *left, t_ast *right, int is_child)
-// {
-	
-// }
+char	*extract_filename(t_ast *node)
+{
+	t_token	*token;
+
+	token = (t_token *)node->value;
+	return (token->link.content);
+}
+
+int	execute_redir_in(t_shell *shell, t_ast *left, t_ast *right, int is_child)
+{
+	char	*filename;
+	int		fd;
+
+	filename = extract_filename(right);
+	fd = open(filename, O_RDONLY);
+}
 
 // int	execute_pipe(t_shell *shell, t_ast *left, t_ast *right, int is_child)
 // {
