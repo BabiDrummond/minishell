@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 23:58:08 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/10 22:30:53 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/10 23:00:41 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,13 @@ static int	execute_in_parent(char *path, char **argv, char **envp)
 	pid = fork();
 	if (pid == 0)
 		execute_in_child(path, argv, envp);
-	else if (pid > 0)
-	{
-		waitpid(pid, &status, 0);
-		return (WEXITSTATUS(status));
-	}
-	else
+	if (pid < 0)
 	{
 		perror("fork");
 		return (EXIT_FAILURE);
 	}
+	waitpid(pid, &status, 0);
+	return (WEXITSTATUS(status));
 }
 
 int	execute_external_cmd(t_shell *shell, char **argv, int is_child)

@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 22:30:38 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/22 04:14:30 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/10 23:05:14 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
-int     ft_isspace(int c);
+int		ft_isspace(int c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/10 22:36:31 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/10 22:56:48 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	main(int argc, char **argv, char **envp)
 		gc_free_all();
 	}
 	ft_split_free(operators);
-	lst_clear(shell.vars, var_clear);
+	lst_clear(&shell.vars, var_clear);
 	gc_free_all();
 	return (shell.exit_status);
 }
