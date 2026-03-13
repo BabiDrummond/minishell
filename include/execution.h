@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 23:19:10 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/12 19:12:52 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/13 20:17:13 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,19 @@ typedef struct s_var
 	char	*value;
 	int		exported;
 }	t_var;
+
+typedef struct s_redir
+{
+	t_redir_type	type;
+	char			*target;
+} t_redir;
+
+typedef struct s_exec_node
+{
+	t_node_type type;
+	t_list		*redirs;
+	t_list		*argv;
+}	t_exec_node;
 
 typedef struct s_shell
 {

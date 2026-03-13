@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/12 23:56:05 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/13 19:34:59 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,24 +61,24 @@ int	print_error_and_return(t_shell *shell, char *error_msg, int exit_status)
 	return (shell->exit_status);
 }
 
-int	execute_redir_in(t_shell *shell, t_ast *left, t_ast *right, int is_child)
-{
-	t_token *token;
-	int		fd;
+// int	execute_redir_in(t_shell *shell, t_ast *left, t_ast *right, int is_child)
+// {
+// 	t_token *token;
+// 	int		fd;
 
-	token = (t_token *) left->value;
-	fd = get_stdin_fd(right->value);
-	if (fd == -1)
-		return (EXIT_FAILURE);
-	if (token->is_operator)
-		execute_redir_in(shell, left, token, is_child);
-	dup2(fd, STDIN_FILENO);
-	if (!token->is_operator)
-		shell->exit_status = execute(shell, left, is_child);
-	close(fd);
-	dup2(shell->stdin_backup, STDIN_FILENO);
-	return (shell->exit_status);
-}
+// 	token = (t_token *) left->value;
+// 	fd = get_stdin_fd(right->value);
+// 	if (fd == -1)
+// 		return (EXIT_FAILURE);
+// 	if (token->is_operator)
+// 		execute_redir_in(shell, left, token, is_child);
+// 	dup2(fd, STDIN_FILENO);
+// 	if (!token->is_operator)
+// 		shell->exit_status = execute(shell, left, is_child);
+// 	close(fd);
+// 	dup2(shell->stdin_backup, STDIN_FILENO);
+// 	return (shell->exit_status);
+// }
 
 // int	execute_redir_out(t_shell *shell, t_ast *left, t_ast *right, int is_child)
 // {

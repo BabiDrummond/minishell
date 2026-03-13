@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:24:36 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/06 18:47:44 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/13 19:58:57 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,29 @@ static int	operator_is_equal(t_token *token, char *operator)
 			operator) == 0);
 }
 
+t_ast	build_exec_node(t_head *tokens)
+{
+	t_token	*current_token;
+
+	current_token = (t_token *)tokens->first;
+	while (current_token)
+	{
+		
+		current_token = (t_token *)current_token->link.next;
+	}
+}
+
 t_ast	*parse(t_head *tokens, char **operators)
 {
 	t_token	*current_token;
 	char	**operator;
+	int i;
 
 	if (has_syntax_error(tokens))
 		return (NULL);
 	operator = operators;
-	while (*operator)
+	i = 0;
+	while (*operator && i < 3)
 	{
 		current_token = (t_token *)tokens->last;
 		while (current_token)
@@ -78,6 +92,16 @@ t_ast	*parse(t_head *tokens, char **operators)
 			current_token = (t_token *)current_token->link.prev;
 		}
 		operator++;
+		i++;
 	}
 	return (ast_new(tokens->first));
 }
+
+// percorrer lista
+// se encontrar operador (&& || pipe)
+// dividir lista em 2 (antes e depois do operador)
+// fazer isso recursivamente até não achar mais operadores
+// ao chegar na folha (não tiver mais operadores), analisar folha e coletar redirs
+// se redir, pegar redir e proximo argumento e colocar na lista de redirs
+// colocar o resto no argv
+// criar nó com TYPE, lista de redirs, e lista de argv
