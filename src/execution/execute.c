@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/10 23:34:16 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/12 23:56:05 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,71 @@ int	execute_or(t_shell *shell, t_ast *left, t_ast *right, int is_child)
 	return (shell->exit_status);
 }
 
-char	*extract_filename(t_ast *node)
+int	get_stdin_fd(t_token *token)
 {
-	t_token	*token;
+	char	**argv;
+	int		fd;
+	int		i;
 
-	token = (t_token *)node->value;
-	return (token->link.content);
+	i = 0;
+	fd = -1;
+	argv = build_argv(token);
+	while (argv && argv[i])
+	{
+		if (fd != -1)	
+			close(fd);
+		fd = open(argv[i], O_RDONLY);
+		if (fd < 0)
+		{
+			perror("fd");
+			ft_split_free(argv);
+			return (-1);
+		}
+		i++;
+	}
+	ft_split_free(argv);
+	return (fd);
+}
+
+int	print_error_and_return(t_shell *shell, char *error_msg, int exit_status)
+{
+	perror(error_msg);
+	shell->exit_status = exit_status;
+	return (shell->exit_status);
 }
 
 int	execute_redir_in(t_shell *shell, t_ast *left, t_ast *right, int is_child)
 {
-	char	*filename;
+	t_token *token;
 	int		fd;
 
-	filename = extract_filename(right);
-	fd = open(filename, O_RDONLY);
+	token = (t_token *) left->value;
+	fd = get_stdin_fd(right->value);
+	if (fd == -1)
+		return (EXIT_FAILURE);
+	if (token->is_operator)
+		execute_redir_in(shell, left, token, is_child);
+	dup2(fd, STDIN_FILENO);
+	if (!token->is_operator)
+		shell->exit_status = execute(shell, left, is_child);
+	close(fd);
+	dup2(shell->stdin_backup, STDIN_FILENO);
+	return (shell->exit_status);
 }
+
+// int	execute_redir_out(t_shell *shell, t_ast *left, t_ast *right, int is_child)
+// {
+// 	int		fd;
+
+// 	fd = get_stdin_fd(right->value);
+// 	if (fd == -1)
+// 		return (EXIT_FAILURE);
+// 	dup2(fd, STDIN_FILENO);
+// 	shell->exit_status = execute(shell, left, is_child);
+// 	close(fd);
+// 	dup2(shell->stdin_backup, STDIN_FILENO);
+// 	return (shell->exit_status);
+// }
 
 // int	execute_pipe(t_shell *shell, t_ast *left, t_ast *right, int is_child)
 // {
