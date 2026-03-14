@@ -6,7 +6,7 @@
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 18:07:03 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/02/02 19:56:06 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/14 03:37:35 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,99 @@ static void	print_ast_operator(t_ast *node, int depth)
 	printf("}");
 }
 
-static void	print_ast_cmd_argv(t_token *token)
-{
-	int		first_arg;
-	t_word	*part;
 
-	first_arg = 1;
+typedef struct s_redir
+{
+	char *symbol;
+	t_token *target;
+} t_redir;
+
+typedef struct s_command // t_exec_node
+{
+	t_node_type type;
+	t_list *redirs;
+	t_list *argv;
+} t_command;
+
+
+static t_command *get_redir(t_token *token)
+{
+	(void) token;
+
+	t_command *command = calloc(1, sizeof(t_command));
 	while (token)
 	{
-		part = (t_word *)((t_head *)token->link.content)->first;
-		while (part)
+		
+
+		if(token->is_operator)
 		{
-			if (!first_arg)
-				printf(", ");
-			printf("\"%s\"", (char *)part->link.content);
-			first_arg = 0;
-			part = (t_word *)part->link.next;
+
+			t_redir *redir = calloc(1, sizeof(t_redir));
+			redir->symbol = token->link.content;
+
+			t_token *target = (t_token*)token->link.next;
+			if(!target)
+				printf("wolvesshell: parse error near #####");
+			
+			redir->target = target;
+
+			lst_add_back(&command->redirs, lst_new(redir));
+
+			token = target;
+	
 		}
-		token = (t_token *)token->link.next;
+		else {
+
+			lst_add_back(&command->argv, lst_new(token->link.content));
+		}
+		token = (t_token*)token->link.next;
+	}
+	return command;
+}
+
+static void print_argv(t_command *command)
+{
+	if(!command)
+		return ;
+
+	t_list *arg = command->argv;
+
+	while(arg)
+	{
+
+		t_list *part = (t_list*)((t_head*)arg->content)->first;
+		while(part)
+		{
+			printf("%s, ",(char*) part->content);
+			part = part->next;
+		}
+		arg = arg->next;
+	}
+}
+static void print_redirs(t_exec_node *command)
+{
+	if(!command)
+		return ;
+
+	t_list *node = command->redirs;
+
+	while(node)
+	{
+
+		t_redir *redir = (t_redir*)node->content;
+		printf("[%s, ", redir->symbol);
+		
+		t_token *target = redir->target;
+		t_head *parts = (t_head*)target->link.content;
+		t_word *word = (t_word*)parts->first;
+		while(word)
+		{
+			printf("%s, ", (char*)word->link.content);
+			word = (t_word*)word->link.next;
+		}
+		printf("], ");
+		
+		node = node->next;
 	}
 }
 
@@ -75,8 +150,13 @@ static void	print_ast_cmd(t_ast *node, int depth)
 	print_ast_indent(depth + 1);
 	printf("\"type\": \"CMD\",\n");
 	print_ast_indent(depth + 1);
+	t_command *command = get_redir(node->value);
+	printf("\"redirs\": [");
+	print_redirs(command);
+	printf("]\n");
+	print_ast_indent(depth + 1);
 	printf("\"argv\": [");
-	print_ast_cmd_argv(node->value);
+	print_argv(command);
 	printf("]\n");
 	print_ast_indent(depth);
 	printf("}");
@@ -93,6 +173,7 @@ void	print_ast(t_ast *node, int depth)
 		print_ast_operator(node, depth);
 	else
 		print_ast_cmd(node, depth);
+
 	if (!depth)
 		printf("\n");
 }

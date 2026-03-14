@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:40:23 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/06 19:45:59 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/14 01:21:08 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ typedef struct s_word
 	t_node			link;
 	t_quote_state	quote_state;
 }	t_word;
+
+// typedef struct s_operator
+// {
+// 	char	*symbol;
+// 	int		;
+// }	t_operator;
+
 
 typedef struct s_token
 {
