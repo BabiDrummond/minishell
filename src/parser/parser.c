@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:24:36 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/13 19:58:57 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/14 20:22:31 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,33 @@ static void	set_left(t_head *left, t_token *current_token, t_head *tokens)
 		current_token->link.prev->next = NULL;
 }
 
+t_node_type get_node_type(t_token *token)
+{
+	if (token->is_operator)
+	{
+		if (ft_strcmp(token->link.content, "&&") == 0)
+			return (NODE_AND);
+		else if (ft_strcmp(token->link.content, "||") == 0)
+			return (NODE_OR);
+		else if (ft_strcmp(token->link.content, "|") == 0)
+			return (NODE_PIPE);
+	}
+	return (NODE_CMD);
+}
+
+t_exec_node	*new_exec_node(t_node_type type, t_list *redirs, t_list *argv)
+{
+	t_exec_node *exec_node;
+
+	exec_node = ft_calloc(1, sizeof(t_exec_node));
+	if (!exec_node)
+		return (NULL);
+	exec_node->type = type;
+	exec_node->redirs = redirs;
+	exec_node->argv = argv;
+	return (exec_node);
+}
+
 static t_ast	*parse_operators(t_token *token,
 	char **operators, t_head *tokens)
 {
@@ -39,7 +66,7 @@ static t_ast	*parse_operators(t_token *token,
 	right.last = NULL;
 	left.first = NULL;
 	left.last = NULL;
-	node = ast_new(token);
+	node = ast_new(new_exec_node(get_node_type(token), NULL, NULL));
 	set_left(&left, token, tokens);
 	set_right(&right, token, tokens);
 	if (left.first)
@@ -56,34 +83,45 @@ static int	operator_is_equal(t_token *token, char *operator)
 			operator) == 0);
 }
 
-t_ast	build_exec_node(t_head *tokens)
+t_exec_node	*build_ast_node(t_token *token)
 {
-	t_token	*current_token;
+	t_exec_node *exec_node;
+	t_redir *redir;
 
-	current_token = (t_token *)tokens->first;
-	while (current_token)
+	exec_node = ft_calloc(1, sizeof(t_exec_node));
+	while (token)
 	{
-		
-		current_token = (t_token *)current_token->link.next;
+		if (token->is_operator)
+		{
+			redir = ft_calloc(1, sizeof(t_redir));
+			redir->type = token->link.content;
+			if (!token->link.next)
+				printf("minishell: parse error near %s\n", redir->type);
+			redir->target = (t_word *)((t_head *)((t_token *)
+							token->link.next)->link.content)->first;
+			lst_add_back(&exec_node->redirs, lst_new(redir));
+		}
+		else
+			lst_add_back(&exec_node->argv, lst_new(token->link.content));
+		token = (t_token *)token->link.next;
 	}
+	return (new_exec_node(NODE_CMD, exec_node->redirs, exec_node->argv));
 }
 
 t_ast	*parse(t_head *tokens, char **operators)
 {
 	t_token	*current_token;
-	char	**operator;
 	int i;
 
+	i = 0;
 	if (has_syntax_error(tokens))
 		return (NULL);
-	operator = operators;
-	i = 0;
-	while (*operator && i < 3)
+	while (operators[i] && i < 3)
 	{
 		current_token = (t_token *)tokens->last;
 		while (current_token)
 		{
-			if (operator_is_equal(current_token, *operator))
+			if (operator_is_equal(current_token, operators[i]))
 				return (parse_operators(
 						current_token,
 						operators,
@@ -91,10 +129,9 @@ t_ast	*parse(t_head *tokens, char **operators)
 					));
 			current_token = (t_token *)current_token->link.prev;
 		}
-		operator++;
 		i++;
 	}
-	return (ast_new(tokens->first));
+	return (ast_new(build_ast_node((t_token *)tokens->first)));
 }
 
 // percorrer lista

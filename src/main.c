@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/10 22:56:48 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/14 20:20:23 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,15 @@ int	main(int argc, char **argv, char **envp)
 			gc_free_all();
 			continue ;
 		}
-		print_ast(ast, 0);
-		if (collect_heredocs(ast))
-		{
-			gc_free_all();
-			continue ;
-		}
+		//print_ast(ast, 0);
+		// if (collect_heredocs(ast))
+		// {
+		// 	gc_free_all();
+		// 	continue ;
+		// }
 		// print_ast(ast, 0);
 
-		shell.exit_status = execute(&shell, ast, FALSE);
+		//shell.exit_status = execute(&shell, ast, FALSE);
 		gc_free_all();
 	}
 	ft_split_free(operators);

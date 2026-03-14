@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 23:19:10 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/13 20:17:13 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/14 19:16:09 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ typedef enum s_exit_status
 	PERMISSION_DENIED = 126,
 	CMD_NOT_FOUND = 127,
 	CTRL_C = 130,
-	CTRL_QUIT = 131,
-	INVALID_EXIT = 255
+	CTRL_QUIT = 131
 }	t_exit_status;
 
 typedef struct s_var
@@ -42,9 +41,9 @@ typedef struct s_var
 
 typedef struct s_redir
 {
-	t_redir_type	type;
-	char			*target;
-} t_redir;
+	char	*type;
+	t_word	*target;
+}	t_redir;
 
 typedef struct s_exec_node
 {

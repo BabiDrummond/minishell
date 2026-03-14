@@ -6,13 +6,13 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 16:42:32 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/10 20:01:16 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/13 20:50:03 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-long long	exit_atoll(char *ascii)
+long long	exit_atoll(t_shell *shell, char *ascii)
 {
 	long long	num;
 	int			negative;
@@ -27,12 +27,13 @@ long long	exit_atoll(char *ascii)
 	while (*ascii)
 	{
 		if (!ft_isdigit(*ascii))
-			return (SYNTAX_ERROR);
-		if (num > LLONG_MAX / 10
-			|| (negative == 1 && num == LLONG_MAX / 10 && *ascii > '7')
-			|| (negative == -1 && num == LLONG_MAX / 10 && *ascii > '8'))
-			return (SYNTAX_ERROR);
-		num = (num * 10) + *ascii++ - '0';
+			shell->exit_status = SYNTAX_ERROR;
+		else if (num > LLONG_MAX / 10 || (num == LLONG_MAX / 10 && 
+			((negative == 1 && *ascii > '7') || (negative == -1 && *ascii > '8'))))
+			shell->exit_status = SYNTAX_ERROR;
+		else
+			num = (num * 10) + *ascii - '0';
+		ascii++;
 	}
 	return (num * negative);
 }
@@ -44,8 +45,8 @@ int	builtin_exit(t_shell *shell, char **argv)
 	printf("exit\n");
 	if (!argv[1])
 		exit(shell->exit_status);
-	exit_code = exit_atoll(argv[1]);
-	if (exit_code == SYNTAX_ERROR
+	exit_code = exit_atoll(shell, argv[1]);
+	if (shell->exit_status == SYNTAX_ERROR
 		&& printf("exit: %s: numeric argument required\n", argv[1]))
 		exit(SYNTAX_ERROR);
 	if (ft_split_size(argv) > 2 && printf("exit: too many arguments\n"))
