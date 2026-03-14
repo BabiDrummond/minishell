@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   create_token_result.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/01/09 20:43:19 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/01/29 16:20:06 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/01/30 18:35:03 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "minishell.h"
 
-# include "ast.h"
-# include "char.h"
-# include "list.h"
-# include "gc.h"
-# include "lst.h"
-# include "matrix.h"
-# include "mem.h"
-# include "str.h"
-# include "types.h"
+void	**create_token_result(void *str, void *token_value)
+{
+	void	**result;
 
-#endif
+	result = (void **)ft_calloc(1, sizeof(void *) * 2);
+	result[0] = str;
+	result[1] = token_value;
+	return (result);
+}

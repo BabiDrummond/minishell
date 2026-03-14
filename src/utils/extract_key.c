@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   extract_key.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/01/09 20:43:19 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/03/05 20:02:11 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/07 01:59:16 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "execution.h"
 
-# include "ast.h"
-# include "char.h"
-# include "list.h"
-# include "gc.h"
-# include "lst.h"
-# include "matrix.h"
-# include "mem.h"
-# include "str.h"
-# include "types.h"
+char	*extract_key(char *var_content)
+{
+	char	*equal;
 
-#endif
+	equal = ft_strchr(var_content, '=');
+	if (equal)
+		return (ft_substr(var_content, 0, equal - var_content));
+	return (ft_strdup(var_content));
+}

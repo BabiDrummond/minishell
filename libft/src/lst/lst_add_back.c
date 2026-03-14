@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   lst_add_back.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/01/09 20:43:19 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/07/19 16:12:58 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/19 16:52:04 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "lst.h"
 
-# include "ast.h"
-# include "char.h"
-# include "list.h"
-# include "gc.h"
-# include "lst.h"
-# include "matrix.h"
-# include "mem.h"
-# include "str.h"
-# include "types.h"
+void	lst_add_back(t_list **head, t_list *new)
+{
+	t_list	*last;
 
-#endif
+	if (!head || !new)
+		return ;
+	if (!*head)
+	{
+		*head = new;
+		return ;
+	}
+	last = lst_last(*head);
+	last->next = new;
+	new->prev = last;
+}

@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   lst_to_envp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/01/09 20:43:19 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/03/07 01:50:27 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/07 01:59:24 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "execution.h"
 
-# include "ast.h"
-# include "char.h"
-# include "list.h"
-# include "gc.h"
-# include "lst.h"
-# include "matrix.h"
-# include "mem.h"
-# include "str.h"
-# include "types.h"
+char	**lst_to_envp(t_list *vars)
+{
+	t_var	*var;
+	char	**envp;
+	char	**start;
 
-#endif
+	envp = ft_calloc(lst_size(vars) + 1, sizeof(char *));
+	start = envp;
+	while (vars)
+	{
+		var = (t_var *) vars->content;
+		if (var && var->exported)
+			*envp++ = ft_triple_join(var->key, "=", var->value);
+		vars = vars->next;
+	}
+	return (start);
+}

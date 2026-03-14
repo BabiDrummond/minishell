@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   var_update.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/01/09 20:43:19 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/21 00:40:59 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/07 01:59:44 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "execution.h"
 
-# include "ast.h"
-# include "char.h"
-# include "list.h"
-# include "gc.h"
-# include "lst.h"
-# include "matrix.h"
-# include "mem.h"
-# include "str.h"
-# include "types.h"
+void	var_update(t_list **vars, t_var *var)
+{
+	t_var	*curr_var;
+	t_list	*current;
 
-#endif
+	current = *vars;
+	while (current)
+	{
+		curr_var = (t_var *)current->content;
+		if (curr_var && curr_var->key && !ft_strcmp(curr_var->key, var->key))
+		{
+			var_clear(curr_var);
+			current->content = var;
+			return ;
+		}
+		current = current->next;
+	}
+}

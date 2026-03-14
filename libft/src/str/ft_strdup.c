@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/01/09 20:43:19 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/07/13 06:46:05 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/08 00:24:34 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "str.h"
 
-# include "ast.h"
-# include "char.h"
-# include "list.h"
-# include "gc.h"
-# include "lst.h"
-# include "matrix.h"
-# include "mem.h"
-# include "str.h"
-# include "types.h"
+char	*ft_strdup(const char *s)
+{
+	char	*new;
+	int		i;
 
-#endif
+	i = -1;
+	if (!s)
+		return (NULL);
+	new = ft_calloc(ft_strlen(s) + 1, sizeof(char));
+	if (!new)
+		return (NULL);
+	while (s[++i])
+		new[i] = s[i];
+	return (new);
+}

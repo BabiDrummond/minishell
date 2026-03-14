@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   envp_to_lst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/01/09 20:43:19 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/03/05 21:55:00 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/07 01:59:14 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "execution.h"
 
-# include "ast.h"
-# include "char.h"
-# include "list.h"
-# include "gc.h"
-# include "lst.h"
-# include "matrix.h"
-# include "mem.h"
-# include "str.h"
-# include "types.h"
+t_list	*envp_to_lst(char **envp)
+{
+	t_list	*vars;
+	t_var	*var;
+	char	*key;
+	char	*value;
+	int		i;
 
-#endif
+	i = 0;
+	vars = NULL;
+	while (envp[i])
+	{
+		key = extract_key(envp[i]);
+		value = extract_value(envp[i]);
+		var = var_create(key, value, TRUE);
+		lst_add_back(&vars, lst_new(var));
+		i++;
+	}
+	return (vars);
+}

@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_join_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/01/09 20:43:19 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/07 23:58:49 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/19 17:51:54 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "str.h"
 
-# include "ast.h"
-# include "char.h"
-# include "list.h"
-# include "gc.h"
-# include "lst.h"
-# include "matrix.h"
-# include "mem.h"
-# include "str.h"
-# include "types.h"
+char	*ft_join_split(char **split, char *separator)
+{
+	char	*str;
+	int		size;
+	int		i;
 
-#endif
+	i = 0;
+	str = ft_strdup("");
+	if (!split || !*split)
+		return (str);
+	size = ft_split_size(split);
+	while (i < size)
+	{
+		str = ft_strjoin_free(str, split[i], TRUE, FALSE);
+		if (i < size - 1)
+			str = ft_strjoin_free(str, separator, TRUE, FALSE);
+		i++;
+	}
+	return (str);
+}

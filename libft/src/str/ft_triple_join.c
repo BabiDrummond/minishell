@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_triple_join.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/01/09 20:43:19 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/19 19:25:33 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/02/21 19:16:20 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "str.h"
 
-# include "ast.h"
-# include "char.h"
-# include "list.h"
-# include "gc.h"
-# include "lst.h"
-# include "matrix.h"
-# include "mem.h"
-# include "str.h"
-# include "types.h"
+char	*ft_triple_join(char *s1, char *s2, char *s3)
+{
+	char	*new;
+	int		i;
+	int		j;
 
-#endif
+	i = 0;
+	j = 0;
+	new = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3) + 1,
+			sizeof(char));
+	if (!new)
+		return (NULL);
+	while (s1[j])
+		new[i++] = s1[j++];
+	j = 0;
+	while (s2[j])
+		new[i++] = s2[j++];
+	j = 0;
+	while (s3[j])
+		new[i++] = s3[j++];
+	return (new);
+}
