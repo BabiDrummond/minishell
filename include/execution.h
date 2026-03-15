@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 23:19:10 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/14 19:16:09 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/14 21:33:59 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int		builtin_unset(t_list **vars, char **argv);
 
 /* Execution */
 int		execute(t_shell *shell, t_ast *node, int is_child);
-int		execute_command(t_shell *shell, t_token *token, int is_child);
-int		execute_external_cmd(t_shell *shell, char **argv, int is_child);
-int		execute_builtin_cmd(t_shell *shell, char **argv);
+int		execute_cmd(t_shell *ctx, t_exec_node *node, int is_child);
+int		execute_external_cmd(t_shell *ctx, char **argv, int is_child);
+int		execute_builtin_cmd(t_shell *ctx, char **argv);
 char	**build_argv(t_token *token);
 char	*find_cmd_path(t_list *vars, char *cmd);
 

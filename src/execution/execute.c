@@ -6,26 +6,26 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/13 23:18:23 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/14 21:31:16 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-int	execute_and(t_shell *shell, t_ast *left, t_ast *right, int is_child)
+int	execute_and(t_shell *ctx, t_ast *left, t_ast *right, int is_child)
 {
-	shell->exit_status = execute(shell, left, is_child);
-	if (shell->exit_status == EXIT_SUCCESS)
-		shell->exit_status = execute(shell, right, is_child);
-	return (shell->exit_status);
+	ctx->exit_status = execute(ctx, left, is_child);
+	if (ctx->exit_status == EXIT_SUCCESS)
+		ctx->exit_status = execute(ctx, right, is_child);
+	return (ctx->exit_status);
 }
 
-int	execute_or(t_shell *shell, t_ast *left, t_ast *right, int is_child)
+int	execute_or(t_shell *ctx, t_ast *left, t_ast *right, int is_child)
 {
-	shell->exit_status = execute(shell, left, is_child);
-	if (shell->exit_status != EXIT_SUCCESS)
-		shell->exit_status = execute(shell, right, is_child);
-	return (shell->exit_status);
+	ctx->exit_status = execute(ctx, left, is_child);
+	if (ctx->exit_status != EXIT_SUCCESS)
+		ctx->exit_status = execute(ctx, right, is_child);
+	return (ctx->exit_status);
 }
 
 int	get_stdin_fd(t_token *token)
@@ -54,11 +54,11 @@ int	get_stdin_fd(t_token *token)
 	return (fd);
 }
 
-int	print_error_and_return(t_shell *shell, char *error_msg, int exit_status)
+int	print_error_and_return(t_shell *ctx, char *error_msg, int exit_status)
 {
 	perror(error_msg);
-	shell->exit_status = exit_status;
-	return (shell->exit_status);
+	ctx->exit_status = exit_status;
+	return (ctx->exit_status);
 }
 
 // int	execute_redir_in(t_shell *shell, t_ast *left, t_ast *right, int is_child)
@@ -99,38 +99,30 @@ int	print_error_and_return(t_shell *shell, char *error_msg, int exit_status)
 	
 // }
 
-int	execute_operator(t_shell *shell, t_ast *node, t_token *token, int is_child)
+int	execute_operator(t_shell *ctx, t_ast *ast, t_exec_node *node, int is_child)
 {
-	char	*operator;
-
-	operator = (char *)token->link.content;
-	// if (ft_strcmp(operator, "|") == 0)
-	// 	return (execute_pipe(shell, node->left, node->right, is_child));
-	if (ft_strcmp(operator, "&&") == 0)
-		shell->exit_status = execute_and(shell, node->left,
-				node->right, is_child);
-	else if (ft_strcmp(operator, "||") == 0)
-		shell->exit_status = execute_or(shell, node->left,
-				node->right, is_child);
-	// else if (ft_strcmp(operator, "<") == 0)
-	// 	return (execute_redir_in(shell, node->left, node->right, is_child));
-	// else if (ft_strcmp(operator, ">") == 0)
-	// 	return (execute_redir_out(shell, node->left, node->right, is_child));
-	// else if (ft_strcmp(operator, ">>") == 0)
-	// 	return (execute_redir_append(shell, node->left, node->right, is_child));
-	return (shell->exit_status);
+	if (node->type == NODE_AND)
+		ctx->exit_status = execute_and(ctx, ast->left,
+				ast->right, is_child);
+	else if (node->type == NODE_OR)
+		ctx->exit_status = execute_or(ctx, ast->left,
+				ast->right, is_child);
+	else if (node->type == NODE_PIPE)
+		ctx->exit_status = execute_pipe(ctx, ast->left,
+				ast->right, is_child);
+	return (ctx->exit_status);
 }
 
-int	execute(t_shell *shell, t_ast *node, int is_child)
+int	execute(t_shell *ctx, t_ast *ast, int is_child)
 {
-	t_token	*token;
+	t_exec_node	*node;
 
-	if (!node)
-		return (0);
-	token = (t_token *)node->value;
-	if (token && token->is_operator)
-		return (execute_operator(shell, node, token, is_child));
-	return (execute_command(shell, token, is_child));
+	if (!ast)
+		return (EXIT_SUCCESS);
+	node = (t_exec_node *) ast->value;
+	if (node->type == NODE_CMD)
+		return (execute_command(ctx, node, is_child));
+	return (execute_operator(ctx, ast, node, is_child));
 }
 
 // todo PIPE

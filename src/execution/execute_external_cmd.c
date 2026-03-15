@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 23:58:08 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/10 23:00:41 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/14 21:32:43 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,19 @@ static int	execute_in_parent(char *path, char **argv, char **envp)
 	return (WEXITSTATUS(status));
 }
 
-int	execute_external_cmd(t_shell *shell, char **argv, int is_child)
+int	execute_external_cmd(t_shell *ctx, char **argv, int is_child)
 {
 	char	**envp;
 	char	*cmd_path;
 	int		exit_status;
 
-	cmd_path = find_cmd_path(shell->vars, argv[0]);
+	cmd_path = find_cmd_path(ctx->vars, argv[0]);
 	if (!cmd_path)
 	{
 		printf("Command not found: %s\n", argv[0]);
 		return (CMD_NOT_FOUND);
 	}
-	envp = lst_to_envp(shell->vars);
+	envp = lst_to_envp(ctx->vars);
 	if (is_child)
 		execute_in_child(cmd_path, argv, envp);
 	else

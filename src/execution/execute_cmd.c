@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_cmd.c                                      :+:      :+:    :+:   */
+/*   execute_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 20:27:16 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/10 22:30:20 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/14 21:32:09 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ static int	is_builtin(char *cmd)
 	return (FALSE);
 }
 
-int	execute_command(t_shell *shell, t_token *token, int is_child)
+int	execute_cmd(t_shell *ctx, t_exec_node *node, int is_child)
 {
 	char	**argv;
 	int		exit_status;
 
-	argv = build_argv(token);
+	argv = build_argv(node->argv);
 	if (is_builtin(argv[0]))
-		exit_status = execute_builtin_cmd(shell, argv);
+		exit_status = execute_builtin_cmd(ctx, argv);
 	else
-		exit_status = execute_external_cmd(shell, argv, is_child);
+		exit_status = execute_external_cmd(ctx, argv, is_child);
 	ft_split_free(argv);
 	return (exit_status);
 }
