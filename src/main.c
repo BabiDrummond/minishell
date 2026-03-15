@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/14 20:48:37 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/14 21:47:06 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	signal_handler(int sig)
 	}
 }
 
-void	init_shell(t_shell *shell, char **envp)
+void	init_ctx(t_shell *shell, char **envp)
 {
 	shell->pid = getpid();
 	shell->vars = envp_to_lst(envp);
@@ -48,11 +48,11 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	char	**operators;
 	char	*prompt;
-	t_shell shell;
+	t_shell ctx;
 	t_head	*tokens;
 	t_ast	*ast;
 	
-	init_shell(&shell, envp);
+	init_ctx(&ctx, envp);
 	operators = initialize_operators();
 	prompt = NULL;
 	tokens = NULL;
@@ -84,11 +84,11 @@ int	main(int argc, char **argv, char **envp)
 		// }
 		// print_ast(ast, 0);
 
-		//shell.exit_status = execute(&shell, ast, FALSE);
+		ctx.exit_status = execute(&ctx, ast, FALSE);
 		gc_free_all();
 	}
 	ft_split_free(operators);
-	lst_clear(&shell.vars, var_clear);
+	lst_clear(&ctx.vars, var_clear);
 	gc_free_all();
-	return (shell.exit_status);
+	return (ctx.exit_status);
 }

@@ -6,32 +6,19 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 23:54:57 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 23:59:36 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/14 21:43:33 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-static int	count_tokens(t_token *token)
-{
-	int	total;
-
-	total = 0;
-	while (token)
-	{
-		total++;
-		token = (t_token *)token->link.next;
-	}
-	return (total);
-}
-
-static size_t	get_token_parts_length(t_token *token)
+static size_t	get_word_parts_length(t_word *word)
 {
 	size_t	total;
 	t_word	*part;
 
 	total = 0;
-	part = (t_word *)((t_head *)token->link.content)->first;
+	part = (t_word *)((t_head *)word->link.content)->first;
 	while (part)
 	{
 		total += ft_strlen((char *)part->link.content);
@@ -40,7 +27,7 @@ static size_t	get_token_parts_length(t_token *token)
 	return (total);
 }
 
-static char	*join_token_parts(t_token *token)
+static char	*join_word_parts(t_word *word)
 {
 	char	*result;
 	t_word	*part;
@@ -48,12 +35,12 @@ static char	*join_token_parts(t_token *token)
 	size_t	len;
 	size_t	i;
 
-	total_len = get_token_parts_length(token);
-	result = malloc(total_len + 1);
+	total_len = get_word_parts_length(word);
+	result = ft_calloc(1, total_len);
 	if (!result)
 		return (NULL);
 	i = 0;
-	part = (t_word *)((t_head *)token->link.content)->first;
+	part = (t_word *)((t_head *)word->link.content)->first;
 	while (part)
 	{
 		len = ft_strlen((char *)part->link.content);
@@ -61,27 +48,25 @@ static char	*join_token_parts(t_token *token)
 		i += len;
 		part = (t_word *)part->link.next;
 	}
-	result[i] = '\0';
 	return (result);
 }
 
-char	**build_argv(t_token *token)
+char	**build_argv(t_list *args)
 {
 	char	**argv;
 	int		count;
 	int		i;
 
-	count = count_tokens(token);
-	argv = malloc(sizeof(char *) * (count + 1));
+	count = lst_size(args);
+	argv = ft_calloc((count + 1), sizeof(char *));
 	if (!argv)
 		return (NULL);
 	i = 0;
-	while (token)
+	while (args)
 	{
-		argv[i] = join_token_parts(token);
+		argv[i] = join_word_parts(args->content);
 		i++;
-		token = (t_token *)token->link.next;
+		args = args->next;
 	}
-	argv[i] = NULL;
 	return (argv);
 }
