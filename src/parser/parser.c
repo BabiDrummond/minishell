@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:24:36 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/14 20:22:31 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/14 20:51:39 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ t_exec_node	*build_ast_node(t_token *token)
 			redir->target = (t_word *)((t_head *)((t_token *)
 							token->link.next)->link.content)->first;
 			lst_add_back(&exec_node->redirs, lst_new(redir));
+			token = (t_token *)token->link.next;
 		}
 		else
 			lst_add_back(&exec_node->argv, lst_new(token->link.content));
