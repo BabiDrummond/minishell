@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 18:07:03 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/14 21:12:02 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/14 21:56:59 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void print_argv(t_exec_node *exec_node)
 		part = (t_list *)((t_head *)arg->content)->first;
 		while(part)
 		{
-			printf("%s, ",(char*) part->content);
+			printf("%s, ", (char *) part->content);
 			part = part->next;
 		}
 		arg = arg->next;
@@ -94,7 +94,7 @@ static void print_redirs(t_exec_node *exec_node)
 		word = redir->target;
 		while(word)
 		{
-			printf("%s, ", (char*)word->link.content);
+			printf("%s, ", (char *) word->link.content);
 			word = (t_word *) word->link.next;
 		}
 		printf("], ");

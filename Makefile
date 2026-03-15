@@ -77,7 +77,7 @@ all: $(NAME)
 
 test: $(LIBFT) $(OBJS)
 	@echo "\033[0;33mCompiling tests...\033[0m"
-	@$(CC) $(CFLAGS) $(INCLUDE) $(TEST_SRCS) $(TEST_OBJS) $(LIBFT) $(READLINE) -o $(TEST_EXEC)
+	@$(CC) $(INCLUDE) $(TEST_SRCS) $(TEST_OBJS) $(LIBFT) $(READLINE) -o $(TEST_EXEC)
 	@echo "\033[0;32mRunning tests...\033[0m"
 	@./$(TEST_EXEC)
 
@@ -87,7 +87,7 @@ $(NAME): $(LIBFT) $(OBJS)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $(INCLUDE) $(READLINE) -c $< -o $@
+	@$(CC) $(INCLUDE) $(READLINE) -c $< -o $@
 	@echo "\033[95mCompiling \033[0m$(notdir $<)"
 
 $(LIBFT):
