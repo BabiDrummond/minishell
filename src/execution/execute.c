@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/14 21:45:06 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/14 22:19:32 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	execute_or(t_shell *ctx, t_ast *left, t_ast *right, int is_child)
 // 	return (ctx->exit_status);
 // }
 
-// int	execute_redir_in(t_shell *shell, t_ast *left, t_ast *right, int is_child)
+// int	execute_redir_in(t_shell *ctx, t_ast *left, t_ast *right, int is_child)
 // {
 // 	t_token *token;
 // 	int		fd;
@@ -80,23 +80,8 @@ int	execute_or(t_shell *ctx, t_ast *left, t_ast *right, int is_child)
 // 	return (shell->exit_status);
 // }
 
-// int	execute_redir_out(t_shell *shell, t_ast *left, t_ast *right, int is_child)
-// {
-// 	int		fd;
-
-// 	fd = get_stdin_fd(right->value);
-// 	if (fd == -1)
-// 		return (EXIT_FAILURE);
-// 	dup2(fd, STDIN_FILENO);
-// 	shell->exit_status = execute(shell, left, is_child);
-// 	close(fd);
-// 	dup2(shell->stdin_backup, STDIN_FILENO);
-// 	return (shell->exit_status);
-// }
-
 // int	execute_pipe(t_shell *shell, t_ast *left, t_ast *right, int is_child)
 // {
-	
 // }
 
 int	execute_operator(t_shell *ctx, t_ast *ast, t_exec_node *node, int is_child)

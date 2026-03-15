@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 18:07:03 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/14 21:56:59 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/14 22:18:06 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	print_ast_indent(int depth)
 	}
 }
 
-static char *get_operator_symbol(t_node_type node_type)
+static char	*get_operator_symbol(t_node_type node_type)
 {
 	if (node_type == NODE_AND)
 		return ("&&");
@@ -42,7 +42,8 @@ static void	print_ast_operator(t_ast *node, int depth)
 	print_ast_indent(depth + 1);
 	printf("\"type\": \"OPERATOR\",\n");
 	print_ast_indent(depth + 1);
-	printf("\"symbol\": %s,\n", get_operator_symbol(((t_exec_node *)node->value)->type));
+	printf("\"symbol\": %s,\n",
+		get_operator_symbol(((t_exec_node *)node->value)->type));
 	print_ast_indent(depth + 1);
 	printf("\"stdin_fd\": %d,\n", ((t_token *)node->value)->stdin_fd);
 	print_ast_indent(depth + 1);
@@ -57,18 +58,18 @@ static void	print_ast_operator(t_ast *node, int depth)
 	printf("}");
 }
 
-static void print_argv(t_exec_node *exec_node)
+static void	print_argv(t_exec_node *exec_node)
 {
 	t_list	*arg;
 	t_list	*part;
-	
+
 	if (!exec_node)
 		return ;
 	arg = exec_node->argv;
-	while(arg)
+	while (arg)
 	{
 		part = (t_list *)((t_head *)arg->content)->first;
-		while(part)
+		while (part)
 		{
 			printf("%s, ", (char *) part->content);
 			part = part->next;
@@ -77,22 +78,21 @@ static void print_argv(t_exec_node *exec_node)
 	}
 }
 
-static void print_redirs(t_exec_node *exec_node)
+static void	print_redirs(t_exec_node *exec_node)
 {
 	t_list	*node;
 	t_redir	*redir;
 	t_word	*word;
-	
+
 	if (!exec_node)
 		return ;
 	node = exec_node->redirs;
-	while(node)
+	while (node)
 	{
 		redir = (t_redir *) node->content;
 		printf("[%s, ", redir->type);
-		
 		word = redir->target;
-		while(word)
+		while (word)
 		{
 			printf("%s, ", (char *) word->link.content);
 			word = (t_word *) word->link.next;

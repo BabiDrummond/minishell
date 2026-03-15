@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:24:36 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/14 20:51:39 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/14 22:19:12 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	set_left(t_head *left, t_token *current_token, t_head *tokens)
 		current_token->link.prev->next = NULL;
 }
 
-t_node_type get_node_type(t_token *token)
+t_node_type	get_node_type(t_token *token)
 {
 	if (token->is_operator)
 	{
@@ -44,7 +44,7 @@ t_node_type get_node_type(t_token *token)
 
 t_exec_node	*new_exec_node(t_node_type type, t_list *redirs, t_list *argv)
 {
-	t_exec_node *exec_node;
+	t_exec_node	*exec_node;
 
 	exec_node = ft_calloc(1, sizeof(t_exec_node));
 	if (!exec_node)
@@ -85,8 +85,8 @@ static int	operator_is_equal(t_token *token, char *operator)
 
 t_exec_node	*build_ast_node(t_token *token)
 {
-	t_exec_node *exec_node;
-	t_redir *redir;
+	t_exec_node	*exec_node;
+	t_redir		*redir;
 
 	exec_node = ft_calloc(1, sizeof(t_exec_node));
 	while (token)
@@ -98,7 +98,7 @@ t_exec_node	*build_ast_node(t_token *token)
 			if (!token->link.next)
 				printf("minishell: parse error near %s\n", redir->type);
 			redir->target = (t_word *)((t_head *)((t_token *)
-							token->link.next)->link.content)->first;
+						token->link.next)->link.content)->first;
 			lst_add_back(&exec_node->redirs, lst_new(redir));
 			token = (t_token *)token->link.next;
 		}
@@ -112,7 +112,7 @@ t_exec_node	*build_ast_node(t_token *token)
 t_ast	*parse(t_head *tokens, char **operators)
 {
 	t_token	*current_token;
-	int i;
+	int		i;
 
 	i = 0;
 	if (has_syntax_error(tokens))
@@ -134,12 +134,3 @@ t_ast	*parse(t_head *tokens, char **operators)
 	}
 	return (ast_new(build_ast_node((t_token *)tokens->first)));
 }
-
-// percorrer lista
-// se encontrar operador (&& || pipe)
-// dividir lista em 2 (antes e depois do operador)
-// fazer isso recursivamente até não achar mais operadores
-// ao chegar na folha (não tiver mais operadores), analisar folha e coletar redirs
-// se redir, pegar redir e proximo argumento e colocar na lista de redirs
-// colocar o resto no argv
-// criar nó com TYPE, lista de redirs, e lista de argv

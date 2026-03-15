@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 16:42:32 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/14 21:34:50 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/14 22:20:41 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,27 @@
 long long	exit_atoll(t_shell *ctx, char *ascii)
 {
 	long long	num;
-	int			negative;
+	int			sign;
 
 	num = 0;
-	negative = 1;
+	sign = 1;
 	while (ft_isspace(*ascii))
 		ascii++;
 	if (*ascii == '-' || *ascii == '+')
 		if (*ascii++ == '-')
-			negative *= -1;
+			sign *= -1;
 	while (*ascii)
 	{
 		if (!ft_isdigit(*ascii))
 			ctx->exit_status = SYNTAX_ERROR;
-		else if (num > LLONG_MAX / 10 || (num == LLONG_MAX / 10 && 
-			((negative == 1 && *ascii > '7') || (negative == -1 && *ascii > '8'))))
+		else if (num > LLONG_MAX / 10 || (num == LLONG_MAX / 10 && ((sign == 1
+						&& *ascii > '7') || (sign == -1 && *ascii > '8'))))
 			ctx->exit_status = SYNTAX_ERROR;
 		else
 			num = (num * 10) + *ascii - '0';
 		ascii++;
 	}
-	return (num * negative);
+	return (num * sign);
 }
 
 int	builtin_exit(t_shell *ctx, char **argv)
@@ -55,12 +55,3 @@ int	builtin_exit(t_shell *ctx, char **argv)
 		exit_code = exit_code % 256;
 	exit(exit_code);
 }
-
-// exit vazio => exit com status do último comando executado
-// exit com letras => msg: numeric argument required, exit 255
-// exit com valor > 9223372036854775807 ou valor < -9223372036854775808 => 
-// msg: numeric argument required, exit 255
-// exit > 1 arg => msg: too many arguments, não dá exit, retorna 1
-// exit fora do range 0-255 => exit com valor % 256
-// exit com valor no range 0-255 => 
-// exit com valor passado transformado em numero (atol)

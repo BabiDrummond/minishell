@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 15:33:39 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/13 19:56:20 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/14 22:16:12 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	has_syntax_error(t_head *tokens)
 		if (current_token->is_operator
 			&& (current_token->link.next == NULL
 				|| (((t_token *)current_token->link.next)->is_operator
-				&& !operator_is_redir(current_token->link.next->content))))
+					&& !operator_is_redir(current_token->link.next->content))))
 			return (print_error());
 		current_token = (t_token *)current_token->link.next;
 	}
