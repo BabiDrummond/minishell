@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialize_operators.c                             :+:      :+:    :+:   */
+/*   init_ast_operators.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:36:06 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/30 19:03:21 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/17 20:09:06 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**initialize_operators(void)
+char	**init_ast_operators(void)
 {
-	char	**operators;
+	char	**ast_operators;
 
-	operators = ft_calloc(8, sizeof(char *));
-	operators[0] = ft_strdup("||");
-	operators[1] = ft_strdup("&&");
-	operators[2] = ft_strdup("|");
-	operators[3] = ft_strdup("<<");
-	operators[4] = ft_strdup(">>");
-	operators[5] = ft_strdup("<");
-	operators[6] = ft_strdup(">");
-	operators[7] = NULL;
-	return (operators);
+	ast_operators = ft_calloc(4, sizeof(char *));
+	ast_operators[0] = ft_strdup("||");
+	ast_operators[1] = ft_strdup("&&");
+	ast_operators[2] = ft_strdup("|");
+	ast_operators[3] = NULL;
+	return (ast_operators);
 }

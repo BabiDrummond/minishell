@@ -28,11 +28,11 @@ SRCS = main.c 							\
 	lexer/errors/syntax_error.c			\
 	lexer/utils/create_token_result.c	\
 	lexer/utils/get_char_type.c			\
-	lexer/utils/initialize_operators.c	\
 	lexer/utils/print_tokens.c			\
 	lexer/create_token.c				\
 	lexer/create_word.c					\
 	lexer/get_next_token.c				\
+	lexer/init_lexer_operators.c		\
 	lexer/tokenize.c					\
 	parser/has_syntax_error.c 			\
 	parser/parser.c 					\

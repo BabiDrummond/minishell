@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:40:23 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/13 20:15:48 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/17 20:12:30 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_token
 	int		stdin_fd;
 }	t_token;
 
-char		**initialize_operators(void);
+char		**init_lexer_operators(void);
 t_head		*tokenize(char *prompt, char **operators);
 t_char_type	get_char_type(const char *str, char **operators);
 t_word		*create_word(const char *value, int length, t_quote_state quote_state);

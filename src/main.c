@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/14 21:47:06 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/17 20:12:05 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	main(int argc, char **argv, char **envp)
 	t_ast	*ast;
 	
 	init_ctx(&ctx, envp);
-	operators = initialize_operators();
+	operators = init_lexer_operators();
 	prompt = NULL;
 	tokens = NULL;
 	while (1)
@@ -70,7 +70,8 @@ int	main(int argc, char **argv, char **envp)
 		tokens = tokenize(prompt, operators);
 		handle_exit(prompt);
 		print_tokens(tokens);
-		ast = parse(tokens, operators);
+		
+		ast = parse(tokens, ast_operators);
 		if (!ast)
 		{
 			gc_free_all();
