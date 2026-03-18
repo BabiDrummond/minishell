@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 23:19:10 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/14 21:44:07 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/17 20:46:03 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <errno.h>
+# include "minishell.h"
 # include "lexer.h"
 # include "parser.h"
 # include "../libft/include/libft.h"
@@ -38,19 +39,6 @@ typedef struct s_var
 	char	*value;
 	int		exported;
 }	t_var;
-
-typedef struct s_redir
-{
-	char	*type;
-	t_word	*target;
-}	t_redir;
-
-typedef struct s_exec_node
-{
-	t_node_type type;
-	t_list		*redirs;
-	t_list		*argv;
-}	t_exec_node;
 
 typedef struct s_shell
 {

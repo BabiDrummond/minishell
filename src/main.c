@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/17 20:12:05 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/17 20:16:25 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,16 @@ int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
-	char	**operators;
+	char	**lexer_operators;
+	char	**ast_operators;
 	char	*prompt;
 	t_shell ctx;
 	t_head	*tokens;
 	t_ast	*ast;
 	
 	init_ctx(&ctx, envp);
-	operators = init_lexer_operators();
+	lexer_operators = init_lexer_operators();
+	ast_operators = init_ast_operators();
 	prompt = NULL;
 	tokens = NULL;
 	while (1)
@@ -67,7 +69,7 @@ int	main(int argc, char **argv, char **envp)
 		if (strlen(prompt) == 0)
 			continue ;
 		gc_set_current_scope(GC_SCOPE_FUNCTION);
-		tokens = tokenize(prompt, operators);
+		tokens = tokenize(prompt, lexer_operators);
 		handle_exit(prompt);
 		print_tokens(tokens);
 		
@@ -88,7 +90,8 @@ int	main(int argc, char **argv, char **envp)
 		ctx.exit_status = execute(&ctx, ast, FALSE);
 		gc_free_all();
 	}
-	ft_split_free(operators);
+	ft_split_free(lexer_operators);
+	ft_split_free(ast_operators);
 	lst_clear(&ctx.vars, var_clear);
 	gc_free_all();
 	return (ctx.exit_status);

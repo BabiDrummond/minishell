@@ -34,7 +34,9 @@ SRCS = main.c 							\
 	lexer/get_next_token.c				\
 	lexer/init_lexer_operators.c		\
 	lexer/tokenize.c					\
+	parser/build_ast_node.c 			\
 	parser/has_syntax_error.c 			\
+	parser/init_ast_operators.c			\
 	parser/parser.c 					\
 	parser/print_ast.c 					\
 	utils/envp_to_lst.c					\
