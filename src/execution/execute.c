@@ -105,7 +105,7 @@ int	execute(t_shell *ctx, t_ast *ast, int is_child)
 	if (!ast)
 		return (EXIT_SUCCESS);
 	node = (t_exec_node *) ast->value;
-	if (node->type == NODE_CMD)
+	if (node->argv && node->type == NODE_CMD)
 		return (execute_cmd(ctx, node, is_child));
 	return (execute_operator(ctx, ast, node, is_child));
 }

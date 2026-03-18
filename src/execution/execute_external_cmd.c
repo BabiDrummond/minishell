@@ -45,7 +45,6 @@ int	execute_external_cmd(t_shell *ctx, char **argv, int is_child)
 {
 	char	**envp;
 	char	*cmd_path;
-	int		exit_status;
 
 	cmd_path = find_cmd_path(ctx->vars, argv[0]);
 	if (!cmd_path)
@@ -57,8 +56,8 @@ int	execute_external_cmd(t_shell *ctx, char **argv, int is_child)
 	if (is_child)
 		execute_in_child(cmd_path, argv, envp);
 	else
-		exit_status = execute_in_parent(cmd_path, argv, envp);
+		ctx->exit_status = execute_in_parent(cmd_path, argv, envp);
 	free(cmd_path);
 	ft_split_free(envp);
-	return (exit_status);
+	return (ctx->exit_status);
 }

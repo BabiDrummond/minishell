@@ -6,7 +6,12 @@ INCLUDE = -I./include/
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-READLINE = -lreadline
+# Readline for macOS (Homebrew)
+ifeq ($(shell uname -s),Darwin)
+	READLINE = -L$(shell brew --prefix readline)/lib -I$(shell brew --prefix readline)/include -lreadline
+else
+	READLINE = -lreadline
+endif
 
 SRCS_DIR = src/
 SRCS = main.c 							\

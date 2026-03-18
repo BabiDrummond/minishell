@@ -29,13 +29,12 @@ static int	is_builtin(char *cmd)
 int	execute_cmd(t_shell *ctx, t_exec_node *node, int is_child)
 {
 	char	**argv;
-	int		exit_status;
 
 	argv = build_argv(node->argv);
 	if (is_builtin(argv[0]))
-		exit_status = execute_builtin_cmd(ctx, argv);
+		ctx->exit_status = execute_builtin_cmd(ctx, argv);
 	else
-		exit_status = execute_external_cmd(ctx, argv, is_child);
+		ctx->exit_status = execute_external_cmd(ctx, argv, is_child);
 	ft_split_free(argv);
-	return (exit_status);
+	return (ctx->exit_status);
 }
