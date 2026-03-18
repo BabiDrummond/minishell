@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 23:42:57 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/09 16:45:09 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/17 21:15:01 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	is_n_option(char *arg)
 }
 
 int	builtin_echo(char **argv)
-{	
+{
 	char	*str;
 	int		i;
 

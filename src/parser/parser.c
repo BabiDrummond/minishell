@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:24:36 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/17 20:44:08 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/17 21:42:23 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,6 @@ static t_ast	*parse_operators(t_token *token,
 	return (node);
 }
 
-static int	operator_is_equal(t_token *token, char *operator)
-{
-	return (token->is_operator
-		&& ft_strcmp(((char*)token->link.content),
-			operator) == 0);
-}
-
 t_ast	*parse(t_head *tokens, char **operators)
 {
 	t_token	*current_token;
@@ -69,12 +62,9 @@ t_ast	*parse(t_head *tokens, char **operators)
 		current_token = (t_token *)tokens->last;
 		while (current_token)
 		{
-			if (operator_is_equal(current_token, operators[i]))
-				return (parse_operators(
-						current_token,
-						operators,
-						tokens
-					));
+			if (current_token->is_operator
+				&& ft_strcmp((current_token->link.content), operators[i]) == 0)
+				return (parse_operators(current_token, operators, tokens));
 			current_token = (t_token *)current_token->link.prev;
 		}
 		i++;
