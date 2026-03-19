@@ -64,39 +64,54 @@
 // 	return (shell->exit_status);
 // }
 
-// int	get_fd(char *redir_target, int redir_type, int *stdin_fd, int *stdout_fd)
-// {
-// 	if (stdin_fd != -1)
-// 		close(stdin_fd);
-// 	if (stdout_fd != -1)
-// 		close(stdout_fd);
-// 	if (redir_type == REDIR_IN)
-// 	{
-// 		stdin_fd = open(redir_target, O_RDONLY);
-// 		if (stdin_fd < 0)
-// 		{
-// 			perror(errno);
-// 			return (EXIT_FAILURE);
-// 		}
-// 	}
-// }
+int	get_fd(char *redir_target, int redir_type, int *stdin_fd, int *stdout_fd)
+{
+	if (stdin_fd != -1)
+		close(stdin_fd);
+	if (stdout_fd != -1)
+		close(stdout_fd);
+	if (redir_type == REDIR_IN)
+	{
+		stdin_fd = open(redir_target, O_RDONLY);
+		if (stdin_fd < 0)
+		{
+			perror(errno);
+			return (EXIT_FAILURE);
+		}
+	}
+}
 
-// int	process_redirects(t_list *redirs)
-// {
-// 	t_list	*node;
-// 	t_redir	*redir;
-// 	int		stdin_fd;
-// 	int		stdout_fd;
+int	open_fd(t_redir *redir)
+{
+	if (redir->type == REDIR_IN)
+		return (open(redir->target, O_RDONLY));
+	else if (redir->type == REDIR_OUT)
+		return (open(redir->target, O_WRONLY, O_CREAT, O_TRUNC));
+	else if (redir->type == REDIR_APPEND)
+		return (open(redir->target, O_WRONLY, O_CREAT, O_APPEND));
+	return (-1);
+}
 
-// 	stdin_fd = -1;
-// 	stdout_fd = -1;
-// 	while (node)
-// 	{
-// 		redir = (t_redir *) node->content;
-// 		get_fd(redir->target, redir->type, stdin_fd, stdout_fd);
-// 		node->next;
-// 	}
-// }
+int	process_redirects(t_list *redirs)
+{
+	t_list	*node;
+	int		fd;
+
+	fd = -1;
+	node = redirs;
+	while (node)
+	{
+		fd = open_fd(node->content);
+		if (fd == -1)
+			return (EXIT_FAILURE);
+		node->next;
+	}
+}
+
+// 1. iterar pela lista de redirs
+// 2. se redir_in: open readonly
+// 3. se redir_out: open wronly, creat, trunc
+// 4. se redir_append: open wronly, creat, append
 
 int	execute(t_shell *ctx, t_ast *ast, int is_child)
 {
