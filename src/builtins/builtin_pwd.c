@@ -6,11 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 23:44:24 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 23:35:20 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:20:28 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "execution.h"
 
 int	builtin_pwd(t_list *vars)
 {

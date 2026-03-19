@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_word.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:45:02 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/02/04 20:36:17 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:38:42 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "lexer.h"
 
 t_word	*create_word(const char *value, int length, t_quote_state quote_state)
 {

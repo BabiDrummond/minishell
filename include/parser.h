@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:14:43 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/17 21:23:53 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:15:57 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,6 @@ typedef enum e_node_type
 	NODE_PIPE,
 	NODE_CMD
 }	t_node_type;
-
-typedef enum e_redir_type
-{
-    REDIR_IN,
-    REDIR_OUT,
-    REDIR_APPEND,
-    HEREDOC
-}   t_redir_type;
 
 typedef struct s_redir
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_char_type.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:49:35 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/30 18:35:49 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:38:31 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "lexer.h"
 
 t_char_type	get_char_type(const char *str, char **operators)
 {

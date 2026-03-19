@@ -6,11 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:53:16 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/06 18:51:54 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:38:47 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "lexer.h"
 
 void	**get_not_quoted_word(char *str, char **operators)
 {

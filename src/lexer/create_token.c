@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:43:59 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/02/02 19:49:36 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:38:39 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "lexer.h"
 
 t_token	*create_token(void *content, int is_operator)
 {

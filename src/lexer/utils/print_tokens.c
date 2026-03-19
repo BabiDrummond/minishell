@@ -6,11 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:38:30 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/06 19:31:14 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:38:35 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "lexer.h"
 
 static char	*quote_state_to_str(t_quote_state quote_state)
 {

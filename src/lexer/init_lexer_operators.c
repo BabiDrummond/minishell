@@ -6,11 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:36:06 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/17 20:08:56 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:38:50 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "lexer.h"
 
 char	**init_lexer_operators(void)
 {

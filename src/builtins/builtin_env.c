@@ -6,11 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 23:44:45 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/09 16:45:09 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:17:20 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "execution.h"
 
 int	builtin_env(t_list *vars, char **argv)
 {

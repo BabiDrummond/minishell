@@ -6,11 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 15:33:39 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/17 21:37:56 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:39:13 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser.h"
 
 static int	print_error(void)
 {
