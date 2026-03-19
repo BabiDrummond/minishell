@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/17 21:39:00 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/19 18:51:24 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	handle_exit(char *prompt)
 {
-	if (strncmp(prompt, "exit", 5) == 0)
+	if (ft_strcmp(prompt, "exit") == 0)
 	{
 		gc_free_all();
 		free(prompt);

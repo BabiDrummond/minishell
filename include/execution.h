@@ -6,16 +6,13 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 23:19:10 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/19 17:16:45 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/19 18:49:16 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <errno.h>

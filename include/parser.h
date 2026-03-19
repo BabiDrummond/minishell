@@ -6,14 +6,13 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:14:43 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/19 17:15:57 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/19 18:46:29 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include <stdio.h>
 # include "lexer.h"
 # include "../libft/include/libft.h"
 

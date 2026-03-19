@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 21:16:37 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/07 00:51:19 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/19 18:52:21 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ static int	continue_with_child_process(int pipefd[2], const char *delimiter)
 			close(pipefd[1]);
 			exit(0);
 		}
-		if (strcmp(line, delimiter) == 0)
+		if (ft_strcmp(line, delimiter) == 0)
 		{
 			free(line);
 			close(pipefd[1]);
 			exit(0);
 		}
-		write(pipefd[1], line, strlen(line));
+		write(pipefd[1], line, ft_strlen(line));
 		write(pipefd[1], "\n", 1);
 	}
 }

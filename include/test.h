@@ -6,14 +6,13 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 20:18:17 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/05 22:05:27 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/19 18:56:43 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TEST_H
 # define TEST_H
 
-# include <stdio.h>
 # include "minishell.h"
 # include "../libft/include/libft.h"
 

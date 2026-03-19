@@ -6,15 +6,13 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:40:23 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/17 20:12:30 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/19 18:45:58 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-# include <stdio.h>
-# include <stdlib.h>
 # include "../libft/include/libft.h"
 
 typedef enum e_char_type
