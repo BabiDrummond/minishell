@@ -60,8 +60,9 @@ int		builtin_unset(t_list **vars, char **argv);
 /* Execution */
 int		execute(t_shell *shell, t_ast *node, int is_child);
 int		execute_cmd(t_shell *ctx, t_exec_node *node, int is_child);
-int		execute_external_cmd(t_shell *ctx, char **argv, int is_child);
 int		execute_builtin_cmd(t_shell *ctx, char **argv);
+int		execute_external_cmd(t_shell *ctx, char **argv, int is_child);
+int		execute_operator(t_shell *ctx, t_ast *ast, t_exec_node *node, int is_child);
 char	**build_argv(t_list *args);
 char	*find_cmd_path(t_list *vars, char *cmd);
 

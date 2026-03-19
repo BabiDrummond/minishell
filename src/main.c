@@ -33,13 +33,13 @@ void	signal_handler(int sig)
 	}
 }
 
-void	init_ctx(t_shell *shell, char **envp)
+void	init_ctx(t_shell *ctx, char **envp)
 {
-	shell->pid = getpid();
-	shell->vars = envp_to_lst(envp);
-	shell->exit_status = EXIT_SUCCESS;
-	shell->stdin_backup = dup(STDIN_FILENO);
-	shell->stdout_backup = dup(STDOUT_FILENO);
+	ctx->pid = getpid();
+	ctx->vars = envp_to_lst(envp);
+	ctx->exit_status = EXIT_SUCCESS;
+	ctx->stdin_backup = dup(STDIN_FILENO);
+	ctx->stdout_backup = dup(STDOUT_FILENO);
 }
 
 int	main(int argc, char **argv, char **envp)

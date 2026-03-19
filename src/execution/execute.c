@@ -12,22 +12,6 @@
 
 #include "execution.h"
 
-int	execute_and(t_shell *ctx, t_ast *left, t_ast *right, int is_child)
-{
-	ctx->exit_status = execute(ctx, left, is_child);
-	if (ctx->exit_status == EXIT_SUCCESS)
-		ctx->exit_status = execute(ctx, right, is_child);
-	return (ctx->exit_status);
-}
-
-int	execute_or(t_shell *ctx, t_ast *left, t_ast *right, int is_child)
-{
-	ctx->exit_status = execute(ctx, left, is_child);
-	if (ctx->exit_status != EXIT_SUCCESS)
-		ctx->exit_status = execute(ctx, right, is_child);
-	return (ctx->exit_status);
-}
-
 // int	get_stdin_fd(t_token *token)
 // {
 // 	char	**argv;
@@ -80,23 +64,39 @@ int	execute_or(t_shell *ctx, t_ast *left, t_ast *right, int is_child)
 // 	return (shell->exit_status);
 // }
 
-// int	execute_pipe(t_shell *shell, t_ast *left, t_ast *right, int is_child)
+// int	get_fd(char *redir_target, int redir_type, int *stdin_fd, int *stdout_fd)
 // {
+// 	if (stdin_fd != -1)
+// 		close(stdin_fd);
+// 	if (stdout_fd != -1)
+// 		close(stdout_fd);
+// 	if (redir_type == REDIR_IN)
+// 	{
+// 		stdin_fd = open(redir_target, O_RDONLY);
+// 		if (stdin_fd < 0)
+// 		{
+// 			perror(errno);
+// 			return (EXIT_FAILURE);
+// 		}
+// 	}
 // }
 
-int	execute_operator(t_shell *ctx, t_ast *ast, t_exec_node *node, int is_child)
-{
-	if (node->type == NODE_AND)
-		ctx->exit_status = execute_and(ctx, ast->left,
-				ast->right, is_child);
-	else if (node->type == NODE_OR)
-		ctx->exit_status = execute_or(ctx, ast->left,
-				ast->right, is_child);
-	// else if (node->type == NODE_PIPE)
-	// 	ctx->exit_status = execute_pipe(ctx, ast->left,
-	// 			ast->right, is_child);
-	return (ctx->exit_status);
-}
+// int	process_redirects(t_list *redirs)
+// {
+// 	t_list	*node;
+// 	t_redir	*redir;
+// 	int		stdin_fd;
+// 	int		stdout_fd;
+
+// 	stdin_fd = -1;
+// 	stdout_fd = -1;
+// 	while (node)
+// 	{
+// 		redir = (t_redir *) node->content;
+// 		get_fd(redir->target, redir->type, stdin_fd, stdout_fd);
+// 		node->next;
+// 	}
+// }
 
 int	execute(t_shell *ctx, t_ast *ast, int is_child)
 {
@@ -109,14 +109,3 @@ int	execute(t_shell *ctx, t_ast *ast, int is_child)
 		return (execute_cmd(ctx, node, is_child));
 	return (execute_operator(ctx, ast, node, is_child));
 }
-
-// todo PIPE
-// add in_child to execute argv
-// in_child default is false
-// execute_pipe
-// fork
-// pass in_child as true
-// execute_external_cmd receives in_child
-// execute_external_cmd checks in_child
-// if true -> execve directly (calls execute_in_parent)
-// if false -> fork + execve (calls execute_in_child)
