@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 23:54:57 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/14 22:04:55 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:44:11 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*join_word_parts(t_list *word)
 	size_t	i;
 
 	total_len = get_word_parts_length(word);
-	result = ft_calloc(1, total_len);
+	result = ft_calloc(total_len + 1, sizeof(char));
 	if (!result)
 		return (NULL);
 	i = 0;
@@ -48,7 +48,6 @@ static char	*join_word_parts(t_list *word)
 		i += len;
 		part = (t_word *) part->link.next;
 	}
-	result[i] = '\0';
 	return (result);
 }
 
@@ -59,7 +58,7 @@ char	**build_argv(t_list *args)
 	int		i;
 
 	count = lst_size(args);
-	argv = ft_calloc((count + 1), sizeof(char *));
+	argv = ft_calloc(count + 1, sizeof(char *));
 	if (!argv)
 		return (NULL);
 	i = 0;
@@ -69,6 +68,5 @@ char	**build_argv(t_list *args)
 		i++;
 		args = args->next;
 	}
-	argv[i] = NULL;
 	return (argv);
 }
