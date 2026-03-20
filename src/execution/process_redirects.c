@@ -6,25 +6,25 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 22:33:22 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/19 22:58:40 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/19 23:04:15 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-static char	*build_target(t_word *words)
+static char	*build_string(t_word *words)
 {
 	t_word	*word;
-	char	*target;
+	char	*string;
 
 	word = words;
-	target = ft_strdup("");
+	string = ft_strdup("");
 	while (word)
 	{
-		target = ft_strjoin_free(target, word->link.content, TRUE, FALSE);
+		string = ft_strjoin_free(string, word->link.content, TRUE, FALSE);
 		word = (t_word *) word->link.next;
 	}
-	return (target);
+	return (string);
 }
 
 static int	open_fd(t_redir *redir)
@@ -33,7 +33,7 @@ static int	open_fd(t_redir *redir)
 	int		fd;
 
 	fd = -1;
-	target = build_target(redir->target);
+	target = build_string(redir->target);
 	if (ft_strcmp(redir->type, "<") == 0)
 		fd = open(target, O_RDONLY);
 	else if (ft_strcmp(redir->type, ">") == 0)
