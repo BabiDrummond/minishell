@@ -29,6 +29,7 @@ SRCS = main.c 							\
 	execution/execute_operator.c		\
 	execution/execute.c					\
 	execution/find_cmd_path.c			\
+	execution/process_redirects.c		\
 	heredoc/collect_heredocs.c 			\
 	heredoc/should_collect_heredoc.c	\
 	lexer/errors/syntax_error.c			\

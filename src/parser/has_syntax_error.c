@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 15:33:39 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/19 17:39:13 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/19 22:23:38 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	has_syntax_error(t_head *tokens)
 	while (current_token)
 	{
 		if (is_ast_operator(current_token) && (current_token->link.next == NULL
-			 || is_ast_operator(((t_token *)current_token->link.next))))
+				|| is_ast_operator(((t_token *)current_token->link.next))))
 			return (print_error());
 		current_token = (t_token *)current_token->link.next;
 	}
