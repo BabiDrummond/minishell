@@ -6,7 +6,7 @@
 /*   By: barbara.drummond <barbara.drummond@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:55:06 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/21 18:31:54 by barbara.dru      ###   ########.fr       */
+/*   Updated: 2026/03/21 18:36:46 by barbara.dru      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,22 @@ char	*get_key(char *word)
 	return (key);
 }
 
+int	expand_variable(char **new_str, char *str, int i, t_list *vars)
+{
+	char	*key;
+
+	key = get_key(str + i + 1);
+	new_str = ft_strjoin_free(new_str, var_get(vars, key), TRUE, FALSE);
+	i += ft_strlen(key) + 1;
+	free(key);
+	return (i);
+}
+
 t_word	*expand_string(t_word *words, t_list *vars)
 {
 	t_word	*word;
 	char	*new_str;
 	char	*str;
-	char	*key;
 	int		i;
 
 	word = words;
@@ -45,12 +55,7 @@ t_word	*expand_string(t_word *words, t_list *vars)
 		while (str[i])
 		{
 			if (str[i] == '$' && word->quote_state != QUOTE_SINGLE)
-			{
-				key = get_key(str + i + 1);
-				new_str = ft_strjoin_free(new_str, var_get(vars, key), TRUE, FALSE);
-				i += ft_strlen(key) + 1;
-				free(key);
-			}
+				i+= expand_variable();
 			else
 				new_str = ft_strjoin_free(new_str, str[i++], TRUE, FALSE);
 		}
