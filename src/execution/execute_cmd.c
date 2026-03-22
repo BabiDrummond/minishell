@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 20:27:16 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/21 21:28:49 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/21 23:27:12 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,15 @@ static int	is_builtin(char *cmd)
 
 int	execute_cmd(t_shell *ctx, t_exec_node *node, int is_child)
 {
+	char	**old_argv;
+	char	*join_argv;
 	char	**argv;
 
 	node->argv = expand(ctx, node->argv);
-	argv = build_argv(node->argv);
+	//node->argv = mark_protected_spaces(node->argv);
+	old_argv = build_argv(node->argv);
+	join_argv = ft_join_split(old_argv, " ");
+	argv = split_unquoted(join_argv);
 	if (process_redirects(ctx, node->redirs, is_child) == EXIT_FAILURE)
 	{
 		restore_fds(ctx, is_child);

@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:55:06 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/21 21:54:29 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/21 23:38:54 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,39 +55,66 @@ int	expand_variable(t_shell *ctx, char **new_str, char *str)
 	return (key_len);
 }
 
-char    *append_char(char **new_str, char c)
+char    *to_str(char c)
 {
 	char    *new;
 	
 	new = ft_calloc(1 + 1, sizeof(char));
 	new[0] = c;
-	new[1] = '\0';
-	return (ft_strjoin_free(*new_str, new, TRUE, TRUE));
+	return (new);
 }
 
-t_list	*expand_string(t_shell *ctx, t_list *words)
+t_list	*expand_string(t_shell *ctx, t_list *words, int non_expandable)
 {
 	t_word	*word;
-	char	*new_str;
-	char	*str;
+	char	*new_s;
+	char	*s;
 	int		i;
 
 	word = (t_word *)words;
 	while (word)
 	{
-		str = (char *) word->link.content;
-		if (str)
+		s = (char *) word->link.content;
+		if (s)
 		{
-			new_str = ft_strdup("");
+			new_s = ft_strdup("");
 			i = 0;
-			while (str[i])
-				if (str[i] == '$' && is_allowed_char(str[i + 1])
-					&& word->quote_state != QUOTE_SINGLE)
-					i+= expand_variable(ctx, &new_str, str + i);
+			while (s[i])
+				if (s[i] == '$' && is_allowed_char(s[i + 1])
+					&& word->quote_state != non_expandable)
+					i+= expand_variable(ctx, &new_s, s + i);
 				else
-					new_str = append_char(&new_str, str[i++]);
+					new_s = ft_strjoin_free(new_s, to_str(s[i++]), TRUE, TRUE);
 			free(word->link.content);
-			word->link.content = new_str;
+			word->link.content = new_s;
+		}
+		word = (t_word *) word->link.next;
+	}
+	return (words);
+}
+
+t_list	*add_quote_guard(t_list *words)
+{
+	t_word	*word;
+	char	*new_s;
+	char	*s;
+	int		len;
+
+	word = (t_word *) words;
+	while (word)
+	{
+		s = (char *) word->link.content;
+		if (word->quote_state == QUOTE_DOUBLE 
+			|| word->quote_state == QUOTE_SINGLE)
+		{
+			len = ft_strlen(s);
+			new_s = ft_calloc(len + 3, sizeof(char));
+			new_s[0] = QUOTE_GUARD;
+			new_s[len + 1] = QUOTE_GUARD;
+			ft_memcpy(new_s + 1, s, len);
+			printf("new_s: %s\n", new_s);
+			free(word->link.content);
+			word->link.content = new_s;
 		}
 		word = (t_word *) word->link.next;
 	}
@@ -101,8 +128,10 @@ t_list  *expand(t_shell *ctx, t_list *args)
 	arg = args;
 	while (arg)
 	{
-		((t_head *)arg->content)->first = (t_node *)
-		expand_string(ctx, (t_list *)((t_head *)arg->content)->first);
+		((t_head *)arg->content)->first = (t_node *) expand_string(ctx,
+			(t_list *)((t_head *)arg->content)->first, QUOTE_SINGLE); // this is going to leak. needs to free old list before assigning new one.
+		((t_head *)arg->content)->first = (t_node *) 
+			add_quote_guard((t_list *)((t_head *)arg->content)->first);
 		arg = arg->next;
 	}
 	return (args);
