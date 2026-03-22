@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:55:06 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/21 23:38:54 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/22 00:09:49 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,13 +112,66 @@ t_list	*add_quote_guard(t_list *words)
 			new_s[0] = QUOTE_GUARD;
 			new_s[len + 1] = QUOTE_GUARD;
 			ft_memcpy(new_s + 1, s, len);
-			printf("new_s: %s\n", new_s);
 			free(word->link.content);
 			word->link.content = new_s;
 		}
 		word = (t_word *) word->link.next;
 	}
 	return (words);
+}
+
+int	count_chr(char *str, char c)
+{
+	int	count;
+	int	i;
+	
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+char	*ft_strtrim(char *str, char c)
+{
+	char	*new_str;
+	int		new_len;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	//printf("strlen: %ld, count_chr: %d\n", ft_strlen(str), count_chr(str, c));
+	new_len = ft_strlen(str) - count_chr(str, c);
+	//printf("newlen %d\n", new_len);
+	new_str = ft_calloc(new_len + 1, sizeof(char));
+	while (str[i])
+	{
+		if (str[i] == c)
+			i++;
+		else
+			new_str[j++] = str[i++];
+	}
+	//eprintf("newstr %s\n", new_str);
+	return (new_str);
+}
+
+char	**remove_quote_guard(char **argv)
+{
+	char	*new_s;
+	int		i;
+	
+	i = 0;
+	while (argv[i])
+	{
+		argv[i]	= ft_strtrim(argv[i], QUOTE_GUARD);
+		i++;
+	}
+	return (argv);
 }
 
 t_list  *expand(t_shell *ctx, t_list *args)
