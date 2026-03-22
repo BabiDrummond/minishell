@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: barbara.drummond <barbara.drummond@stud    +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:55:06 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/21 18:36:46 by barbara.dru      ###   ########.fr       */
+/*   Updated: 2026/03/21 21:54:29 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
+#include "execution.h"
+
+int	is_allowed_char(char c)
+{
+	return (ft_isalnum(c) || c == '_' || c == '?');
+}
 
 char	*get_key(char *word)
 {
@@ -20,7 +26,9 @@ char	*get_key(char *word)
 	i = 0;
 	while (word[i])
 	{
-		if (!ft_isalnum(word[i]) && word[i] != '_')
+		if (!is_allowed_char(word[i]))
+			break ;
+		if (word[i++] == '?')
 			break ;
 		i++;
 	}
@@ -28,47 +36,76 @@ char	*get_key(char *word)
 	return (key);
 }
 
-int	expand_variable(char **new_str, char *str, int i, t_list *vars)
+int	expand_variable(t_shell *ctx, char **new_str, char *str)
 {
 	char	*key;
+	char	*value;
+	int     key_len;
 
-	key = get_key(str + i + 1);
-	new_str = ft_strjoin_free(new_str, var_get(vars, key), TRUE, FALSE);
-	i += ft_strlen(key) + 1;
+	key_len = 0;
+	key = get_key(str + 1);
+	if (ft_strcmp(key, "?") == 0)
+		value = ft_itoa(ctx->exit_status);
+	else
+		value = var_get_value(ctx->vars, key);
+	if (value)
+		*new_str = ft_strjoin_free(*new_str, value, TRUE, FALSE);
+	key_len = ft_strlen(key) + 1;
 	free(key);
-	return (i);
+	return (key_len);
 }
 
-t_word	*expand_string(t_word *words, t_list *vars)
+char    *append_char(char **new_str, char c)
+{
+	char    *new;
+	
+	new = ft_calloc(1 + 1, sizeof(char));
+	new[0] = c;
+	new[1] = '\0';
+	return (ft_strjoin_free(*new_str, new, TRUE, TRUE));
+}
+
+t_list	*expand_string(t_shell *ctx, t_list *words)
 {
 	t_word	*word;
 	char	*new_str;
 	char	*str;
 	int		i;
 
-	word = words;
+	word = (t_word *)words;
 	while (word)
 	{
 		str = (char *) word->link.content;
-		new_str = ft_strdup("");
-		i = 0;
-		while (str[i])
+		if (str)
 		{
-			if (str[i] == '$' && word->quote_state != QUOTE_SINGLE)
-				i+= expand_variable();
-			else
-				new_str = ft_strjoin_free(new_str, str[i++], TRUE, FALSE);
+			new_str = ft_strdup("");
+			i = 0;
+			while (str[i])
+				if (str[i] == '$' && is_allowed_char(str[i + 1])
+					&& word->quote_state != QUOTE_SINGLE)
+					i+= expand_variable(ctx, &new_str, str + i);
+				else
+					new_str = append_char(&new_str, str[i++]);
+			free(word->link.content);
+			word->link.content = new_str;
 		}
-		free(word->link.content);
-		word->link.content = new_str;
-		word = word->link.next;
+		word = (t_word *) word->link.next;
 	}
-	return (EXIT_SUCCESS);
+	return (words);
 }
 
-int expand()
+t_list  *expand(t_shell *ctx, t_list *args)
 {
-	
+	t_list *arg;
+
+	arg = args;
+	while (arg)
+	{
+		((t_head *)arg->content)->first = (t_node *)
+		expand_string(ctx, (t_list *)((t_head *)arg->content)->first);
+		arg = arg->next;
+	}
+	return (args);
 }
 
 // Expansão:

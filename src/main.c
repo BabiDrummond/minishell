@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/19 21:45:47 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/21 21:27:59 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	main(int argc, char **argv, char **envp)
 		//prompt = ft_strdup("echo oiiii");
 		if (!prompt)
 			continue ;
+		add_history(prompt);
 		gc_add(prompt, free);
 		if (strlen(prompt) == 0)
 			continue ;

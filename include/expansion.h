@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: barbara.drummond <barbara.drummond@stud    +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:55:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/21 17:42:29 by barbara.dru      ###   ########.fr       */
+/*   Updated: 2026/03/21 21:30:09 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 # define QUOTE_GUARD '\x01'
 
-char	**split_unquoted(char *s, char c);
+typedef struct s_shell t_shell;
+
+t_list  *expand(t_shell *ctx, t_list *args);
+//char	**split_unquoted(char *s, char c);
 
 #endif

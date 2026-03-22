@@ -6,11 +6,12 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 20:27:16 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/19 22:49:30 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/21 21:28:49 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
+#include "expansion.h"
 
 static int	is_builtin(char *cmd)
 {
@@ -30,6 +31,7 @@ int	execute_cmd(t_shell *ctx, t_exec_node *node, int is_child)
 {
 	char	**argv;
 
+	node->argv = expand(ctx, node->argv);
 	argv = build_argv(node->argv);
 	if (process_redirects(ctx, node->redirs, is_child) == EXIT_FAILURE)
 	{
