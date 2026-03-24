@@ -6,26 +6,15 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 20:27:16 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/23 23:51:37 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/24 01:07:37 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 #include "expansion.h"
 
-static int	is_builtin(char *cmd)
-{
-	if (ft_strcmp(cmd, "cd") == 0
-		|| ft_strcmp(cmd, "echo") == 0
-		|| ft_strcmp(cmd, "env") == 0
-		|| ft_strcmp(cmd, "exit") == 0
-		|| ft_strcmp(cmd, "export") == 0
-		|| ft_strcmp(cmd, "pwd") == 0
-		|| ft_strcmp(cmd, "unset") == 0
-	)
-		return (TRUE);
-	return (FALSE);
-}
+int			execute_cmd(t_shell *ctx, t_exec_node *node, int is_child);
+static int	is_builtin(char *cmd);
 
 int	execute_cmd(t_shell *ctx, t_exec_node *node, int is_child)
 {
@@ -51,6 +40,20 @@ int	execute_cmd(t_shell *ctx, t_exec_node *node, int is_child)
 			ctx->exit_status = execute_external_cmd(ctx, argv, is_child);
 	}
 	restore_fds(ctx, is_child);
-	//ft_split_free(argv);
+	//ft_split_free(argv); // this is double freeing for some reason
 	return (ctx->exit_status);
+}
+
+static int	is_builtin(char *cmd)
+{
+	if (ft_strcmp(cmd, "cd") == 0
+		|| ft_strcmp(cmd, "echo") == 0
+		|| ft_strcmp(cmd, "env") == 0
+		|| ft_strcmp(cmd, "exit") == 0
+		|| ft_strcmp(cmd, "export") == 0
+		|| ft_strcmp(cmd, "pwd") == 0
+		|| ft_strcmp(cmd, "unset") == 0
+	)
+		return (TRUE);
+	return (FALSE);
 }

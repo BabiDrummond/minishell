@@ -6,11 +6,60 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/20 20:24:23 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/24 01:18:16 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
+
+int			execute_operator(
+				t_shell *ctx, t_ast *ast, t_exec_node *node, int is_child);
+static int	execute_and(t_shell *ctx, t_ast *ast, int is_child);
+static int	execute_or(t_shell *ctx, t_ast *ast, int is_child);
+static int	execute_pipe(t_shell *ctx, t_ast *ast, int is_child);
+static int	pipe_children(t_shell *ctx, t_ast *ast, int pipefd[2], int pid[2]);
+
+int	execute_operator(t_shell *ctx, t_ast *ast, t_exec_node *node, int is_child)
+{
+	if (node->type == NODE_AND)
+		ctx->exit_status = execute_and(ctx, ast, is_child);
+	else if (node->type == NODE_OR)
+		ctx->exit_status = execute_or(ctx, ast, is_child);
+	else if (node->type == NODE_PIPE)
+		ctx->exit_status = execute_pipe(ctx, ast, is_child);
+	return (ctx->exit_status);
+}
+
+static int	execute_and(t_shell *ctx, t_ast *ast, int is_child)
+{
+	ctx->exit_status = execute(ctx, ast->left, is_child);
+	if (ctx->exit_status == EXIT_SUCCESS)
+		ctx->exit_status = execute(ctx, ast->right, is_child);
+	return (ctx->exit_status);
+}
+
+static int	execute_or(t_shell *ctx, t_ast *ast, int is_child)
+{
+	ctx->exit_status = execute(ctx, ast->left, is_child);
+	if (ctx->exit_status != EXIT_SUCCESS)
+		ctx->exit_status = execute(ctx, ast->right, is_child);
+	return (ctx->exit_status);
+}
+
+static int	execute_pipe(t_shell *ctx, t_ast *ast, int is_child)
+{
+	int	pipefd[2];
+	int	pid[2];
+	int	status;
+
+	pipe(pipefd);
+	pipe_children(ctx, ast, pipefd, pid);
+	close(pipefd[0]);
+	close(pipefd[1]);
+	waitpid(pid[0], NULL, 0);
+	waitpid(pid[1], &status, 0);
+	return (WEXITSTATUS(status));
+}
 
 static int	pipe_children(t_shell *ctx, t_ast *ast, int pipefd[2], int pid[2])
 {
@@ -37,46 +86,4 @@ static int	pipe_children(t_shell *ctx, t_ast *ast, int pipefd[2], int pid[2])
 		exit(ctx->exit_status);
 	}
 	return (EXIT_SUCCESS);
-}
-
-static int	execute_pipe(t_shell *ctx, t_ast *ast, int is_child)
-{
-	int	pipefd[2];
-	int	pid[2];
-	int	status;
-
-	pipe(pipefd);
-	pipe_children(ctx, ast, pipefd, pid);
-	close(pipefd[0]);
-	close(pipefd[1]);
-	waitpid(pid[0], NULL, 0);
-	waitpid(pid[1], &status, 0);
-	return (WEXITSTATUS(status));
-}
-
-static int	execute_and(t_shell *ctx, t_ast *ast, int is_child)
-{
-	ctx->exit_status = execute(ctx, ast->left, is_child);
-	if (ctx->exit_status == EXIT_SUCCESS)
-		ctx->exit_status = execute(ctx, ast->right, is_child);
-	return (ctx->exit_status);
-}
-
-static int	execute_or(t_shell *ctx, t_ast *ast, int is_child)
-{
-	ctx->exit_status = execute(ctx, ast->left, is_child);
-	if (ctx->exit_status != EXIT_SUCCESS)
-		ctx->exit_status = execute(ctx, ast->right, is_child);
-	return (ctx->exit_status);
-}
-
-int	execute_operator(t_shell *ctx, t_ast *ast, t_exec_node *node, int is_child)
-{
-	if (node->type == NODE_AND)
-		ctx->exit_status = execute_and(ctx, ast, is_child);
-	else if (node->type == NODE_OR)
-		ctx->exit_status = execute_or(ctx, ast, is_child);
-	else if (node->type == NODE_PIPE)
-		ctx->exit_status = execute_pipe(ctx, ast, is_child);
-	return (ctx->exit_status);
 }

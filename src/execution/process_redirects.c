@@ -6,25 +6,44 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 22:33:22 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/20 19:11:10 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/24 01:10:22 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-static char	*build_string(t_word *words)
-{
-	t_word	*word;
-	char	*string;
+int			process_redirects(t_shell *ctx, t_list *redirs, int is_child);
+static int	open_fd(t_redir *redir);
+static int	redir_fd(t_redir *redir, int fd);
+void		restore_fds(t_shell *ctx, int is_child);
+static char	*build_string(t_word *words);
 
-	word = words;
-	string = ft_strdup("");
-	while (word)
+int	process_redirects(t_shell *ctx, t_list *redirs, int is_child)
+{
+	t_list	*redir;
+	int		fd;
+
+	fd = -1;
+	redir = redirs;
+	if (!is_child && redirs)
 	{
-		string = ft_strjoin_free(string, word->link.content, TRUE, FALSE);
-		word = (t_word *) word->link.next;
+		ctx->stdin_backup = dup(STDIN_FILENO);
+		ctx->stdout_backup = dup(STDOUT_FILENO);
 	}
-	return (string);
+	while (redir)
+	{
+		fd = open_fd(redir->content);
+		if (fd == -1)
+			return (EXIT_FAILURE);
+		if (redir_fd(redir->content, fd) == -1)
+		{
+			close(fd);
+			return (EXIT_FAILURE);
+		}
+		close(fd);
+		redir = redir->next;
+	}
+	return (EXIT_SUCCESS);
 }
 
 static int	open_fd(t_redir *redir)
@@ -73,35 +92,17 @@ void	restore_fds(t_shell *ctx, int is_child)
 	}
 }
 
-int	process_redirects(t_shell *ctx, t_list *redirs, int is_child)
+static char	*build_string(t_word *words)
 {
-	t_list	*redir;
-	int		fd;
+	t_word	*word;
+	char	*string;
 
-	fd = -1;
-	redir = redirs;
-	if (!is_child && redirs)
+	word = words;
+	string = ft_strdup("");
+	while (word)
 	{
-		ctx->stdin_backup = dup(STDIN_FILENO);
-		ctx->stdout_backup = dup(STDOUT_FILENO);
+		string = ft_strjoin_free(string, word->link.content, TRUE, FALSE);
+		word = (t_word *) word->link.next;
 	}
-	while (redir)
-	{
-		fd = open_fd(redir->content);
-		if (fd == -1)
-			return (EXIT_FAILURE);
-		if (redir_fd(redir->content, fd) == -1)
-		{
-			close(fd);
-			return (EXIT_FAILURE);
-		}
-		close(fd);
-		redir = redir->next;
-	}
-	return (EXIT_SUCCESS);
+	return (string);
 }
-
-// 1. iterar pela lista de redirs
-// 2. se redir_in: open readonly
-// 3. se redir_out: open wronly, creat, trunc
-// 4. se redir_append: open wronly, creat, append

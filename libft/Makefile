@@ -32,6 +32,7 @@ SRCS = ast/ast_new.c		\
 	mem/ft_bzero.c			\
 	mem/ft_calloc.c			\
 	mem/ft_memcpy.c			\
+	str/append_char.c		\
 	str/ft_itoa.c			\
 	str/ft_join_split.c		\
 	str/ft_split_free.c		\
@@ -45,7 +46,8 @@ SRCS = ast/ast_new.c		\
 	str/ft_strcmp.c			\
 	str/ft_strncmp.c		\
 	str/ft_strndup.c		\
-	str/ft_substr.c
+	str/ft_substr.c			\
+	str/merge_splits.c
 OBJS_DIR = objs/
 OBJS = $(SRCS:%.c=$(OBJS_DIR)%.o)
 

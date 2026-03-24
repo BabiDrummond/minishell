@@ -6,40 +6,15 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 23:58:08 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/14 21:32:43 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/24 01:08:01 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-static void	execute_in_child(char *path, char **argv, char **envp)
-{
-	execve(path, argv, envp);
-	perror(argv[0]);
-	if (errno == ENOENT)
-		exit(CMD_NOT_FOUND);
-	else if (errno == EACCES)
-		exit(PERMISSION_DENIED);
-	else
-		exit(EXIT_FAILURE);
-}
-
-static int	execute_in_parent(char *path, char **argv, char **envp)
-{
-	int		status;
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == 0)
-		execute_in_child(path, argv, envp);
-	if (pid < 0)
-	{
-		perror("fork");
-		return (EXIT_FAILURE);
-	}
-	waitpid(pid, &status, 0);
-	return (WEXITSTATUS(status));
-}
+int			execute_external_cmd(t_shell *ctx, char **argv, int is_child);
+static int	execute_in_parent(char *path, char **argv, char **envp);
+static void	execute_in_child(char *path, char **argv, char **envp);
 
 int	execute_external_cmd(t_shell *ctx, char **argv, int is_child)
 {
@@ -60,4 +35,33 @@ int	execute_external_cmd(t_shell *ctx, char **argv, int is_child)
 	free(cmd_path);
 	ft_split_free(envp);
 	return (ctx->exit_status);
+}
+
+static int	execute_in_parent(char *path, char **argv, char **envp)
+{
+	int		status;
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == 0)
+		execute_in_child(path, argv, envp);
+	if (pid < 0)
+	{
+		perror("fork");
+		return (EXIT_FAILURE);
+	}
+	waitpid(pid, &status, 0);
+	return (WEXITSTATUS(status));
+}
+
+static void	execute_in_child(char *path, char **argv, char **envp)
+{
+	execve(path, argv, envp);
+	perror(argv[0]);
+	if (errno == ENOENT)
+		exit(CMD_NOT_FOUND);
+	else if (errno == EACCES)
+		exit(PERMISSION_DENIED);
+	else
+		exit(EXIT_FAILURE);
 }

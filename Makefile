@@ -31,6 +31,8 @@ SRCS = main.c 							\
 	execution/process_redirects.c		\
 	expansion/build_argv.c				\
 	expansion/expand.c					\
+	expansion/expand_string.c			\
+	expansion/split_unquoted.c			\
 	heredoc/collect_heredocs.c 			\
 	heredoc/should_collect_heredoc.c	\
 	lexer/errors/syntax_error.c			\

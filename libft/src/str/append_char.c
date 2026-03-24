@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand.c                                           :+:      :+:    :+:   */
+/*   append_char.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/20 20:55:06 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/24 01:17:31 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/03/24 00:56:26 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/24 00:56:37 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expansion.h"
-#include "execution.h"
+#include "str.h"
 
-t_list	*expand(t_shell *ctx, t_list *args)
+char	*append_char(char *str, char c)
 {
-	t_list	*arg;
+	char	*new;
 
-	arg = args;
-	while (arg)
-	{
-		// this is going to leak. needs to free old list before assigning new one.
-		((t_head *)arg->content)->first = (t_node *) expand_string(ctx,
-				(t_list *)((t_head *)arg->content)->first, QUOTE_SINGLE); 
-		arg = arg->next;
-	}
-	return (args);
+	new = ft_calloc(1 + 1, sizeof(char));
+	new[0] = c;
+	str = ft_strjoin_free(str, new, TRUE, TRUE);
+	return (str);
 }

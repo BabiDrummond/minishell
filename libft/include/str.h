@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 22:42:31 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/21 21:39:32 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/24 00:56:50 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "mem.h"
 # include "types.h"
 
+char	*append_char(char *str, char c);
 char	*ft_itoa(int n);
 char	*ft_join_split(char **split, char *separator);
 char	**ft_split_free(char **split);
@@ -32,5 +33,6 @@ int		ft_strcmp(const char *s1, const char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strndup(const char *s, size_t n);
 size_t	ft_strlen(const char *s);
+char	**merge_splits(char **first, char **second);
 
 #endif
