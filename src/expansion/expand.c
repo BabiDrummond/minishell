@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:55:06 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/22 00:09:49 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/23 20:21:59 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,86 +93,86 @@ t_list	*expand_string(t_shell *ctx, t_list *words, int non_expandable)
 	return (words);
 }
 
-t_list	*add_quote_guard(t_list *words)
-{
-	t_word	*word;
-	char	*new_s;
-	char	*s;
-	int		len;
+// t_list	*add_quote_guard(t_list *words)
+// {
+// 	t_word	*word;
+// 	char	*new_s;
+// 	char	*s;
+// 	int		len;
 
-	word = (t_word *) words;
-	while (word)
-	{
-		s = (char *) word->link.content;
-		if (word->quote_state == QUOTE_DOUBLE 
-			|| word->quote_state == QUOTE_SINGLE)
-		{
-			len = ft_strlen(s);
-			new_s = ft_calloc(len + 3, sizeof(char));
-			new_s[0] = QUOTE_GUARD;
-			new_s[len + 1] = QUOTE_GUARD;
-			ft_memcpy(new_s + 1, s, len);
-			free(word->link.content);
-			word->link.content = new_s;
-		}
-		word = (t_word *) word->link.next;
-	}
-	return (words);
-}
+// 	word = (t_word *) words;
+// 	while (word)
+// 	{
+// 		s = (char *) word->link.content;
+// 		if (word->quote_state == QUOTE_DOUBLE 
+// 			|| word->quote_state == QUOTE_SINGLE)
+// 		{
+// 			len = ft_strlen(s);
+// 			new_s = ft_calloc(len + 3, sizeof(char));
+// 			new_s[0] = QUOTE_GUARD;
+// 			new_s[len + 1] = QUOTE_GUARD;
+// 			ft_memcpy(new_s + 1, s, len);
+// 			free(word->link.content);
+// 			word->link.content = new_s;
+// 		}
+// 		word = (t_word *) word->link.next;
+// 	}
+// 	return (words);
+// }
 
-int	count_chr(char *str, char c)
-{
-	int	count;
-	int	i;
+// int	count_chr(char *str, char c)
+// {
+// 	int	count;
+// 	int	i;
 	
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			count++;
-		i++;
-	}
-	return (count);
-}
+// 	i = 0;
+// 	count = 0;
+// 	while (str[i])
+// 	{
+// 		if (str[i] == c)
+// 			count++;
+// 		i++;
+// 	}
+// 	return (count);
+// }
 
-char	*ft_strtrim(char *str, char c)
-{
-	char	*new_str;
-	int		new_len;
-	int		i;
-	int		j;
+// char	*ft_strtrim(char *str, char c)
+// {
+// 	char	*new_str;
+// 	int		new_len;
+// 	int		i;
+// 	int		j;
 
-	i = 0;
-	j = 0;
-	//printf("strlen: %ld, count_chr: %d\n", ft_strlen(str), count_chr(str, c));
-	new_len = ft_strlen(str) - count_chr(str, c);
-	//printf("newlen %d\n", new_len);
-	new_str = ft_calloc(new_len + 1, sizeof(char));
-	while (str[i])
-	{
-		if (str[i] == c)
-			i++;
-		else
-			new_str[j++] = str[i++];
-	}
-	//eprintf("newstr %s\n", new_str);
-	return (new_str);
-}
+// 	i = 0;
+// 	j = 0;
+// 	//printf("strlen: %ld, count_chr: %d\n", ft_strlen(str), count_chr(str, c));
+// 	new_len = ft_strlen(str) - count_chr(str, c);
+// 	//printf("newlen %d\n", new_len);
+// 	new_str = ft_calloc(new_len + 1, sizeof(char));
+// 	while (str[i])
+// 	{
+// 		if (str[i] == c)
+// 			i++;
+// 		else
+// 			new_str[j++] = str[i++];
+// 	}
+// 	//eprintf("newstr %s\n", new_str);
+// 	return (new_str);
+// }
 
-char	**remove_quote_guard(char **argv)
-{
-	char	*new_s;
-	int		i;
+// char	**remove_quote_guard(char **argv)
+// {
+// 	char	*new_s;
+// 	int		i;
 	
-	i = 0;
-	while (argv[i])
-	{
-		argv[i]	= ft_strtrim(argv[i], QUOTE_GUARD);
-		i++;
-	}
-	return (argv);
-}
+// 	i = 0;
+// 	while (argv[i])
+// 	{
+// 		argv[i]	= ft_strtrim(argv[i], QUOTE_GUARD);
+// 		i++;
+// 	}
+// 	return (argv);
+// }
 
 t_list  *expand(t_shell *ctx, t_list *args)
 {
@@ -183,8 +183,8 @@ t_list  *expand(t_shell *ctx, t_list *args)
 	{
 		((t_head *)arg->content)->first = (t_node *) expand_string(ctx,
 			(t_list *)((t_head *)arg->content)->first, QUOTE_SINGLE); // this is going to leak. needs to free old list before assigning new one.
-		((t_head *)arg->content)->first = (t_node *) 
-			add_quote_guard((t_list *)((t_head *)arg->content)->first);
+		// ((t_head *)arg->content)->first = (t_node *) 
+		// 	add_quote_guard((t_list *)((t_head *)arg->content)->first);
 		arg = arg->next;
 	}
 	return (args);

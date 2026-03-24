@@ -30,6 +30,7 @@ SRCS = main.c 							\
 	execution/execute.c					\
 	execution/find_cmd_path.c			\
 	execution/process_redirects.c		\
+	expansion/build_args.c				\
 	expansion/expand.c					\
 	expansion/split_unquoted.c			\
 	heredoc/collect_heredocs.c 			\

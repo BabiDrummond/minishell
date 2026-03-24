@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:14:43 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/19 22:57:38 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/23 20:22:43 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_exec_node
 {
 	t_node_type	type;
 	t_list		*redirs;
-	t_list		*argv;
+	t_list		*args;
 }	t_exec_node;
 
 t_ast		*parse(t_head *tokens, char **operators);

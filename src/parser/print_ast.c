@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 18:07:03 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/19 17:39:23 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/23 20:23:21 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	print_argv(t_exec_node *exec_node)
 
 	if (!exec_node)
 		return ;
-	arg = exec_node->argv;
+	arg = exec_node->args;
 	while (arg)
 	{
 		part = (t_list *)((t_head *)arg->content)->first;

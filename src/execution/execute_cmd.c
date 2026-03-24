@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 20:27:16 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/22 00:12:03 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/23 20:25:58 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,10 @@ int	execute_cmd(t_shell *ctx, t_exec_node *node, int is_child)
 	char	*join_argv;
 	char	**argv;
 
-	node->argv = expand(ctx, node->argv);
-	old_argv = build_argv(node->argv);
-	printf("first_argv\n");
-	ft_matrix_print(old_argv);
-	join_argv = ft_join_split(old_argv, " ");
-	argv = split_unquoted(join_argv);
-	printf("second_argv\n");
-	ft_matrix_print(argv);
-	argv = remove_quote_guard(argv);
-	printf("third_argv\n");
-	ft_matrix_print(argv);
+	node->args = expand(ctx, node->args);
+	argv = build_argv(node->args);
+	//argv = build_args(node->args);
+	//ft_matrix_print(argv);
 	if (process_redirects(ctx, node->redirs, is_child) == EXIT_FAILURE)
 	{
 		restore_fds(ctx, is_child);
