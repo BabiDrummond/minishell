@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 20:27:16 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/23 20:25:58 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/23 23:51:37 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ int	execute_cmd(t_shell *ctx, t_exec_node *node, int is_child)
 
 	node->args = expand(ctx, node->args);
 	argv = build_argv(node->args);
-	//argv = build_args(node->args);
-	//ft_matrix_print(argv);
 	if (process_redirects(ctx, node->redirs, is_child) == EXIT_FAILURE)
 	{
 		restore_fds(ctx, is_child);
@@ -53,6 +51,6 @@ int	execute_cmd(t_shell *ctx, t_exec_node *node, int is_child)
 			ctx->exit_status = execute_external_cmd(ctx, argv, is_child);
 	}
 	restore_fds(ctx, is_child);
-	ft_split_free(argv);
+	//ft_split_free(argv);
 	return (ctx->exit_status);
 }

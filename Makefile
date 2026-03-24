@@ -22,7 +22,6 @@ SRCS = main.c 							\
 	builtins/builtin_export.c			\
 	builtins/builtin_pwd.c				\
 	builtins/builtin_unset.c			\
-	execution/build_argv.c				\
 	execution/execute_cmd.c				\
 	execution/execute_builtin_cmd.c		\
 	execution/execute_external_cmd.c	\
@@ -30,9 +29,8 @@ SRCS = main.c 							\
 	execution/execute.c					\
 	execution/find_cmd_path.c			\
 	execution/process_redirects.c		\
-	expansion/build_args.c				\
+	expansion/build_argv.c				\
 	expansion/expand.c					\
-	expansion/split_unquoted.c			\
 	heredoc/collect_heredocs.c 			\
 	heredoc/should_collect_heredoc.c	\
 	lexer/errors/syntax_error.c			\

@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:55:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/23 19:57:36 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/23 23:56:22 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 typedef struct s_shell t_shell;
 
 t_list  *expand(t_shell *ctx, t_list *args);
-char	**build_args(t_list	*args);
-char	**split_unquoted(char *s);
-char	**remove_quote_guard(char **argv);
+char	**build_argv(t_list	*args);
 
 #endif
