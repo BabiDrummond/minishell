@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 18:21:44 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 01:17:46 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 01:52:12 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,12 @@ char	**ft_split(const char *s, char c)
 
 	word = 0;
 	arr = ft_calloc((count_words((char *) s, c) + 1), sizeof(char *));
-	if (!arr)
-		return (NULL);
 	while (*s && *s == c)
 		s++;
 	while (*s)
 	{
 		letter = 0;
 		arr[word] = ft_calloc(word_len((char *)s, c) + 1, sizeof(char));
-		if (!arr[word])
-			return (ft_split_free(arr));
 		while (*s && *s != c)
 			arr[word][letter++] = *s++;
 		while (*s && *s == c)

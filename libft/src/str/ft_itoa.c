@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 18:17:32 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/21 21:40:41 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 01:51:48 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ char	*ft_itoa(int n)
 	str = ft_calloc(len + 1, sizeof(char));
 	if (n == INT_MIN)
 		return ((char *) ft_memcpy(str, "-2147483648", len));
-	if (!str)
-		return (NULL);
 	if (n < 0)
 	{
 		n *= -1;

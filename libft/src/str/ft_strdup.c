@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 06:46:05 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/08 00:24:34 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 01:52:27 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ char	*ft_strdup(const char *s)
 	if (!s)
 		return (NULL);
 	new = ft_calloc(ft_strlen(s) + 1, sizeof(char));
-	if (!new)
-		return (NULL);
 	while (s[++i])
 		new[i] = s[i];
 	return (new);

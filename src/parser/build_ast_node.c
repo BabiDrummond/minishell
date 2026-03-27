@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 20:35:35 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/23 20:24:00 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 01:54:07 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ t_exec_node	*new_exec_node(t_node_type type, t_list *redirs, t_list *args)
 	t_exec_node	*exec_node;
 
 	exec_node = ft_calloc(1, sizeof(t_exec_node));
-	if (!exec_node)
-		return (NULL);
 	exec_node->type = type;
 	exec_node->redirs = redirs;
 	exec_node->args = args;

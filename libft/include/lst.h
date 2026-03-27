@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 22:42:15 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/22 23:57:57 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 01:55:58 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include "types.h"
+# include "mem.h"
 
 void	lst_add_back(t_list **lst, t_list *new);
 void	lst_clear_node(t_list *lst, void (*del)(void *));

@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 14:39:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/12 21:09:17 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 01:50:35 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ t_list	*lst_new(void *content)
 {
 	t_list	*node;
 
-	node = malloc(sizeof(t_list));
-	if (!node)
-		return (NULL);
+	node = (t_list *) ft_calloc(1, sizeof(t_list));
 	node->content = content;
 	node->prev = NULL;
 	node->next = NULL;
