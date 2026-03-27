@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expansion.h                                        :+:      :+:    :+:   */
+/*   split_content_heredoc.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/20 20:55:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 19:31:29 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/03/27 19:58:27 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/27 20:21:12 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPANSION_H
-# define EXPANSION_H
+#include "heredoc.h"
 
-# include "lexer.h"
-# include "heredoc.h"
-# include "../libft/include/libft.h"
+char	**split_content_heredoc(t_word *words)
+{
+	char	**argv;
+	int		size;
+	int		i;
 
-# define QUOTE_GUARD '\x01'
-
-typedef struct s_shell	t_shell;
-
-char	**build_argv(t_list	*args);
-t_list	*expand(t_shell *ctx, t_list *args);
-t_list	*expand_string(t_shell *ctx, t_list *words, int is_heredoc);
-char	**split_unquoted(t_word *words);
-
-#endif
+	i = 0;
+	size = lst_size((t_list *) words);
+	argv = ft_calloc(size + 1, sizeof(char *));
+	while (words && i < size)
+	{
+		argv[i] = (char *)words->link.content;
+		i++;
+		words = (t_word *) words->link.next;
+	}
+	return (argv);
+}

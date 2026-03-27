@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expansion.h                                        :+:      :+:    :+:   */
+/*   redirect_heredoc.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/20 20:55:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 19:31:29 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/03/27 19:22:35 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/27 20:25:23 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPANSION_H
-# define EXPANSION_H
+#include "heredoc.h"
 
-# include "lexer.h"
-# include "heredoc.h"
-# include "../libft/include/libft.h"
+int	redirect_heredoc(char **target)
+{
+	char	*string;
+	int		pipefd[2];
 
-# define QUOTE_GUARD '\x01'
-
-typedef struct s_shell	t_shell;
-
-char	**build_argv(t_list	*args);
-t_list	*expand(t_shell *ctx, t_list *args);
-t_list	*expand_string(t_shell *ctx, t_list *words, int is_heredoc);
-char	**split_unquoted(t_word *words);
-
-#endif
+	string = ft_join_split(target, "\n");
+	pipe(pipefd);
+	write(pipefd[1], string, ft_strlen(string));
+	write(pipefd[1], "\n", 1);
+	close(pipefd[1]);
+	return (pipefd[0]);
+}

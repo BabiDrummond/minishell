@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 00:44:52 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 16:49:22 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 20:18:57 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "lexer.h"
 # include "parser.h"
 
-int	collect_heredocs(t_ast *tokens);
+int     collect_heredocs(t_ast *tokens);
+int     redirect_heredoc(char **target);
+char	**split_content_heredoc(t_word *words);
 
 #endif

@@ -34,6 +34,8 @@ SRCS = main.c 							\
 	expansion/expand_string.c			\
 	expansion/split_unquoted.c			\
 	heredoc/collect_heredocs.c 			\
+	heredoc/redirect_heredoc.c			\
+	heredoc/split_content_heredoc.c		\
 	lexer/errors/syntax_error.c			\
 	lexer/utils/create_token_result.c	\
 	lexer/utils/get_char_type.c			\
