@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 22:33:22 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/24 01:10:22 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 03:59:27 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	restore_fds(t_shell *ctx, int is_child)
 			dup2(ctx->stdout_backup, STDOUT_FILENO);
 			close(ctx->stdout_backup);
 			ctx->stdout_backup = -1;
-		}	
+		}
 	}
 }
 
