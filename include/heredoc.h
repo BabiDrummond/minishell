@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 00:44:52 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/19 18:54:04 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 16:49:22 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 # define HEREDOC_H
 
 # include <readline/readline.h>
-# include <readline/history.h>
 # include <signal.h>
-# include <sys/wait.h>
 # include "../libft/include/libft.h"
 # include "lexer.h"
 # include "parser.h"
