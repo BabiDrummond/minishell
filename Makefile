@@ -49,6 +49,7 @@ SRCS = main.c 							\
 	parser/init_ast_operators.c			\
 	parser/parser.c 					\
 	parser/print_ast.c 					\
+	signals/signals.c					\
 	utils/envp_to_lst.c					\
 	utils/extract_key.c					\
 	utils/extract_value.c				\

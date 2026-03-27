@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 00:31:49 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 01:31:30 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,6 @@ static void	handle_exit(char *prompt)
 		free(prompt);
 		exit(0);
 	}
-}
-
-void	sig_handler(int sig)
-{
-	g_signal = sig;
-}
-
-int	sig_hook(void)
-{
-	if (g_signal == SIGINT)
-	{
-		rl_done = 1;
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-	return (EXIT_SUCCESS);
 }
 
 void	init_ctx(t_shell *ctx, char **envp)
@@ -67,9 +50,7 @@ int	main(int argc, char **argv, char **envp)
 	ast_operators = init_ast_operators();
 	prompt = NULL;
 	tokens = NULL;
-	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, SIG_IGN);
-	rl_event_hook = sig_hook;
+	set_signals();
 	while (1)
 	{
 		g_signal = 0;
