@@ -6,13 +6,13 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 16:53:23 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 02:40:39 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 03:46:53 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lst.h"
 
-void	lst_del_node(t_list **head, t_list *node, void (*del)(void *))
+void	lst_del_node(t_list **head, t_list *node)
 {	
 	if (!head || !*head || !node)
 		return ;
@@ -24,6 +24,4 @@ void	lst_del_node(t_list **head, t_list *node, void (*del)(void *))
 		node->next->prev = node->prev;
 	node->prev = NULL;
 	node->next = NULL;
-	(void) del;
-	//lst_clear_node(node, (*del));
 }

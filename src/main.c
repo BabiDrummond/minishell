@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 02:48:52 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 03:50:22 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void	handle_exit(char *prompt)
 	if (ft_strcmp(prompt, "exit") == 0)
 	{
 		gc_free_all();
-		free(prompt);
+		gc_set_current_scope(GC_SCOPE_GLOBAL);
+		gc_free_all();
 		exit(0);
 	}
 }
@@ -86,6 +87,7 @@ int	main(int argc, char **argv, char **envp)
 		ctx.exit_status = execute(&ctx, ast, FALSE);
 		gc_free_all();
 	}
+	gc_set_current_scope(GC_SCOPE_GLOBAL);
 	gc_free_all();
 	return (ctx.exit_status);
 }

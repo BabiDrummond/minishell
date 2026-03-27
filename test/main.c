@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 20:31:02 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/05 21:48:46 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 03:48:00 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,6 @@ int main(int argc, char **argv, char **envp)
     test_extract_value_without_equal_sign(&vars);
     test_extract_value_with_empty_value(&vars);
     test_extract_value_with_multiple_equals(&vars);
-
-    lst_clear(&vars, var_clear);
     
     printf("\n=== TESTS COMPLETE ===\n");
     return 0;

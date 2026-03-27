@@ -55,7 +55,6 @@ SRCS = main.c 							\
 	utils/extract_value.c				\
 	utils/is_valid_key.c				\
 	utils/lst_to_envp.c					\
-	var/var_clear.c						\
 	var/var_create.c					\
 	var/var_get.c						\
 	var/var_set.c						\

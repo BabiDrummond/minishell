@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 23:19:10 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 00:26:30 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 03:48:25 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ char	*extract_value(char *var_content);
 int		is_valid_key(char *var_content);
 
 /* Variables */
-void	var_clear(void *var_content);
 t_var	*var_create(char *key, char *value, int exported);
 t_var	*var_get(t_list *vars, char *key);
 char	*var_get_value(t_list *vars, char *key);

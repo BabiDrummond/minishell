@@ -21,14 +21,11 @@ SRCS = ast/ast_new.c		\
 	list/lst_pop.c			\
 	list/lst_new_head.c		\
 	lst/lst_add_back.c		\
-	lst/lst_clear_node.c	\
-	lst/lst_clear.c			\
 	lst/lst_del_node.c		\
 	lst/lst_last.c			\
 	lst/lst_new.c			\
 	lst/lst_size.c			\
 	matrix/ft_matrix_print.c \
-	mem/ft_free.c			\
 	mem/ft_bzero.c			\
 	mem/ft_calloc.c			\
 	mem/ft_memcpy.c			\
@@ -36,7 +33,6 @@ SRCS = ast/ast_new.c		\
 	str/append_char.c		\
 	str/ft_itoa.c			\
 	str/ft_join_split.c		\
-	str/ft_split_free.c		\
 	str/ft_split_size.c		\
 	str/ft_split.c			\
 	str/ft_strchr.c			\

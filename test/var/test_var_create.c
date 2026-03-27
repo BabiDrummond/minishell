@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 23:25:00 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/05 23:25:00 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 03:48:22 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,11 @@ void test_var_create_valid_variable(t_list **vars)
 		printf("Expected: Valid var created\n");
 		printf("Got: key=%s, value=%s, exported=%d\n", var->key, var->value, var->exported);
 		printf("\033[0;32m✓ PASS\033[0m\n");
-		var_clear(var);
 	}
 	else
 	{
 		printf("Expected: Valid var, Got: NULL or wrong values\n");
 		printf("\033[0;31m✗ FAIL\033[0m\n");
-		if (var)
-			var_clear(var);
 	}
 }
 
@@ -55,7 +52,6 @@ void test_var_create_invalid_key(t_list **vars)
 	{
 		printf("Expected: NULL, Got: valid var (should reject invalid key)\n");
 		printf("\033[0;31m✗ FAIL\033[0m\n");
-		var_clear(var);
 	}
 }
 
@@ -71,13 +67,10 @@ void test_var_create_with_empty_value(t_list **vars)
 		printf("Expected: var with empty value\n");
 		printf("Got: value='%s' (empty)\n", var->value);
 		printf("\033[0;32m✓ PASS\033[0m\n");
-		var_clear(var);
 	}
 	else
 	{
 		printf("Expected: var with empty value\n");
 		printf("\033[0;31m✗ FAIL\033[0m\n");
-		if (var)
-			var_clear(var);
 	}
 }
