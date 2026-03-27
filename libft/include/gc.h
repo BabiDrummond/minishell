@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gcft.h                                             :+:      :+:    :+:   */
+/*   gc.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:40:23 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/02/04 15:12:29 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/27 16:07:12 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,5 @@ void		gc_exit(void);
 void		gc_add_or_exit(void *ptr, void (*destructor)(void *));
 void		gc_set_current_scope(t_gc_scope new_scope);
 t_gc_scope	*gc_get_current_scope(void);
+
 #endif
