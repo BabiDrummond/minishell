@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:55:06 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 02:47:17 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 04:00:25 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_list	*expand(t_shell *ctx, t_list *args)
 	while (arg)
 	{
 		((t_head *)arg->content)->first = (t_node *) expand_string(ctx,
-				(t_list *)((t_head *)arg->content)->first, QUOTE_SINGLE); 
+				(t_list *)((t_head *)arg->content)->first, QUOTE_SINGLE);
 		arg = arg->next;
 	}
 	return (args);
