@@ -76,12 +76,12 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		print_ast(ast, 0);
-		// if (collect_heredocs(ast))
-		// {
-		// 	gc_free_all();
-		// 	continue ;
-		// }
-		// print_ast(ast, 0);
+		if (collect_heredocs(ast))
+		{
+			gc_free_all();
+			continue ;
+		}
+		print_ast(ast, 0);
 
 		ctx.exit_status = execute(&ctx, ast, FALSE);
 		gc_free_all();

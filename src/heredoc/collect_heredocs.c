@@ -12,93 +12,47 @@
 
 #include "heredoc.h"
 
-char	*get_delimiter(t_token *token)
-{
-	t_head	*parts;
-	t_word	*word;
-
-	if (token->is_operator)
-		return (NULL);
-	parts = (t_head *)token->link.content;
-	word = (t_word *)lst_pop(parts);
-	return ((char *)word->link.content);
-}
-
-void	heredoc_sigint_handler(int sig)
-{
-	(void) sig;
-	exit(1);
-}
-
-static int	continue_with_child_process(int pipefd[2], const char *delimiter)
-{
-	char	*line;
-
-	signal(SIGINT, heredoc_sigint_handler);
-	close(pipefd[0]);
-	while (1)
-	{
-		line = readline("> ");
-		if (!line)
-		{
-			fprintf(stderr,
-				"Warning: heredoc delimited by end-of-file (wanted `%s`)\n",
-				delimiter);
-			free(line);
-			close(pipefd[1]);
-			exit(0);
-		}
-		if (ft_strcmp(line, delimiter) == 0)
-		{
-			free(line);
-			close(pipefd[1]);
-			exit(0);
-		}
-		write(pipefd[1], line, ft_strlen(line));
-		write(pipefd[1], "\n", 1);
-	}
-}
-
-static int	continue_with_parent_process(pid_t pid,
-	int pipefd[2], t_token *token)
-{
-	int	status;
-	int	exit_code;
-
-	waitpid(pid, &status, 0);
-	close(pipefd[1]);
-	exit_code = (status >> 8) & 0xFF;
-	if (exit_code == 1)
-	{
-		close(pipefd[0]);
-		return (1);
-	}
-	token->stdin_fd = pipefd[0];
-	return (0);
-}
-
 int	collect_heredocs(t_ast *tokens)
 {
-	char	*delimiter;
-	int		pipefd[2];
-	pid_t	pid;
-
 	if (tokens == NULL)
 		return (0);
 	if (collect_heredocs(tokens->left))
 		return (1);
 	if (collect_heredocs(tokens->right))
 		return (1);
-	if (should_collect_heredoc((t_token *)tokens->value))
+
+	t_exec_node *node = (t_exec_node *) tokens->value;
+	t_list *redirs = node->redirs;
+
+	while(redirs)
 	{
-		delimiter = get_delimiter((t_token *)tokens->right->value);
-		printf("Collecting heredoc until delimiter: %s\n", delimiter);
-		pipe(pipefd);
-		pid = fork();
-		if (pid == 0)
-			continue_with_child_process(pipefd, delimiter);
-		return (continue_with_parent_process(pid, pipefd,
-				(t_token *)tokens->value));
+		t_redir *redir = (t_redir *) redirs->content;
+		if (ft_strcmp(redir->type, "<<") == 0)
+		{
+			t_word *delimiter = redir->target;
+			t_word *words = NULL;
+			int error = 0;
+			while (1)
+			{
+				char *line = readline("> ");
+				if (!line)
+				{
+					// TODO: talvez nao possa usar essa funcao
+					fprintf(stderr,
+						"Warning: heredoc delimited by end-of-file (wanted `%s`)\n",
+						(char*) delimiter->link.content);
+					return (1);
+				}
+				if (ft_strcmp(line, (char*) delimiter->link.content) == 0)
+				{
+					free(line);
+					break;
+				}
+				lst_add_back((t_list**) &words, (t_list*)create_word(line, ft_strlen(line), delimiter->quote_state));
+			}
+			redir->target = words;
+		}
+		redirs = redirs->next;
 	}
 	return (0);
 }

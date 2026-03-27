@@ -22,6 +22,5 @@
 # include "parser.h"
 
 int	collect_heredocs(t_ast *tokens);
-int	should_collect_heredoc(t_token *token);
 
 #endif
