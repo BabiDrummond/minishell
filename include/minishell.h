@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 01:29:22 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 16:58:50 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@
 # include "parser.h"
 # include "signals.h"
 
-extern int g_signal;
+extern int	g_signal;
 
 #endif
