@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 23:19:10 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/21 21:28:43 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 00:26:30 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <errno.h>
+# include <signal.h>
 # include "parser.h"
 # include "../libft/include/libft.h"
 

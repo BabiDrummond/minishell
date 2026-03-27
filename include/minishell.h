@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/19 18:54:09 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 00:17:41 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@
 # include "heredoc.h"
 # include "lexer.h"
 # include "parser.h"
+
+extern int g_signal;
 
 #endif

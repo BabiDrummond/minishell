@@ -6,11 +6,13 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/21 21:27:59 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 00:31:49 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int g_signal = 0;
 
 static void	handle_exit(char *prompt)
 {
@@ -22,15 +24,21 @@ static void	handle_exit(char *prompt)
 	}
 }
 
-void	signal_handler(int sig)
+void	sig_handler(int sig)
 {
-	if (sig == SIGINT)
+	g_signal = sig;
+}
+
+int	sig_hook(void)
+{
+	if (g_signal == SIGINT)
 	{
-		printf("\n");
+		rl_done = 1;
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
+	return (EXIT_SUCCESS);
 }
 
 void	init_ctx(t_shell *ctx, char **envp)
@@ -59,13 +67,18 @@ int	main(int argc, char **argv, char **envp)
 	ast_operators = init_ast_operators();
 	prompt = NULL;
 	tokens = NULL;
+	signal(SIGINT, sig_handler);
+	signal(SIGQUIT, SIG_IGN);
+	rl_event_hook = sig_hook;
 	while (1)
 	{
-		signal(SIGINT, signal_handler);
+		g_signal = 0;
 		prompt = readline("prompt> ");
-		//prompt = ft_strdup("echo oiiii");
 		if (!prompt)
-			continue ;
+		{
+			printf("exit\n");
+			break ;
+		}
 		add_history(prompt);
 		gc_add(prompt, free);
 		if (strlen(prompt) == 0)
@@ -98,3 +111,9 @@ int	main(int argc, char **argv, char **envp)
 	gc_free_all();
 	return (ctx.exit_status);
 }
+
+// DEPOIS do parser, ANTES do execute
+// Percorrer árvore
+// Para cada nó, percorrer lista de redirs
+// Para cada heredoc, ler input do usuário até EOF
+// Substituir conteúdo do EOF com conteúdo lido na lista de redirs

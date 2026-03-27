@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 23:58:08 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/24 01:08:01 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 00:26:51 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static int	execute_in_parent(char *path, char **argv, char **envp)
 
 static void	execute_in_child(char *path, char **argv, char **envp)
 {
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	execve(path, argv, envp);
 	perror(argv[0]);
 	if (errno == ENOENT)
