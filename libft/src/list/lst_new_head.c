@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_new.c                                          :+:      :+:    :+:   */
+/*   lst_new_head.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 14:41:00 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/01/30 18:31:43 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/27 02:33:23 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_head	*lst_new_head(void)
 {
 	t_head	*list;
 
-	list = (t_head *)ft_calloc(1, sizeof(t_head));
+	list = (t_head *)safe_calloc(1, sizeof(t_head));
 	list->first = NULL;
 	list->last = NULL;
 	list->count = 0;

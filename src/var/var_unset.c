@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 01:35:54 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 01:59:41 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 03:13:53 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	var_unset(t_list **vars, char *key)
 		curr_var = (t_var *) current->content;
 		if (ft_strcmp(curr_var->key, key) == 0)
 		{
-			lst_del_node(vars, current, var_clear);
+			lst_del_node(vars, current, NULL);
 			return ;
 		}
 		current = current->next;

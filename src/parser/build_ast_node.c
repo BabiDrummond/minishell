@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 20:35:35 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 01:54:07 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 02:34:14 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_exec_node	*new_exec_node(t_node_type type, t_list *redirs, t_list *args)
 {
 	t_exec_node	*exec_node;
 
-	exec_node = ft_calloc(1, sizeof(t_exec_node));
+	exec_node = safe_calloc(1, sizeof(t_exec_node));
 	exec_node->type = type;
 	exec_node->redirs = redirs;
 	exec_node->args = args;
@@ -42,12 +42,12 @@ t_exec_node	*build_ast_node(t_token *token)
 	t_exec_node	*exec_node;
 	t_redir		*redir;
 
-	exec_node = ft_calloc(1, sizeof(t_exec_node));
+	exec_node = safe_calloc(1, sizeof(t_exec_node));
 	while (token)
 	{
 		if (token->is_operator)
 		{
-			redir = ft_calloc(1, sizeof(t_redir));
+			redir = safe_calloc(1, sizeof(t_redir));
 			redir->type = token->link.content;
 			if (!token->link.next)
 				printf("minishell: parse error near %s\n", redir->type);

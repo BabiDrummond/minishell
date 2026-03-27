@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 20:27:16 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/24 01:07:37 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 02:46:32 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	execute_cmd(t_shell *ctx, t_exec_node *node, int is_child)
 	if (process_redirects(ctx, node->redirs, is_child) == EXIT_FAILURE)
 	{
 		restore_fds(ctx, is_child);
-		ft_split_free(argv);
 		return (exit_status(ctx, EXIT_FAILURE, FALSE));
 	}
 	else
@@ -40,7 +39,6 @@ int	execute_cmd(t_shell *ctx, t_exec_node *node, int is_child)
 			ctx->exit_status = execute_external_cmd(ctx, argv, is_child);
 	}
 	restore_fds(ctx, is_child);
-	//ft_split_free(argv); // this is double freeing for some reason
 	return (ctx->exit_status);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 01:01:48 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/24 01:12:44 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 02:47:21 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,18 @@ char	**split_unquoted(t_word *words)
 	int		j;
 
 	i = 0;
-	argv = ft_calloc(total_words(words) + 1, sizeof(char *));
+	argv = safe_calloc(total_words(words) + 1, sizeof(char *));
 	while (words)
 	{
 		if (words->quote_state != QUOTE_NONE)
-			argv[i] = ft_strjoin_free(
-					argv[i], words->link.content, TRUE, FALSE);
+			argv[i] = ft_strjoin(argv[i], words->link.content);
 		else
 		{
 			j = 0;
 			splitted = ft_split(words->link.content, ' ');
-			argv[i] = ft_strjoin_free(argv[i], splitted[j++], TRUE, FALSE);
+			argv[i] = ft_strjoin(argv[i], splitted[j++]);
 			while (splitted[j])
 				argv[++i] = ft_strdup(splitted[j++]);
-			ft_split_free(splitted);
 		}
 		words = (t_word *) words->link.next;
 	}

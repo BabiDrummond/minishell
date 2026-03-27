@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 00:51:06 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/24 00:57:34 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 02:47:08 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ t_list	*expand_string(t_shell *ctx, t_list *words, int non_expandable)
 		{
 			new_content = expand_content(ctx, word, non_expandable);
 			if (new_content)
-			{
-				free(word->link.content);
 				word->link.content = new_content;
-			}
 		}
 		word = (t_word *) word->link.next;
 	}
@@ -74,9 +71,8 @@ static int	expand_variable(t_shell *ctx, char **new_str, char *str)
 	else
 		value = var_get_value(ctx->vars, key);
 	if (value)
-		*new_str = ft_strjoin_free(*new_str, value, TRUE, FALSE);
+		*new_str = ft_strjoin(*new_str, value);
 	key_len = ft_strlen(key) + 1;
-	free(key);
 	return (key_len);
 }
 

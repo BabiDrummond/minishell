@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 00:41:36 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 01:54:37 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 02:42:57 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ t_var	*var_create(char *key, char *value, int exported)
 	if (!is_valid_key(key))
 	{
 		printf("export: `%s': not a valid identifier\n", key);
-		return (free(key), free(value), NULL);
+		return (NULL);
 	}
-	var = ft_calloc(1, sizeof(t_var));
+	var = safe_calloc(1, sizeof(t_var));
 	var->key = key;
 	var->value = value;
 	var->exported = exported;

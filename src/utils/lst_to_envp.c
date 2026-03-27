@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 01:50:27 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 01:59:24 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 02:34:19 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	**lst_to_envp(t_list *vars)
 	char	**envp;
 	char	**start;
 
-	envp = ft_calloc(lst_size(vars) + 1, sizeof(char *));
+	envp = safe_calloc(lst_size(vars) + 1, sizeof(char *));
 	start = envp;
 	while (vars)
 	{

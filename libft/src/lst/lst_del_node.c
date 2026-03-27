@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 16:53:23 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/19 17:17:22 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 02:40:39 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void	lst_del_node(t_list **head, t_list *node, void (*del)(void *))
 		node->next->prev = node->prev;
 	node->prev = NULL;
 	node->next = NULL;
-	lst_clear_node(node, (*del));
+	(void) del;
+	//lst_clear_node(node, (*del));
 }

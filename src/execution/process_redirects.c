@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 22:33:22 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/24 01:10:22 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 02:46:49 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static int	open_fd(t_redir *redir)
 		fd = open(target, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (ft_strcmp(redir->type, ">>") == 0)
 		fd = open(target, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	free(target);
 	return (fd);
 }
 
@@ -101,7 +100,7 @@ static char	*build_string(t_word *words)
 	string = ft_strdup("");
 	while (word)
 	{
-		string = ft_strjoin_free(string, word->link.content, TRUE, FALSE);
+		string = ft_strjoin(string, word->link.content);
 		word = (t_word *) word->link.next;
 	}
 	return (string);

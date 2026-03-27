@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:55:06 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/24 01:17:31 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 02:47:17 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_list	*expand(t_shell *ctx, t_list *args)
 	arg = args;
 	while (arg)
 	{
-		// this is going to leak. needs to free old list before assigning new one.
 		((t_head *)arg->content)->first = (t_node *) expand_string(ctx,
 				(t_list *)((t_head *)arg->content)->first, QUOTE_SINGLE); 
 		arg = arg->next;

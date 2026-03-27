@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 22:42:31 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/24 00:56:50 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 02:22:48 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_split_size(char **split);
 char	**ft_split(const char *s, char c);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s);
-char	*ft_strjoin_free(char *s1, char *s2, int free_s1, int free_s2);
+char	*ft_strjoin(char *s1, char *s2);
 char	*ft_triple_join(char *s1, char *s2, char *s3);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 int		ft_strcmp(const char *s1, const char *s2);

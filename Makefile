@@ -86,6 +86,8 @@ TEST_OBJS = $(filter-out $(OBJS_DIR)main.o, $(OBJS))
 
 TEST_EXEC = $(TEST_DIR)$(TEST_NAME)
 
+VALGRIND = valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes
+
 all: $(NAME)
 
 test: $(LIBFT) $(OBJS)
@@ -116,6 +118,9 @@ fclean: clean
 	@rm -f $(NAME)
 	@rm -f $(TEST_EXEC)
 	@make --no-print-directory -C $(LIBFT_DIR) fclean
+
+valgrind: all
+	$(VALGRIND) ./$(NAME)
 
 re: fclean all
 

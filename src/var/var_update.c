@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 00:40:59 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 01:59:44 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 03:13:38 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	var_update(t_list **vars, t_var *var)
 		curr_var = (t_var *)current->content;
 		if (curr_var && curr_var->key && !ft_strcmp(curr_var->key, var->key))
 		{
-			var_clear(curr_var);
 			current->content = var;
 			return ;
 		}

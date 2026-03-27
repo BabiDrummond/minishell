@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 23:58:08 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 00:26:51 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 02:46:39 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int	execute_external_cmd(t_shell *ctx, char **argv, int is_child)
 		execute_in_child(cmd_path, argv, envp);
 	else
 		ctx->exit_status = execute_in_parent(cmd_path, argv, envp);
-	free(cmd_path);
-	ft_split_free(envp);
 	return (ctx->exit_status);
 }
 

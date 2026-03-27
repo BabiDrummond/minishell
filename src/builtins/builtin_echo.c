@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 23:42:57 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/19 17:17:15 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 02:26:51 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	builtin_echo(char **argv)
 			i++;
 		str = ft_join_split(argv + i, " ");
 		printf("%s", str);
-		free(str);
 	}
 	if (i == 1)
 		printf("\n");
