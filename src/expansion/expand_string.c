@@ -6,19 +6,19 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 00:51:06 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 02:47:08 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 21:40:12 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
 #include "execution.h"
 
-t_list		*expand_string(t_shell *ctx, t_list *words, int non_expandable);
-static char	*expand_content(t_shell *ctx, t_word *word, int non_expandable);
+t_list		*expand_string(t_shell *ctx, t_list *words, int is_heredoc);
+static char	*expand_content(t_shell *ctx, t_word *word, int is_heredoc);
 static int	expand_variable(t_shell *ctx, char **new_str, char *str);
 static char	*get_key(char *word);
 
-t_list	*expand_string(t_shell *ctx, t_list *words, int non_expandable)
+t_list	*expand_string(t_shell *ctx, t_list *words, int is_heredoc)
 {
 	t_word	*word;
 	char	*new_content;
@@ -28,7 +28,7 @@ t_list	*expand_string(t_shell *ctx, t_list *words, int non_expandable)
 	{
 		if (word->link.content)
 		{
-			new_content = expand_content(ctx, word, non_expandable);
+			new_content = expand_content(ctx, word, is_heredoc);
 			if (new_content)
 				word->link.content = new_content;
 		}
@@ -37,7 +37,7 @@ t_list	*expand_string(t_shell *ctx, t_list *words, int non_expandable)
 	return (words);
 }
 
-static char	*expand_content(t_shell *ctx, t_word *word, int non_expandable)
+static char	*expand_content(t_shell *ctx, t_word *word, int is_heredoc)
 {
 	char	*new_s;
 	char	*s;
@@ -50,7 +50,11 @@ static char	*expand_content(t_shell *ctx, t_word *word, int non_expandable)
 	{
 		if (s[i] == '$'
 			&& (ft_isalnum(s[i + 1]) || s[i + 1] == '_' || s[i + 1] == '?')
-			&& word->quote_state != non_expandable)
+			&& is_heredoc == FALSE && word->quote_state != QUOTE_SINGLE)
+			i += expand_variable(ctx, &new_s, s + i);
+		else if (s[i] == '$'
+			&& (ft_isalnum(s[i + 1]) || s[i + 1] == '_' || s[i + 1] == '?')
+			&& is_heredoc == TRUE && word->quote_state == QUOTE_NONE)
 			i += expand_variable(ctx, &new_s, s + i);
 		else
 			new_s = append_char(new_s, s[i++]);

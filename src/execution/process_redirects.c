@@ -6,17 +6,18 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 22:33:22 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 04:00:20 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 21:39:33 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
+#include "expansion.h"
 
 int			process_redirects(t_shell *ctx, t_list *redirs, int is_child);
-static int	open_fd(t_redir *redir);
+static char	**expand_redirs(t_shell *ctx, t_redir *redir);
+static int	open_fd(t_shell *ctx, t_redir *redir, char **target);
 static int	redir_fd(t_redir *redir, int fd);
 void		restore_fds(t_shell *ctx, int is_child);
-static char	*build_string(t_word *words);
 
 int	process_redirects(t_shell *ctx, t_list *redirs, int is_child)
 {
@@ -32,7 +33,7 @@ int	process_redirects(t_shell *ctx, t_list *redirs, int is_child)
 	}
 	while (redir)
 	{
-		fd = open_fd(redir->content);
+		fd = open_fd(ctx, redir->content, expand_redirs(ctx, redir->content));
 		if (fd == -1)
 			return (EXIT_FAILURE);
 		if (redir_fd(redir->content, fd) == -1)
@@ -46,25 +47,54 @@ int	process_redirects(t_shell *ctx, t_list *redirs, int is_child)
 	return (EXIT_SUCCESS);
 }
 
-static int	open_fd(t_redir *redir)
+static char	**expand_redirs(t_shell *ctx, t_redir *redir)
 {
-	char	*target;
+	char	**target;
+	char	*old_target;
+
+	old_target = ft_strdup((char *)redir->target->link.content);
+	if (ft_strcmp(redir->type, "<<") == 0)
+	{
+		redir->target = (t_word *) expand_string(ctx,
+				(t_list *) redir->target, TRUE);
+		target = split_content_heredoc(redir->target);
+	}
+	else
+	{
+		redir->target = (t_word *) expand_string(ctx,
+				(t_list *) redir->target, FALSE);
+		target = split_unquoted(redir->target);
+	}
+	return (target);
+}
+
+static int	open_fd(t_shell *ctx, t_redir *redir, char **target)
+{
 	int		fd;
 
 	fd = -1;
-	target = build_string(redir->target);
-	if (ft_strcmp(redir->type, "<") == 0)
-		fd = open(target, O_RDONLY);
+	if (ft_split_size(target) > 1 && ft_strcmp(redir->type, "<<") != 0)
+	{
+		printf("%s: ambiguous redirect\n",
+			(char *)redir->target->link.content);
+		return (fd);
+	}
+	if (ft_strcmp(redir->type, "<<") == 0)
+		fd = redirect_heredoc(target);
+	else if (ft_strcmp(redir->type, "<") == 0)
+		fd = open(target[0], O_RDONLY);
 	else if (ft_strcmp(redir->type, ">") == 0)
-		fd = open(target, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		fd = open(target[0], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (ft_strcmp(redir->type, ">>") == 0)
-		fd = open(target, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		fd = open(target[0], O_WRONLY | O_CREAT | O_APPEND, 0644);
+	free(target);
 	return (fd);
 }
 
 static int	redir_fd(t_redir *redir, int fd)
 {
-	if (ft_strcmp(redir->type, "<") == 0)
+	if (ft_strcmp(redir->type, "<") == 0
+		|| ft_strcmp(redir->type, "<<") == 0)
 		return (dup2(fd, STDIN_FILENO));
 	else if (ft_strcmp(redir->type, ">") == 0
 		|| ft_strcmp(redir->type, ">>") == 0)
@@ -89,19 +119,4 @@ void	restore_fds(t_shell *ctx, int is_child)
 			ctx->stdout_backup = -1;
 		}
 	}
-}
-
-static char	*build_string(t_word *words)
-{
-	t_word	*word;
-	char	*string;
-
-	word = words;
-	string = ft_strdup("");
-	while (word)
-	{
-		string = ft_strjoin(string, word->link.content);
-		word = (t_word *) word->link.next;
-	}
-	return (string);
 }

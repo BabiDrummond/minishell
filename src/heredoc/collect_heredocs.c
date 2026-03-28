@@ -6,99 +6,64 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 21:16:37 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/19 18:52:21 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 16:56:10 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
+#include "minishell.h"
 
-char	*get_delimiter(t_token *token)
+int				collect_heredocs(t_ast *ast);
+static t_word	*collect_input(t_word *delimiter);
+
+int	collect_heredocs(t_ast *ast)
 {
-	t_head	*parts;
-	t_word	*word;
+	t_exec_node	*node;
+	t_list		*redirs;
+	t_redir		*redir;
 
-	if (token->is_operator)
-		return (NULL);
-	parts = (t_head *)token->link.content;
-	word = (t_word *)lst_pop(parts);
-	return ((char *)word->link.content);
+	if (ast == NULL)
+		return (EXIT_SUCCESS);
+	if (collect_heredocs(ast->left))
+		return (EXIT_FAILURE);
+	if (collect_heredocs(ast->right))
+		return (EXIT_FAILURE);
+	node = (t_exec_node *) ast->value;
+	redirs = node->redirs;
+	while (redirs)
+	{
+		if (g_signal == SIGINT)
+			return (EXIT_FAILURE);
+		redir = (t_redir *) redirs->content;
+		if (ft_strcmp(redir->type, "<<") == 0)
+			redir->target = collect_input(redir->target);
+		redirs = redirs->next;
+	}
+	return (EXIT_SUCCESS);
 }
 
-void	heredoc_sigint_handler(int sig)
+static t_word	*collect_input(t_word *delimiter)
 {
-	(void) sig;
-	exit(1);
-}
-
-static int	continue_with_child_process(int pipefd[2], const char *delimiter)
-{
+	t_word	*words;
 	char	*line;
 
-	signal(SIGINT, heredoc_sigint_handler);
-	close(pipefd[0]);
+	words = NULL;
 	while (1)
 	{
 		line = readline("> ");
 		if (!line)
 		{
-			fprintf(stderr,
-				"Warning: heredoc delimited by end-of-file (wanted `%s`)\n",
-				delimiter);
-			free(line);
-			close(pipefd[1]);
-			exit(0);
+			printf("Warning: heredoc delimited by end-of-file "
+				"(wanted `%s')\n", (char *)delimiter->link.content);
+			break ;
 		}
-		if (ft_strcmp(line, delimiter) == 0)
-		{
-			free(line);
-			close(pipefd[1]);
-			exit(0);
-		}
-		write(pipefd[1], line, ft_strlen(line));
-		write(pipefd[1], "\n", 1);
+		if (g_signal == SIGINT)
+			break ;
+		gc_add(line, free);
+		if (line && ft_strcmp(line, delimiter->link.content) == 0)
+			break ;
+		lst_add_back((t_list **)&words, (t_list *)create_word(line,
+				ft_strlen(line), delimiter->quote_state));
 	}
-}
-
-static int	continue_with_parent_process(pid_t pid,
-	int pipefd[2], t_token *token)
-{
-	int	status;
-	int	exit_code;
-
-	waitpid(pid, &status, 0);
-	close(pipefd[1]);
-	exit_code = (status >> 8) & 0xFF;
-	if (exit_code == 1)
-	{
-		close(pipefd[0]);
-		return (1);
-	}
-	token->stdin_fd = pipefd[0];
-	return (0);
-}
-
-int	collect_heredocs(t_ast *tokens)
-{
-	char	*delimiter;
-	int		pipefd[2];
-	pid_t	pid;
-
-	if (tokens == NULL)
-		return (0);
-	if (collect_heredocs(tokens->left))
-		return (1);
-	if (collect_heredocs(tokens->right))
-		return (1);
-	if (should_collect_heredoc((t_token *)tokens->value))
-	{
-		delimiter = get_delimiter((t_token *)tokens->right->value);
-		printf("Collecting heredoc until delimiter: %s\n", delimiter);
-		pipe(pipefd);
-		pid = fork();
-		if (pid == 0)
-			continue_with_child_process(pipefd, delimiter);
-		return (continue_with_parent_process(pid, pipefd,
-				(t_token *)tokens->value));
-	}
-	return (0);
+	return (words);
 }

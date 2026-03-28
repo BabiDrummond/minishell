@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   should_collect_heredoc.c                           :+:      :+:    :+:   */
+/*   split_content_heredoc.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/04 15:30:25 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/07 00:51:23 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/03/27 19:58:27 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/27 20:21:12 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
 
-int	should_collect_heredoc(t_token *token)
+char	**split_content_heredoc(t_word *words)
 {
-	if (token->is_operator
-		&& ft_strcmp(((char *)token->link.content), "<<") == 0)
-		return (1);
-	return (0);
+	char	**argv;
+	int		size;
+	int		i;
+
+	i = 0;
+	size = lst_size((t_list *) words);
+	argv = ft_calloc(size + 1, sizeof(char *));
+	while (words && i < size)
+	{
+		argv[i] = (char *)words->link.content;
+		i++;
+		words = (t_word *) words->link.next;
+	}
+	return (argv);
 }
