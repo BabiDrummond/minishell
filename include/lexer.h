@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:40:23 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/19 22:56:59 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 22:12:16 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct s_token
 {
 	t_node	link;
 	int		is_operator;
-	int		stdin_fd;
 }	t_token;
 
 char		**init_lexer_operators(void);

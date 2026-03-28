@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 22:03:47 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 22:17:47 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	main(int argc, char **argv, char **envp)
 		gc_set_current_scope(GC_SCOPE_FUNCTION);
 		tokens = tokenize(prompt, lexer_operators);
 		handle_exit(prompt);
-		print_tokens(tokens);
+		//print_tokens(tokens);
 		
 		ast = parse(tokens, ast_operators);
 		if (!ast)
@@ -76,10 +76,13 @@ int	main(int argc, char **argv, char **envp)
 			gc_free_all();
 			continue ;
 		}
-		print_ast(ast, 0);
+		//print_ast(ast, 0);
 		if (collect_heredocs(ast))
+		{
+			gc_free_all();
 			continue ;
-		print_ast(ast, 0);
+		}
+		//print_ast(ast, 0);
 
 		ctx.exit_status = execute(&ctx, ast, FALSE);
 		gc_free_all();

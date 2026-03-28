@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 18:07:03 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/23 20:23:21 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 22:12:08 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ static void	print_ast_operator(t_ast *node, int depth)
 	print_ast_indent(depth + 1);
 	printf("\"symbol\": %s,\n",
 		get_operator_symbol(((t_exec_node *)node->value)->type));
-	print_ast_indent(depth + 1);
-	printf("\"stdin_fd\": %d,\n", ((t_token *)node->value)->stdin_fd);
 	print_ast_indent(depth + 1);
 	printf("\"left\": ");
 	print_ast(node->left, depth + 1);
