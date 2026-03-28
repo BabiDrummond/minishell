@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 22:33:22 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 21:39:33 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 21:59:09 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 #include "expansion.h"
 
 int			process_redirects(t_shell *ctx, t_list *redirs, int is_child);
-static char	**expand_redirs(t_shell *ctx, t_redir *redir);
+static void	save_fds(t_shell *ctx, t_list *redirs, int is_child);
 static int	open_fd(t_shell *ctx, t_redir *redir, char **target);
 static int	redir_fd(t_redir *redir, int fd);
 void		restore_fds(t_shell *ctx, int is_child);
 
 int	process_redirects(t_shell *ctx, t_list *redirs, int is_child)
 {
+	char	**expanded;
 	t_list	*redir;
 	int		fd;
 
 	fd = -1;
 	redir = redirs;
-	if (!is_child && redirs)
-	{
-		ctx->stdin_backup = dup(STDIN_FILENO);
-		ctx->stdout_backup = dup(STDOUT_FILENO);
-	}
+	save_fds(ctx, redirs, is_child);
 	while (redir)
 	{
-		fd = open_fd(ctx, redir->content, expand_redirs(ctx, redir->content));
-		if (fd == -1)
+		expanded = expand_redirect(ctx, redir->content);
+		if (!expanded)
+			return (EXIT_FAILURE);
+		fd = open_fd(ctx, redir->content, expanded);
+		if (fd == -1 && printf("no such file or directory\n"))
 			return (EXIT_FAILURE);
 		if (redir_fd(redir->content, fd) == -1)
 		{
@@ -47,25 +47,13 @@ int	process_redirects(t_shell *ctx, t_list *redirs, int is_child)
 	return (EXIT_SUCCESS);
 }
 
-static char	**expand_redirs(t_shell *ctx, t_redir *redir)
+static void	save_fds(t_shell *ctx, t_list *redirs, int is_child)
 {
-	char	**target;
-	char	*old_target;
-
-	old_target = ft_strdup((char *)redir->target->link.content);
-	if (ft_strcmp(redir->type, "<<") == 0)
+	if (!is_child && redirs)
 	{
-		redir->target = (t_word *) expand_string(ctx,
-				(t_list *) redir->target, TRUE);
-		target = split_content_heredoc(redir->target);
+		ctx->stdin_backup = dup(STDIN_FILENO);
+		ctx->stdout_backup = dup(STDOUT_FILENO);
 	}
-	else
-	{
-		redir->target = (t_word *) expand_string(ctx,
-				(t_list *) redir->target, FALSE);
-		target = split_unquoted(redir->target);
-	}
-	return (target);
 }
 
 static int	open_fd(t_shell *ctx, t_redir *redir, char **target)
@@ -73,12 +61,6 @@ static int	open_fd(t_shell *ctx, t_redir *redir, char **target)
 	int		fd;
 
 	fd = -1;
-	if (ft_split_size(target) > 1 && ft_strcmp(redir->type, "<<") != 0)
-	{
-		printf("%s: ambiguous redirect\n",
-			(char *)redir->target->link.content);
-		return (fd);
-	}
 	if (ft_strcmp(redir->type, "<<") == 0)
 		fd = redirect_heredoc(target);
 	else if (ft_strcmp(redir->type, "<") == 0)
@@ -87,7 +69,6 @@ static int	open_fd(t_shell *ctx, t_redir *redir, char **target)
 		fd = open(target[0], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (ft_strcmp(redir->type, ">>") == 0)
 		fd = open(target[0], O_WRONLY | O_CREAT | O_APPEND, 0644);
-	free(target);
 	return (fd);
 }
 

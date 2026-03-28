@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 23:20:00 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/05 22:39:45 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 21:45:51 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,11 @@ void test_extract_value_with_equal_sign(t_list **vars)
 		printf("Expected: value\n");
 		printf("Got: %s\n", value);
 		printf("\033[0;32m✓ PASS\033[0m\n");
-		free(value);
 	}
 	else
 	{
 		printf("Expected: value, Got: %s\n", value ? value : "(null)");
 		printf("\033[0;31m✗ FAIL\033[0m\n");
-		if (value)
-			free(value);
 	}
 }
 
@@ -52,7 +49,6 @@ void test_extract_value_without_equal_sign(t_list **vars)
 	{
 		printf("Expected: NULL, Got: %s\n", value);
 		printf("\033[0;31m✗ FAIL\033[0m\n");
-		free(value);
 	}
 }
 
@@ -68,14 +64,11 @@ void test_extract_value_with_empty_value(t_list **vars)
 		printf("Expected: empty string\n");
 		printf("Got: empty string\n");
 		printf("\033[0;32m✓ PASS\033[0m\n");
-		free(value);
 	}
 	else
 	{
 		printf("Expected: empty string, Got: %s\n", value ? value : "(null)");
 		printf("\033[0;31m✗ FAIL\033[0m\n");
-		if (value)
-			free(value);
 	}
 }
 
@@ -91,13 +84,10 @@ void test_extract_value_with_multiple_equals(t_list **vars)
 		printf("Expected: value=another\n");
 		printf("Got: %s\n", value);
 		printf("\033[0;32m✓ PASS\033[0m\n");
-		free(value);
 	}
 	else
 	{
 		printf("Expected: value=another, Got: %s\n", value ? value : "(null)");
 		printf("\033[0;31m✗ FAIL\033[0m\n");
-		if (value)
-			free(value);
 	}
 }

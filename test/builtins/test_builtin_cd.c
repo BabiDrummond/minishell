@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 20:17:31 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/09 16:45:09 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 21:45:09 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,9 +223,6 @@ void test_cd_updates_oldpwd(t_list **vars)
 		printf("Got: OLDPWD=%s\n", oldpwd ? oldpwd : "(null)");
 		printf("\033[0;31m✗ FAIL\033[0m\n");
 	}
-	
-	if (pwd_copy)
-		free(pwd_copy);
 }
 
 void test_cd_dash_without_oldpwd_fails(t_list **vars)

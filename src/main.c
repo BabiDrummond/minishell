@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 21:37:23 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 22:03:47 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		print_ast(ast, 0);
 		if (collect_heredocs(ast))
-		{
-			gc_free_all();
 			continue ;
-		}
 		print_ast(ast, 0);
 
 		ctx.exit_status = execute(&ctx, ast, FALSE);
@@ -91,9 +88,3 @@ int	main(int argc, char **argv, char **envp)
 	gc_free_all();
 	return (ctx.exit_status);
 }
-
-// DEPOIS do parser, ANTES do execute
-// Percorrer árvore
-// Para cada nó, percorrer lista de redirs
-// Para cada heredoc, ler input do usuário até EOF
-// Substituir conteúdo do EOF com conteúdo lido na lista de redirs
