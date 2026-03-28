@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 23:35:32 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 23:40:24 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,33 @@ void	init_ctx(t_shell *ctx, char **envp)
 	ctx->stdout_backup = -1;
 }
 
+int	get_trimmed_length(char *str)
+{
+	int	i;
+	int	len;
+	int	in_space;
+
+	i = 0;
+	len = 0;
+	in_space = 0;
+	while (str[i] && ft_isspace(str[i]))
+		i++;
+	while (str[i])
+	{
+		if (ft_isspace(str[i]))
+			in_space = 1;
+		else
+		{
+			if (in_space && len > 0)
+				len++;
+			in_space = 0;
+			len++;
+		}
+		i++;
+	}
+	return (len);
+}
+	
 int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
@@ -45,6 +72,8 @@ int	main(int argc, char **argv, char **envp)
 	t_shell ctx;
 	t_head	*tokens;
 	t_ast	*ast;
+	struct termios	original_termios;
+	tcgetattr(STDIN_FILENO, &original_termios);
 	
 	init_ctx(&ctx, envp);
 	lexer_operators = init_lexer_operators();
@@ -55,16 +84,18 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		g_signal = 0;
+		tcsetattr(STDIN_FILENO, TCSANOW, &original_termios);
 		prompt = readline("prompt> ");
 		if (!prompt)
 		{
 			printf("exit\n");
 			break ;
 		}
-		add_history(prompt);
 		gc_add(prompt, free);
-		if (strlen(prompt) == 0)
+		
+		if (get_trimmed_length(prompt) == 0)
 			continue ;
+		add_history(prompt);
 		gc_set_current_scope(GC_SCOPE_FUNCTION);
 		tokens = tokenize(prompt, lexer_operators);
 		handle_exit(prompt);
