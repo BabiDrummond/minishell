@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 00:44:52 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 20:27:52 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 23:35:57 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
 # include "../libft/include/libft.h"
 # include "lexer.h"
 # include "parser.h"
+# include "execution.h"
 
-int		collect_heredocs(t_ast *tokens);
+int		collect_heredocs(t_shell *ctx, t_ast *ast);
 int		redirect_heredoc(char **target);
 char	**split_content_heredoc(t_word *words);
 

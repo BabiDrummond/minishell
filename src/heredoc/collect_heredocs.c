@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   collect_heredocs.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 21:16:37 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/27 22:59:26 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/27 23:34:52 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
 #include "minishell.h"
 
-int				collect_heredocs(t_ast *ast);
-static t_word	*collect_input(t_word *delimiter);
+int				collect_heredocs(t_shell *ctx, t_ast *ast);
 static t_word	*build_delimiter(t_word *words);
+static t_word	*collect_input(t_word *delimiter);
 
-int	collect_heredocs(t_ast *ast)
+int	collect_heredocs(t_shell *ctx, t_ast *ast)
 {
 	t_exec_node	*node;
 	t_list		*redirs;
@@ -25,16 +25,16 @@ int	collect_heredocs(t_ast *ast)
 
 	if (ast == NULL)
 		return (EXIT_SUCCESS);
-	if (collect_heredocs(ast->left))
+	if (collect_heredocs(ctx, ast->left))
 		return (EXIT_FAILURE);
-	if (collect_heredocs(ast->right))
+	if (collect_heredocs(ctx, ast->right))
 		return (EXIT_FAILURE);
 	node = (t_exec_node *) ast->value;
 	redirs = node->redirs;
 	while (redirs)
 	{
 		if (g_signal == SIGINT)
-			return (EXIT_FAILURE);
+			return (exit_status(ctx, CTRL_C, FALSE));
 		redir = (t_redir *) redirs->content;
 		if (ft_strcmp(redir->type, "<<") == 0)
 			redir->target = collect_input(build_delimiter(redir->target));
