@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 23:58:08 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 02:46:39 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 22:58:55 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	execute_in_parent(char *path, char **argv, char **envp)
 	if (pid < 0)
 	{
 		perror("fork");
-		return (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	waitpid(pid, &status, 0);
 	return (WEXITSTATUS(status));

@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/24 01:18:16 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 23:13:03 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			execute_operator(
 static int	execute_and(t_shell *ctx, t_ast *ast, int is_child);
 static int	execute_or(t_shell *ctx, t_ast *ast, int is_child);
 static int	execute_pipe(t_shell *ctx, t_ast *ast, int is_child);
-static int	pipe_children(t_shell *ctx, t_ast *ast, int pipefd[2], int pid[2]);
+static void	pipe_children(t_shell *ctx, t_ast *ast, int pipefd[2], int pid[2]);
 
 int	execute_operator(t_shell *ctx, t_ast *ast, t_exec_node *node, int is_child)
 {
@@ -61,29 +61,28 @@ static int	execute_pipe(t_shell *ctx, t_ast *ast, int is_child)
 	return (WEXITSTATUS(status));
 }
 
-static int	pipe_children(t_shell *ctx, t_ast *ast, int pipefd[2], int pid[2])
+static void	pipe_children(t_shell *ctx, t_ast *ast, int pipefd[2], int pid[2])
 {
 	pid[0] = fork();
 	if (pid[0] < 0)
-		return (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	else if (pid[0] == 0)
 	{
 		dup2(pipefd[1], STDOUT_FILENO);
 		close(pipefd[0]);
 		close(pipefd[1]);
-		execute(ctx, ast->left, TRUE);
+		ctx->exit_status = execute(ctx, ast->left, TRUE);
 		exit(ctx->exit_status);
 	}
 	pid[1] = fork();
 	if (pid[1] < 0)
-		return (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	else if (pid[1] == 0)
 	{
 		dup2(pipefd[0], STDIN_FILENO);
 		close(pipefd[0]);
 		close(pipefd[1]);
-		execute(ctx, ast->right, TRUE);
+		ctx->exit_status = execute(ctx, ast->right, TRUE);
 		exit(ctx->exit_status);
 	}
-	return (EXIT_SUCCESS);
 }
