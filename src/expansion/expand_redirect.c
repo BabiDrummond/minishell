@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_redirect.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 21:56:52 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 21:57:39 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 03:17:19 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**expand_redirect(t_shell *ctx, t_redir *redir)
 	}
 	if (ft_split_size(target) > 1 && ft_strcmp(redir->type, "<<") != 0)
 	{
-		printf("%s: ambiguous redirect\n", old_target);
+		ft_putstr_fd(ft_replace("%s: ambiguous redirect\n", "%s", old_target), 2);
 		return (NULL);
 	}
 	return (target);

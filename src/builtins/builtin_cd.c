@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 01:34:24 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/19 17:17:11 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 02:40:51 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ int	builtin_cd(t_list **vars, char **argv)
 	char	*dir;
 
 	dir = argv[1];
-	if (ft_split_size(argv) > 2 && printf("cd: too many arguments\n"))
-		return (EXIT_FAILURE);
+	if (ft_split_size(argv) > 2)
+		return (print_error("cd: too many arguments\n", EXIT_FAILURE));
 	if (!argv[1] || ft_strcmp(argv[1], "~") == 0)
 		dir = var_get_value(*vars, "HOME");
-	if (!dir && printf("cd: HOME not set\n"))
-		return (EXIT_FAILURE);
+	if (!dir)
+		return (print_error("cd: HOME not set\n", EXIT_FAILURE));
 	if (argv[1] && ft_strcmp(argv[1], "-") == 0)
 		dir = var_get_value(*vars, "OLDPWD");
-	if (!dir && printf("cd: OLDPWD not set\n"))
-		return (EXIT_FAILURE);
-	if (chdir(dir) == -1 && printf("cd: %s: No such file or directory\n", dir))
-		return (EXIT_FAILURE);
+	if (!dir)
+		return (print_error("cd: OLDPWD not set\n", EXIT_FAILURE));
+	if (chdir(dir) == -1)
+		return (print_error(ft_replace("cd: %s: No such file or directory\n", "%s",dir), EXIT_FAILURE));
 	old_pwd = var_get_value(*vars, "PWD");
 	var_set(vars, ft_strdup("OLDPWD"), ft_strdup(old_pwd), TRUE);
 	if (getcwd(new_pwd, sizeof(new_pwd)) != NULL)

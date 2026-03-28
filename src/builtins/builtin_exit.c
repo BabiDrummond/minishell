@@ -6,7 +6,7 @@
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 16:42:32 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 01:31:57 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/28 03:16:40 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,23 @@ int	builtin_exit(t_shell *ctx, char **argv)
 
 	if (!argv[1])
 	{
-		perror("exit");
+		printf("exit");
 		gc_exit(ctx->exit_status);
 	}
 	exit_code = exit_atoll(ctx, argv[1]);
 	if (ctx->exit_status == SYNTAX_ERROR)
 	{
-		fprintf(stderr, "exit\nexit: %s: numeric argument required\n", argv[1]); // trocar fprintf
+		ft_putstr_fd(ft_replace("exit\nexit: %s: numeric argument required\n", "%s", argv[1]), 2);
 		gc_exit(SYNTAX_ERROR);
 	}
 	if (ft_split_size(argv) > 2)
 	{
-		fprintf(stderr, "exit: too many arguments\n"); // trocar fprintf
+		ft_putstr_fd("exit: too many arguments\n", 2);
 		return (exit_status(ctx, EXIT_FAILURE, FALSE));
 	}
 	if (exit_code < 0 || exit_code > 255)
 	{
-		perror("exit");
+		printf("exit");
 		gc_exit((unsigned char) exit_code);
 	}
 	return (ctx->exit_status);

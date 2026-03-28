@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 00:46:16 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/19 17:20:35 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 02:35:32 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int	builtin_unset(t_list **vars, char **argv)
 		return (exit_code);
 	while (argv[i])
 	{
-		if (!is_valid_key(argv[i])
-			&& printf("unset: `%s': invalid parameter name\n", argv[i]))
+		if (!is_valid_key(argv[i]))
 			exit_code = EXIT_FAILURE;
 		else
 			var_unset(vars, argv[i]);

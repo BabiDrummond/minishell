@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_ast_node.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 20:35:35 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 02:34:14 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 02:26:56 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_exec_node	*build_ast_node(t_token *token)
 			redir = safe_calloc(1, sizeof(t_redir));
 			redir->type = token->link.content;
 			if (!token->link.next)
-				printf("minishell: parse error near %s\n", redir->type);
+				print_syntax_error(redir->type);
 			redir->target = (t_word *)((t_head *)((t_token *)
 						token->link.next)->link.content)->first;
 			lst_add_back(&exec_node->redirs, lst_new(redir));

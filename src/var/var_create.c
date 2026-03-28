@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_create.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 00:41:36 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 02:42:57 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 03:17:33 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_var	*var_create(char *key, char *value, int exported)
 
 	if (!is_valid_key(key))
 	{
-		printf("export: `%s': not a valid identifier\n", key);
+		ft_putstr_fd(ft_replace("export: `%s': not a valid identifier\n", "%s",key), 2);
 		return (NULL);
 	}
 	var = safe_calloc(1, sizeof(t_var));

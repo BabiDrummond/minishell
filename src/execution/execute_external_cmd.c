@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   execute_external_cmd.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 23:58:08 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 22:58:55 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 03:23:20 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
+#include "minishell.h"
 
 int			execute_external_cmd(t_shell *ctx, char **argv, int is_child);
 static int	execute_in_parent(char *path, char **argv, char **envp);
@@ -23,10 +24,7 @@ int	execute_external_cmd(t_shell *ctx, char **argv, int is_child)
 
 	cmd_path = find_cmd_path(ctx->vars, argv[0]);
 	if (!cmd_path)
-	{
-		printf("Command not found: %s\n", argv[0]);
-		return (CMD_NOT_FOUND);
-	}
+		return (print_error(ft_replace("Command not found: %s\n", "%s", argv[0]), CMD_NOT_FOUND));
 	envp = lst_to_envp(ctx->vars);
 	if (is_child)
 		execute_in_child(cmd_path, argv, envp);
