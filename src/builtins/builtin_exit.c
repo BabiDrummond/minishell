@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 16:42:32 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/19 22:55:35 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 00:53:54 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
+
+static void	handle_exit(int status)
+{
+	printf("exit\n");
+	gc_free_all();
+	gc_set_current_scope(GC_SCOPE_GLOBAL);
+	gc_free_all();
+	exit(status);
+}
 
 static long long	exit_atoll(t_shell *ctx, char *ascii)
 {
@@ -49,14 +58,19 @@ int	builtin_exit(t_shell *ctx, char **argv)
 	long long	exit_code;
 
 	if (!argv[1])
-		return (exit_status(ctx, ctx->exit_status, TRUE));
+		handle_exit(ctx->exit_status);
 	exit_code = exit_atoll(ctx, argv[1]);
-	if (ctx->exit_status == SYNTAX_ERROR
-		&& printf("exit: %s: numeric argument required\n", argv[1]))
-		return (exit_status(ctx, SYNTAX_ERROR, TRUE));
-	if (ft_split_size(argv) > 2 && printf("exit: too many arguments\n"))
+	if (ctx->exit_status == SYNTAX_ERROR)
+	{
+		fprintf(stderr, "exit: %s: numeric argument required\n", argv[1]); // trocar fprintf
+		handle_exit(SYNTAX_ERROR);
+	}
+	if (ft_split_size(argv) > 2)
+	{
+		fprintf(stderr, "exit: too many arguments\n"); // trocar fprintf
 		return (exit_status(ctx, EXIT_FAILURE, FALSE));
+	}
 	if (exit_code < 0 || exit_code > 255)
-		exit_code = (unsigned char) exit_code;
-	return (exit_status(ctx, exit_code, TRUE));
+		handle_exit((unsigned char) exit_code);
+	return (ctx->exit_status);
 }
