@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:57:44 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/19 17:38:53 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 01:07:36 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_head	*tokenize(char *prompt, char **operators)
 	while (*prompt)
 	{
 		result = get_next_token(prompt, operators);
+		if (!result)
+			return (NULL);
 		if (result[1] != NULL)
 			lst_add_last(tokens, result[1]);
 		prompt = (char *)result[0];

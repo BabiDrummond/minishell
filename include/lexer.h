@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:40:23 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/27 22:12:16 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 01:40:33 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,5 @@ t_token		*create_token(void *content, int is_operator);
 void		**get_next_token(char *str, char **operators);
 void		**create_token_result(void *str, void *token_value);
 void		print_tokens(t_head *tokens);
-void		syntax_error(void);
 
 #endif

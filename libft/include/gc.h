@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:40:23 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/27 16:07:12 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 01:26:18 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_head		*get_collector(void);
 void		gc_node_free(t_gc_node *gc_node);
 void		gc_add(void *ptr, void (*destructor)(void *));
 void		gc_free_all(void);
-void		gc_exit(void);
+void		gc_exit(int exit_status);
 void		gc_add_or_exit(void *ptr, void (*destructor)(void *));
 void		gc_set_current_scope(t_gc_scope new_scope);
 t_gc_scope	*gc_get_current_scope(void);

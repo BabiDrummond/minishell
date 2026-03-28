@@ -6,20 +6,11 @@
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 16:42:32 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 00:53:54 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/28 01:31:57 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-
-static void	handle_exit(int status)
-{
-	printf("exit\n");
-	gc_free_all();
-	gc_set_current_scope(GC_SCOPE_GLOBAL);
-	gc_free_all();
-	exit(status);
-}
 
 static long long	exit_atoll(t_shell *ctx, char *ascii)
 {
@@ -58,12 +49,15 @@ int	builtin_exit(t_shell *ctx, char **argv)
 	long long	exit_code;
 
 	if (!argv[1])
-		handle_exit(ctx->exit_status);
+	{
+		perror("exit");
+		gc_exit(ctx->exit_status);
+	}
 	exit_code = exit_atoll(ctx, argv[1]);
 	if (ctx->exit_status == SYNTAX_ERROR)
 	{
-		fprintf(stderr, "exit: %s: numeric argument required\n", argv[1]); // trocar fprintf
-		handle_exit(SYNTAX_ERROR);
+		fprintf(stderr, "exit\nexit: %s: numeric argument required\n", argv[1]); // trocar fprintf
+		gc_exit(SYNTAX_ERROR);
 	}
 	if (ft_split_size(argv) > 2)
 	{
@@ -71,6 +65,9 @@ int	builtin_exit(t_shell *ctx, char **argv)
 		return (exit_status(ctx, EXIT_FAILURE, FALSE));
 	}
 	if (exit_code < 0 || exit_code > 255)
-		handle_exit((unsigned char) exit_code);
+	{
+		perror("exit");
+		gc_exit((unsigned char) exit_code);
+	}
 	return (ctx->exit_status);
 }

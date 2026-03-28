@@ -6,24 +6,13 @@
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 00:56:37 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/28 01:34:01 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int g_signal = 0;
-
-static void	handle_exit(char *prompt)
-{
-	if (ft_strcmp(prompt, "exit") == 0)
-	{
-		gc_free_all();
-		gc_set_current_scope(GC_SCOPE_GLOBAL);
-		gc_free_all();
-		exit(0);
-	}
-}
 
 void	init_ctx(t_shell *ctx, char **envp)
 {
@@ -83,12 +72,14 @@ int	main(int argc, char **argv, char **envp)
 	set_signals();
 	while (1)
 	{
+		gc_set_current_scope(GC_SCOPE_FUNCTION);
+
 		g_signal = 0;
 		tcsetattr(STDIN_FILENO, TCSANOW, &original_termios);
 		prompt = readline("prompt> ");
 		if (!prompt)
 		{
-			printf("exit\n");
+			perror("exit\n");
 			break ;
 		}
 		gc_add(prompt, free);
@@ -96,8 +87,9 @@ int	main(int argc, char **argv, char **envp)
 		if (get_trimmed_length(prompt) == 0)
 			continue ;
 		add_history(prompt);
-		gc_set_current_scope(GC_SCOPE_FUNCTION);
 		tokens = tokenize(prompt, lexer_operators);
+		if (!tokens)
+			continue;
 		//print_tokens(tokens);
 		
 		ast = parse(tokens, ast_operators);
@@ -117,7 +109,6 @@ int	main(int argc, char **argv, char **envp)
 		ctx.exit_status = execute(&ctx, ast, FALSE);
 		gc_free_all();
 	}
-	gc_set_current_scope(GC_SCOPE_GLOBAL);
 	gc_free_all();
 	return (ctx.exit_status);
 }

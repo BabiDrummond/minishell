@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:53:16 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/19 17:38:47 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 01:09:17 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ void	**get_quoted_word(char *str, char **operators, t_char_type type)
 	while (*end && get_char_type(end, operators) != type)
 		end++;
 	if (get_char_type(end, operators) == IS_NULL)
-		syntax_error();
+	{
+		perror("Syntax Error: Unclosed quote\n");
+		return (NULL);
+	}
 	len = end - start;
 	if (type == IS_SINGLE_QUOTE)
 		word = create_word(start, len, QUOTE_SINGLE);
