@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:58:27 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 20:21:12 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 21:42:46 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**split_content_heredoc(t_word *words)
 
 	i = 0;
 	size = lst_size((t_list *) words);
-	argv = ft_calloc(size + 1, sizeof(char *));
+	argv = safe_calloc(size + 1, sizeof(char *));
 	while (words && i < size)
 	{
 		argv[i] = (char *)words->link.content;
