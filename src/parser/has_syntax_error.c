@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   has_syntax_error.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 15:33:39 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/19 22:23:38 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 03:41:50 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int	print_error(void)
 {
 	printf("Syntax Error: two consecutive operators\n");
-	gc_exit();
 	return (1);
 }
 

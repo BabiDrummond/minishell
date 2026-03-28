@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_matrix_print.c                                  :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 21:00:01 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/23 22:50:59 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/03/28 03:08:00 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/03/28 03:14:22 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrix.h"
+#include "str.h"
 
-void	ft_matrix_print(char **matrix)
+void	ft_putstr_fd(char *s, int fd)
 {
-	while (matrix && *matrix)
-		printf("%s\n", *matrix++);
+	if (!s)
+		return ;
+	write(fd, s, ft_strlen(s));
 }

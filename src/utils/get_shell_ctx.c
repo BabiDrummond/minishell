@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix.h                                           :+:      :+:    :+:   */
+/*   get_shell_ctx.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 21:10:41 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/02/23 00:42:27 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/03/28 02:08:40 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/03/28 04:19:35 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATRIX_H
-# define MATRIX_H
+#include "shell.h"
 
-# include <stdio.h>
-
-void	ft_matrix_print(char **matrix);
-
-#endif
+t_shell *get_shell_ctx(void)
+{
+	static t_shell  ctx = {0};
+	return (&ctx);
+}

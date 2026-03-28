@@ -6,7 +6,7 @@
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 23:19:10 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 23:37:56 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/28 02:47:23 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,7 @@
 # include "parser.h"
 # include <termios.h>
 # include "../libft/include/libft.h"
-
-typedef enum s_exit_status
-{
-	SYNTAX_ERROR = 2,
-	PERMISSION_DENIED = 126,
-	CMD_NOT_FOUND = 127,
-	CTRL_C = 130,
-	CTRL_QUIT = 131
-}	t_exit_status;
+# include "shell.h"
 
 typedef struct s_var
 {
@@ -37,15 +29,6 @@ typedef struct s_var
 	int		exported;
 }	t_var;
 
-typedef struct s_shell
-{
-	pid_t			pid;
-	t_list			*vars;
-	t_exit_status	exit_status;
-	int				should_exit;
-	int				stdin_backup;
-	int				stdout_backup;
-}	t_shell;
 
 /* Built-ins */
 int		builtin_cd(t_list **vars, char **argv);

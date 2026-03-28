@@ -37,7 +37,6 @@ SRCS = main.c 							\
 	heredoc/collect_heredocs.c 			\
 	heredoc/redirect_heredoc.c			\
 	heredoc/split_content_heredoc.c		\
-	lexer/errors/syntax_error.c			\
 	lexer/utils/create_token_result.c	\
 	lexer/utils/get_char_type.c			\
 	lexer/utils/print_tokens.c			\
@@ -57,6 +56,8 @@ SRCS = main.c 							\
 	utils/extract_value.c				\
 	utils/is_valid_key.c				\
 	utils/lst_to_envp.c					\
+	utils/get_shell_ctx.c				\
+	utils/print_error.c					\
 	var/var_create.c					\
 	var/var_get.c						\
 	var/var_set.c						\

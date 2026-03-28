@@ -10,7 +10,6 @@ SRCS = ast/ast_new.c		\
 	char/ft_isdigit.c		\
 	char/ft_isspace.c		\
 	gc/create_gc_node.c		\
-	gc/gc_add_or_exit.c		\
 	gc/gc_free_all.c		\
 	gc/get_collector.c		\
 	gc/gc_add.c				\
@@ -25,7 +24,6 @@ SRCS = ast/ast_new.c		\
 	lst/lst_last.c			\
 	lst/lst_new.c			\
 	lst/lst_size.c			\
-	matrix/ft_matrix_print.c \
 	mem/ft_bzero.c			\
 	mem/ft_calloc.c			\
 	mem/ft_memcpy.c			\
@@ -44,7 +42,10 @@ SRCS = ast/ast_new.c		\
 	str/ft_strncmp.c		\
 	str/ft_strndup.c		\
 	str/ft_substr.c			\
+	str/ft_replace.c		\
+	str/ft_putstr_fd.c		\
 	str/merge_splits.c
+
 OBJS_DIR = objs/
 OBJS = $(SRCS:%.c=$(OBJS_DIR)%.o)
 

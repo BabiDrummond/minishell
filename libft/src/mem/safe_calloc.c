@@ -6,13 +6,14 @@
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 02:06:47 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 01:32:28 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/28 03:19:25 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mem.h"
 #include "list.h"
 #include "gc.h"
+#include "str.h"
 
 void	*safe_calloc(size_t nmemb, size_t size)
 {
@@ -21,7 +22,7 @@ void	*safe_calloc(size_t nmemb, size_t size)
 	ptr = ft_calloc(nmemb, size);
 	if (!ptr)
 	{
-		perror("Error allocating memory. Terminating now...\n");
+		ft_putstr_fd("Error allocating memory. Terminating now...\n", 2);
 		gc_exit(EXIT_FAILURE);
 	}
 	gc_add(ptr, free);

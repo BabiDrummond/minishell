@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 22:42:31 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 03:47:51 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 03:13:15 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strndup(const char *s, size_t n);
 size_t	ft_strlen(const char *s);
 char	**merge_splits(char **first, char **second);
+char	*ft_replace(const char *str, const char *placeholder, const char *value);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif

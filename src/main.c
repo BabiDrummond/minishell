@@ -6,7 +6,7 @@
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 01:34:01 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/28 04:31:05 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	get_trimmed_length(char *str)
 	}
 	return (len);
 }
-	
+
 int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
@@ -58,13 +58,14 @@ int	main(int argc, char **argv, char **envp)
 	char	**lexer_operators;
 	char	**ast_operators;
 	char	*prompt;
-	t_shell ctx;
+	t_shell *ctx;
 	t_head	*tokens;
 	t_ast	*ast;
 	struct termios	original_termios;
 	tcgetattr(STDIN_FILENO, &original_termios);
 	
-	init_ctx(&ctx, envp);
+	ctx = get_shell_ctx();
+	init_ctx(ctx, envp);
 	lexer_operators = init_lexer_operators();
 	ast_operators = init_ast_operators();
 	prompt = NULL;
@@ -73,12 +74,13 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		gc_set_current_scope(GC_SCOPE_FUNCTION);
-
+		
 		g_signal = 0;
 		tcsetattr(STDIN_FILENO, TCSANOW, &original_termios);
 		prompt = readline("prompt> ");
 		if (!prompt)
 		{
+			// ft_putstr_fd("exit\n", 2);
 			perror("exit\n");
 			break ;
 		}
@@ -99,16 +101,16 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		//print_ast(ast, 0);
-		if (collect_heredocs(&ctx, ast))
+		if (collect_heredocs(ctx, ast))
 		{
 			gc_free_all();
 			continue ;
 		}
 		//print_ast(ast, 0);
 
-		ctx.exit_status = execute(&ctx, ast, FALSE);
+		ctx->exit_status = execute(ctx, ast, FALSE);
 		gc_free_all();
 	}
 	gc_free_all();
-	return (ctx.exit_status);
+	return (ctx->exit_status);
 }

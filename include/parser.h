@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:14:43 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/23 20:22:43 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 02:53:05 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
+#include "shell.h"
 # include "lexer.h"
 # include "../libft/include/libft.h"
 
