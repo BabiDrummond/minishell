@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collect_heredocs.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 21:16:37 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/27 23:34:52 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/27 23:53:17 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ int	collect_heredocs(t_shell *ctx, t_ast *ast)
 
 	if (ast == NULL)
 		return (EXIT_SUCCESS);
-	if (collect_heredocs(ctx, ast->left))
-		return (EXIT_FAILURE);
-	if (collect_heredocs(ctx, ast->right))
+	if (collect_heredocs(ctx, ast->left)
+		|| collect_heredocs(ctx, ast->right))
 		return (EXIT_FAILURE);
 	node = (t_exec_node *) ast->value;
 	redirs = node->redirs;
@@ -37,7 +36,11 @@ int	collect_heredocs(t_shell *ctx, t_ast *ast)
 			return (exit_status(ctx, CTRL_C, FALSE));
 		redir = (t_redir *) redirs->content;
 		if (ft_strcmp(redir->type, "<<") == 0)
+		{
 			redir->target = collect_input(build_delimiter(redir->target));
+			if (redir->target == NULL)
+				return (EXIT_FAILURE);
+		}
 		redirs = redirs->next;
 	}
 	return (EXIT_SUCCESS);
