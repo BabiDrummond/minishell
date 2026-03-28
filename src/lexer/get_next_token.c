@@ -6,7 +6,7 @@
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:53:16 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/28 01:09:17 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/28 04:48:49 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	**get_quoted_word(char *str, char **operators, t_char_type type)
 		end++;
 	if (get_char_type(end, operators) == IS_NULL)
 	{
-		perror("Syntax Error: Unclosed quote\n");
+		ft_putstr_fd("Syntax Error: Unclosed quote\n", 2);
 		return (NULL);
 	}
 	len = end - start;
@@ -68,7 +68,11 @@ void	**get_word_token(char *str, char **operators)
 			if (type == IS_NORMAL)
 				result = get_not_quoted_word(str, operators);
 			else
+			{
 				result = get_quoted_word(str, operators, type);
+				if (!result)
+					return (NULL);
+			}
 			str = (char *)result[0];
 			lst_add_last(parts, result[1]);
 			continue ;
