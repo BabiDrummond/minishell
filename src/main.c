@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 00:08:36 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 00:46:51 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ int	main(int argc, char **argv, char **envp)
 	set_signals();
 	while (1)
 	{
-		gc_set_current_scope(GC_SCOPE_FUNCTION);
-		
 		g_signal = 0;
 		tcsetattr(STDIN_FILENO, TCSANOW, &original_termios);
 		prompt = readline("prompt> ");
@@ -84,7 +82,6 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		}
 		gc_add(prompt, free);
-		
 		if (get_trimmed_length(prompt) == 0)
 			continue ;
 		add_history(prompt);
@@ -92,23 +89,14 @@ int	main(int argc, char **argv, char **envp)
 		if (!tokens)
 			continue;
 		//print_tokens(tokens);
-		
 		ast = parse(tokens, ast_operators);
 		if (!ast)
-		{
-			gc_free_all();
 			continue ;
-		}
 		//print_ast(ast, 0);
 		if (collect_heredocs(ctx, ast))
-		{
-			gc_free_all();
 			continue ;
-		}
 		//print_ast(ast, 0);
-
 		ctx->exit_status = execute(ctx, ast, FALSE);
-		gc_free_all();
 	}
 	gc_free_all();
 	return (ctx->exit_status);

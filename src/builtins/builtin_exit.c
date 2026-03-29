@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 16:42:32 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 23:57:17 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 00:48:27 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,8 @@ int	builtin_exit(t_shell *ctx, char **argv)
 		ft_putstr_fd("exit: too many arguments\n", 2);
 		return (exit_status(ctx, EXIT_FAILURE, FALSE));
 	}
-	if (exit_code < 0 || exit_code > 255)
-	{
-		printf("exit\n");
-		gc_exit((unsigned char) exit_code);
-	}
+	printf("exit\n");
+	gc_exit((unsigned char) exit_code);
 	return (ctx->exit_status);
 }
 
