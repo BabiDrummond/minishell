@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 01:58:44 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 03:23:05 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ int	main(int argc, char **argv, char **envp)
 		tokens = tokenize(prompt, lexer_operators);
 		if (!tokens)
 			continue;
-		//print_tokens(tokens);
+		print_tokens(tokens);
 		ast = parse(tokens, ast_operators);
 		if (!ast)
 			continue ;
-		//print_ast(ast, 0);
+		print_ast(ast, 0);
 		if (collect_heredocs(ctx, ast))
 			continue ;
-		//print_ast(ast, 0);
+		print_ast(ast, 0);
 		ctx->exit_status = execute(ctx, ast, FALSE);
 	}
 	gc_free_all();

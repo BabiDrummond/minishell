@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 01:01:48 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 23:39:34 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 03:49:29 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,12 @@ char	**split_unquoted(t_word *words)
 		{
 			j = 0;
 			splitted = ft_split(words->link.content, ' ');
-			argv[i] = ft_strjoin(argv[i], splitted[j++]);
-			while (splitted[j])
-				argv[++i] = ft_strdup(splitted[j++]);
+			if (splitted && splitted[0])
+			{
+				argv[i] = ft_strjoin(argv[i], splitted[j++]);
+				while (splitted[j])
+					argv[++i] = ft_strdup(splitted[j++]);
+			}
 		}
 		words = (t_word *) words->link.next;
 	}
