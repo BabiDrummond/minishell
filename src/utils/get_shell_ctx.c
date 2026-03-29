@@ -6,14 +6,15 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 02:08:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/28 23:25:06 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 00:04:35 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-t_shell *get_shell_ctx(void)
+t_shell	*get_shell_ctx(void)
 {
-	static t_shell  ctx = {0};
+	static t_shell	ctx = {0};
+
 	return (&ctx);
 }

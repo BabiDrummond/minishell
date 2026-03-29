@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 21:16:37 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/28 23:36:00 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 00:02:42 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static t_word	*build_delimiter(t_word *words)
 }
 
 static t_word	*collect_input(t_word *delimiter)
-{	
+{
 	t_word	*words;
 	char	*line;
 

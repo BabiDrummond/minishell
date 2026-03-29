@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 23:58:08 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 23:33:31 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 00:05:11 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	execute_external_cmd(t_shell *ctx, char **argv, int is_child)
 	cmd_path = find_cmd_path(ctx->vars, argv[0]);
 	if (!cmd_path)
 		return (print_error(ft_replace("Command not found: %s\n", "%s",
-			argv[0]), CMD_NOT_FOUND));
+					argv[0]), CMD_NOT_FOUND));
 	envp = lst_to_envp(ctx->vars);
 	if (is_child)
 		execute_in_child(cmd_path, argv, envp);

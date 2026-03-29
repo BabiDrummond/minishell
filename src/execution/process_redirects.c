@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 22:33:22 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 23:56:11 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 00:05:05 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	process_redirects(t_shell *ctx, t_list *redirs, int is_child)
 		fd = open_fd(ctx, redir->content, expanded);
 		if (fd == -1)
 			return (print_error(ft_replace("%s: No such file or directory\n",
-				"%s", expanded[0]), EXIT_FAILURE));
+						"%s", expanded[0]), EXIT_FAILURE));
 		if (redir_fd(redir->content, fd) == -1)
 		{
 			close(fd);

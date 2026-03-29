@@ -6,18 +6,18 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:24:36 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/28 23:01:21 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 00:03:14 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 t_ast			*parse(t_head *tokens, char **operators);
-static t_ast	*parse_operators(t_token *token, char **operators, 
-		t_head *tokens);
+static t_ast	*parse_operators(t_token *token, char **operators,
+					t_head *tokens);
 static void		set_left(t_head *left, t_token *current_token, t_head *tokens);
 static void		set_right(t_head *right, t_token *current_token,
-		t_head *tokens);
+					t_head *tokens);
 
 t_ast	*parse(t_head *tokens, char **operators)
 {

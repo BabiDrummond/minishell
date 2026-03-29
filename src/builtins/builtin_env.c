@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 23:44:45 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 21:43:55 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 00:01:43 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	builtin_env(t_list *vars, char **argv)
 
 	if (argv[1])
 		return (print_error(ft_replace("env: '%s': No such file or directory"
-				"\n", "%s", argv[1]), CMD_NOT_FOUND));
+					"\n", "%s", argv[1]), CMD_NOT_FOUND));
 	while (vars)
 	{
 		var = (t_var *) vars->content;

@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 21:56:52 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 22:19:56 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 00:03:43 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ char	**expand_redirect(t_shell *ctx, t_redir *redir)
 	}
 	if (ft_split_size(target) > 1 && ft_strcmp(redir->type, "<<") != 0)
 	{
-		ft_putstr_fd(ft_replace("%s: ambiguous redirect\n", "%s", old_target), 2);
+		ft_putstr_fd(ft_replace("%s: ambiguous redirect\n",
+				"%s", old_target), 2);
 		return (NULL);
 	}
 	return (target);
