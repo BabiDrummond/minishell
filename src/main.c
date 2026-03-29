@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 03:23:05 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 03:57:47 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,53 @@
 
 int g_signal = 0;
 
-void	init_ctx(t_shell *ctx, char **envp)
+int			main(int argc, char **argv, char **envp);
+static void	init_ctx(t_shell *ctx, char **envp);
+static void	main_loop(t_shell *ctx, struct termios *term);
+
+int	main(int argc, char **argv, char **envp)
+{
+	struct termios	original_termios;
+	t_shell			*ctx;
+	(void)argc;
+	(void)argv;
+	
+	tcgetattr(STDIN_FILENO, &original_termios);
+	ctx = get_shell_ctx();
+	init_ctx(ctx, envp);
+	set_signals();
+	main_loop(ctx, &original_termios);
+	gc_free_all();
+	return (ctx->exit_status);
+}
+
+static void	init_ctx(t_shell *ctx, char **envp)
 {
 	ctx->pid = getpid();
 	ctx->vars = envp_to_lst(envp);
 	ctx->exit_status = EXIT_SUCCESS;
 	ctx->stdin_backup = -1;
 	ctx->stdout_backup = -1;
+	var_set(&ctx->vars, "SHLVL", 
+			ft_itoa(ft_atoi(var_get_value(ctx->vars, "SHLVL")) + 1), TRUE);
 }
 
-int	main(int argc, char **argv, char **envp)
+static void	main_loop(t_shell *ctx, struct termios *term)
 {
-	(void)argc;
-	(void)argv;
 	char	**lexer_operators;
 	char	**ast_operators;
 	char	*prompt;
-	t_shell *ctx;
 	t_head	*tokens;
 	t_ast	*ast;
-	struct termios	original_termios;
-	tcgetattr(STDIN_FILENO, &original_termios);
 	
-	ctx = get_shell_ctx();
-	init_ctx(ctx, envp);
-	var_set(&ctx->vars, "SHLVL", ft_itoa(ft_atoi(var_get_value(ctx->vars, "SHLVL")) + 1), TRUE);
 	lexer_operators = init_lexer_operators();
 	ast_operators = init_ast_operators();
 	prompt = NULL;
 	tokens = NULL;
-	set_signals();
 	while (1)
 	{
 		g_signal = 0;
-		tcsetattr(STDIN_FILENO, TCSANOW, &original_termios);
+		tcsetattr(STDIN_FILENO, TCSANOW, term);
 		prompt = readline("prompt> ");
 		if (!prompt)
 		{
@@ -55,9 +68,9 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		}
 		gc_add(prompt, free);
+		add_history(prompt);
 		if (get_trimmed_length(prompt) == 0)
 			continue ;
-		add_history(prompt);
 		tokens = tokenize(prompt, lexer_operators);
 		if (!tokens)
 			continue;
@@ -71,6 +84,4 @@ int	main(int argc, char **argv, char **envp)
 		print_ast(ast, 0);
 		ctx->exit_status = execute(ctx, ast, FALSE);
 	}
-	gc_free_all();
-	return (ctx->exit_status);
 }
