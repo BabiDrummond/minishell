@@ -6,15 +6,17 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 01:01:48 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 03:49:29 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 18:32:46 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
 
 char		**split_unquoted(t_word *words);
+static char	**split_spaces(const char *s);
 static int	total_words(t_word *words);
 static int	count_words(char *s);
+static int	word_len(const char *s);
 
 char	**split_unquoted(t_word *words)
 {
@@ -32,7 +34,7 @@ char	**split_unquoted(t_word *words)
 		else
 		{
 			j = 0;
-			splitted = ft_split(words->link.content, ' ');
+			splitted = split_spaces(words->link.content);
 			if (splitted && splitted[0])
 			{
 				argv[i] = ft_strjoin(argv[i], splitted[j++]);
@@ -43,6 +45,30 @@ char	**split_unquoted(t_word *words)
 		words = (t_word *) words->link.next;
 	}
 	return (argv);
+}
+
+
+static char	**split_spaces(const char *s)
+{
+	char	**arr;
+	int		word;
+	int		letter;
+
+	word = 0;
+	arr = safe_calloc((count_words((char *) s) + 1), sizeof(char *));
+	while (*s && ft_isspace(*s))
+		s++;
+	while (*s)
+	{
+		letter = 0;
+		arr[word] = safe_calloc(word_len((char *)s) + 1, sizeof(char));
+		while (*s && !ft_isspace(*s))
+			arr[word][letter++] = *s++;
+		while (*s && ft_isspace(*s))
+			s++;
+		word++;
+	}
+	return (arr);
 }
 
 static int	total_words(t_word *words)
@@ -90,4 +116,14 @@ static int	count_words(char *s)
 		i++;
 	}
 	return (count);
+}
+
+static int	word_len(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] && !ft_isspace(s[i]))
+		i++;
+	return (i);
 }
