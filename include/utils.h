@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 01:28:40 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 01:59:26 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_shell
 t_shell	*get_shell_ctx(void);
 t_list	*envp_to_lst(char **envp);
 char	**lst_to_envp(t_list *vars);
+int		get_trimmed_length(char *str);
 int		print_error(char *error_message, int error_code);
 int		print_syntax_error(char *error_message);
 

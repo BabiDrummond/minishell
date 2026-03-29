@@ -54,6 +54,7 @@ SRCS = main.c 							\
 	utils/envp_to_lst.c					\
 	utils/lst_to_envp.c					\
 	utils/get_shell_ctx.c				\
+	utils/get_trimmed_length.c			\
 	utils/print_error.c					\
 	var/extract_key.c					\
 	var/extract_value.c					\
