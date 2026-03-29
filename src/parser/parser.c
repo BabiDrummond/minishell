@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:24:36 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/29 00:03:14 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 00:20:59 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void		set_right(t_head *right, t_token *current_token,
 
 t_ast	*parse(t_head *tokens, char **operators)
 {
-	t_token	*current_token;
+	t_exec_node	*exec_node;
+	t_token		*current_token;
 	int		i;
 
 	i = 0;
@@ -39,7 +40,10 @@ t_ast	*parse(t_head *tokens, char **operators)
 		}
 		i++;
 	}
-	return (ast_new(build_ast_node((t_token *)tokens->first)));
+	exec_node = build_ast_node((t_token *)tokens->first);
+	if (!exec_node)
+		return (NULL);
+	return (ast_new(exec_node));
 }
 
 static t_ast	*parse_operators(t_token *token, char **operators,
@@ -57,9 +61,17 @@ static t_ast	*parse_operators(t_token *token, char **operators,
 	set_left(&left, token, tokens);
 	set_right(&right, token, tokens);
 	if (left.first)
+	{
 		node->left = parse(&left, operators);
+		if (!node->left)
+			return (NULL);
+	}
 	if (right.first)
+	{
 		node->right = parse(&right, operators);
+		if (!node->right)
+			return (NULL);
+	}
 	return (node);
 }
 
