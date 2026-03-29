@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_replace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 01:53:03 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/28 03:12:26 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/29 01:36:13 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	*ft_replace(const char *str, const char *placeholder, const char *value)
 	if (count == 0)
 		return (ft_strdup(str));
 	len_result = ft_strlen(str) + (len_val - len_ph) * count;
-	result = ft_calloc(len_result + 1, sizeof(char));
+	result = safe_calloc(len_result + 1, sizeof(char));
 	fill_replace(result, str, placeholder, value);
 	return (result);
 }

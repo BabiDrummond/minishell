@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 00:46:51 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 01:32:05 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	init_ctx(t_shell *ctx, char **envp)
 	ctx->pid = getpid();
 	ctx->vars = envp_to_lst(envp);
 	ctx->exit_status = EXIT_SUCCESS;
-	ctx->should_exit = FALSE;
 	ctx->stdin_backup = -1;
 	ctx->stdout_backup = -1;
 }
@@ -78,7 +77,7 @@ int	main(int argc, char **argv, char **envp)
 		prompt = readline("prompt> ");
 		if (!prompt)
 		{
-			perror("exit\n");
+			printf("exit\n");
 			break ;
 		}
 		gc_add(prompt, free);

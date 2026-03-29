@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 21:16:37 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/29 00:02:42 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 01:29:30 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	collect_heredocs(t_shell *ctx, t_ast *ast)
 	while (redirs)
 	{
 		if (g_signal == SIGINT)
-			return (exit_status(ctx, CTRL_C, FALSE));
+			return (exit_status(ctx, CTRL_C));
 		redir = (t_redir *) redirs->content;
 		if (ft_strcmp(redir->type, "<<") == 0)
 		{

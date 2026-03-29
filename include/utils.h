@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 23:41:25 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 01:28:40 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_shell
 	pid_t			pid;
 	t_list			*vars;
 	t_exit_status	exit_status;
-	int				should_exit;
 	int				stdin_backup;
 	int				stdout_backup;
 }	t_shell;

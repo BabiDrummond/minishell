@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 23:19:10 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 23:35:49 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 01:28:33 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		builtin_exit(t_shell *shell, char **argv);
 int		builtin_export(t_list **vars, char **argv);
 int		builtin_pwd(t_list *vars);
 int		builtin_unset(t_list **vars, char **argv);
-int		exit_status(t_shell *ctx, int exit_code, int should_exit);
+int		exit_status(t_shell *ctx, int exit_code);
 
 /* Execution */
 int		execute(t_shell *shell, t_ast *node, int is_child);
