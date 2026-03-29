@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 01:01:48 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 18:32:46 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 20:10:57 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ char	**split_unquoted(t_word *words)
 	}
 	return (argv);
 }
-
 
 static char	**split_spaces(const char *s)
 {

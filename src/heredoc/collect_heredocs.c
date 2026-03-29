@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 21:16:37 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/29 01:29:30 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 20:19:48 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int				collect_heredocs(t_shell *ctx, t_ast *ast);
 static t_word	*build_delimiter(t_word *words);
 static t_word	*collect_input(t_word *delimiter);
+static char		*read_heredoc_line(t_word *delimiter, t_word **words);
 
 int	collect_heredocs(t_shell *ctx, t_ast *ast)
 {
@@ -73,20 +74,37 @@ static t_word	*collect_input(t_word *delimiter)
 	words = NULL;
 	while (1)
 	{
-		line = readline("> ");
+		line = read_heredoc_line(delimiter, &words);
 		if (!line)
-		{
-			printf("Warning: heredoc delimited by end-of-file "
-				"(wanted `%s')\n", (char *)delimiter->link.content);
 			break ;
-		}
-		gc_add(line, free);
-		if (g_signal == SIGINT)
-			break ;
-		if (line && ft_strcmp(line, delimiter->link.content) == 0)
-			break ;
-		lst_add_back((t_list **)&words, (t_list *)create_word(line,
+		lst_add_back((t_list **)&words,
+			(t_list *)create_word(line,
 				ft_strlen(line), delimiter->quote_state));
 	}
 	return (words);
+}
+
+static char	*read_heredoc_line(t_word *delimiter, t_word **words)
+{
+	char	*line;
+
+	line = readline("> ");
+	if (!line)
+	{
+		printf("Warning: heredoc delimited by end-of-file "
+			"(wanted `%s')\n", (char *)delimiter->link.content);
+		return (NULL);
+	}
+	gc_add(line, free);
+	if (g_signal == SIGINT)
+		return (NULL);
+	if (ft_strcmp(line, delimiter->link.content) == 0)
+	{
+		if (*words == NULL)
+			lst_add_back((t_list **)words,
+				(t_list *)create_word(ft_strdup(""), 0,
+					delimiter->quote_state));
+		return (NULL);
+	}
+	return (line);
 }

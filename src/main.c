@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 17:58:52 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 20:22:31 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static char	*read_input(struct termios *term)
 
 	g_signal = 0;
 	tcsetattr(STDIN_FILENO, TCSANOW, term);
-	prompt = readline("prompt> ");
+	prompt = readline("\001\033[1;30m\002Wolfshell\001\033[0m\002 🐺> ");
 	if (!prompt)
 	{
 		printf("exit\n");
@@ -97,13 +97,10 @@ static void	process_input(t_shell *ctx, char *prompt,
 	tokens = tokenize(prompt, lexer_ops);
 	if (!tokens)
 		return ;
-	//print_tokens(tokens);
 	ast = parse(tokens, ast_ops);
 	if (!ast)
 		return ;
-	//print_ast(ast, 0);
 	if (collect_heredocs(ctx, ast))
 		return ;
-	//print_ast(ast, 0);
 	ctx->exit_status = execute(ctx, ast, FALSE);
 }

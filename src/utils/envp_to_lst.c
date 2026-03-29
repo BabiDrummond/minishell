@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 21:55:00 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 17:49:07 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 20:22:16 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_list	*envp_to_lst(char **envp)
 	vars = NULL;
 	gc_set_current_scope(GC_SCOPE_GLOBAL);
 	while (envp && envp[i])
-	{	
+	{
 		key = extract_key(envp[i]);
 		value = extract_value(envp[i]);
 		var = var_create(key, value, TRUE);
