@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:24:36 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/29 00:20:59 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 01:44:26 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_ast	*parse(t_head *tokens, char **operators)
 {
 	t_exec_node	*exec_node;
 	t_token		*current_token;
-	int		i;
+	int			i;
 
 	i = 0;
 	if (parser_syntax_error(tokens))
