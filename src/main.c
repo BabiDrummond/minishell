@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 01:32:05 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 01:55:58 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	main(int argc, char **argv, char **envp)
 	
 	ctx = get_shell_ctx();
 	init_ctx(ctx, envp);
+	var_set(&ctx->vars, "SHLVL", ft_itoa(ft_atoi(var_get_value(ctx->vars, "SHLVL")) + 1), TRUE);
 	lexer_operators = init_lexer_operators();
 	ast_operators = init_ast_operators();
 	prompt = NULL;

@@ -29,6 +29,7 @@ SRCS = ast/ast_new.c		\
 	mem/ft_memcpy.c			\
 	mem/safe_calloc.c		\
 	str/append_char.c		\
+	str/ft_atoi.c			\
 	str/ft_itoa.c			\
 	str/ft_join_split.c		\
 	str/ft_split_size.c		\
