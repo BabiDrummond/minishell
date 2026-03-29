@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 01:53:03 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/29 01:36:13 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 20:30:02 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,17 @@ static char	*ft_strstr(const char *haystack, const char *needle)
 
 static int	count_occurrences(const char *str, const char *sub)
 {
-	int	count;
+	int		count;
 	size_t	len;
 
 	count = 0;
 	len = ft_strlen(sub);
-	while ((str = ft_strstr(str, sub)))
+	str = ft_strstr(str, sub);
+	while (str)
 	{
 		count++;
 		str += len;
+		str = ft_strstr(str, sub);
 	}
 	return (count);
 }

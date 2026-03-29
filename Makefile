@@ -6,12 +6,7 @@ INCLUDE = -I./include/
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-# Readline for macOS (Homebrew)
-ifeq ($(shell uname -s),Darwin)
-	READLINE = -L$(shell brew --prefix readline)/lib -I$(shell brew --prefix readline)/include -lreadline
-else
-	READLINE = -lreadline
-endif
+READLINE = -lreadline
 
 SRCS_DIR = src/
 SRCS = main.c 							\
@@ -39,7 +34,6 @@ SRCS = main.c 							\
 	heredoc/split_content_heredoc.c		\
 	lexer/create_token_result.c			\
 	lexer/get_char_type.c				\
-	lexer/print_tokens.c				\
 	lexer/create_token.c				\
 	lexer/create_word.c					\
 	lexer/get_next_token.c				\
@@ -49,7 +43,6 @@ SRCS = main.c 							\
 	parser/parser_syntax_error.c 		\
 	parser/init_ast_operators.c			\
 	parser/parser.c 					\
-	parser/print_ast.c 					\
 	signals/signals.c					\
 	utils/envp_to_lst.c					\
 	utils/lst_to_envp.c					\
@@ -67,37 +60,9 @@ SRCS = main.c 							\
 OBJS_DIR = objs/
 OBJS = $(SRCS:%.c=$(OBJS_DIR)%.o)
 
-TEST_NAME = test
-TEST_DIR = test/
-TEST_SRCS = $(TEST_DIR)main.c \
-			$(TEST_DIR)builtins/test_builtin_echo.c \
-			$(TEST_DIR)builtins/test_builtin_export.c \
-			$(TEST_DIR)builtins/test_builtin_unset.c \
-			$(TEST_DIR)builtins/test_builtin_env.c \
-			$(TEST_DIR)builtins/test_builtin_pwd.c \
-			$(TEST_DIR)builtins/test_builtin_cd.c \
-			$(TEST_DIR)var/test_var_create.c \
-			$(TEST_DIR)var/test_var_set.c \
-			$(TEST_DIR)var/test_var_get.c \
-			$(TEST_DIR)var/test_var_unset.c \
-			$(TEST_DIR)var/test_var_update.c \
-			$(TEST_DIR)utils/test_is_valid_key.c \
-			$(TEST_DIR)utils/test_extract_key.c \
-			$(TEST_DIR)utils/test_extract_value.c
-
-TEST_OBJS = $(filter-out $(OBJS_DIR)main.o, $(OBJS))
-
-TEST_EXEC = $(TEST_DIR)$(TEST_NAME)
-
 VALGRIND = valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes
 
 all: $(NAME)
-
-test: $(LIBFT) $(OBJS)
-	@echo "\033[0;33mCompiling tests...\033[0m"
-	@$(CC) $(INCLUDE) $(TEST_SRCS) $(TEST_OBJS) $(LIBFT) $(READLINE) -o $(TEST_EXEC)
-	@echo "\033[0;32mRunning tests...\033[0m"
-	@./$(TEST_EXEC)
 
 $(NAME): $(LIBFT) $(OBJS)
 	@$(CC) $(OBJS) $(LIBFT) -o $(NAME) $(READLINE)
@@ -105,7 +70,7 @@ $(NAME): $(LIBFT) $(OBJS)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(INCLUDE) $(READLINE) -c $< -o $@
+	@$(CC) $(INCLUDE) -c $< -o $@
 	@echo "\033[95mCompiling \033[0m$(notdir $<)"
 
 $(LIBFT):
