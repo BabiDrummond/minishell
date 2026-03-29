@@ -6,19 +6,15 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 00:44:52 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 23:25:06 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 02:13:29 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEREDOC_H
 # define HEREDOC_H
 
-# include <readline/readline.h>
-# include <signal.h>
-# include "../libft/include/libft.h"
-# include "lexer.h"
-# include "parser.h"
 # include "execution.h"
+# include "parser.h"
 # include "utils.h"
 
 int		collect_heredocs(t_shell *ctx, t_ast *ast);

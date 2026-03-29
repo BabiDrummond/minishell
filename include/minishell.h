@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 23:38:04 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 02:02:46 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@
 # include "parser.h"
 # include "signals.h"
 # include "utils.h"
+# include "variables.h"
 
 #endif
