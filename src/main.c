@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 03:57:47 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 04:26:55 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int g_signal = 0;
 int			main(int argc, char **argv, char **envp);
 static void	init_ctx(t_shell *ctx, char **envp);
 static void	main_loop(t_shell *ctx, struct termios *term);
+static char	*read_input(struct termios *term);
+static void	process_input(t_shell *ctx, char *prompt, char **lexer_ops, char **ast_ops);
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -50,38 +52,55 @@ static void	main_loop(t_shell *ctx, struct termios *term)
 	char	**lexer_operators;
 	char	**ast_operators;
 	char	*prompt;
-	t_head	*tokens;
-	t_ast	*ast;
 	
 	lexer_operators = init_lexer_operators();
 	ast_operators = init_ast_operators();
 	prompt = NULL;
-	tokens = NULL;
 	while (1)
 	{
-		g_signal = 0;
-		tcsetattr(STDIN_FILENO, TCSANOW, term);
-		prompt = readline("prompt> ");
+		prompt = read_input(term);
 		if (!prompt)
-		{
-			printf("exit\n");
 			break ;
-		}
-		gc_add(prompt, free);
-		add_history(prompt);
-		if (get_trimmed_length(prompt) == 0)
-			continue ;
-		tokens = tokenize(prompt, lexer_operators);
-		if (!tokens)
-			continue;
-		print_tokens(tokens);
-		ast = parse(tokens, ast_operators);
-		if (!ast)
-			continue ;
-		print_ast(ast, 0);
-		if (collect_heredocs(ctx, ast))
-			continue ;
-		print_ast(ast, 0);
-		ctx->exit_status = execute(ctx, ast, FALSE);
+		process_input(ctx, prompt, lexer_operators, ast_operators);
 	}
+}
+
+static char	*read_input(struct termios *term)
+{
+	char	*prompt;
+
+	g_signal = 0;
+	tcsetattr(STDIN_FILENO, TCSANOW, term);
+	prompt = readline("prompt> ");
+	if (!prompt)
+	{
+		printf("exit\n");
+		return (NULL);
+	}
+	gc_add(prompt, free);
+	if (get_trimmed_length(prompt) > 0)
+		add_history(prompt);
+	return (prompt);
+}
+
+static void	process_input(t_shell *ctx, char *prompt, char **lexer_ops, char **ast_ops)
+{	
+	t_head	*tokens;
+	t_ast	*ast;
+
+	tokens = NULL;
+	if (get_trimmed_length(prompt) == 0)
+		return ;
+	tokens = tokenize(prompt, lexer_ops);
+	if (!tokens)
+		return ;
+	print_tokens(tokens);
+	ast = parse(tokens, ast_ops);
+	if (!ast)
+		return ;
+	print_ast(ast, 0);
+	if (collect_heredocs(ctx, ast))
+		return ;
+	print_ast(ast, 0);
+	ctx->exit_status = execute(ctx, ast, FALSE);
 }
