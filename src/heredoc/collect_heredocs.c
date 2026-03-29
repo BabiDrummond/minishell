@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   collect_heredocs.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 21:16:37 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/27 23:53:17 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/28 23:36:00 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
-#include "minishell.h"
 
 int				collect_heredocs(t_shell *ctx, t_ast *ast);
 static t_word	*build_delimiter(t_word *words);
@@ -81,9 +80,9 @@ static t_word	*collect_input(t_word *delimiter)
 				"(wanted `%s')\n", (char *)delimiter->link.content);
 			break ;
 		}
+		gc_add(line, free);
 		if (g_signal == SIGINT)
 			break ;
-		gc_add(line, free);
 		if (line && ft_strcmp(line, delimiter->link.content) == 0)
 			break ;
 		lst_add_back((t_list **)&words, (t_list *)create_word(line,

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   process_redirects.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 22:33:22 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 02:33:23 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/28 23:56:11 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-#include "expansion.h"
-#include  "minishell.h"
 
 int			process_redirects(t_shell *ctx, t_list *redirs, int is_child);
 static void	save_fds(t_shell *ctx, t_list *redirs, int is_child);
@@ -36,7 +34,8 @@ int	process_redirects(t_shell *ctx, t_list *redirs, int is_child)
 			return (EXIT_FAILURE);
 		fd = open_fd(ctx, redir->content, expanded);
 		if (fd == -1)
-			return (print_error("no such file or directory\n", SYNTAX_ERROR));
+			return (print_error(ft_replace("%s: No such file or directory\n",
+				"%s", expanded[0]), EXIT_FAILURE));
 		if (redir_fd(redir->content, fd) == -1)
 		{
 			close(fd);

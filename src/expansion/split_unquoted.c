@@ -6,12 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 01:01:48 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 02:47:21 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 23:39:34 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
-#include "execution.h"
 
 char		**split_unquoted(t_word *words);
 static int	total_words(t_word *words);

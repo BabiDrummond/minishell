@@ -6,11 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 20:02:36 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 01:59:18 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 23:30:14 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "variables.h"
 
 char	*extract_value(char *var_content)
 {

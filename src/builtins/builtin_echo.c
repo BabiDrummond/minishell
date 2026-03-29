@@ -6,25 +6,14 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 23:42:57 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 02:26:51 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 22:01:59 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-static int	is_n_option(char *arg)
-{
-	int	i;
-
-	i = 1;
-	if (!arg || arg[0] != '-')
-		return (FALSE);
-	while (arg[i] == 'n')
-		i++;
-	if (i > 1 && arg[i] == '\0')
-		return (TRUE);
-	return (FALSE);
-}
+int			builtin_echo(char **argv);
+static int	is_n_option(char *arg);
 
 int	builtin_echo(char **argv)
 {
@@ -42,4 +31,18 @@ int	builtin_echo(char **argv)
 	if (i == 1)
 		printf("\n");
 	return (EXIT_SUCCESS);
+}
+
+static int	is_n_option(char *arg)
+{
+	int	i;
+
+	i = 1;
+	if (!arg || arg[0] != '-')
+		return (FALSE);
+	while (arg[i] == 'n')
+		i++;
+	if (i > 1 && arg[i] == '\0')
+		return (TRUE);
+	return (FALSE);
 }

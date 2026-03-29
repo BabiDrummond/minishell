@@ -6,12 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 01:26:59 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 01:32:10 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 23:37:30 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "signals.h"
-#include "minishell.h"
 
 void		set_signals(void);
 static void	sig_handler(int sig);

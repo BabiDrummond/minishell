@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.h                                            :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 04:34:44 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/28 23:41:25 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHELL_H
-# define SHELL_H
+#ifndef UTILS_H
+# define UTILS_H
 
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <signal.h>
 # include "../libft/include/libft.h"
+# include "variables.h"
 
 extern int	g_signal;
 
@@ -37,9 +41,9 @@ typedef struct s_shell
 }	t_shell;
 
 t_shell	*get_shell_ctx(void);
-int		print_syntax_error(char *token);
+t_list	*envp_to_lst(char **envp);
+char	**lst_to_envp(t_list *vars);
 int		print_error(char *error_message, int error_code);
-
-
+int		print_syntax_error(char *error_message);
 
 #endif

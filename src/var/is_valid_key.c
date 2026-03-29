@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract_key.c                                      :+:      :+:    :+:   */
+/*   is_valid_key.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/05 20:02:11 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 01:59:16 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/23 03:05:57 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/28 23:30:17 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "variables.h"
 
-char	*extract_key(char *var_content)
+int	is_valid_key(char *var_content)
 {
-	char	*equal;
+	int	i;
 
-	equal = ft_strchr(var_content, '=');
-	if (equal)
-		return (ft_substr(var_content, 0, equal - var_content));
-	return (ft_strdup(var_content));
+	i = 1;
+	if (!var_content || !var_content[0])
+		return (FALSE);
+	if (!ft_isalpha(var_content[0]) && !(var_content[0] == '_'))
+		return (FALSE);
+	while (ft_isalnum(var_content[i]) || var_content[i] == '_')
+		i++;
+	return (var_content[i] == '\0');
 }

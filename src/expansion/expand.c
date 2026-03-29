@@ -6,12 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:55:06 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 21:40:53 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 23:34:52 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
-#include "execution.h"
 
 t_list	*expand(t_shell *ctx, t_list *args)
 {

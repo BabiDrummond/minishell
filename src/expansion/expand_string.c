@@ -6,12 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 00:51:06 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 21:40:12 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 23:34:46 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
-#include "execution.h"
 
 t_list		*expand_string(t_shell *ctx, t_list *words, int is_heredoc);
 static char	*expand_content(t_shell *ctx, t_word *word, int is_heredoc);

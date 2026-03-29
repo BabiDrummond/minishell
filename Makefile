@@ -37,27 +37,27 @@ SRCS = main.c 							\
 	heredoc/collect_heredocs.c 			\
 	heredoc/redirect_heredoc.c			\
 	heredoc/split_content_heredoc.c		\
-	lexer/utils/create_token_result.c	\
-	lexer/utils/get_char_type.c			\
-	lexer/utils/print_tokens.c			\
+	lexer/create_token_result.c			\
+	lexer/get_char_type.c				\
+	lexer/print_tokens.c				\
 	lexer/create_token.c				\
 	lexer/create_word.c					\
 	lexer/get_next_token.c				\
 	lexer/init_lexer_operators.c		\
 	lexer/tokenize.c					\
 	parser/build_ast_node.c 			\
-	parser/has_syntax_error.c 			\
+	parser/parser_syntax_error.c 		\
 	parser/init_ast_operators.c			\
 	parser/parser.c 					\
 	parser/print_ast.c 					\
 	signals/signals.c					\
 	utils/envp_to_lst.c					\
-	utils/extract_key.c					\
-	utils/extract_value.c				\
-	utils/is_valid_key.c				\
 	utils/lst_to_envp.c					\
 	utils/get_shell_ctx.c				\
 	utils/print_error.c					\
+	var/extract_key.c					\
+	var/extract_value.c					\
+	var/is_valid_key.c					\
 	var/var_create.c					\
 	var/var_get.c						\
 	var/var_set.c						\

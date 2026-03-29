@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 02:07:22 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/28 03:47:58 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/28 23:43:53 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "utils.h"
 
 int	print_error(char *error_message, int error_code)
 {
@@ -22,8 +22,8 @@ int	print_error(char *error_message, int error_code)
 	return (error_code);
 }
 
-
-int	print_syntax_error(char *token)
+int	print_syntax_error(char *error_message)
 {
-	return (print_error(ft_replace("bash: syntax error near unexpected token `%s'\n", "%s", token), SYNTAX_ERROR));
+	return (print_error(ft_replace("bash: syntax error near unexpected token "
+		"`%s'\n", "%s", error_message), SYNTAX_ERROR));
 }

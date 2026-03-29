@@ -6,12 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 20:27:16 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 21:37:53 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 23:35:19 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-#include "expansion.h"
 
 int			execute_cmd(t_shell *ctx, t_exec_node *node, int is_child);
 static int	is_builtin(char *cmd);

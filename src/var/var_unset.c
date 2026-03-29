@@ -6,11 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 01:35:54 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 03:47:27 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 23:30:32 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "variables.h"
 
 void	var_unset(t_list **vars, char *key)
 {

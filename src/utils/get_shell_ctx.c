@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_shell_ctx.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 02:08:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/28 04:19:35 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/28 23:25:06 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "utils.h"
 
 t_shell *get_shell_ctx(void)
 {

@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 01:27:33 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/27 01:31:15 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 23:37:43 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SIGNALS_H
 
 # include "../libft/include/libft.h"
+# include "utils.h"
 
 void	set_signals(void);
 

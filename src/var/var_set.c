@@ -6,11 +6,11 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 00:39:38 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/07 01:59:39 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/28 23:30:27 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "variables.h"
 
 int	var_set(t_list **vars, char *key, char *value, int exported)
 {

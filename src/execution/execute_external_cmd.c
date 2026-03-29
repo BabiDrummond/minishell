@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute_external_cmd.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 23:58:08 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 03:23:20 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/28 23:33:31 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-#include "minishell.h"
 
 int			execute_external_cmd(t_shell *ctx, char **argv, int is_child);
 static int	execute_in_parent(char *path, char **argv, char **envp);
@@ -24,7 +23,8 @@ int	execute_external_cmd(t_shell *ctx, char **argv, int is_child)
 
 	cmd_path = find_cmd_path(ctx->vars, argv[0]);
 	if (!cmd_path)
-		return (print_error(ft_replace("Command not found: %s\n", "%s", argv[0]), CMD_NOT_FOUND));
+		return (print_error(ft_replace("Command not found: %s\n", "%s",
+			argv[0]), CMD_NOT_FOUND));
 	envp = lst_to_envp(ctx->vars);
 	if (is_child)
 		execute_in_child(cmd_path, argv, envp);
@@ -39,13 +39,10 @@ static int	execute_in_parent(char *path, char **argv, char **envp)
 	pid_t	pid;
 
 	pid = fork();
+	if (pid < 0)
+		exit(EXIT_FAILURE);
 	if (pid == 0)
 		execute_in_child(path, argv, envp);
-	if (pid < 0)
-	{
-		perror("fork");
-		exit(EXIT_FAILURE);
-	}
 	waitpid(pid, &status, 0);
 	return (WEXITSTATUS(status));
 }

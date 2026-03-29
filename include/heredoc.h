@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 00:44:52 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 02:47:36 by bcosta-b         ###   ########.fr       */
+/*   Updated: 2026/03/28 23:25:06 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "lexer.h"
 # include "parser.h"
 # include "execution.h"
-# include "shell.h"
+# include "utils.h"
 
 int		collect_heredocs(t_shell *ctx, t_ast *ast);
 int		redirect_heredoc(char **target);
