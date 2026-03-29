@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/28 22:08:06 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 18:01:41 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,24 +65,24 @@ static void	pipe_children(t_shell *ctx, t_ast *ast, int pipefd[2], int pid[2])
 {
 	pid[0] = fork();
 	if (pid[0] < 0)
-		exit(EXIT_FAILURE);
+		gc_exit(EXIT_FAILURE);
 	else if (pid[0] == 0)
 	{
 		dup2(pipefd[1], STDOUT_FILENO);
 		close(pipefd[0]);
 		close(pipefd[1]);
 		ctx->exit_status = execute(ctx, ast->left, TRUE);
-		exit(ctx->exit_status);
+		gc_exit(ctx->exit_status);
 	}
 	pid[1] = fork();
 	if (pid[1] < 0)
-		exit(EXIT_FAILURE);
+		gc_exit(EXIT_FAILURE);
 	else if (pid[1] == 0)
 	{
 		dup2(pipefd[0], STDIN_FILENO);
 		close(pipefd[0]);
 		close(pipefd[1]);
 		ctx->exit_status = execute(ctx, ast->right, TRUE);
-		exit(ctx->exit_status);
+		gc_exit(ctx->exit_status);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 23:58:08 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 00:05:11 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 18:01:19 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	execute_in_parent(char *path, char **argv, char **envp)
 
 	pid = fork();
 	if (pid < 0)
-		exit(EXIT_FAILURE);
+		gc_exit(EXIT_FAILURE);
 	if (pid == 0)
 		execute_in_child(path, argv, envp);
 	waitpid(pid, &status, 0);
@@ -54,9 +54,9 @@ static void	execute_in_child(char *path, char **argv, char **envp)
 	execve(path, argv, envp);
 	perror(argv[0]);
 	if (errno == ENOENT)
-		exit(CMD_NOT_FOUND);
+		gc_exit(CMD_NOT_FOUND);
 	else if (errno == EACCES)
-		exit(PERMISSION_DENIED);
+		gc_exit(PERMISSION_DENIED);
 	else
-		exit(EXIT_FAILURE);
+		gc_exit(EXIT_FAILURE);
 }

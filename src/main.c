@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 19:09:14 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 04:31:20 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/29 17:58:52 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main(int argc, char **argv, char **envp)
 	ctx = get_shell_ctx();
 	init_ctx(ctx, envp);
 	set_signals();
+	gc_set_current_scope(GC_SCOPE_FUNCTION);
 	main_loop(ctx, &original_termios);
 	gc_free_all();
 	(void)argc;
@@ -63,6 +64,7 @@ static void	main_loop(t_shell *ctx, struct termios *term)
 			break ;
 		process_input(ctx, prompt, lexer_operators, ast_operators);
 	}
+	gc_free_all();
 }
 
 static char	*read_input(struct termios *term)
@@ -95,13 +97,13 @@ static void	process_input(t_shell *ctx, char *prompt,
 	tokens = tokenize(prompt, lexer_ops);
 	if (!tokens)
 		return ;
-	print_tokens(tokens);
+	//print_tokens(tokens);
 	ast = parse(tokens, ast_ops);
 	if (!ast)
 		return ;
-	print_ast(ast, 0);
+	//print_ast(ast, 0);
 	if (collect_heredocs(ctx, ast))
 		return ;
-	print_ast(ast, 0);
+	//print_ast(ast, 0);
 	ctx->exit_status = execute(ctx, ast, FALSE);
 }
