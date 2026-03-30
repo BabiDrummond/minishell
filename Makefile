@@ -62,9 +62,9 @@ OBJS = $(SRCS:%.c=$(OBJS_DIR)%.o)
 
 VALGRIND = valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes
 
-all: $(NAME)
+all: $(LIBFT) $(NAME)
 
-$(NAME): $(LIBFT) $(OBJS)
+$(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(READLINE)
 	@echo "\033[0;32mGenerated minishell\033[0m"
 

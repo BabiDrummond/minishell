@@ -70,3 +70,5 @@ fclean: clean
 	@rm -f $(NAME)
 
 re:	fclean all
+
+.PHONY: re fclean clean
