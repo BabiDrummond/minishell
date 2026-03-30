@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 20:27:16 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 01:29:23 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/30 16:48:25 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static int	is_builtin(char *cmd);
 
 int	execute_cmd(t_shell *ctx, t_exec_node *node, int is_child)
 {
-	char	**old_argv;
-	char	*join_argv;
 	char	**argv;
 
 	node->args = expand(ctx, node->args);

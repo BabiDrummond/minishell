@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
-/*   Updated: 2026/03/29 18:01:41 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/30 16:49:37 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int			execute_operator(
 				t_shell *ctx, t_ast *ast, t_exec_node *node, int is_child);
 static int	execute_and(t_shell *ctx, t_ast *ast, int is_child);
 static int	execute_or(t_shell *ctx, t_ast *ast, int is_child);
-static int	execute_pipe(t_shell *ctx, t_ast *ast, int is_child);
+static int	execute_pipe(t_shell *ctx, t_ast *ast);
 static void	pipe_children(t_shell *ctx, t_ast *ast, int pipefd[2], int pid[2]);
 
 int	execute_operator(t_shell *ctx, t_ast *ast, t_exec_node *node, int is_child)
@@ -26,7 +26,7 @@ int	execute_operator(t_shell *ctx, t_ast *ast, t_exec_node *node, int is_child)
 	else if (node->type == NODE_OR)
 		ctx->exit_status = execute_or(ctx, ast, is_child);
 	else if (node->type == NODE_PIPE)
-		ctx->exit_status = execute_pipe(ctx, ast, is_child);
+		ctx->exit_status = execute_pipe(ctx, ast);
 	return (ctx->exit_status);
 }
 
@@ -46,7 +46,7 @@ static int	execute_or(t_shell *ctx, t_ast *ast, int is_child)
 	return (ctx->exit_status);
 }
 
-static int	execute_pipe(t_shell *ctx, t_ast *ast, int is_child)
+static int	execute_pipe(t_shell *ctx, t_ast *ast)
 {
 	int	pipefd[2];
 	int	pid[2];

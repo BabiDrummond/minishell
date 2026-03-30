@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 23:22:15 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 22:14:05 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/30 16:50:52 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*find_cmd_path(t_list *vars, char *cmd)
 	if (access(cmd, F_OK) == 0)
 		return (cmd);
 	env_path = ft_split(var_get_value(vars, "PATH"), ':');
-	while (env_path[i])
+	while (env_path && env_path[i])
 	{
 		if (ft_strncmp(env_path[i] + ft_strlen(env_path[i]) - 1, "/", 1) != 0)
 			cmd_path = ft_triple_join(env_path[i], "/", cmd);

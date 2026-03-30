@@ -6,7 +6,7 @@
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 22:33:22 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 00:05:05 by bmoreira         ###   ########.fr       */
+/*   Updated: 2026/03/30 16:50:04 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int			process_redirects(t_shell *ctx, t_list *redirs, int is_child);
 static void	save_fds(t_shell *ctx, t_list *redirs, int is_child);
-static int	open_fd(t_shell *ctx, t_redir *redir, char **target);
+static int	open_fd(t_redir *redir, char **target);
 static int	redir_fd(t_redir *redir, int fd);
 void		restore_fds(t_shell *ctx, int is_child);
 
@@ -32,7 +32,7 @@ int	process_redirects(t_shell *ctx, t_list *redirs, int is_child)
 		expanded = expand_redirect(ctx, redir->content);
 		if (!expanded)
 			return (EXIT_FAILURE);
-		fd = open_fd(ctx, redir->content, expanded);
+		fd = open_fd(redir->content, expanded);
 		if (fd == -1)
 			return (print_error(ft_replace("%s: No such file or directory\n",
 						"%s", expanded[0]), EXIT_FAILURE));
@@ -56,7 +56,7 @@ static void	save_fds(t_shell *ctx, t_list *redirs, int is_child)
 	}
 }
 
-static int	open_fd(t_shell *ctx, t_redir *redir, char **target)
+static int	open_fd(t_redir *redir, char **target)
 {
 	int		fd;
 

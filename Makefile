@@ -65,12 +65,12 @@ VALGRIND = valgrind --suppressions=readline.supp --leak-check=full --show-leak-k
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	@$(CC) $(OBJS) $(LIBFT) -o $(NAME) $(READLINE)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(READLINE)
 	@echo "\033[0;32mGenerated minishell\033[0m"
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(INCLUDE) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 	@echo "\033[95mCompiling \033[0m$(notdir $<)"
 
 $(LIBFT):
