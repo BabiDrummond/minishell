@@ -84,7 +84,6 @@ clean:
 fclean: clean
 	@echo "\033[0;34mCleaning minishell\033[0m"
 	@rm -f $(NAME)
-	@rm -f $(TEST_EXEC)
 	@make --no-print-directory -C $(LIBFT_DIR) fclean
 
 valgrind: all
