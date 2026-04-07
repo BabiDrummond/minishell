@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 02:02:46 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/01/21 19:38:49 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/03/27 02:33:49 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "str.h"
 
-# include "../libft/include/libft.h"
-# include "execution.h"
-# include "expansion.h"
-# include "heredoc.h"
-# include "lexer.h"
-# include "parser.h"
-# include "signals.h"
-# include "utils.h"
-# include "variables.h"
+char	*ft_strndup(const char *s, size_t n)
+{
+	size_t	len;
+	char	*new_str;
 
-#endif
+	len = 0;
+	while (s[len] && len < n)
+		len++;
+	new_str = (char *)safe_calloc(1, len + 1);
+	ft_memcpy(new_str, s, len);
+	new_str[len] = '\0';
+	return (new_str);
+}

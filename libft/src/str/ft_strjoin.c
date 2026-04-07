@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 02:02:46 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/07/14 17:11:29 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/27 02:33:47 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "str.h"
 
-# include "../libft/include/libft.h"
-# include "execution.h"
-# include "expansion.h"
-# include "heredoc.h"
-# include "lexer.h"
-# include "parser.h"
-# include "signals.h"
-# include "utils.h"
-# include "variables.h"
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*new;
+	int		i;
+	int		j;
 
-#endif
+	i = 0;
+	j = 0;
+	if (!s1 && !s2)
+		return (NULL);
+	new = safe_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
+	while (s1 && s1[i])
+	{
+		new[i] = s1[i];
+		i++;
+	}
+	while (s2 && s2[j])
+		new[i++] = s2[j++];
+	return (new);
+}

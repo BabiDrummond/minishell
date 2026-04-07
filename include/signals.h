@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 02:41:59 by bcosta-b         ###   ########.fr       */
+/*   Created: 2026/03/27 01:27:33 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/29 02:11:50 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef SIGNALS_H
+# define SIGNALS_H
 
-# include "ast.h"
-# include "char.h"
-# include "list.h"
-# include "gc.h"
-# include "lst.h"
-# include "mem.h"
-# include "str.h"
-# include "types.h"
+# include "../libft/include/libft.h"
+# include "execution.h"
+# include "utils.h"
+
+void	set_signals(void);
 
 #endif

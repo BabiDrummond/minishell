@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   create_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 02:02:46 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/01/21 19:43:59 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/03/27 22:12:25 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "lexer.h"
 
-# include "../libft/include/libft.h"
-# include "execution.h"
-# include "expansion.h"
-# include "heredoc.h"
-# include "lexer.h"
-# include "parser.h"
-# include "signals.h"
-# include "utils.h"
-# include "variables.h"
+t_token	*create_token(void *content, int is_operator)
+{
+	t_token	*new_token;
 
-#endif
+	new_token = (t_token *) safe_calloc(1, sizeof(t_token));
+	new_token->link.list = NULL;
+	new_token->link.next = NULL;
+	new_token->link.prev = NULL;
+	new_token->link.content = content;
+	new_token->is_operator = is_operator;
+	return (new_token);
+}

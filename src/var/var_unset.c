@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   var_unset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 02:02:46 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/23 01:35:54 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/28 23:30:32 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "variables.h"
 
-# include "../libft/include/libft.h"
-# include "execution.h"
-# include "expansion.h"
-# include "heredoc.h"
-# include "lexer.h"
-# include "parser.h"
-# include "signals.h"
-# include "utils.h"
-# include "variables.h"
+void	var_unset(t_list **vars, char *key)
+{
+	t_list	*current;
+	t_var	*curr_var;
 
-#endif
+	current = *vars;
+	while (current)
+	{
+		curr_var = (t_var *) current->content;
+		if (ft_strcmp(curr_var->key, key) == 0)
+		{
+			lst_del_node(vars, current);
+			return ;
+		}
+		current = current->next;
+	}
+}

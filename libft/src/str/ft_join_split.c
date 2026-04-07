@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_join_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 02:02:46 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/07 23:58:49 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/27 02:24:40 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "str.h"
 
-# include "../libft/include/libft.h"
-# include "execution.h"
-# include "expansion.h"
-# include "heredoc.h"
-# include "lexer.h"
-# include "parser.h"
-# include "signals.h"
-# include "utils.h"
-# include "variables.h"
+char	*ft_join_split(char **split, char *separator)
+{
+	char	*str;
+	int		size;
+	int		i;
 
-#endif
+	i = 0;
+	str = ft_strdup("");
+	if (!split || !*split)
+		return (str);
+	size = ft_split_size(split);
+	while (i < size)
+	{
+		str = ft_strjoin(str, split[i]);
+		if (i < size - 1)
+			str = ft_strjoin(str, separator);
+		i++;
+	}
+	return (str);
+}

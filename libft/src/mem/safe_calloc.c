@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   safe_calloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 02:41:59 by bcosta-b         ###   ########.fr       */
+/*   Created: 2026/03/27 02:06:47 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/28 03:19:25 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "mem.h"
+#include "list.h"
+#include "gc.h"
+#include "str.h"
 
-# include "ast.h"
-# include "char.h"
-# include "list.h"
-# include "gc.h"
-# include "lst.h"
-# include "mem.h"
-# include "str.h"
-# include "types.h"
+void	*safe_calloc(size_t nmemb, size_t size)
+{
+	void	*ptr;
 
-#endif
+	ptr = ft_calloc(nmemb, size);
+	if (!ptr)
+	{
+		ft_putstr_fd("Error allocating memory. Terminating now...\n", 2);
+		gc_exit(EXIT_FAILURE);
+	}
+	gc_add(ptr, free);
+	return (ptr);
+}

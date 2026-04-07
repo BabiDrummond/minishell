@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_triple_join.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 02:02:46 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/19 19:25:33 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/27 02:33:53 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "str.h"
 
-# include "../libft/include/libft.h"
-# include "execution.h"
-# include "expansion.h"
-# include "heredoc.h"
-# include "lexer.h"
-# include "parser.h"
-# include "signals.h"
-# include "utils.h"
-# include "variables.h"
+char	*ft_triple_join(char *s1, char *s2, char *s3)
+{
+	char	*new;
+	int		i;
+	int		j;
 
-#endif
+	i = 0;
+	j = 0;
+	new = safe_calloc(ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3) + 1,
+			sizeof(char));
+	while (s1[j])
+		new[i++] = s1[j++];
+	j = 0;
+	while (s2[j])
+		new[i++] = s2[j++];
+	j = 0;
+	while (s3[j])
+		new[i++] = s3[j++];
+	return (new);
+}

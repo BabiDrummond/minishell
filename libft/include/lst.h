@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   lst.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 02:41:59 by bcosta-b         ###   ########.fr       */
+/*   Created: 2025/10/13 22:42:15 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/27 03:47:08 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef LST_H
+# define LST_H
 
-# include "ast.h"
-# include "char.h"
-# include "list.h"
-# include "gc.h"
-# include "lst.h"
-# include "mem.h"
-# include "str.h"
+# include <stdlib.h>
 # include "types.h"
+# include "mem.h"
+
+void	lst_add_back(t_list **lst, t_list *new);
+void	lst_del_node(t_list **head, t_list *node);
+int		lst_size(t_list *lst);
+t_list	*lst_last(t_list *lst);
+t_list	*lst_new(void *content);
 
 #endif

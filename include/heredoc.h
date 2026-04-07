@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   heredoc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 02:41:59 by bcosta-b         ###   ########.fr       */
+/*   Created: 2026/03/07 00:44:52 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/29 02:13:29 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef HEREDOC_H
+# define HEREDOC_H
 
-# include "ast.h"
-# include "char.h"
-# include "list.h"
-# include "gc.h"
-# include "lst.h"
-# include "mem.h"
-# include "str.h"
-# include "types.h"
+# include "execution.h"
+# include "parser.h"
+# include "utils.h"
+
+int		collect_heredocs(t_shell *ctx, t_ast *ast);
+int		redirect_heredoc(char **target);
+char	**split_content_heredoc(t_word *words);
 
 #endif

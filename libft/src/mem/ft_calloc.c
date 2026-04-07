@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 02:41:59 by bcosta-b         ###   ########.fr       */
+/*   Created: 2026/03/29 20:30:26 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/29 20:30:34 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "mem.h"
 
-# include "ast.h"
-# include "char.h"
-# include "list.h"
-# include "gc.h"
-# include "lst.h"
-# include "mem.h"
-# include "str.h"
-# include "types.h"
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	unsigned char	*arr;
 
-#endif
+	if (size && nmemb > (size_t) -1 / size)
+		return (NULL);
+	arr = malloc(nmemb * size);
+	if (!arr)
+		return (NULL);
+	ft_bzero(arr, nmemb * size);
+	return (arr);
+}

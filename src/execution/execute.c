@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 02:02:46 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/22 03:51:40 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/03/28 22:09:57 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "execution.h"
 
-# include "../libft/include/libft.h"
-# include "execution.h"
-# include "expansion.h"
-# include "heredoc.h"
-# include "lexer.h"
-# include "parser.h"
-# include "signals.h"
-# include "utils.h"
-# include "variables.h"
+int	execute(t_shell *ctx, t_ast *ast, int is_child)
+{
+	t_exec_node	*node;
 
-#endif
+	if (!ast)
+		return (EXIT_SUCCESS);
+	node = (t_exec_node *) ast->value;
+	if (node->type == NODE_CMD)
+		return (execute_cmd(ctx, node, is_child));
+	return (execute_operator(ctx, ast, node, is_child));
+}

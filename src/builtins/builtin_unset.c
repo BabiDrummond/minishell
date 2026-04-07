@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 02:41:59 by bcosta-b         ###   ########.fr       */
+/*   Created: 2026/02/23 00:46:16 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/28 02:35:32 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "execution.h"
 
-# include "ast.h"
-# include "char.h"
-# include "list.h"
-# include "gc.h"
-# include "lst.h"
-# include "mem.h"
-# include "str.h"
-# include "types.h"
+int	builtin_unset(t_list **vars, char **argv)
+{
+	int		exit_code;
+	int		i;
 
-#endif
+	i = 1;
+	exit_code = EXIT_SUCCESS;
+	if (!argv[i])
+		return (exit_code);
+	while (argv[i])
+	{
+		if (!is_valid_key(argv[i]))
+			exit_code = EXIT_FAILURE;
+		else
+			var_unset(vars, argv[i]);
+		i++;
+	}
+	return (exit_code);
+}

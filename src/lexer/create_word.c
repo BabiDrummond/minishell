@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   create_word.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 02:02:46 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/01/21 19:45:02 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/03/27 02:34:03 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "lexer.h"
 
-# include "../libft/include/libft.h"
-# include "execution.h"
-# include "expansion.h"
-# include "heredoc.h"
-# include "lexer.h"
-# include "parser.h"
-# include "signals.h"
-# include "utils.h"
-# include "variables.h"
+t_word	*create_word(const char *value, int length, t_quote_state quote_state)
+{
+	t_word	*new_word;
 
-#endif
+	new_word = (t_word *) safe_calloc(1, sizeof(t_word));
+	new_word->link.list = NULL;
+	new_word->link.next = NULL;
+	new_word->link.prev = NULL;
+	new_word->link.content = ft_strndup(value, length);
+	new_word->link.list = NULL;
+	new_word->quote_state = quote_state;
+	return (new_word);
+}

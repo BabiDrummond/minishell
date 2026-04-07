@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   init_ast_operators.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 02:02:46 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/01/21 20:36:06 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/03/27 02:34:16 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "parser.h"
 
-# include "../libft/include/libft.h"
-# include "execution.h"
-# include "expansion.h"
-# include "heredoc.h"
-# include "lexer.h"
-# include "parser.h"
-# include "signals.h"
-# include "utils.h"
-# include "variables.h"
+char	**init_ast_operators(void)
+{
+	char	**ast_operators;
 
-#endif
+	ast_operators = safe_calloc(4, sizeof(char *));
+	ast_operators[0] = ft_strdup("||");
+	ast_operators[1] = ft_strdup("&&");
+	ast_operators[2] = ft_strdup("|");
+	ast_operators[3] = NULL;
+	return (ast_operators);
+}

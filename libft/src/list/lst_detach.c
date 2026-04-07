@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   lst_detach.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 02:02:46 by bmoreira         ###   ########.fr       */
+/*   Created: 2025/08/13 17:36:30 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/01/09 20:31:19 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "list.h"
 
-# include "../libft/include/libft.h"
-# include "execution.h"
-# include "expansion.h"
-# include "heredoc.h"
-# include "lexer.h"
-# include "parser.h"
-# include "signals.h"
-# include "utils.h"
-# include "variables.h"
-
-#endif
+t_node	*lst_detach(t_head *list, t_node *node)
+{
+	if (!list || !node)
+		return (NULL);
+	if (node->prev)
+		node->prev->next = node->next;
+	else
+		list->first = node->next;
+	if (node->next)
+		node->next->prev = node->prev;
+	else
+		list->last = node->prev;
+	list->count--;
+	node->prev = NULL;
+	node->next = NULL;
+	return (node);
+}

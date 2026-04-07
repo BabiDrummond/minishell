@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   split_content_heredoc.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 02:02:46 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/03/27 19:58:27 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/27 21:42:46 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "heredoc.h"
 
-# include "../libft/include/libft.h"
-# include "execution.h"
-# include "expansion.h"
-# include "heredoc.h"
-# include "lexer.h"
-# include "parser.h"
-# include "signals.h"
-# include "utils.h"
-# include "variables.h"
+char	**split_content_heredoc(t_word *words)
+{
+	char	**argv;
+	int		size;
+	int		i;
 
-#endif
+	i = 0;
+	size = lst_size((t_list *) words);
+	argv = safe_calloc(size + 1, sizeof(char *));
+	while (words && i < size)
+	{
+		argv[i] = (char *)words->link.content;
+		i++;
+		words = (t_word *) words->link.next;
+	}
+	return (argv);
+}

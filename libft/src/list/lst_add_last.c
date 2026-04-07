@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   lst_add_last.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 02:41:59 by bcosta-b         ###   ########.fr       */
+/*   Created: 2025/08/13 17:39:25 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/01/30 13:02:49 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "list.h"
 
-# include "ast.h"
-# include "char.h"
-# include "list.h"
-# include "gc.h"
-# include "lst.h"
-# include "mem.h"
-# include "str.h"
-# include "types.h"
-
-#endif
+t_node	*lst_add_last(t_head *lst, t_node *node)
+{
+	if (!lst || !node)
+		return (NULL);
+	node->list = lst;
+	node->next = NULL;
+	if (lst->count)
+	{
+		node->prev = lst->last;
+		lst->last->next = node;
+	}
+	else
+	{
+		node->prev = NULL;
+		lst->first = node;
+	}
+	lst->last = node;
+	lst->count++;
+	return (node);
+}

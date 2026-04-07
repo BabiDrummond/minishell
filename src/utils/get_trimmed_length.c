@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   get_trimmed_length.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 02:02:46 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/03/29 01:58:54 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/29 01:59:06 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "utils.h"
 
-# include "../libft/include/libft.h"
-# include "execution.h"
-# include "expansion.h"
-# include "heredoc.h"
-# include "lexer.h"
-# include "parser.h"
-# include "signals.h"
-# include "utils.h"
-# include "variables.h"
+int	get_trimmed_length(char *str)
+{
+	int	i;
+	int	len;
+	int	in_space;
 
-#endif
+	i = 0;
+	len = 0;
+	in_space = 0;
+	while (str[i] && ft_isspace(str[i]))
+		i++;
+	while (str[i])
+	{
+		if (ft_isspace(str[i]))
+			in_space = 1;
+		else
+		{
+			if (in_space && len > 0)
+				len++;
+			in_space = 0;
+			len++;
+		}
+		i++;
+	}
+	return (len);
+}

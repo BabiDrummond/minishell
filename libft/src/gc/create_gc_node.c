@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   create_gc_node.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcosta-b <bcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 22:29:46 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/28 02:41:59 by bcosta-b         ###   ########.fr       */
+/*   Created: 2026/01/30 18:24:35 by bcosta-b          #+#    #+#             */
+/*   Updated: 2026/01/30 18:27:43 by bcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "gc.h"
 
-# include "ast.h"
-# include "char.h"
-# include "list.h"
-# include "gc.h"
-# include "lst.h"
-# include "mem.h"
-# include "str.h"
-# include "types.h"
+t_gc_node	*create_gc_node(void *ptr, void (*destructor)(void *))
+{
+	t_gc_node	*item;
 
-#endif
+	item = (t_gc_node *) malloc(sizeof(t_gc_node));
+	item->link.content = ptr;
+	item->link.list = NULL;
+	item->link.next = NULL;
+	item->link.prev = NULL;
+	item->destructor = destructor;
+	return (item);
+}

@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoreira <bmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 19:10:43 by bmoreira          #+#    #+#             */
-/*   Updated: 2026/03/29 02:02:46 by bmoreira         ###   ########.fr       */
+/*   Created: 2026/02/11 23:44:45 by bmoreira          #+#    #+#             */
+/*   Updated: 2026/03/29 00:01:43 by bmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "execution.h"
 
-# include "../libft/include/libft.h"
-# include "execution.h"
-# include "expansion.h"
-# include "heredoc.h"
-# include "lexer.h"
-# include "parser.h"
-# include "signals.h"
-# include "utils.h"
-# include "variables.h"
+int	builtin_env(t_list *vars, char **argv)
+{
+	t_var	*var;
 
-#endif
+	if (argv[1])
+		return (print_error(ft_replace("env: '%s': No such file or directory"
+					"\n", "%s", argv[1]), CMD_NOT_FOUND));
+	while (vars)
+	{
+		var = (t_var *) vars->content;
+		if (var && var->value && var->exported)
+			printf("%s=%s\n", var->key, var->value);
+		vars = vars->next;
+	}
+	return (EXIT_SUCCESS);
+}
